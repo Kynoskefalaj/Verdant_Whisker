@@ -1,3 +1,5 @@
+package root;
+
 import javax.swing.*;
 
 public class Main {
