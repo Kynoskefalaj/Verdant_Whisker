@@ -8,7 +8,7 @@ import java.awt.*;
 public class GamePanel extends JPanel implements Runnable{
     // SCREEN SETTINGS
     final int originalTileSize = 32; //32x32 tile
-    final double scale = 1.5;
+    final double scale = 2;
 
     public final int tileSize = (int) (originalTileSize * scale); //48x48 tile
     final int maxScreenCol = 16;
@@ -25,7 +25,7 @@ public class GamePanel extends JPanel implements Runnable{
 
     public GamePanel () {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
-        this.setBackground(Color.BLACK);
+        this.setBackground(Color.white);
         this.setDoubleBuffered(true); //enabling this will improve performance
         this.addKeyListener(keyH);
         this.setFocusable(true);
