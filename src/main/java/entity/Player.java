@@ -24,21 +24,29 @@ public class Player extends Entity{
     public void setDefaultValues() {
         x = 100;
         y = 100;
-        speed = 3;
+        speed = 6;
         direction = "down";
     }
 
     public void getPlayerImage() {
 
         try {
-            up1 = ImageIO.read(getClass().getResourceAsStream("/player/VW_front.png"));
-            up2 = ImageIO.read(getClass().getResourceAsStream("/player/VW_front_step.png"));
-            down1 = ImageIO.read(getClass().getResourceAsStream("/player/VW_rear.png"));
-            down2 = ImageIO.read(getClass().getResourceAsStream("/player/VW_rear_step.png"));
-            left1 = ImageIO.read(getClass().getResourceAsStream("/player/VW_left.png"));
-            left2 = ImageIO.read(getClass().getResourceAsStream("/player/VW_left_step.png"));
-            right1 = ImageIO.read(getClass().getResourceAsStream("/player/VW_right.png"));
-            right2 = ImageIO.read(getClass().getResourceAsStream("/player/VW_right_step.png"));
+            up1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream
+                    ("/player/VW_front.png")));
+            up2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream
+                    ("/player/VW_front_step.png")));
+            down1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream
+                    ("/player/VW_rear.png")));
+            down2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream
+                    ("/player/VW_rear_step.png")));
+            left1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream
+                    ("/player/VW_left.png")));
+            left2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream
+                    ("/player/VW_left_step.png")));
+            right1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream
+                    ("/player/VW_right.png")));
+            right2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream
+                    ("/player/VW_right_step.png")));
 
         } catch(IOException e) {
             e.printStackTrace();
@@ -53,17 +61,16 @@ public class Player extends Entity{
             if (keyH.upPressed) {
                 direction = "up";
                 y -= speed;
-            } else if (keyH.downPressed) {
+            }  if (keyH.downPressed) {
                 direction = "down";
                 y += speed;
-            } else if (keyH.leftPressed) {
+            }  if (keyH.leftPressed) {
                 direction = "left";
                 x -= speed;
-            } else if (keyH.rightPressed) {
+            }  if (keyH.rightPressed) {
                 direction = "right";
                 x += speed;
             }
-
             spriteCounter++;
             if (spriteCounter > 10) {
                 if (spriteNum == 1) {
