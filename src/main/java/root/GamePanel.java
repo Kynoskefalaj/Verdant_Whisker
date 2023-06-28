@@ -1,6 +1,7 @@
 package root;
 
 import entity.Player;
+import tile.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,6 +20,7 @@ public class GamePanel extends JPanel implements Runnable{
 //    FPS
     int FPS = 60;
 
+    TileManager tileM = new TileManager(this);
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
     Player player = new Player(this, keyH);
@@ -112,6 +114,8 @@ public class GamePanel extends JPanel implements Runnable{
         super.paintComponent(g);
 
         Graphics2D g2 = (Graphics2D)g;
+
+        tileM.draw(g2); //tiles must be drawn before player, otherwise tiles would override player image
         player.draw(g2);
         g2.dispose();
     }
