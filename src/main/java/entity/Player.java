@@ -58,6 +58,9 @@ public class Player extends Entity{
         if(keyH.upPressed == true || keyH.downPressed == true
                 || keyH.leftPressed == true || keyH.rightPressed == true) {
 
+
+//            if statements provide possibility to move diagonally
+//            else if statements would provide moving in grid
             if (keyH.upPressed) {
                 direction = "up";
                 y -= speed;
