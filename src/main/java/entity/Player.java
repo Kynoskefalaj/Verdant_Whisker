@@ -13,17 +13,23 @@ public class Player extends Entity{
     GamePanel gp;
     KeyHandler keyH;
 
+    public final int screenX;
+    public final int screenY;
+
     public Player(GamePanel gp, KeyHandler keyH){
         this.gp = gp;
         this.keyH = keyH;
+
+        screenX = gp.screenWidth/2 - gp.tileSize/2;
+        screenY = gp.screenHeight/2 - gp.tileSize/2;
 
         setDefaultValues();
         getPlayerImage();
     }
 
     public void setDefaultValues() {
-        x = 100;
-        y = 100;
+        worldX = gp.tileSize * 23;
+        worldY = gp.tileSize * 21;
         speed = 6;
         direction = "down";
     }
@@ -42,11 +48,19 @@ public class Player extends Entity{
             left1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream
                     ("/player/VW_left.png")));
             left2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream
-                    ("/player/VW_left_step.png")));
+                    ("/player/VW_left2.png")));
+            left3 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream
+                    ("/player/VW_left3.png")));
+            left4 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream
+                    ("/player/VW_left4.png")));
             right1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream
                     ("/player/VW_right.png")));
             right2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream
-                    ("/player/VW_right_step.png")));
+                    ("/player/VW_right2.png")));
+            right3 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream
+                    ("/player/VW_right3.png")));
+            right4 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream
+                    ("/player/VW_right4.png")));
 
         } catch(IOException e) {
             e.printStackTrace();
@@ -58,27 +72,30 @@ public class Player extends Entity{
         if(keyH.upPressed == true || keyH.downPressed == true
                 || keyH.leftPressed == true || keyH.rightPressed == true) {
 
-
 //            if statements provide possibility to move diagonally
 //            else if statements would provide moving in grid
             if (keyH.upPressed) {
                 direction = "up";
-                y -= speed;
+                worldY -= speed;
             } if (keyH.downPressed) {
                 direction = "down";
-                y += speed;
+                worldY += speed;
             } if (keyH.leftPressed) {
                 direction = "left";
-                x -= speed;
+                worldX -= speed;
             } if (keyH.rightPressed) {
                 direction = "right";
-                x += speed;
+                worldX += speed;
             }
             spriteCounter++;
-            if (spriteCounter > 10) {
+            if (spriteCounter > 8) {
                 if (spriteNum == 1) {
                     spriteNum = 2;
                 } else if (spriteNum == 2) {
+                    spriteNum = 3;
+                } else if (spriteNum == 3) {
+                    spriteNum = 4;
+                } else if (spriteNum == 4) {
                     spriteNum = 1;
                 }
                 spriteCounter = 0;
@@ -98,11 +115,19 @@ public class Player extends Entity{
                     image = up1;
                 } else if (spriteNum == 2) {
                     image = up2;
+                } else if (spriteNum == 3) {
+                    image = up1;
+                } else if (spriteNum == 4) {
+                    image = up2;
                 } break;
             case "down" :
                 if (spriteNum == 1) {
                     image = down1;
                 } else if (spriteNum == 2) {
+                    image = down2;
+                } else if (spriteNum == 3) {
+                    image = down1;
+                } else if (spriteNum == 4) {
                     image = down2;
                 } break;
             case "left" :
@@ -110,15 +135,23 @@ public class Player extends Entity{
                     image = left1;
                 } else if (spriteNum == 2) {
                     image = left2;
+                } else if (spriteNum == 3) {
+                    image = left3;
+                } else if (spriteNum == 4) {
+                    image = left4;
                 } break;
             case "right" :
                 if (spriteNum == 1) {
                     image = right1;
                 } else if (spriteNum == 2) {
                     image = right2;
+                } else if (spriteNum == 3) {
+                    image = right3;
+                } else if (spriteNum == 4) {
+                    image = right4;
                 } break;
         }
 
-        g2.drawImage(image, x, y, gp.tileSize, gp.tileSize, null);
+        g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
     }
 }
