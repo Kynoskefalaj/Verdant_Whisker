@@ -38,13 +38,21 @@ public class Player extends Entity{
 
         try {
             up1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream
-                    ("/player/VW_front.png")));
+                    ("/player/VW_up.png")));
             up2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream
-                    ("/player/VW_front_step.png")));
+                    ("/player/VW_up2.png")));
+            up3 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream
+                    ("/player/VW_up3.png")));
+            up4 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream
+                    ("/player/VW_up4.png")));
             down1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream
-                    ("/player/VW_rear.png")));
+                    ("/player/VW_down.png")));
             down2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream
-                    ("/player/VW_rear_step.png")));
+                    ("/player/VW_down2.png")));
+            down3 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream
+                    ("/player/VW_down3.png")));
+            down4 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream
+                    ("/player/VW_down4.png")));
             left1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream
                     ("/player/VW_left.png")));
             left2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream
@@ -116,9 +124,9 @@ public class Player extends Entity{
                 } else if (spriteNum == 2) {
                     image = up2;
                 } else if (spriteNum == 3) {
-                    image = up1;
+                    image = up3;
                 } else if (spriteNum == 4) {
-                    image = up2;
+                    image = up4;
                 } break;
             case "down" :
                 if (spriteNum == 1) {
@@ -126,9 +134,9 @@ public class Player extends Entity{
                 } else if (spriteNum == 2) {
                     image = down2;
                 } else if (spriteNum == 3) {
-                    image = down1;
+                    image = down3;
                 } else if (spriteNum == 4) {
-                    image = down2;
+                    image = down4;
                 } break;
             case "left" :
                 if (spriteNum == 1) {
