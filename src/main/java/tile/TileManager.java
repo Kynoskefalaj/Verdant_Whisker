@@ -102,7 +102,7 @@ public class TileManager {
         int worldRow = 0;
 
 
-        while (worldCol < gp.maxWorldCol && worldRow < gp.maxWorldRow){
+        while (worldCol < gp.maxWorldCol && worldRow < gp.maxWorldRow) {
 
             int tileNum = mapTileNum[worldCol][worldRow];
 
@@ -111,13 +111,18 @@ public class TileManager {
             int screenX = worldX - gp.player.worldX + gp.player.screenX;
             int screenY = worldY - gp.player.worldY + gp.player.screenY;
 
+            if (worldX + gp.tileSize > gp.player.worldX - gp.player.screenX &&
+                worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
+                worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
+                worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
+
             g2.drawImage(tiles[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+        }
             worldCol++;
 
 
             if (worldCol == gp.maxWorldCol) {
                 worldCol = 0;
-
                 worldRow++;
 
             }

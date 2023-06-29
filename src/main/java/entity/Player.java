@@ -30,7 +30,7 @@ public class Player extends Entity{
     public void setDefaultValues() {
         worldX = gp.tileSize * 23;
         worldY = gp.tileSize * 21;
-        speed = 6;
+        speed = 5;
         direction = "down";
     }
 
@@ -88,7 +88,7 @@ public class Player extends Entity{
                 worldX += speed;
             }
             spriteCounter++;
-            if (spriteCounter > 8) {
+            if (spriteCounter > 9) {
                 if (spriteNum == 1) {
                     spriteNum = 2;
                 } else if (spriteNum == 2) {
