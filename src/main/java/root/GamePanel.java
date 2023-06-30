@@ -9,7 +9,7 @@ import java.awt.*;
 public class GamePanel extends JPanel implements Runnable{
     // SCREEN SETTINGS
     final int originalTileSize = 32; //32x32 tile
-    final double scale = 3;
+    public final double scale = 3;
 
     public final int tileSize = (int) (originalTileSize * scale); //48x48 tile
     public final int maxScreenCol = 16;
@@ -29,6 +29,7 @@ public class GamePanel extends JPanel implements Runnable{
     TileManager tileM = new TileManager(this);
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
+    public CollisionChecker cChecker = new CollisionChecker(this);
     public Player player = new Player(this, keyH);
 
     public GamePanel () {

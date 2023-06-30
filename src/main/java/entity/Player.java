@@ -23,6 +23,12 @@ public class Player extends Entity{
         screenX = gp.screenWidth/2 - gp.tileSize/2;
         screenY = gp.screenHeight/2 - gp.tileSize/2;
 
+        solidArea = new Rectangle();
+        solidArea.x = (int)(10 * gp.scale);
+        solidArea.y = (int)(16 * gp.scale);
+        solidArea.width = (int)(12 * gp.scale);
+        solidArea.height = (int)(14 * gp.scale);
+
         setDefaultValues();
         getPlayerImage();
     }
@@ -84,17 +90,29 @@ public class Player extends Entity{
 //            else if statements would provide moving in grid
             if (keyH.upPressed) {
                 direction = "up";
-                worldY -= speed;
             } if (keyH.downPressed) {
                 direction = "down";
-                worldY += speed;
             } if (keyH.leftPressed) {
                 direction = "left";
-                worldX -= speed;
             } if (keyH.rightPressed) {
                 direction = "right";
-                worldX += speed;
             }
+
+//            CHECK TILE COLLISION
+            collisionOn = false;
+            gp.cChecker.checkTile(this);
+
+//            IF COLLISION IS FALSE, PLAYER CAN MOVE
+            if(collisionOn == false) {
+
+                switch (direction) {
+                    case "up" -> worldY -= speed;
+                    case "down" -> worldY += speed;
+                    case "left" -> worldX -= speed;
+                    case "right" -> worldX += speed;
+                }
+            }
+
             spriteCounter++;
             if (spriteCounter > 9) {
                 if (spriteNum == 1) {
