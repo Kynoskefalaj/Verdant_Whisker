@@ -16,6 +16,8 @@ public class Player extends Entity{
     public final int screenX;
     public final int screenY;
 
+    int spriteSpeedModifier;
+
     public Player(GamePanel gp, KeyHandler keyH){
         this.gp = gp;
         this.keyH = keyH;
@@ -38,6 +40,7 @@ public class Player extends Entity{
         worldY = gp.tileSize * 21;
         speed = 5;
         direction = "down";
+        spriteSpeedModifier = 0;
     }
 
     public void getPlayerImage() {
@@ -82,6 +85,7 @@ public class Player extends Entity{
     }
 
     public void update() {
+        resetSpeed();
 
         if(keyH.upPressed == true || keyH.downPressed == true
                 || keyH.leftPressed == true || keyH.rightPressed == true) {
@@ -96,6 +100,9 @@ public class Player extends Entity{
                 direction = "left";
             } if (keyH.rightPressed) {
                 direction = "right";
+            } if (keyH.spacePressed) {
+                speed = 9;
+                spriteSpeedModifier = 4;
             }
 
 //            CHECK TILE COLLISION
@@ -114,7 +121,7 @@ public class Player extends Entity{
             }
 
             spriteCounter++;
-            if (spriteCounter > 9) {
+            if (spriteCounter > 9 - spriteSpeedModifier) {
                 if (spriteNum == 1) {
                     spriteNum = 2;
                 } else if (spriteNum == 2) {
@@ -127,6 +134,11 @@ public class Player extends Entity{
                 spriteCounter = 0;
             }
         }
+    }
+
+    public void resetSpeed() {
+        speed = 5;
+        spriteSpeedModifier = 0;
     }
 
     public void draw(Graphics2D g2) {
