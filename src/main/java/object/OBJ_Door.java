@@ -7,7 +7,7 @@ import java.util.Objects;
 public class OBJ_Door extends SuperObject{
 
     public OBJ_Door () {
-        name = "door";
+        name = "Door";
 
         try {
             image = ImageIO.read(Objects.requireNonNull(getClass()
@@ -15,5 +15,7 @@ public class OBJ_Door extends SuperObject{
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        collision = true;
     }
 }

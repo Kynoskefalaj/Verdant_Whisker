@@ -15,6 +15,7 @@ public class Player extends Entity{
 
     public final int screenX;
     public final int screenY;
+    int hasKey = 0;
 
     int spriteSpeedModifier;
 
@@ -28,6 +29,8 @@ public class Player extends Entity{
         solidArea = new Rectangle();
         solidArea.x = (int)(10 * gp.scale);
         solidArea.y = (int)(16 * gp.scale);
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
         solidArea.width = (int)(12 * gp.scale);
         solidArea.height = (int)(14 * gp.scale);
 
@@ -109,6 +112,10 @@ public class Player extends Entity{
             collisionOn = false;
             gp.cChecker.checkTile(this);
 
+//            CHECK OBJECT COLLISION
+            int objIndex = gp.cChecker.checkObject(this, true);
+            pickUpObject(objIndex);
+
 //            IF COLLISION IS FALSE, PLAYER CAN MOVE
             if(collisionOn == false) {
 
@@ -135,6 +142,31 @@ public class Player extends Entity{
             }
         }
     }
+
+    public void pickUpObject(int i) {
+
+        if (i != 999) {
+
+            String objectName = gp.obj[i].name;
+
+            switch (objectName) {
+            case "Key" :
+                hasKey++;
+                gp.obj[i] = null;
+                System.out.println("Key: " + hasKey);
+                break;
+            case "Door" :
+                if(hasKey > 0) {
+                    gp.obj[i] = null;
+                    hasKey--;
+                }
+                System.out.println("Key: " + hasKey);
+                break;
+            }
+
+        }
+    }
+
 
     public void resetSpeed() {
         speed = 5;
