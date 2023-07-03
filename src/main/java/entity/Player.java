@@ -17,6 +17,8 @@ public class Player extends Entity{
     public final int screenY;
     int hasKey = 0;
 
+    int speedBoost = 0;
+
     int spriteSpeedModifier;
 
     public Player(GamePanel gp, KeyHandler keyH){
@@ -120,14 +122,15 @@ public class Player extends Entity{
             if(collisionOn == false) {
 
                 switch (direction) {
-                    case "up" -> worldY -= speed;
-                    case "down" -> worldY += speed;
-                    case "left" -> worldX -= speed;
-                    case "right" -> worldX += speed;
+                    case "up" -> worldY -= speed + speedBoost;
+                    case "down" -> worldY += speed + speedBoost;
+                    case "left" -> worldX -= speed + speedBoost;
+                    case "right" -> worldX += speed + speedBoost;
                 }
             }
 
             spriteCounter++;
+//            System.out.println("Speed:" + speed + "speedBoost: " + speedBoost);
             if (spriteCounter > 9 - spriteSpeedModifier) {
                 if (spriteNum == 1) {
                     spriteNum = 2;
@@ -162,6 +165,10 @@ public class Player extends Entity{
                 }
                 System.out.println("Key: " + hasKey);
                 break;
+            case "Boots" :
+                speedBoost += 1;
+                gp.obj[i] = null;
+                break;
             }
 
         }
@@ -169,7 +176,7 @@ public class Player extends Entity{
 
 
     public void resetSpeed() {
-        speed = 5;
+        speed = 5 + speedBoost;
         spriteSpeedModifier = 0;
     }
 
