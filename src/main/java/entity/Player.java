@@ -171,8 +171,7 @@ public class Player extends Entity{
                     gp.ui.showMessage("You need a key!");
                     seCounter++;
                     if (seCounter % 20 == 0) {
-                        gp.se.setFile(5);
-                        gp.se.play();
+                        gp.playSE(5);
                         seCounter = 0;
                     }
                 }
@@ -182,6 +181,12 @@ public class Player extends Entity{
                 speedBoost += 1;
                 gp.obj[i] = null;
                 gp.ui.showMessage("Speed up!");
+                break;
+            case "Chest" :
+                gp.ui.gameFinished = true;
+                gp.stopMusic();
+                gp.playSE(4);
+                gp.ui.showMessage("You have found a chest! \n Congratulations you completed the game!");
                 break;
             }
         }
