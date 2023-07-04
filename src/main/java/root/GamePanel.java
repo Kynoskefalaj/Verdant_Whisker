@@ -10,7 +10,7 @@ import java.awt.*;
 public class GamePanel extends JPanel implements Runnable{
     // SCREEN SETTINGS
     public final int originalTileSize = 32; //32x32 tile
-    public final double scale = 2.5;
+    public final double scale = 2;
 
     public final int tileSize = (int) (originalTileSize * scale);
     public final int maxScreenCol = 16;
@@ -29,9 +29,10 @@ public class GamePanel extends JPanel implements Runnable{
     TileManager tileM = new TileManager(this);
     KeyHandler keyH = new KeyHandler();
     Sound music = new Sound();
-    Sound se = new Sound(); //Sound Effect
+    public Sound se = new Sound(); //Sound Effect
     public CollisionChecker cChecker = new CollisionChecker(this);
     public AssetSetter asSetter = new AssetSetter(this);
+    public UI ui = new UI(this);
     Thread gameThread;
 
 //    ENTITY AND OBJECT
@@ -148,6 +149,10 @@ public class GamePanel extends JPanel implements Runnable{
 
         // PLAYER
         player.draw(g2);
+
+        // USER INTERFACE
+        ui.draw(g2);
+
         g2.dispose();
     }
     public void playMusic(int i) {
