@@ -1,6 +1,7 @@
 package entity;
 import root.GamePanel;
 import root.KeyHandler;
+import root.UtilityTool;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -12,6 +13,7 @@ public class Player extends Entity{
 
     GamePanel gp;
     KeyHandler keyH;
+    UtilityTool uTool;
 
     public final int screenX;
     public final int screenY;
@@ -26,6 +28,7 @@ public class Player extends Entity{
     public Player(GamePanel gp, KeyHandler keyH){
         this.gp = gp;
         this.keyH = keyH;
+        this.uTool = new UtilityTool();
 
         screenX = gp.screenWidth/2 - gp.tileSize/2;
         screenY = gp.screenHeight/2 - gp.tileSize/2;
@@ -51,44 +54,34 @@ public class Player extends Entity{
     }
 
     public void getPlayerImage() {
+            up1 = setUp("VW_up");
+            up2 = setUp("VW_up2");
+            up3 = setUp("VW_up3");
+            up4 = setUp("VW_up4");
+            down1 = setUp("VW_down");
+            down2 = setUp("VW_down2");
+            down3 = setUp("VW_down3");
+            down4 = setUp("VW_down4");
+            left1 = setUp("VW_left");
+            left2 = setUp("VW_left2");
+            left3 = setUp("VW_left3");
+            left4 = setUp("VW_left4");
+            right1 = setUp("VW_right");
+            right2 = setUp("VW_right2");
+            right3 = setUp("VW_right3");
+            right4 = setUp("VW_right4");
+    }
 
+    public BufferedImage setUp (String imageName) {
+        BufferedImage image = null;
         try {
-            up1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream
-                    ("/player/VW_up.png")));
-            up2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream
-                    ("/player/VW_up2.png")));
-            up3 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream
-                    ("/player/VW_up3.png")));
-            up4 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream
-                    ("/player/VW_up4.png")));
-            down1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream
-                    ("/player/VW_down.png")));
-            down2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream
-                    ("/player/VW_down2.png")));
-            down3 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream
-                    ("/player/VW_down3.png")));
-            down4 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream
-                    ("/player/VW_down4.png")));
-            left1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream
-                    ("/player/VW_left.png")));
-            left2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream
-                    ("/player/VW_left2.png")));
-            left3 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream
-                    ("/player/VW_left3.png")));
-            left4 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream
-                    ("/player/VW_left4.png")));
-            right1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream
-                    ("/player/VW_right.png")));
-            right2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream
-                    ("/player/VW_right2.png")));
-            right3 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream
-                    ("/player/VW_right3.png")));
-            right4 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream
-                    ("/player/VW_right4.png")));
-
-        } catch(IOException e) {
+            image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream
+                    ("/player/" + imageName + ".png")));
+            image = uTool.scaleImage(image, gp.tileSize, gp.tileSize);
+        } catch (IOException e) {
             e.printStackTrace();
         }
+        return image;
     }
 
     public void update() {
@@ -247,6 +240,6 @@ public class Player extends Entity{
                 } break;
         }
 
-        g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+        g2.drawImage(image, screenX, screenY,null);
     }
 }
