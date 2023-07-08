@@ -11,7 +11,6 @@ import java.util.Objects;
 
 public class Player extends Entity{
 
-    GamePanel gp;
     KeyHandler keyH;
     UtilityTool uTool;
 
@@ -20,11 +19,11 @@ public class Player extends Entity{
     int speedBoost = 0;
 
     int spriteSpeedModifier;
-
-    int seCounter;
+    
 
     public Player(GamePanel gp, KeyHandler keyH){
-        this.gp = gp;
+        super(gp); // CALLING THE SUPER CLASS CONSTRUCTOR
+
         this.keyH = keyH;
         this.uTool = new UtilityTool();
 
