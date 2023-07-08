@@ -27,7 +27,7 @@ public class GamePanel extends JPanel implements Runnable{
 
 //    SYSTEM
     TileManager tileM = new TileManager(this);
-    KeyHandler keyH = new KeyHandler();
+    KeyHandler keyH = new KeyHandler(this);
     Sound music = new Sound();
     public Sound se = new Sound(); //Sound Effect
     public CollisionChecker cChecker = new CollisionChecker(this);
@@ -40,6 +40,11 @@ public class GamePanel extends JPanel implements Runnable{
 //    We can display 10 object on screen at the same time
     public SuperObject obj[] = new SuperObject[10];
 
+    // GAME STATE
+    public int gameState;
+    public final int playState = 1;
+    public final int pauseState = 2;
+
 
     public GamePanel () {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -47,14 +52,14 @@ public class GamePanel extends JPanel implements Runnable{
         this.setDoubleBuffered(true); //enabling this will improve performance
         this.addKeyListener(keyH);
         this.setFocusable(true);
-
     }
 
     public void setupGame () {
 
         asSetter.setObject();
-
         playMusic(0);
+        stopMusic(); //SUPPRESS THE MUSIC
+        gameState = playState;
     }
 
     public void startGameThread() {
@@ -126,11 +131,13 @@ public class GamePanel extends JPanel implements Runnable{
 //    }
 
     public void update() {
-
 //        don't have to write like "(keyH.upPressed == true)" in each statement because this field is boolean type,
 //        so statement is true if that field is true
-        player.update();
-
+        if(gameState == playState) {
+            player.update();
+        } if(gameState == pauseState) {
+            // NOTHING (for that moment)
+        }
     }
 
     public void paintComponent(Graphics g) {
