@@ -24,15 +24,31 @@ public class Entity {
     public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean collisionOn = false;
     public int actionLockCounter;
+    String[] dialogues = new String[20];
+    int dialogueIndex = 0;
 
     public Entity (GamePanel gp) {
         this.gp = gp;
         solidArea = new Rectangle(0, 0, gp.tileSize, gp.tileSize);
     }
 
-    public void setAction () {
+    public void setAction () { }
 
+    public void speak () {
+        if(dialogues[dialogueIndex] == null) {
+            dialogueIndex -= 1;
+        }
+        gp.ui.currentDialogue = dialogues[dialogueIndex];
+        dialogueIndex++;
+
+        switch (gp.player.direction) {
+            case "up" -> direction = "down";
+            case "down" -> direction = "up";
+            case "left" -> direction = "right";
+            case "right" -> direction = "left";
+        }
     }
+
     public void update () {
 
         setAction();

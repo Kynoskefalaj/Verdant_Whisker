@@ -13,6 +13,7 @@ public class NPC_OldMan extends Entity{
         speed = 1;
 
         getImage();
+        setDialogue();
     }
 
     public void getImage() {
@@ -32,6 +33,34 @@ public class NPC_OldMan extends Entity{
         right2 = setUp("/npc/oldMan_right2");
         right3 = setUp("/npc/oldMan_right3");
         right4 = setUp("/npc/oldMan_right4");
+    }
+
+    public void setDialogue () {
+
+        dialogues[0] =
+                "Hello, lad.";
+        dialogues[1] =
+                "Oww... \n" +
+                "I feel that...\n" +
+                "You must be The One...";
+        dialogues[2] =
+                "Verdant Whisker!\n" +
+                "Of course! That makes sense!\n" +
+                "Finally! \n" +
+                "I've been waiting for centuries!";
+        dialogues[3] =
+                "You are Blink!";
+        dialogues[4] =
+                "Great darkness is coming for us,\n" +
+                "you have to stop it!";
+        dialogues[5] =
+                "\"Only the One with a pure heart, verdant whisker\n" +
+                "and an emerald tail can find the sword of destiny...\n" +
+                "Holding back The Calamity...\n" +
+                "And bringing the light once again!\"";
+        dialogues[6] =
+                "You have to...\n" +
+                "Otherwise everything is lost!";
     }
 
     @Override
@@ -56,5 +85,12 @@ public class NPC_OldMan extends Entity{
             }
             actionLockCounter = 0;
         }
+    }
+
+    public void speak () {
+
+        // Do this character specific stuff in future
+
+        super.speak();
     }
 }
