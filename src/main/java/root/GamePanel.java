@@ -137,7 +137,14 @@ public class GamePanel extends JPanel implements Runnable{
 //        don't have to write like "(keyH.upPressed == true)" in each statement because this field is boolean type,
 //        so statement is true if that field is true
         if(gameState == playState) {
+            // PLAYER
             player.update();
+            // NPC
+            for (Entity entity : npc) {
+                if (entity != null) {
+                    entity.update();
+                }
+            }
         } if(gameState == pauseState) {
             // NOTHING (for that moment)
         }
