@@ -26,6 +26,9 @@ public class Sound {
 
         // Talk Sound Effect
         soundURL[9] = getClass().getResource("/sound/Jump.wav");
+
+        // Enter to the game
+        soundURL[10] = getClass().getResource("/sound/Miscellaneous.wav");
     }
 
     public void setFile(int i) {
