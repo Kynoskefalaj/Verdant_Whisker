@@ -59,7 +59,7 @@ public class NPC_OldMan extends Entity{
                 "Holding back The Calamity...\n" +
                 "And bringing the light once again!\"";
         dialogues[6] =
-                "You have to...\n" +
+                "You have to find The Sword...\n" +
                 "Otherwise everything is lost!";
     }
 

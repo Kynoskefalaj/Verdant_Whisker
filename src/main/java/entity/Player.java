@@ -137,6 +137,7 @@ public class Player extends Entity{
             if (gp.keyH.enterPressed == true) {
                 gp.gameState = gp.dialogueState;
                 gp.npc[i].speak();
+                gp.playSE(9);
             }
         }
         gp.keyH.enterPressed = false;

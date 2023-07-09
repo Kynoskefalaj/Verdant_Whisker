@@ -14,6 +14,8 @@ public class UI {
     int messageCounter = 0;
     public boolean gameFinished = false;
     public String currentDialogue = "";
+    public int commandNum = 0;
+    public int currentUiSE = 6;
 
     public UI(GamePanel gp) {
         this.gp = gp;
@@ -27,7 +29,6 @@ public class UI {
     }
 
     public void showMessage (String text) {
-
         message = text;
         messageOn = true;
     }
@@ -37,6 +38,10 @@ public class UI {
         g2.setFont(maruMonica);
         g2.setColor(Color.white);
 
+        // TITLE STATE
+        if (gp.gameState == gp.titleState) {
+            drawTitleScreen();
+        }
         // PLAY STATE
         if (gp.gameState == gp.playState) {
             //do play stuff later
@@ -49,6 +54,68 @@ public class UI {
         if (gp.gameState == gp.dialogueState) {
             drawDialogueScreen();
         }
+    }
+
+    public void drawTitleScreen(){
+
+        g2.setColor(new Color (0, 0, 0));
+        g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
+
+        // MAIN TITLE
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 96));
+        String text = "VERDANT WHISKER";
+        int x = getXforCenteredText(text);
+        int y = gp.tileSize * 3;
+
+        // SHADOW
+        g2.setColor(new Color (28, 128, 75));
+        g2.drawString(text, x+5, y+5);
+        // MAIN COLOR
+        g2.setColor(Color.white);
+        g2.drawString(text, x, y);
+
+        // SUBTITLE
+        text = "The tale of Emerald Tail";
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN,62));
+        x = getXforCenteredText(text);
+        y += 76;
+
+        g2.setColor(Color.white);
+        g2.drawString(text, x, y);
+
+        // BLINK IMAGE
+        x = gp.screenWidth / 2;
+        y += gp.tileSize * 2;
+        g2.drawImage(gp.player.down1, x - gp.tileSize, y - gp.tileSize,
+                gp.tileSize * 2, gp.tileSize * 2, null);
+
+        // MENU
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 48));
+
+        text = "NEW GAME";
+        x = getXforCenteredText(text);
+        y += gp.tileSize * 3;
+        g2.drawString(text, x, y);
+        if (commandNum == 0) {
+            g2.drawString(">", x - 40, y);
+        }
+
+        text = "LOAD GAME";
+        x = getXforCenteredText(text);
+        y += gp.tileSize;
+        g2.drawString(text, x, y);
+        if (commandNum == 1) {
+            g2.drawString(">", x - 40, y);
+        }
+
+        text = "EXIT";
+        x = getXforCenteredText(text);
+        y += gp.tileSize;
+        g2.drawString(text, x, y);
+        if (commandNum == 2) {
+            g2.drawString(">", x - 40, y);
+        }
+
     }
 
     public void drawPauseScreen() {
@@ -76,10 +143,8 @@ public class UI {
         x += gp.tileSize/2;
         y += gp.tileSize;
 
-        for (String line : currentDialogue.split("\n")) { // creates an array with String objects delimited by \n
-            g2.drawString(line, x, y);
-            y += 40;
-        }
+        UtilityTool uTool = new UtilityTool();
+        uTool.drawEnterDelimitedString(currentDialogue, x, y,40, g2);
     }
 
     public void drawSubWindow (int x, int y, int width, int height) {
@@ -97,5 +162,13 @@ public class UI {
         int length = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
         int x = gp.screenWidth/2 - length/2;
         return x;
+    }
+
+    public void setCurrentSE () { // Resets sound effect state to 0
+        if (currentUiSE % 8 == 0) {
+            currentUiSE = 6;
+        } else {
+            currentUiSE++;
+        }
     }
 }

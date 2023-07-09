@@ -14,4 +14,11 @@ public class UtilityTool {
 
         return scaledImage;
     }
+
+    public void drawEnterDelimitedString (String text, int x, int y, int intersection, Graphics2D g2) {
+        for (String line : text.split("\n")) { // creates an array with String objects delimited by \n
+            g2.drawString(line, x, y);
+            y += intersection;
+        }
+    }
 }
