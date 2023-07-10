@@ -48,6 +48,9 @@ public class Player extends Entity{
         // PLAYER STATUS
         maxLife = 6;
         life = maxLife;
+        maxStamina = 16;
+        stamina = maxStamina;
+        agility = 3;
     }
 
     public void getPlayerImage() {
@@ -71,6 +74,13 @@ public class Player extends Entity{
 
     public void update() {
         resetSpeed();
+        if (keyH.spacePressed == false) {
+            if (stamina >= maxStamina) {
+                stamina = maxStamina;
+            } else {
+                stamina += agility * 0.005f;
+            }
+        }
 
         if(keyH.upPressed == true || keyH.downPressed == true
                 || keyH.leftPressed == true || keyH.rightPressed == true) {
@@ -86,8 +96,15 @@ public class Player extends Entity{
             } if (keyH.rightPressed) {
                 direction = "right";
             } if (keyH.spacePressed) {
-                speed = 6;
-                spriteSpeedModifier = 4;
+                if (stamina > 1){
+                    speed = 6;
+                    spriteSpeedModifier = 4;
+                }
+                if (stamina < 0) {
+                    stamina = 0;
+                } else {
+                    stamina -= 0.06f;
+                }
             }
 
 //            CHECK TILE COLLISION

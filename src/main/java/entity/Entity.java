@@ -30,6 +30,9 @@ public class Entity {
     // CHARACTER STATUS
     public int maxLife;
     public int life;
+    public float maxStamina;
+    public float stamina;
+    public int agility;
 
     public Entity (GamePanel gp) {
         this.gp = gp;

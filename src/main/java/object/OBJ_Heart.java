@@ -16,11 +16,11 @@ public class OBJ_Heart extends SuperObject{
 
         try {
             image = ImageIO.read(Objects.requireNonNull(getClass()
-                    .getResourceAsStream("/objects/heart_full.png")));
+                    .getResourceAsStream("/objects/hud/heart_full.png")));
             image2 = ImageIO.read(Objects.requireNonNull(getClass()
-                    .getResourceAsStream("/objects/heart_half.png")));
+                    .getResourceAsStream("/objects/hud/heart_half.png")));
             image3 = ImageIO.read(Objects.requireNonNull(getClass()
-                    .getResourceAsStream("/objects/heart_blank.png")));
+                    .getResourceAsStream("/objects/hud/heart_blank.png")));
 
             image = uTool.scaleImage(image, gp.tileSize *3/4, gp.tileSize *3/4);
             image2 = uTool.scaleImage(image2, gp.tileSize *3/4, gp.tileSize *3/4);

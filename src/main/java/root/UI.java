@@ -1,6 +1,7 @@
 package root;
 
 import object.OBJ_Heart;
+import object.OBJ_StaminaWheel;
 import object.SuperObject;
 
 import java.awt.*;
@@ -14,6 +15,7 @@ public class UI {
     Graphics2D g2;
     Font maruMonica;
     BufferedImage heart_full, heart_half, heart_blank;
+    BufferedImage stWheel8, stWheel7, stWheel6, stWheel5, stWheel4, stWheel3, stWheel2, stWheel1, stWheel0;
     public boolean messageOn = false;
     public String message = "";
     int messageCounter = 0;
@@ -37,6 +39,18 @@ public class UI {
             heart_full = heart.image;
             heart_half = heart.image2;
             heart_blank = heart.image3;
+
+            SuperObject staminaWheel = new OBJ_StaminaWheel(gp);
+            stWheel0 = staminaWheel.image9;
+            stWheel1 = staminaWheel.image8;
+            stWheel2 = staminaWheel.image7;
+            stWheel3 = staminaWheel.image6;
+            stWheel4 = staminaWheel.image5;
+            stWheel5 = staminaWheel.image4;
+            stWheel6 = staminaWheel.image3;
+            stWheel7 = staminaWheel.image2;
+            stWheel8 = staminaWheel.image;
+
     }
 
     public void showMessage (String text) {
@@ -56,21 +70,24 @@ public class UI {
         // PLAY STATE
         if (gp.gameState == gp.playState) {
             drawPlayerLife();
+            drawPlayerStamina();
             //do play stuff later
         }
         // PAUSE STATE
         if (gp.gameState == gp.pauseState) {
             drawPauseScreen();
             drawPlayerLife();
+            drawPlayerStamina();
         }
         // DIALOGUE STATE
         if (gp.gameState == gp.dialogueState) {
             drawDialogueScreen();
             drawPlayerLife();
+            drawPlayerStamina();
         }
     }
 
-    public void drawPlayerLife() {
+    private void drawPlayerLife() {
 
 //        gp.player.life = 3;
 
@@ -99,6 +116,61 @@ public class UI {
             }
             i++;
             x += gp.tileSize /2;
+        }
+    }
+
+    public void drawPlayerStamina() {
+//        gp.player.stamina = 0;
+
+        int x = gp.screenWidth - gp.tileSize - 10;
+        int y = gp.tileSize / 2;
+        int i = 0;
+
+        // DRAW MAX STAMINA
+        while(i < gp.player.maxStamina / 8) {
+            g2.drawImage(stWheel0, x, y, null);
+            i++;
+            x += gp.tileSize /2;
+        }
+
+        // RESET
+        x = gp.screenWidth - gp.tileSize - 10;
+        y = gp.tileSize / 2;
+        i = 0;
+
+        // DRAW CURRENT STAMINA
+        while (i < gp.player.stamina) {
+            g2.drawImage(stWheel1, x, y, null);
+            i++;
+            if (i < gp.player.stamina) {
+                g2.drawImage(stWheel2, x, y, null);
+            }
+            i++;
+            if (i < gp.player.stamina) {
+                g2.drawImage(stWheel3, x, y, null);
+            }
+            i++;
+            if (i < gp.player.stamina) {
+                g2.drawImage(stWheel4, x, y, null);
+            }
+            i++;
+            if (i < gp.player.stamina) {
+                g2.drawImage(stWheel5, x, y, null);
+            }
+            i++;
+            if (i < gp.player.stamina) {
+                g2.drawImage(stWheel6, x, y, null);
+            }
+            i++;
+            if (i < gp.player.stamina) {
+                g2.drawImage(stWheel7, x, y, null);
+            }
+            i++;
+            if (i < gp.player.stamina) {
+                g2.drawImage(stWheel8, x, y, null);
+            }
+            i++;
+            x -= gp.tileSize * 4/5;
         }
     }
 
