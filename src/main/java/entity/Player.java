@@ -41,7 +41,7 @@ public class Player extends Entity{
     public void setDefaultValues() {
         worldX = gp.tileSize * 23;
         worldY = gp.tileSize * 21;
-        speed = 4;
+        speed = 3;
         direction = "down";
         spriteSpeedModifier = 0;
 
@@ -118,6 +118,12 @@ public class Player extends Entity{
 //            CHECK NPC COLLISION
             int npcIndex = gp.cChecker.checkEntity(this, gp.npc); //Checks if any npc from array collided with player
             interactNPC(npcIndex);
+
+//            CHECK EVENT
+            gp.eHandler.checkEvent();
+
+            gp.keyH.enterPressed = false;
+
 //            IF COLLISION IS FALSE, PLAYER CAN MOVE
             if(collisionOn == false) {
 
@@ -161,12 +167,11 @@ public class Player extends Entity{
                 gp.playSE(9);
             }
         }
-        gp.keyH.enterPressed = false;
     }
 
 
     public void resetSpeed() {
-        speed = 4 + speedBoost;
+        speed = 3 + speedBoost;
         spriteSpeedModifier = 0;
     }
 

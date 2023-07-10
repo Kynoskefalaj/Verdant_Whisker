@@ -96,7 +96,7 @@ public class KeyHandler implements KeyListener{
                                 gp.gameState = gp.playState;
                                 gp.playSE(10);
                                 try {
-                                    Thread.sleep(1); //3100 is optimal
+                                    Thread.sleep(3100); //3100 is optimal
                                 } catch (InterruptedException ex) {
                                     throw new RuntimeException(ex);
                                 }
@@ -107,7 +107,7 @@ public class KeyHandler implements KeyListener{
                                 gp.gameState = gp.playState;
                                 gp.playSE(10);
                                 try {
-                                    Thread.sleep(1); //3100 is optimal
+                                    Thread.sleep(3100); //3100 is optimal
                                 } catch (InterruptedException ex) {
                                     throw new RuntimeException(ex);
                                 }
