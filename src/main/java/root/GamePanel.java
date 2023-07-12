@@ -45,6 +45,7 @@ public class GamePanel extends JPanel implements Runnable{
 //    We can display 10 object on screen at the same time
     public Entity objects[] = new Entity[10];
     public Entity npcs[] = new Entity[10];
+    public Entity monsters[] = new Entity[20];
     ArrayList<Entity> entityList = new ArrayList<>();
 
     // GAME STATE
@@ -66,6 +67,7 @@ public class GamePanel extends JPanel implements Runnable{
 
         asSetter.setObject();
         asSetter.setNPC();
+        asSetter.setMonster();
         playMusic(0);
         gameState = titleState;
     }
@@ -150,6 +152,11 @@ public class GamePanel extends JPanel implements Runnable{
                     entity.update();
                 }
             }
+            for (Entity monster : monsters) {
+                if (monster != null) {
+                    monster.update();
+                }
+            }
         } if(gameState == pauseState) {
             // NOTHING (for that moment)
         }
@@ -171,6 +178,7 @@ public class GamePanel extends JPanel implements Runnable{
             // TILE
             tileM.draw(g2); //tiles must be drawn before player, otherwise tiles would override player image
 
+            //ADD ENTITIES TOP THE LIST
             entityList.add(player);
             for (Entity npc : npcs) {
                 if (npc != null) {
@@ -181,6 +189,12 @@ public class GamePanel extends JPanel implements Runnable{
             for (Entity obj : objects) {
                 if (obj != null) {
                     entityList.add(obj);
+                }
+            }
+
+            for (Entity monster : monsters) {
+                if (monster != null) {
+                    entityList.add(monster);
                 }
             }
 

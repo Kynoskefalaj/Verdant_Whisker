@@ -36,7 +36,7 @@ public class UI {
         }
             // CREATE HUD OBJECT
             Entity heart = new OBJ_Heart(gp);
-            heart_full = heart.image;
+            heart_full = heart.image1;
             heart_half = heart.image2;
             heart_blank = heart.image3;
 
@@ -49,7 +49,7 @@ public class UI {
             stWheel5 = staminaWheel.image4;
             stWheel6 = staminaWheel.image3;
             stWheel7 = staminaWheel.image2;
-            stWheel8 = staminaWheel.image;
+            stWheel8 = staminaWheel.image1;
 
     }
 

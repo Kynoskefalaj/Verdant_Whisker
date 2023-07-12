@@ -24,7 +24,7 @@ public class Entity {
     public int actionLockCounter;
     String[] dialogues = new String[20];
     int dialogueIndex = 0;
-    public BufferedImage image, image2, image3, image4, image5, image6, image7, image8, image9;
+    public BufferedImage image1, image2, image3, image4, image5, image6, image7, image8, image9;
     public BufferedImage up1, up2, up3, up4, down1, down2, down3, down4, left1, left2,
             left3, left4, right1, right2, right3, right4;
     public String name;

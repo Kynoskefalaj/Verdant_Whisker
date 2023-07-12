@@ -9,7 +9,7 @@ public class OBJ_StaminaWheel extends Entity {
         super(gp);
         name = "StaminaWheel";
 
-        image = setUp("/objects/hud/stamina_wheel_full");
+        image1 = setUp("/objects/hud/stamina_wheel_full");
         image2 = setUp("/objects/hud/stamina_wheel_7_8");
         image3 = setUp("/objects/hud/stamina_wheel_6_8");
         image4 = setUp("/objects/hud/stamina_wheel_5_8");
@@ -20,7 +20,7 @@ public class OBJ_StaminaWheel extends Entity {
         image9 = setUp("/objects/hud/stamina_wheel_blank");
 
         int scaledSize = gp.tileSize * 3/4;
-        image = uTool.scaleImage(image, scaledSize, scaledSize);
+        image1 = uTool.scaleImage(image1, scaledSize, scaledSize);
         image2 = uTool.scaleImage(image2, scaledSize, scaledSize);
         image3 = uTool.scaleImage(image3, scaledSize, scaledSize);
         image4 = uTool.scaleImage(image4, scaledSize, scaledSize);
