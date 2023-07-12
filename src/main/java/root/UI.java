@@ -1,8 +1,8 @@
 package root;
 
+import entity.Entity;
 import object.OBJ_Heart;
 import object.OBJ_StaminaWheel;
-import object.SuperObject;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -35,12 +35,12 @@ public class UI {
             e.printStackTrace();
         }
             // CREATE HUD OBJECT
-            SuperObject heart = new OBJ_Heart(gp);
+            Entity heart = new OBJ_Heart(gp);
             heart_full = heart.image;
             heart_half = heart.image2;
             heart_blank = heart.image3;
 
-            SuperObject staminaWheel = new OBJ_StaminaWheel(gp);
+            Entity staminaWheel = new OBJ_StaminaWheel(gp);
             stWheel0 = staminaWheel.image9;
             stWheel1 = staminaWheel.image8;
             stWheel2 = staminaWheel.image7;

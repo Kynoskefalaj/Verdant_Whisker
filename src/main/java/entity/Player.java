@@ -82,6 +82,21 @@ public class Player extends Entity{
             }
         }
 
+        int npcActionRadius;
+        if (keyH.enterPressed){
+            for (int i = 0; i < gp.npcs.length; i++) {
+                if (gp.npcs[i] == null) {
+                    break;
+                } else {
+                    npcActionRadius = (int) Math.sqrt(Math.exp(gp.player.worldX - gp.npcs[i].worldX) +
+                            Math.exp(gp.player.worldY - gp.npcs[i].worldY));
+                    if (npcActionRadius < gp.tileSize * 1.5){
+                        interactNPC(i);
+                    }
+                }
+            }
+        }
+
         if(keyH.upPressed == true || keyH.downPressed == true
                 || keyH.leftPressed == true || keyH.rightPressed == true) {
 
@@ -116,8 +131,9 @@ public class Player extends Entity{
             pickUpObject(objIndex);
 
 //            CHECK NPC COLLISION
-            int npcIndex = gp.cChecker.checkEntity(this, gp.npc); //Checks if any npc from array collided with player
+            int npcIndex = gp.cChecker.checkEntity(this, gp.npcs); //Checks if any npc from array collided with player
             interactNPC(npcIndex);
+
 
 //            CHECK EVENT
             gp.eHandler.checkEvent();
@@ -161,11 +177,9 @@ public class Player extends Entity{
     public void interactNPC (int i) {
 
         if (i != 999) {
-            if (gp.keyH.enterPressed == true) {
-                gp.gameState = gp.dialogueState;
-                gp.npc[i].speak();
-                gp.playSE(9);
-            }
+            gp.gameState = gp.dialogueState;
+            gp.npcs[i].speak();
+            gp.playSE(9);
         }
     }
 

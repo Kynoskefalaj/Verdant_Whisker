@@ -1,32 +1,23 @@
 package object;
 
+import entity.Entity;
 import root.GamePanel;
-import javax.imageio.ImageIO;
-import java.io.IOException;
-import java.util.Objects;
 
-public class OBJ_Heart extends SuperObject{
-
-    GamePanel gp;
+public class OBJ_Heart extends Entity {
 
     public OBJ_Heart (GamePanel gp) {
-
-        this.gp = gp;
+        super(gp);
         name = "Heart";
+        image = setUp("/objects/hud/heart_full");
+        image2 = setUp("/objects/hud/heart_half");
+        image3 = setUp("/objects/hud/heart_blank");
 
-        try {
-            image = ImageIO.read(Objects.requireNonNull(getClass()
-                    .getResourceAsStream("/objects/hud/heart_full.png")));
-            image2 = ImageIO.read(Objects.requireNonNull(getClass()
-                    .getResourceAsStream("/objects/hud/heart_half.png")));
-            image3 = ImageIO.read(Objects.requireNonNull(getClass()
-                    .getResourceAsStream("/objects/hud/heart_blank.png")));
+        int scaledSize = gp.tileSize * 4/5;
+        image = uTool.scaleImage(image, scaledSize, scaledSize);
+        image2 = uTool.scaleImage(image2, scaledSize, scaledSize);
+        image3 = uTool.scaleImage(image3, scaledSize, scaledSize);
 
-            image = uTool.scaleImage(image, gp.tileSize *3/4, gp.tileSize *3/4);
-            image2 = uTool.scaleImage(image2, gp.tileSize *3/4, gp.tileSize *3/4);
-            image3 = uTool.scaleImage(image3, gp.tileSize *3/4, gp.tileSize *3/4);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+
     }
 }
