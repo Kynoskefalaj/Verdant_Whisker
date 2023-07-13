@@ -66,6 +66,8 @@ public class Entity {
         collisionOn = false;
         gp.cChecker.checkTile(this);
         gp.cChecker.checkObject(this, false);
+        gp.cChecker.checkEntity(this, gp.npcs);
+        gp.cChecker.checkEntity(this, gp.monsters);
         gp.cChecker.checkPlayer(this);
 
         // IF COLLISION IS FALSE, ENTITY CAN MOVE
