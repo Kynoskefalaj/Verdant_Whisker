@@ -136,6 +136,7 @@ public class Player extends Entity{
 
 //            CHECK MONSTER COLLISION
             int monsterIndex = gp.cChecker.checkEntity(this, gp.monsters);
+            contactMonster(monsterIndex);
 
 
 //            CHECK EVENT
@@ -169,6 +170,14 @@ public class Player extends Entity{
                 spriteCounter = 0;
             }
         }
+        // This needs to be outside of key if statement. Because it has to be updated even if player doesn't move.
+        if (invincible == true) {
+            invincibleCounter++;
+            if (invincibleCounter > 60) {
+                invincible = false;
+                invincibleCounter = 0;
+            }
+        }
     }
 
     public void pickUpObject(int i) {
@@ -186,6 +195,17 @@ public class Player extends Entity{
         }
     }
 
+    public void contactMonster(int i) {
+
+        if (i != 999){
+
+            if (invincible == false) {
+                life -= 1;
+                invincible = true;
+            }
+        }
+    }
+
 
     public void resetSpeed() {
         speed = 3 + speedBoost;
@@ -200,47 +220,48 @@ public class Player extends Entity{
 
         switch (direction) {
             case "up" :
-                if (spriteNum == 1) {
-                    image = up1;
-                } else if (spriteNum == 2) {
-                    image = up2;
-                } else if (spriteNum == 3) {
-                    image = up3;
-                } else if (spriteNum == 4) {
-                    image = up4;
+                switch (spriteNum) {
+                    case 1 -> image = up1;
+                    case 2 -> image = up2;
+                    case 3 -> image = up3;
+                    case 4 -> image = up4;
                 } break;
             case "down" :
-                if (spriteNum == 1) {
-                    image = down1;
-                } else if (spriteNum == 2) {
-                    image = down2;
-                } else if (spriteNum == 3) {
-                    image = down3;
-                } else if (spriteNum == 4) {
-                    image = down4;
+                switch (spriteNum) {
+                    case 1 -> image = down1;
+                    case 2 -> image = down2;
+                    case 3 -> image = down3;
+                    case 4 -> image = down4;
                 } break;
             case "left" :
-                if (spriteNum == 1) {
-                    image = left1;
-                } else if (spriteNum == 2) {
-                    image = left2;
-                } else if (spriteNum == 3) {
-                    image = left3;
-                } else if (spriteNum == 4) {
-                    image = left4;
+                switch (spriteNum) {
+                    case 1 -> image = left1;
+                    case 2 -> image = left2;
+                    case 3 -> image = left3;
+                    case 4 -> image = left4;
                 } break;
             case "right" :
-                if (spriteNum == 1) {
-                    image = right1;
-                } else if (spriteNum == 2) {
-                    image = right2;
-                } else if (spriteNum == 3) {
-                    image = right3;
-                } else if (spriteNum == 4) {
-                    image = right4;
+                switch (spriteNum) {
+                    case 1 -> image = right1;
+                    case 2 -> image = right2;
+                    case 3 -> image = right3;
+                    case 4 -> image = right4;
                 } break;
         }
 
+        if (invincible == true) {
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
+        }
+
         g2.drawImage(image, screenX, screenY,null);
+
+        // Reset alpha
+
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+
+        // DEBUG
+//        g2.setFont(new Font("Arial", Font.PLAIN, 26));
+//        g2.setColor(Color.white);
+//        g2.drawString("Invincible: " + invincibleCounter, 100, 100);
     }
 }
