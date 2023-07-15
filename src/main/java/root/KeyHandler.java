@@ -120,6 +120,7 @@ public class KeyHandler implements KeyListener{
                 }
             }
         }
+
         // PLAY STATE
         if (gp.gameState == gp.playState) {
             switch (code) {
@@ -128,6 +129,7 @@ public class KeyHandler implements KeyListener{
                 case KeyEvent.VK_A -> leftPressed = true;
                 case KeyEvent.VK_D -> rightPressed = true;
                 case KeyEvent.VK_SPACE -> spacePressed = true;
+                case KeyEvent.VK_ENTER -> enterPressed = true;
                 case KeyEvent.VK_T -> {
                     if (checkDrawTime == false) {
                         checkDrawTime = true;
@@ -142,15 +144,16 @@ public class KeyHandler implements KeyListener{
                         gp.gameState = gp.playState;
                     }
                 }
-                case KeyEvent.VK_ENTER -> enterPressed = true;
             }
         }
+
         // PAUSE STATE
         else if (gp.gameState == gp.pauseState) {
             if (code == KeyEvent.VK_P) {
                 gp.gameState = gp.playState;
             }
         }
+
         // DIALOGUE STATE
         else if (gp.gameState == gp.dialogueState) {
             if (code == KeyEvent.VK_ENTER) {

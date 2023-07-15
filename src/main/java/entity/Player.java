@@ -83,22 +83,22 @@ public class Player extends Entity{
         }
 
         int npcActionRadius;
-        if (keyH.enterPressed){
-            for (int i = 0; i < gp.npcs.length; i++) {
-                if (gp.npcs[i] == null) {
-                    break;
-                } else {
-                    npcActionRadius = (int) Math.sqrt(Math.exp(gp.player.worldX - gp.npcs[i].worldX) +
-                            Math.exp(gp.player.worldY - gp.npcs[i].worldY));
-                    if (npcActionRadius < gp.tileSize * 1.5){
-                        interactNPC(i);
-                    }
-                }
-            }
-        }
+//        if (keyH.enterPressed){
+//            for (int i = 0; i < gp.npcs.length; i++) {
+//                if (gp.npcs[i] == null) {
+//                    break;
+//                } else {
+//                    npcActionRadius = (int) Math.sqrt(Math.exp(gp.player.worldX - gp.npcs[i].worldX) +
+//                            Math.exp(gp.player.worldY - gp.npcs[i].worldY));
+//                    if (npcActionRadius < gp.tileSize * 1.5){
+//                        interactNPC(i);
+//                    }
+//                }
+//            }
+//        }
 
         if(keyH.upPressed == true || keyH.downPressed == true
-                || keyH.leftPressed == true || keyH.rightPressed == true) {
+                || keyH.leftPressed == true || keyH.rightPressed == true || keyH.enterPressed == true) {
 
 //            if statements provide possibility to move diagonally
 //            else if statements would provide moving in grid
@@ -110,7 +110,9 @@ public class Player extends Entity{
                 direction = "left";
             } if (keyH.rightPressed) {
                 direction = "right";
-            } if (keyH.spacePressed) {
+            }
+
+            if (keyH.spacePressed) {
                 if (stamina > 1){
                     speed = 6;
                     spriteSpeedModifier = 4;
@@ -138,14 +140,11 @@ public class Player extends Entity{
             int monsterIndex = gp.cChecker.checkEntity(this, gp.monsters);
             contactMonster(monsterIndex);
 
-
 //            CHECK EVENT
             gp.eHandler.checkEvent();
 
-            gp.keyH.enterPressed = false;
-
 //            IF COLLISION IS FALSE, PLAYER CAN MOVE
-            if(collisionOn == false) {
+            if(collisionOn == false && keyH.enterPressed == false) {
 
                 switch (direction) {
                     case "up" -> worldY -= speed + speedBoost;
@@ -154,6 +153,8 @@ public class Player extends Entity{
                     case "right" -> worldX += speed + speedBoost;
                 }
             }
+
+            gp.keyH.enterPressed = false;
 
             spriteCounter++;
 //            System.out.println("Speed:" + speed + "speedBoost: " + speedBoost);
@@ -189,9 +190,11 @@ public class Player extends Entity{
     public void interactNPC (int i) {
 
         if (i != 999) {
-            gp.gameState = gp.dialogueState;
-            gp.npcs[i].speak();
-            gp.playSE(9);
+            if(gp.keyH.enterPressed == true) {
+                gp.gameState = gp.dialogueState;
+                gp.npcs[i].speak();
+                gp.playSE(9);
+            }
         }
     }
 

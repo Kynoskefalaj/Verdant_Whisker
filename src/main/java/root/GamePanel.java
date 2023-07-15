@@ -7,7 +7,6 @@ import tile.TileManager;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -214,9 +213,7 @@ public class GamePanel extends JPanel implements Runnable{
                 entity.draw(g2);
             }
             // EMPTY ENTITY LIST (otherwise it will grow on every loop)
-            for (int i = 0; i < entityList.size(); i++) {
-                entityList.remove(i);
-            }
+            entityList.clear();
 
             // USER INTERFACE
             ui.draw(g2);
