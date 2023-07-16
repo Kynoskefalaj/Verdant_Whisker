@@ -11,29 +11,38 @@ import java.util.Objects;
 
 public class Entity {
 
-    public UtilityTool uTool = new UtilityTool();
     GamePanel gp;
-    public int worldX, worldY ;
-    public int speed;
-    public String direction = "down";
-    public int spriteCounter = 0;
-    public int spriteNum = 1;
-    public Rectangle solidArea;
-    public int solidAreaDefaultX, solidAreaDefaultY;
-    public boolean collisionOn = false;
-    public int actionLockCounter = 0;
-    public boolean invincible = false;
-    public int invincibleCounter;
-    String[] dialogues = new String[20];
-    int dialogueIndex = 0;
+    public UtilityTool uTool = new UtilityTool();
     public BufferedImage image1, image2, image3, image4, image5, image6, image7, image8, image9;
     public BufferedImage up1, up2, up3, up4, down1, down2, down3, down4, left1, left2,
             left3, left4, right1, right2, right3, right4;
-    public String name;
+    public BufferedImage attackUp1, attackUp2, attackUp3, attackUp4, attackUp5,
+            attackDown1, attackDown2, attackDown3, attackDown4, attackDown5,
+            attackLeft1, attackLeft2, attackLeft3, attackLeft4, attackLeft5,
+            attackRight1, attackRight2, attackRight3, attackRight4, attackRight5;
+    public Rectangle solidArea;
+    public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean collision = false;
-    public int type; // o = player 1 = npc, 2 = monster
+    String[] dialogues = new String[20];
 
-    // CHARACTER STATUS
+    // STATE
+    public int worldX, worldY ;
+    public String direction = "down";
+    public int spriteNum = 1;
+    int dialogueIndex = 0;
+    public boolean collisionOn = false;
+    public boolean invincible = false;
+    public boolean attacking = false;
+
+    // COUNTER
+    public int spriteCounter = 0;
+    public int actionLockCounter = 0;
+    public int invincibleCounter;
+
+    //CHARACTER ATTRIBUTES
+    public int type; // o = player 1 = npc, 2 = monster
+    public String name;
+    public int speed;
     public int maxLife;
     public int life;
     public float maxStamina;
@@ -169,12 +178,12 @@ public class Entity {
         }
     }
 
-    public BufferedImage setUp (String imagePath) {
+    public BufferedImage setUp (String imagePath, int width, int height) {
         BufferedImage image = null;
         try {
             image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream
                     (imagePath + ".png")));
-            image = uTool.scaleImage(image, gp.tileSize, gp.tileSize);
+            image = uTool.scaleImage(image, width, height);
         } catch (IOException e) {
             e.printStackTrace();
         }

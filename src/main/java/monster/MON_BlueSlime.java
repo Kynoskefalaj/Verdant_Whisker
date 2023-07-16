@@ -31,13 +31,13 @@ public class MON_BlueSlime extends Entity {
     }
 
     public void getImage () {
-        image1 = setUp("/monster/Slime1");
-        image2 = setUp("/monster/Slime2");
-        image3 = setUp("/monster/Slime3");
-        image4 = setUp("/monster/Slime4");
-        image5 = setUp("/monster/Slime5");
-        image6 = setUp("/monster/Slime6");
-        image7 = setUp("/monster/Slime7");
+        image1 = setUp("/monster/Slime1", gp.tileSize, gp.tileSize);
+        image2 = setUp("/monster/Slime2", gp.tileSize, gp.tileSize);
+        image3 = setUp("/monster/Slime3", gp.tileSize, gp.tileSize);
+        image4 = setUp("/monster/Slime4", gp.tileSize, gp.tileSize);
+        image5 = setUp("/monster/Slime5", gp.tileSize, gp.tileSize);
+        image6 = setUp("/monster/Slime6", gp.tileSize, gp.tileSize);
+        image7 = setUp("/monster/Slime7", gp.tileSize, gp.tileSize);
 
         up1 = image1;
         up2 = image3;

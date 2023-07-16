@@ -9,15 +9,15 @@ public class OBJ_StaminaWheel extends Entity {
         super(gp);
         name = "StaminaWheel";
 
-        image1 = setUp("/objects/hud/stamina_wheel_full");
-        image2 = setUp("/objects/hud/stamina_wheel_7_8");
-        image3 = setUp("/objects/hud/stamina_wheel_6_8");
-        image4 = setUp("/objects/hud/stamina_wheel_5_8");
-        image5 = setUp("/objects/hud/stamina_wheel_4_8");
-        image6 = setUp("/objects/hud/stamina_wheel_3_8");
-        image7 = setUp("/objects/hud/stamina_wheel_2_8");
-        image8 = setUp("/objects/hud/stamina_wheel_1_8");
-        image9 = setUp("/objects/hud/stamina_wheel_blank");
+        image1 = setUp("/objects/hud/stamina_wheel_full", gp.tileSize, gp.tileSize);
+        image2 = setUp("/objects/hud/stamina_wheel_7_8", gp.tileSize, gp.tileSize);
+        image3 = setUp("/objects/hud/stamina_wheel_6_8", gp.tileSize, gp.tileSize);
+        image4 = setUp("/objects/hud/stamina_wheel_5_8", gp.tileSize, gp.tileSize);
+        image5 = setUp("/objects/hud/stamina_wheel_4_8", gp.tileSize, gp.tileSize);
+        image6 = setUp("/objects/hud/stamina_wheel_3_8", gp.tileSize, gp.tileSize);
+        image7 = setUp("/objects/hud/stamina_wheel_2_8", gp.tileSize, gp.tileSize);
+        image8 = setUp("/objects/hud/stamina_wheel_1_8", gp.tileSize, gp.tileSize);
+        image9 = setUp("/objects/hud/stamina_wheel_blank", gp.tileSize, gp.tileSize);
 
         int scaledSize = gp.tileSize * 3/4;
         image1 = uTool.scaleImage(image1, scaledSize, scaledSize);

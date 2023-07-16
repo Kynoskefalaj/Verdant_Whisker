@@ -36,6 +36,7 @@ public class Player extends Entity{
 
         setDefaultValues();
         getPlayerImage();
+        getPlayerAttackImage();
     }
 
     public void setDefaultValues() {
@@ -54,22 +55,48 @@ public class Player extends Entity{
     }
 
     public void getPlayerImage() {
-            up1 = setUp("/player/walk/VW_up");
-            up2 = setUp("/player/walk/VW_up2");
-            up3 = setUp("/player/walk/VW_up3");
-            up4 = setUp("/player/walk/VW_up4");
-            down1 = setUp("/player/walk/VW_down");
-            down2 = setUp("/player/walk/VW_down2");
-            down3 = setUp("/player/walk/VW_down3");
-            down4 = setUp("/player/walk/VW_down4");
-            left1 = setUp("/player/walk/VW_left");
-            left2 = setUp("/player/walk/VW_left2");
-            left3 = setUp("/player/walk/VW_left3");
-            left4 = setUp("/player/walk/VW_left4");
-            right1 = setUp("/player/walk/VW_right");
-            right2 = setUp("/player/walk/VW_right2");
-            right3 = setUp("/player/walk/VW_right3");
-            right4 = setUp("/player/walk/VW_right4");
+            up1 = setUp("/player/walk/VW_up", gp.tileSize, gp.tileSize);
+            up2 = setUp("/player/walk/VW_up2", gp.tileSize, gp.tileSize);
+            up3 = setUp("/player/walk/VW_up3", gp.tileSize, gp.tileSize);
+            up4 = setUp("/player/walk/VW_up4", gp.tileSize, gp.tileSize);
+            down1 = setUp("/player/walk/VW_down", gp.tileSize, gp.tileSize);
+            down2 = setUp("/player/walk/VW_down2", gp.tileSize, gp.tileSize);
+            down3 = setUp("/player/walk/VW_down3", gp.tileSize, gp.tileSize);
+            down4 = setUp("/player/walk/VW_down4", gp.tileSize, gp.tileSize);
+            left1 = setUp("/player/walk/VW_left", gp.tileSize, gp.tileSize);
+            left2 = setUp("/player/walk/VW_left2", gp.tileSize, gp.tileSize);
+            left3 = setUp("/player/walk/VW_left3", gp.tileSize, gp.tileSize);
+            left4 = setUp("/player/walk/VW_left4", gp.tileSize, gp.tileSize);
+            right1 = setUp("/player/walk/VW_right", gp.tileSize, gp.tileSize);
+            right2 = setUp("/player/walk/VW_right2", gp.tileSize, gp.tileSize);
+            right3 = setUp("/player/walk/VW_right3", gp.tileSize, gp.tileSize);
+            right4 = setUp("/player/walk/VW_right4", gp.tileSize, gp.tileSize);
+    }
+
+    public void getPlayerAttackImage () {
+        attackUp1 = setUp("/player/combat/Blink_up_smear_1", gp.tileSize, gp.tileSize * 2);
+        attackUp2 = setUp("/player/combat/Blink_up_smear_2", gp.tileSize, gp.tileSize * 2);
+        attackUp3 = setUp("/player/combat/Blink_up_smear_3", gp.tileSize, gp.tileSize * 2);
+        attackUp4 = setUp("/player/combat/Blink_up_smear_4", gp.tileSize, gp.tileSize * 2);
+        attackUp5 = setUp("/player/combat/Blink_up_smear_5", gp.tileSize, gp.tileSize * 2);
+
+        attackDown1 = setUp("/player/combat/Blink_down_smear_1", gp.tileSize, gp.tileSize * 2);
+        attackDown2 = setUp("/player/combat/Blink_down_smear_2", gp.tileSize, gp.tileSize * 2);
+        attackDown3 = setUp("/player/combat/Blink_down_smear_3", gp.tileSize, gp.tileSize * 2);
+        attackDown4 = setUp("/player/combat/Blink_down_smear_4", gp.tileSize, gp.tileSize * 2);
+        attackDown5 = setUp("/player/combat/Blink_down_smear_5", gp.tileSize, gp.tileSize * 2);
+
+        attackLeft1 = setUp("/player/combat/Blink_left_smear_1", gp.tileSize * 2, gp.tileSize);
+        attackLeft2 = setUp("/player/combat/Blink_left_smear_2", gp.tileSize * 2, gp.tileSize);
+        attackLeft3 = setUp("/player/combat/Blink_left_smear_3", gp.tileSize * 2, gp.tileSize);
+        attackLeft4 = setUp("/player/combat/Blink_left_smear_4", gp.tileSize * 2, gp.tileSize);
+        attackLeft5 = setUp("/player/combat/Blink_left_smear_5", gp.tileSize * 2, gp.tileSize);
+
+        attackRight1 = setUp("/player/combat/Blink_right_smear_1", gp.tileSize * 2, gp.tileSize);
+        attackRight2 = setUp("/player/combat/Blink_right_smear_2", gp.tileSize * 2, gp.tileSize);
+        attackRight3 = setUp("/player/combat/Blink_right_smear_3", gp.tileSize * 2, gp.tileSize);
+        attackRight4 = setUp("/player/combat/Blink_right_smear_4", gp.tileSize * 2, gp.tileSize);
+        attackRight5 = setUp("/player/combat/Blink_right_smear_5", gp.tileSize * 2, gp.tileSize);
     }
 
     public void update() {
