@@ -3,12 +3,14 @@ package root;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
 import java.net.URL;
 
 public class Sound {
 
     Clip clip;
     URL[] soundURL = new URL[30];
+    FloatControl volumeControl;
 
     public Sound() {
 
@@ -29,6 +31,7 @@ public class Sound {
 
         // Enter to the game
         soundURL[10] = getClass().getResource("/sound/Miscellaneous.wav");
+
     }
 
     public void setFile(int i) {
@@ -37,8 +40,12 @@ public class Sound {
             clip = AudioSystem.getClip();
             clip.open(ais);
 
-        } catch (Exception e) {
+            //getting clip volume controller
+            volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            setVolume(-30f);
 
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }
@@ -53,5 +60,16 @@ public class Sound {
     public void stop() {
 
         clip.stop();
+    }
+
+    public void setVolume(float volume) {
+        if (volume < volumeControl.getMinimum()) {
+            volume = volumeControl.getMinimum();
+        }
+        if (volume > volumeControl.getMaximum()) {
+            volume = volumeControl.getMaximum();
+        }
+
+        volumeControl.setValue(volume);
     }
 }

@@ -54,22 +54,22 @@ public class Player extends Entity{
     }
 
     public void getPlayerImage() {
-            up1 = setUp("/player/VW_up");
-            up2 = setUp("/player/VW_up2");
-            up3 = setUp("/player/VW_up3");
-            up4 = setUp("/player/VW_up4");
-            down1 = setUp("/player/VW_down");
-            down2 = setUp("/player/VW_down2");
-            down3 = setUp("/player/VW_down3");
-            down4 = setUp("/player/VW_down4");
-            left1 = setUp("/player/VW_left");
-            left2 = setUp("/player/VW_left2");
-            left3 = setUp("/player/VW_left3");
-            left4 = setUp("/player/VW_left4");
-            right1 = setUp("/player/VW_right");
-            right2 = setUp("/player/VW_right2");
-            right3 = setUp("/player/VW_right3");
-            right4 = setUp("/player/VW_right4");
+            up1 = setUp("/player/walk/VW_up");
+            up2 = setUp("/player/walk/VW_up2");
+            up3 = setUp("/player/walk/VW_up3");
+            up4 = setUp("/player/walk/VW_up4");
+            down1 = setUp("/player/walk/VW_down");
+            down2 = setUp("/player/walk/VW_down2");
+            down3 = setUp("/player/walk/VW_down3");
+            down4 = setUp("/player/walk/VW_down4");
+            left1 = setUp("/player/walk/VW_left");
+            left2 = setUp("/player/walk/VW_left2");
+            left3 = setUp("/player/walk/VW_left3");
+            left4 = setUp("/player/walk/VW_left4");
+            right1 = setUp("/player/walk/VW_right");
+            right2 = setUp("/player/walk/VW_right2");
+            right3 = setUp("/player/walk/VW_right3");
+            right4 = setUp("/player/walk/VW_right4");
     }
 
     public void update() {
