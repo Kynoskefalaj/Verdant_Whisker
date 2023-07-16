@@ -12,37 +12,50 @@ public class Sound {
     URL[] soundURL = new URL[30];
     FloatControl volumeControl;
 
+    public URL mainTheme, coinSE, powerUpSE, unlockSE, successSE, bumpSE,
+            talkSE, enterGameSE, swordSlashSE, monsterDeath,
+            gui1SE, gui2SE, gui3SE, gui4SE;
+    public URL[] uiSounds;
+
     public Sound() {
 
-        soundURL[0] = getClass().getResource("/sound/Cave.wav");
-        soundURL[1] = getClass().getResource("/sound/Coin 1.wav");
-        soundURL[2] = getClass().getResource("/sound/Power Up 1.wav");
-        soundURL[3] = getClass().getResource("/sound/Unlock.wav");
-        soundURL[4] = getClass().getResource("/sound/Success 1.wav");
-        soundURL[5] = getClass().getResource("/sound/Bump.wav");
+        mainTheme = getClass().getResource("/sound/Cave.wav");
+        coinSE = getClass().getResource("/sound/Coin 1.wav");
+        powerUpSE = getClass().getResource("/sound/Power Up 1.wav");
+        unlockSE = getClass().getResource("/sound/Unlock.wav");
+        successSE = getClass().getResource("/sound/Success 1.wav");
+        bumpSE = getClass().getResource("/sound/Bump.wav");
 
         // UI Sound Effects
-        soundURL[6] = getClass().getResource("/sound/GUI Sound Effects_024.wav");
-        soundURL[7] = getClass().getResource("/sound/GUI Sound Effects_025.wav");
-        soundURL[8] = getClass().getResource("/sound/GUI Sound Effects_026.wav");
+        gui1SE = getClass().getResource("/sound/GUI Sound Effects_024.wav");
+        gui2SE = getClass().getResource("/sound/GUI Sound Effects_025.wav");
+        gui3SE = getClass().getResource("/sound/GUI Sound Effects_026.wav");
+        gui4SE = getClass().getResource("/sound/GUI Sound Effects_004.wav");
 
         // Talk Sound Effect
-        soundURL[9] = getClass().getResource("/sound/Jump.wav");
+        talkSE = getClass().getResource("/sound/Jump.wav");
 
         // Enter to the game
-        soundURL[10] = getClass().getResource("/sound/Miscellaneous.wav");
+        enterGameSE = getClass().getResource("/sound/Miscellaneous.wav");
+
+        // Sword Slash
+        swordSlashSE = getClass().getResource("/sound/Sword_Slash.wav");
+
+        monsterDeath = getClass().getResource("/sound/WaterSplash.wav");
+
+        uiSounds = new URL[]{gui1SE, gui2SE, gui3SE};
 
     }
 
-    public void setFile(int i) {
+    public void setFile(URL url) {
         try {
-            AudioInputStream ais = AudioSystem.getAudioInputStream(soundURL[i]);
+            AudioInputStream ais = AudioSystem.getAudioInputStream(url);
             clip = AudioSystem.getClip();
             clip.open(ais);
 
             //getting clip volume controller
             volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-            setVolume(-30f);
+            setVolume(-10f);
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,5 +1,6 @@
 package monster;
 
+import entity.Creature;
 import entity.Entity;
 import root.GamePanel;
 
@@ -7,7 +8,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
-public class MON_BlueSlime extends Entity {
+public class MON_BlueSlime extends Entity implements Creature {
 
     GamePanel gp;
 
@@ -16,9 +17,6 @@ public class MON_BlueSlime extends Entity {
         type = 2;
         this.gp = gp;
         name = "Blue Slime";
-        speed = 1;
-        maxLife = 4;
-        life = maxLife;
 
         solidArea.x = (int)(7 * gp.scale);
         solidArea.y = (int)(11 * gp.scale);
@@ -28,6 +26,22 @@ public class MON_BlueSlime extends Entity {
         solidArea.height = (int)(10 * gp.scale);
 
         getImage();
+        setSounds();
+        setDefaultValues();
+    }
+
+    public void setSounds () {
+        hitSound = getClass().getResource("/sound/Bump.wav");
+        attackSound = null;
+        deathSound = getClass().getResource("/sound/WaterSplash.wav");
+    }
+
+
+    @Override
+    public void setDefaultValues() {
+        speed = 1;
+        maxLife = 14;
+        life = maxLife;
     }
 
     public void getImage () {
@@ -39,25 +53,11 @@ public class MON_BlueSlime extends Entity {
         image6 = setUp("/monster/Slime6", gp.tileSize, gp.tileSize);
         image7 = setUp("/monster/Slime7", gp.tileSize, gp.tileSize);
 
-        up1 = image1;
-        up2 = image3;
-        up3 = image5;
-        up4 = image7;
-
-        down1 = image1;
-        down2 = image3;
-        down3 = image5;
-        down4 = image7;
-
-        left1 = image1;
-        left2 = image3;
-        left3 = image5;
-        left4 = image7;
-
-        right1 = image1;
-        right2 = image3;
-        right3 = image5;
-        right4 = image7;
+        // Below is setting every direction's images <compressed>
+        up1 = image1; up2 = image3; up3 = image5; up4 = image7; down1 = image1;
+        down2 = image3; down3 = image5; down4 = image7; left1 = image1;
+        left2 = image3; left3 = image5; left4 = image7; right1 = image1;
+        right2 = image3; right3 = image5; right4 = image7;
     }
 
     @Override
@@ -68,18 +68,10 @@ public class MON_BlueSlime extends Entity {
             Random random = new Random();
             int i = random.nextInt(100) + 1; // pick up a number from 0 to 100
 
-            if (i <= 25) {
-                direction = "up";
-            }
-            if (i > 25 && i <= 50) {
-                direction = "down";
-            }
-            if (i > 50 && i <= 75) {
-                direction = "left";
-            }
-            if (i > 75) {
-                direction = "right";
-            }
+            if (i <= 25) {direction = "up";}
+            if (i > 25 && i <= 50) {direction = "down";}
+            if (i > 50 && i <= 75) {direction = "left";}
+            if (i > 75) {direction = "right";}
             actionLockCounter = 0;
         }
     }
@@ -111,7 +103,15 @@ public class MON_BlueSlime extends Entity {
                         image = image7;
                     }
                 }
+
+        if (invincible == true) {
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
+
+        }
+
         g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
     }
 }
 

@@ -6,6 +6,7 @@ import tile.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -26,12 +27,12 @@ public class GamePanel extends JPanel implements Runnable{
     public final int maxWorldRow = 50;
 
 //    FPS
-    int FPS = 70;
+    int FPS = 60;
 
 //    SYSTEM
     TileManager tileM = new TileManager(this);
     public KeyHandler keyH = new KeyHandler(this);
-    Sound music = new Sound();
+    public Sound sound = new Sound();
     public Sound se = new Sound(); //Sound Effect
     public CollisionChecker cChecker = new CollisionChecker(this);
     public AssetSetter asSetter = new AssetSetter(this);
@@ -68,7 +69,7 @@ public class GamePanel extends JPanel implements Runnable{
         asSetter.setNPC();
         asSetter.setMonster();
 
-        playMusic(0);
+        playMusic(sound.mainTheme);
         gameState = titleState;
     }
 
@@ -230,19 +231,19 @@ public class GamePanel extends JPanel implements Runnable{
 
         g2.dispose();
     }
-    public void playMusic(int i) {
+    public void playMusic(URL url) {
 
-        music.setFile(i);
-        music.play();
-        music.loop();
+        sound.setFile(url);
+        sound.play();
+        sound.loop();
     }
     public void stopMusic() {
 
-        music.stop();
+        sound.stop();
     }
-    public void playSE(int i) {
+    public void playSE(URL url) {
         //Sound Effect
-        se.setFile(i);
+        se.setFile(url);
         se.play();
     }
 }

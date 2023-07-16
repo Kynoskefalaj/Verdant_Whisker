@@ -7,6 +7,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Objects;
 
 public class Entity {
@@ -21,9 +22,12 @@ public class Entity {
             attackLeft1, attackLeft2, attackLeft3, attackLeft4, attackLeft5,
             attackRight1, attackRight2, attackRight3, attackRight4, attackRight5;
     public Rectangle solidArea;
+    public Rectangle attackArea = new Rectangle(0, 0, 0, 0);
     public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean collision = false;
     String[] dialogues = new String[20];
+
+    public URL hitSound, attackSound, deathSound, healSound;
 
     // STATE
     public int worldX, worldY ;
@@ -36,6 +40,7 @@ public class Entity {
 
     // COUNTER
     public int spriteCounter = 0;
+    public int attackSpriteCounter = 0;
     public int actionLockCounter = 0;
     public int invincibleCounter;
 
@@ -48,6 +53,10 @@ public class Entity {
     public float maxStamina;
     public float stamina;
     public int agility;
+    public int strength;
+    public int attackSpeed;
+    public int attackPower;
+    public int armour = 0;
 
     public Entity (GamePanel gp) {
         this.gp = gp;
@@ -72,6 +81,7 @@ public class Entity {
     }
 
     public void update () {
+//        System.out.println("SpriteCounter: " + spriteCounter);
 
         setAction();
 
@@ -115,6 +125,13 @@ public class Entity {
             spriteCounter = 0;
         }
 
+        if (invincible == true) {
+            invincibleCounter++;
+            if (invincibleCounter > 40) {
+                invincible = false;
+                invincibleCounter = 0;
+            }
+        }
     }
 
     public void draw (Graphics2D g2) {
@@ -129,52 +146,38 @@ public class Entity {
                 worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
             switch (direction) {
                 case "up":
-                    if (spriteNum == 1) {
-                        image = up1;
-                    } else if (spriteNum == 2) {
-                        image = up2;
-                    } else if (spriteNum == 3) {
-                        image = up3;
-                    } else if (spriteNum == 4) {
-                        image = up4;
-                    }
+                    if (spriteNum == 1) {image = up1;}
+                    else if (spriteNum == 2) {image = up2;}
+                    else if (spriteNum == 3) {image = up3;}
+                    else if (spriteNum == 4) {image = up4;}
                     break;
                 case "down":
-                    if (spriteNum == 1) {
-                        image = down1;
-                    } else if (spriteNum == 2) {
-                        image = down2;
-                    } else if (spriteNum == 3) {
-                        image = down3;
-                    } else if (spriteNum == 4) {
-                        image = down4;
-                    }
+                    if (spriteNum == 1) {image = down1;}
+                    else if (spriteNum == 2) {image = down2;}
+                    else if (spriteNum == 3) {image = down3;}
+                    else if (spriteNum == 4) {image = down4;}
                     break;
                 case "left":
-                    if (spriteNum == 1) {
-                        image = left1;
-                    } else if (spriteNum == 2) {
-                        image = left2;
-                    } else if (spriteNum == 3) {
-                        image = left3;
-                    } else if (spriteNum == 4) {
-                        image = left4;
-                    }
+                    if (spriteNum == 1) {image = left1;}
+                    else if (spriteNum == 2) {image = left2;}
+                    else if (spriteNum == 3) {image = left3;}
+                    else if (spriteNum == 4) {image = left4;}
                     break;
                 case "right":
-                    if (spriteNum == 1) {
-                        image = right1;
-                    } else if (spriteNum == 2) {
-                        image = right2;
-                    } else if (spriteNum == 3) {
-                        image = right3;
-                    } else if (spriteNum == 4) {
-                        image = right4;
-                    }
+                    if (spriteNum == 1) {image = right1;}
+                    else if (spriteNum == 2) {image = right2;}
+                    else if (spriteNum == 3) {image = right3;}
+                    else if (spriteNum == 4) {image = right4;}
                     break;
             }
 
+            if (invincible == true) {
+                g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
+            }
+
             g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
         }
     }
 

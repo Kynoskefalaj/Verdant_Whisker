@@ -22,7 +22,7 @@ public class UI {
     public boolean gameFinished = false;
     public String currentDialogue = "";
     public int commandNum = 0;
-    public int currentUiSE = 6;
+    public int currentUiSE = 1;
     public int titleScreenState = 0;
 
     public UI(GamePanel gp) {
@@ -331,8 +331,8 @@ public class UI {
     }
 
     public void setCurrentSE () { // Resets sound effect state to 0
-        if (currentUiSE % 8 == 0) {
-            currentUiSE = 6;
+        if (currentUiSE % 3 == 0) {
+            currentUiSE = 1;
         } else {
             currentUiSE++;
         }

@@ -34,7 +34,7 @@ public class KeyHandler implements KeyListener{
                         if (gp.ui.commandNum < 0) {
                             gp.ui.commandNum = 2;
                         }
-                        gp.playSE(gp.ui.currentUiSE);
+                        gp.playSE(gp.sound.uiSounds[gp.ui.currentUiSE - 1]);
                         gp.ui.setCurrentSE();
                         break;
                     case KeyEvent.VK_S :
@@ -42,7 +42,7 @@ public class KeyHandler implements KeyListener{
                         if (gp.ui.commandNum > 2) {
                             gp.ui.commandNum = 0;
                         }
-                        gp.playSE(gp.ui.currentUiSE);
+                        gp.playSE(gp.sound.uiSounds[gp.ui.currentUiSE - 1]);
                         gp.ui.setCurrentSE();
                         break;
                     case KeyEvent.VK_ENTER :
@@ -50,10 +50,13 @@ public class KeyHandler implements KeyListener{
                             case 0 :
 //                            gp.gameState = gp.playState;
                                 gp.ui.titleScreenState = 1;
+                                gp.playSE(gp.sound.gui4SE);
                                 break;
                             case 1 :
+                                gp.playSE(gp.sound.gui4SE);
                                 break;
                             case 2 :
+                                gp.playSE(gp.sound.gui4SE);
                                 System.exit(0);
                                 break;
                         }
@@ -67,7 +70,7 @@ public class KeyHandler implements KeyListener{
                         if (gp.ui.commandNum < 0) {
                             gp.ui.commandNum = 3;
                         }
-                        gp.playSE(gp.ui.currentUiSE);
+                        gp.playSE(gp.sound.uiSounds[gp.ui.currentUiSE - 1]);
                         gp.ui.setCurrentSE();
                         break;
                     case KeyEvent.VK_S :
@@ -75,7 +78,7 @@ public class KeyHandler implements KeyListener{
                         if (gp.ui.commandNum > 3) {
                             gp.ui.commandNum = 0;
                         }
-                        gp.playSE(gp.ui.currentUiSE);
+                        gp.playSE(gp.sound.uiSounds[gp.ui.currentUiSE - 1]);
                         gp.ui.setCurrentSE();
                         break;
                     case KeyEvent.VK_ENTER :
@@ -83,7 +86,7 @@ public class KeyHandler implements KeyListener{
                             case 0 :
                                 System.out.println("Do some fighter specific stuff!");
                                 gp.gameState = gp.playState;
-                                gp.playSE(10);
+                                gp.playSE(gp.sound.enterGameSE);
                                 try {
                                     Thread.sleep(1); //3100 is optimal
                                 } catch (InterruptedException ex) {
@@ -94,7 +97,7 @@ public class KeyHandler implements KeyListener{
                             case 1 :
                                 System.out.println("Do some thief specific stuff!");
                                 gp.gameState = gp.playState;
-                                gp.playSE(10);
+                                gp.playSE(gp.sound.enterGameSE);
                                 try {
                                     Thread.sleep(3100); //3100 is optimal
                                 } catch (InterruptedException ex) {
@@ -105,7 +108,7 @@ public class KeyHandler implements KeyListener{
                             case 2 :
                                 System.out.println("Do some sorcerer specific stuff!");
                                 gp.gameState = gp.playState;
-                                gp.playSE(10);
+                                gp.playSE(gp.sound.enterGameSE);
                                 try {
                                     Thread.sleep(3100); //3100 is optimal
                                 } catch (InterruptedException ex) {
@@ -122,7 +125,7 @@ public class KeyHandler implements KeyListener{
         }
 
         // PLAY STATE
-        if (gp.gameState == gp.playState) {
+        else if (gp.gameState == gp.playState) {
             switch (code) {
                 case KeyEvent.VK_W -> upPressed = true;
                 case KeyEvent.VK_S -> downPressed = true;
