@@ -57,7 +57,7 @@ public class Player extends Entity{
         agility = 3;
         attackSpeed = agility * 2;
         strength = 3;
-        attackPower = strength;
+        attack = strength;
     }
 
     public void getPlayerImage() {
@@ -279,7 +279,10 @@ public class Player extends Entity{
         if (i != 999){
 
             if (invincible == false) {
-                life -= 1;
+                int damage; //statements below are for case when armour is bigger than AP
+                if (defense >= attack) {damage = 0;}
+                else {damage = gp.monsters[i].attack - defense;}
+                life -= damage;
                 invincible = true;
             }
         }
@@ -291,8 +294,8 @@ public class Player extends Entity{
 
             if (gp.monsters[i].invincible == false) {
                 int damage; //statements below are for case when armour is bigger than AP
-                if (gp.monsters[i].armour >= attackPower) {damage = 0;}
-                else {damage = attackPower - gp.monsters[i].armour;}
+                if (gp.monsters[i].defense >= attack) {damage = 0;}
+                else {damage = attack - gp.monsters[i].defense;}
 
                 gp.monsters[i].life -= damage;
                 gp.monsters[i].invincible = true;

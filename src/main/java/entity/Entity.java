@@ -55,8 +55,8 @@ public class Entity {
     public int agility;
     public int strength;
     public int attackSpeed;
-    public int attackPower;
-    public int armour = 0;
+    public int attack;
+    public int defense = 0;
 
     public Entity (GamePanel gp) {
         this.gp = gp;
@@ -94,8 +94,10 @@ public class Entity {
 
         if (this.type == 2 && contactPlayer == true) {
             if(gp.player.invincible == false) {
-                // We can give damage
-                gp.player.life -= 1;
+                int damage; //statements below are for case when armour is bigger than AP
+                if (gp.player.defense >= attack) {damage = 0;}
+                else {damage = attack - gp.player.defense;}
+                gp.player.life -= damage;
                 gp.player.invincible = true;
             }
         }

@@ -42,6 +42,8 @@ public class MON_BlueSlime extends Entity implements Creature {
         speed = 1;
         maxLife = 14;
         life = maxLife;
+        attack = 5;
+        defense = 0;
     }
 
     public void getImage () {
