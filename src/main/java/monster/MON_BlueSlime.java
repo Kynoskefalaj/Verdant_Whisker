@@ -108,7 +108,9 @@ public class MON_BlueSlime extends Entity implements Creature {
 
         if (invincible == true) {
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
-
+        }
+        if (dying == true) {
+            dyingAnimation(g2);
         }
 
         g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);

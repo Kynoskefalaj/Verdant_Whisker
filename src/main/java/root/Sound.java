@@ -41,7 +41,7 @@ public class Sound {
         // Sword Slash
         swordSlashSE = getClass().getResource("/sound/Sword_Slash.wav");
 
-        monsterDeath = getClass().getResource("/sound/WaterSplash.wav");
+        monsterDeath = getClass().getResource("/sound/Water_Splash.wav");
 
         uiSounds = new URL[]{gui1SE, gui2SE, gui3SE};
 

@@ -302,7 +302,8 @@ public class Player extends Entity{
                 gp.playSE(gp.monsters[i].hitSound);
 
                 if (gp.monsters[i].life <= 0) {
-                    gp.monsters[i] = null;
+                    gp.monsters[i].dying = true;
+                    gp.playSE(gp.sound.monsterDeath);
                 }
             }
         } else {
