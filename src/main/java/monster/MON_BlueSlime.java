@@ -79,6 +79,14 @@ public class MON_BlueSlime extends Entity implements Creature {
     }
 
     @Override
+    public void damageReaction () {
+
+        actionLockCounter = 0;
+
+        direction = gp.player.direction;
+    }
+
+    @Override
     public void draw (Graphics2D g2) {
 
         BufferedImage image = null;
@@ -106,8 +114,28 @@ public class MON_BlueSlime extends Entity implements Creature {
                     }
                 }
 
+        // Monster HP Bar
+        if (type == 2 && hpBarOn == true) {
+
+            double oneScale = (double)gp.tileSize / maxLife;
+            double hpBarValue = oneScale * life;
+            g2.setColor(new Color(35,35,35));
+            g2.fillRect(screenX - 1, screenY - 16, gp.tileSize + 2, 12);
+            g2.setColor(new Color(223, 29, 53));
+            g2.fillRect(screenX, screenY - 15, (int)hpBarValue, 10);
+
+            hpBarCounter++;
+
+            if(hpBarCounter > 600) {
+                hpBarCounter = 0;
+                hpBarOn = false;
+            }
+        }
+
         if (invincible == true) {
-            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
+            hpBarOn = true;
+            hpBarCounter = 0;
+            changeAlpha(g2,0.4f);
         }
         if (dying == true) {
             dyingAnimation(g2);
@@ -115,7 +143,7 @@ public class MON_BlueSlime extends Entity implements Creature {
 
         g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
 
-        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+        changeAlpha(g2,1f);
     }
 }
 

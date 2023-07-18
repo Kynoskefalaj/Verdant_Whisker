@@ -13,7 +13,7 @@ public class Sound {
     FloatControl volumeControl;
 
     public URL mainTheme, coinSE, powerUpSE, unlockSE, successSE, bumpSE,
-            talkSE, enterGameSE, swordSlashSE, monsterDeath,
+            talkSE, enterGameSE, swordSlashSE, monsterDeath, hurtSE, exhaustedSE,
             gui1SE, gui2SE, gui3SE, gui4SE;
     public URL[] uiSounds;
 
@@ -42,6 +42,10 @@ public class Sound {
         swordSlashSE = getClass().getResource("/sound/Sword_Slash.wav");
 
         monsterDeath = getClass().getResource("/sound/Water_Splash.wav");
+
+        hurtSE = getClass().getResource("/sound/Hurt.wav");
+
+        exhaustedSE = getClass().getResource("/sound/Cancel.wav");
 
         uiSounds = new URL[]{gui1SE, gui2SE, gui3SE};
 

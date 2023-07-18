@@ -54,6 +54,7 @@ public class Player extends Entity{
         life = maxLife;
         maxStamina = 16;
         stamina = maxStamina;
+        defense = 2;
         agility = 3;
         attackSpeed = agility * 2;
         strength = 3;
@@ -139,8 +140,9 @@ public class Player extends Entity{
                     speed *= 2;
                     spriteSpeedModifier = speed;
                 }
-                if (stamina < 0) {
+                if (stamina <= 0) {
                     stamina = 0;
+//                    gp.playSE(gp.sound.exhaustedSE);
                 } else {
                     stamina -= 0.06f;
                 }
@@ -283,6 +285,7 @@ public class Player extends Entity{
                 if (defense >= attack) {damage = 0;}
                 else {damage = gp.monsters[i].attack - defense;}
                 life -= damage;
+                gp.playSE(gp.sound.hurtSE);
                 invincible = true;
             }
         }
@@ -293,13 +296,14 @@ public class Player extends Entity{
         if (i != 999) {
 
             if (gp.monsters[i].invincible == false) {
+                gp.playSE(gp.monsters[i].hitSound);
                 int damage; //statements below are for case when armour is bigger than AP
                 if (gp.monsters[i].defense >= attack) {damage = 0;}
                 else {damage = attack - gp.monsters[i].defense;}
 
                 gp.monsters[i].life -= damage;
                 gp.monsters[i].invincible = true;
-                gp.playSE(gp.monsters[i].hitSound);
+                gp.monsters[i].damageReaction();
 
                 if (gp.monsters[i].life <= 0) {
                     gp.monsters[i].dying = true;
