@@ -1,4 +1,6 @@
 package entity;
+import object.OBJ_Wooden_Shield;
+import object.OBJ_Worn_Needle;
 import root.GamePanel;
 import root.KeyHandler;
 import root.UtilityTool;
@@ -51,15 +53,30 @@ public class Player extends Entity{
         spriteSpeedModifier = 0;
 
         // PLAYER STATUS
+        level = 1;
         maxLife = 6;
-        life = maxLife;
         maxStamina = 16;
-        stamina = maxStamina;
         defense = 2;
-        agility = 3;
+        agility = 1;
+        strength = 1;
+        exp = 0;
+        nextLevelExp = 5;
+        coin = 0;
+        currentWeapon = new OBJ_Worn_Needle(gp);
+        currentShield = new OBJ_Wooden_Shield(gp);
+        life = maxLife;
+        stamina = maxStamina;
+        attack = getAttack();
+        defense = getDefense();
         attackSpeed = agility * 2;
-        strength = 3;
-        attack = strength;
+    }
+
+    public int getAttack() {
+        return attack = strength * currentWeapon.attackValue;
+    }
+
+    public int getDefense() {
+        return defense = agility * currentShield.defense;
     }
 
     public void getPlayerImage() {
