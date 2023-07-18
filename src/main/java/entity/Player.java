@@ -13,6 +13,7 @@ public class Player extends Entity{
     public final int screenX;
     public final int screenY;
     int speedBoost = 0;
+    public boolean attackCancelled = false;
 
     int spriteSpeedModifier;
 
@@ -178,6 +179,15 @@ public class Player extends Entity{
                 }
             }
 
+            if (keyH.enterPressed == true && attackCancelled == false && stamina > 1.5) {
+                gp.playSE(gp.sound.swordSlashSE);
+                attacking = true;
+                stamina -= 2;
+                spriteCounter = 0;
+            }
+            attackCancelled = false;
+            keyH.enterPressed = false;
+
             gp.keyH.enterPressed = false;
 
             spriteCounter++;
@@ -263,15 +273,10 @@ public class Player extends Entity{
 
         if(gp.keyH.enterPressed == true) {
             if (i != 999) {
+                attackCancelled = true;
                 gp.gameState = gp.dialogueState;
                 gp.npcs[i].speak();
                 gp.playSE(gp.sound.talkSE);
-            } else {
-                if (stamina >= 2) {
-                    attacking = true;
-                    stamina -= 2;
-                    gp.playSE(gp.sound.swordSlashSE);
-                }
             }
         }
     }
