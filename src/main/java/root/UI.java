@@ -428,6 +428,37 @@ public class UI {
         textY += gp.tileSize;
 
         g2.drawImage(gp.player.currentShield.image1, tailX - gp.tileSize, textY - 14, null);
+
+        drawEquipmentWindow(frameX, tailX);
+    }
+
+    public void drawEquipmentWindow (int topEdge, int rightEdge) {
+
+        final int frameWidth = gp.tileSize * 4;
+        final int frameHeight = gp.tileSize * 4;
+        final int frameX = rightEdge + gp.tileSize;
+        final int frameY = topEdge;
+
+        drawSubWindow(frameX, frameY, frameWidth, frameHeight);
+
+        int offsetX = frameX + gp.tileSize * 3/8;
+        int offsetY = frameY + gp.tileSize * 3/8;
+        int subTileX = offsetX;
+        int subTileY = offsetY;
+        int i = 0;
+        int j = 0;
+
+        while (j < 3) {
+            while (i < 3) {
+                drawEmbeddedSlot(subTileX, subTileY, gp.tileSize, gp.tileSize);
+                subTileX += gp.tileSize * 9/8;
+                i++;
+            }
+            i = 0;
+            subTileX = offsetX;
+            subTileY += gp.tileSize * 9/8;
+            j++;
+        }
     }
 
     public void drawSubWindow (int x, int y, int width, int height) {
@@ -439,6 +470,17 @@ public class UI {
         g2.setColor(c);
         g2.setStroke(new BasicStroke(5));
         g2.drawRoundRect(x+5, y+5, width-10, height-10, 28, 28);
+    }
+
+    public void drawEmbeddedSlot (int x, int y, int width, int height) {
+        Color c = new Color(0,0, 0, 100);
+        g2.setColor(c);
+        g2.fillRoundRect(x, y, width, height, 10, 10);
+
+        c = new Color(255, 255, 255); //GRAY
+        g2.setColor(c);
+        g2.setStroke(new BasicStroke(1));
+        g2.drawRoundRect(x, y, width, height, 10, 10);
     }
 
     public int getXforCenteredText (String text) {
