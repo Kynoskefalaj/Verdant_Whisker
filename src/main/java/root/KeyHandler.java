@@ -7,7 +7,7 @@ import java.security.Key;
 public class KeyHandler implements KeyListener{
 
     GamePanel gp;
-    public boolean upPressed, downPressed, leftPressed, rightPressed, spacePressed, enterPressed;
+    public boolean upPressed, downPressed, leftPressed, rightPressed, spacePressed, enterPressed, escapePressed;
 
     // DEBUG
     boolean checkDrawTime = false;
@@ -55,7 +55,7 @@ public class KeyHandler implements KeyListener{
 
         if (gp.ui.titleScreenState == 0) {
             switch (code) {
-                case KeyEvent.VK_W :
+                case KeyEvent.VK_W, KeyEvent.VK_UP :
                     gp.ui.commandNum--;
                     if (gp.ui.commandNum < 0) {
                         gp.ui.commandNum = 2;
@@ -63,7 +63,7 @@ public class KeyHandler implements KeyListener{
                     gp.playSE(gp.sound.uiSounds[gp.ui.currentUiSE - 1]);
                     gp.ui.setCurrentSE();
                     break;
-                case KeyEvent.VK_S :
+                case KeyEvent.VK_S, KeyEvent.VK_DOWN:
                     gp.ui.commandNum++;
                     if (gp.ui.commandNum > 2) {
                         gp.ui.commandNum = 0;
@@ -90,7 +90,7 @@ public class KeyHandler implements KeyListener{
         }
         else if (gp.ui.titleScreenState == 1) {
             switch (code) {
-                case KeyEvent.VK_W :
+                case KeyEvent.VK_W, KeyEvent.VK_UP:
                     gp.ui.commandNum--;
                     if (gp.ui.commandNum < 0) {
                         gp.ui.commandNum = 3;
@@ -98,7 +98,7 @@ public class KeyHandler implements KeyListener{
                     gp.playSE(gp.sound.uiSounds[gp.ui.currentUiSE - 1]);
                     gp.ui.setCurrentSE();
                     break;
-                case KeyEvent.VK_S :
+                case KeyEvent.VK_S, KeyEvent.VK_DOWN:
                     gp.ui.commandNum++;
                     if (gp.ui.commandNum > 3) {
                         gp.ui.commandNum = 0;
@@ -159,6 +159,7 @@ public class KeyHandler implements KeyListener{
             case KeyEvent.VK_C -> gp.gameState = gp.characterState;
             case KeyEvent.VK_SPACE -> spacePressed = true;
             case KeyEvent.VK_ENTER -> enterPressed = true;
+            case KeyEvent.VK_ESCAPE -> escapePressed = true;
             case KeyEvent.VK_T -> {
                 if (checkDrawTime == false) {
                     checkDrawTime = true;
@@ -178,7 +179,7 @@ public class KeyHandler implements KeyListener{
 
     public void pauseState (int code) {
 
-        if (code == KeyEvent.VK_P) {
+        if (code == KeyEvent.VK_P || code == KeyEvent.VK_ESCAPE) {
             gp.gameState = gp.playState;
         }
     }
@@ -193,6 +194,9 @@ public class KeyHandler implements KeyListener{
     public void characterState (int code) {
 
         if (code == KeyEvent.VK_C) {
+            gp.gameState = gp.playState;
+        }
+        if (code == KeyEvent.VK_ESCAPE) {
             gp.gameState = gp.playState;
         }
     }

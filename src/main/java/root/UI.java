@@ -318,7 +318,6 @@ public class UI {
     }
 
     public void drawCharacterScreen () {
-
         // CREATE A FRAME
         final int frameX = gp.tileSize;
         final int frameY = gp.tileSize;
@@ -424,18 +423,10 @@ public class UI {
         g2.drawString(value, textX, textY);
         textY += lineHeight;
 
-//        value = String.valueOf(gp.player.currentWeapon.name);
-//        textX = getXforAlignToRightText(value, tailX);
-//        g2.drawString(value, textX, textY);
-//        textY += lineHeight;
-//
-//        value = String.valueOf(gp.player.currentShield.name);
-//        textX = getXforAlignToRightText(value, tailX);
-//        g2.drawString(value, textX, textY);
-//        textY += lineHeight;
 
         g2.drawImage(gp.player.currentWeapon.image1, tailX - gp.tileSize, textY - 14, null);
         textY += gp.tileSize;
+
         g2.drawImage(gp.player.currentShield.image1, tailX - gp.tileSize, textY - 14, null);
     }
 
