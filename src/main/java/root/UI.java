@@ -436,7 +436,7 @@ public class UI {
 
         final int frameWidth = gp.tileSize * 4;
         final int frameHeight = gp.tileSize * 4;
-        final int frameX = rightEdge + gp.tileSize;
+        final int frameX = gp.screenWidth - frameWidth - gp.tileSize;
         final int frameY = topEdge;
 
         drawSubWindow(frameX, frameY, frameWidth, frameHeight);
@@ -447,12 +447,15 @@ public class UI {
         int subTileY = offsetY;
         int i = 0;
         int j = 0;
+        int index = 0;
 
         while (j < 3) {
             while (i < 3) {
                 drawEmbeddedSlot(subTileX, subTileY, gp.tileSize, gp.tileSize);
+                drawEquipment(g2, index, subTileX, subTileY);
                 subTileX += gp.tileSize * 9/8;
                 i++;
+                index++;
             }
             i = 0;
             subTileX = offsetX;
@@ -481,6 +484,12 @@ public class UI {
         g2.setColor(c);
         g2.setStroke(new BasicStroke(1));
         g2.drawRoundRect(x, y, width, height, 10, 10);
+    }
+
+    public void drawEquipment (Graphics2D g2, int index, int x, int y) {
+        if (gp.player.equipment[index] != null) {
+            g2.drawImage(gp.player.equipment[index].image1, x, y, null);
+        }
     }
 
     public int getXforCenteredText (String text) {

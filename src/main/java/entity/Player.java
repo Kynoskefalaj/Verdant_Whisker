@@ -1,6 +1,5 @@
 package entity;
-import object.OBJ_Wooden_Shield;
-import object.OBJ_Worn_Needle;
+import object.*;
 import root.GamePanel;
 import root.KeyHandler;
 import root.UtilityTool;
@@ -18,6 +17,8 @@ public class Player extends Entity{
     public boolean attackCancelled = false;
 
     int spriteSpeedModifier;
+
+    public Entity[] equipment = new Entity[9];
 
 
     public Player(GamePanel gp, KeyHandler keyH){
@@ -68,7 +69,17 @@ public class Player extends Entity{
         stamina = maxStamina;
         attack = getAttack();
         defense = getDefense();
-        attackSpeed = agility * 2;
+        attackSpeed = agility * 6;
+
+        equipment[0] = new OBJ_Sacred_Necklace(gp);
+        equipment[1] = new OBJ_Green_Hat(gp);
+        equipment[2] = new OBJ_Leather_Backpack(gp);
+        equipment[3] = currentShield;
+        equipment[4] = new OBJ_Green_Tunic(gp);
+        equipment[5] = currentWeapon;
+        equipment[6] = new OBJ_Rope(gp);
+        equipment[7] = new OBJ_Boots(gp);
+        equipment[8] = new OBJ_Pouch(gp);
     }
 
     public int getAttack() {
