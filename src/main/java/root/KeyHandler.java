@@ -7,7 +7,8 @@ import java.security.Key;
 public class KeyHandler implements KeyListener{
 
     GamePanel gp;
-    public boolean upPressed, downPressed, leftPressed, rightPressed, spacePressed, enterPressed, escapePressed;
+    public boolean upPressed, downPressed, leftPressed, rightPressed, spacePressed, enterPressed,
+            escapePressed, zeroPressed;
 
     // DEBUG
     boolean checkDrawTime = false;
@@ -160,6 +161,7 @@ public class KeyHandler implements KeyListener{
             case KeyEvent.VK_SPACE -> spacePressed = true;
             case KeyEvent.VK_ENTER -> enterPressed = true;
             case KeyEvent.VK_ESCAPE -> escapePressed = true;
+            case KeyEvent.VK_0 -> zeroPressed = true;
             case KeyEvent.VK_T -> {
                 if (checkDrawTime == false) {
                     checkDrawTime = true;

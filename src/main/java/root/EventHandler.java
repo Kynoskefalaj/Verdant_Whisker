@@ -99,6 +99,7 @@ public class EventHandler {
             gp.playSE(gp.sound.successSE);
             gp.ui.currentDialogue = "You drink the water. \n Your health has been recovered!";
             gp.player.life = gp.player.maxLife;
+            gp.asSetter.setMonster();
         }
     }
 

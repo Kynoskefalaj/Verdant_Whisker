@@ -11,7 +11,7 @@ public class OBJ_Wooden_Shield extends Entity {
 
         name = "Wooden Shield";
         image1 = setUp("/objects/Wooden_Shield", gp.tileSize, gp.tileSize);
-        defenseValue = 1;
+        defenseValue = 4;
 
     }
 }

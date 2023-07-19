@@ -87,7 +87,7 @@ public class Player extends Entity{
     }
 
     public int getDefense() {
-        return defense = agility * currentShield.defense;
+        return defense = agility * currentShield.defenseValue;
     }
 
     public void getPlayerImage() {
@@ -143,7 +143,7 @@ public class Player extends Entity{
             if (stamina >= maxStamina) {
                 stamina = maxStamina;
             } else {
-                stamina += agility * 0.005f;
+                stamina += agility * 0.012f;
             }
         }
 
@@ -241,6 +241,11 @@ public class Player extends Entity{
                 invincibleCounter = 0;
             }
         }
+
+        if (gp.keyH.zeroPressed) {
+            gp.asSetter.setMonster();
+            gp.keyH.zeroPressed = false;
+        }
     }
 
     public void attacking () {
@@ -315,7 +320,7 @@ public class Player extends Entity{
 
             if (invincible == false) {
                 int damage; //statements below are for case when armour is bigger than AP
-                if (defense >= attack) {damage = 0;}
+                if (defense >= gp.monsters[i].attack) {damage = 0;}
                 else {damage = gp.monsters[i].attack - defense;}
                 life -= damage;
                 gp.playSE(gp.sound.hurtSE);
@@ -335,12 +340,18 @@ public class Player extends Entity{
                 else {damage = attack - gp.monsters[i].defense;}
 
                 gp.monsters[i].life -= damage;
+                gp.ui.addMessage(damage + " damage!");
+
                 gp.monsters[i].invincible = true;
                 gp.monsters[i].damageReaction();
 
                 if (gp.monsters[i].life <= 0) {
                     gp.monsters[i].dying = true;
                     gp.playSE(gp.sound.monsterDeath);
+                    exp += gp.monsters[i].exp;
+                    gp.ui.addMessage("Blink killed the " + gp.monsters[i].name + "!");
+                    gp.ui.addMessage("Exp " + gp.monsters[i].exp);
+                    checkLevelUp();
                 }
             }
         } else {
@@ -348,12 +359,34 @@ public class Player extends Entity{
         }
     }
 
-    public void resetSpeed() {
+    public void checkLevelUp () {
+
+        if (exp >= nextLevelExp) {
+
+            level++;
+            nextLevelExp = nextLevelExp * 2;
+            maxLife += 1;
+            maxStamina += 2;
+            life = maxLife;
+            stamina = maxStamina;
+            strength++;
+            agility++;
+            attack = getAttack();
+            defense = getDefense();
+
+            gp.playSE(gp.sound.powerUpSE);
+            gp.gameState = gp.dialogueState;
+            gp.ui.currentDialogue = "You are level " + level + "now!\n"
+                    + "You feel stronger!";
+        }
+    }
+
+    public void resetSpeed () {
         speed = 3 + speedBoost;
         spriteSpeedModifier = 0;
     }
 
-    public void draw(Graphics2D g2) {
+    public void draw (Graphics2D g2) {
 
         BufferedImage image = null;
         int tempScreenX = screenX;
