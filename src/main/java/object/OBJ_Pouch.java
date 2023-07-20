@@ -9,5 +9,6 @@ public class OBJ_Pouch extends Entity {
         super(gp);
         name = "Pouch";
         image1 = setUp("/objects/Pouch", gp.tileSize, gp.tileSize);
+        description = "[" + name + "]" + "\nSix additional slots.";
     }
 }

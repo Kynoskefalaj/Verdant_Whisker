@@ -11,6 +11,7 @@ public class OBJ_Worn_Needle extends Entity {
         name = "Worn Needle";
         image1 = setUp("/objects/Worn_Needle", gp.tileSize, gp.tileSize);
         attackValue = 3;
+        description = "[" + name + "]" + "\n\nFirst lesson: \nStick them with the pointy \nend.";
 
     }
 }

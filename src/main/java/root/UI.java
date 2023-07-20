@@ -352,10 +352,10 @@ public class UI {
 
     public void drawCharacterScreen () {
         // CREATE A FRAME
-        final int frameX = gp.tileSize;
-        final int frameY = gp.tileSize;
+        final int frameX = gp.tileSize - 2;
+        final int frameY = gp.tileSize - 2;
         final int frameWidth = gp.tileSize * 5;
-        final int frameHeight = gp.tileSize * 10;
+        final int frameHeight = gp.tileSize * 10 + 4;
         drawSubWindow(frameX, frameY, frameWidth, frameHeight);
 
         // TEXT
@@ -469,8 +469,8 @@ public class UI {
 
         final int frameWidth = gp.tileSize * 4;
         final int frameHeight = gp.tileSize * 4;
-        final int frameX = gp.screenWidth - frameWidth - gp.tileSize;
-        final int frameY = topEdge;
+        final int frameX = gp.screenWidth - frameWidth - gp.tileSize + 4;
+        final int frameY = topEdge - 2;
 
         drawSubWindow(frameX, frameY, frameWidth, frameHeight);
 
@@ -502,8 +502,8 @@ public class UI {
         // FRAME
         int frameWidth = gp.tileSize * 4;
         int frameHeight = gp.tileSize * 6;
-        int frameX = gp.screenWidth - gp.tileSize - frameWidth;
-        int frameY = gp.tileSize * 5;
+        int frameX = gp.screenWidth - gp.tileSize - frameWidth + 4;
+        int frameY = gp.tileSize * 5 + 2;
         drawSubWindow(frameX, frameY, frameWidth, frameHeight);
 
         // SLOT
@@ -534,6 +534,30 @@ public class UI {
         g2.setColor(new Color(25, 54, 165, 190));
         g2.setStroke(new BasicStroke(3));
         g2.drawRoundRect(cursorX, cursorY, cursorWidth, cursorHeight, 10, 10);
+
+        // DESCRIPTION FRAME
+        int dFrameX = gp.tileSize * 6 + 2;
+        int dFrameY = gp.tileSize * 7 + 2;
+        int dFrameWidth = gp.tileSize * 5;
+        int dFrameHeight = gp.tileSize * 4;
+
+        drawSubWindow(dFrameX, dFrameY, dFrameWidth, dFrameHeight);
+
+        //DRAW DESCRIPTION TEXT
+        int textX = dFrameX + 20;
+        int textY = dFrameY + 40;
+        g2.setFont(g2.getFont().deriveFont(28F));
+
+        int itemIndex = getItemIndexOnSlot();
+
+        if (itemIndex < gp.player.inventory.size()) {
+            gp.uTool.drawEnterDelimitedString(gp.player.inventory.get(itemIndex).description, textX, textY,
+                    32, g2);
+        }
+    }
+
+    public int getItemIndexOnSlot () {
+        return slotCol + (slotRow * 3);
     }
 
     public void drawSubWindow (int x, int y, int width, int height) {
