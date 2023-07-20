@@ -5,6 +5,7 @@ import root.KeyHandler;
 import root.UtilityTool;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class Player extends Entity{
 
@@ -19,6 +20,8 @@ public class Player extends Entity{
     int spriteSpeedModifier;
 
     public Entity[] equipment = new Entity[9];
+    public ArrayList<Entity> inventory = new ArrayList<>();
+    public final int maxInventorySize = 15;
 
 
     public Player(GamePanel gp, KeyHandler keyH){
@@ -44,6 +47,7 @@ public class Player extends Entity{
         setDefaultValues();
         getPlayerImage();
         getPlayerAttackImage();
+        setItems();
     }
 
     public void setDefaultValues() {
@@ -70,7 +74,10 @@ public class Player extends Entity{
         attack = getAttack();
         defense = getDefense();
         attackSpeed = agility * 6;
+    }
 
+    public void setItems () {
+        // EQUIPMENT
         equipment[0] = new OBJ_Sacred_Necklace(gp);
         equipment[1] = new OBJ_Green_Hat(gp);
         equipment[2] = new OBJ_Leather_Backpack(gp);
@@ -80,6 +87,17 @@ public class Player extends Entity{
         equipment[6] = new OBJ_Rope(gp);
         equipment[7] = new OBJ_Boots(gp);
         equipment[8] = new OBJ_Pouch(gp);
+
+        // INVENTORY
+        inventory.add(currentShield);
+        inventory.add(currentWeapon);
+        inventory.add(new OBJ_Key(gp));
+        inventory.add(new OBJ_Key(gp));
+        inventory.add(new OBJ_Boots(gp));
+        inventory.add(new OBJ_Boots(gp));
+        inventory.add(new OBJ_Pouch(gp));
+        inventory.add(new OBJ_Pouch(gp));
+        inventory.add(new OBJ_Pouch(gp));
     }
 
     public int getAttack() {

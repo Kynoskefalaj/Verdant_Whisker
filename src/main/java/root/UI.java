@@ -26,6 +26,9 @@ public class UI {
     public int commandNum = 0;
     public int currentUiSE = 1;
     public int titleScreenState = 0;
+    public int slotCol = 0;
+    public int slotRow = 0;
+
 
     public UI(GamePanel gp) {
         this.gp = gp;
@@ -91,6 +94,7 @@ public class UI {
         // CHARACTER STATE
         if (gp.gameState == gp.characterState) {
             drawCharacterScreen();
+            drawInventory();
         }
     }
 
@@ -491,6 +495,45 @@ public class UI {
             subTileY += gp.tileSize * 9/8;
             j++;
         }
+    }
+
+    public void drawInventory () {
+
+        // FRAME
+        int frameWidth = gp.tileSize * 4;
+        int frameHeight = gp.tileSize * 6;
+        int frameX = gp.screenWidth - gp.tileSize - frameWidth;
+        int frameY = gp.tileSize * 5;
+        drawSubWindow(frameX, frameY, frameWidth, frameHeight);
+
+        // SLOT
+        final int slotXstart = frameX + gp.tileSize * 3/8;
+        final int slotYstart = frameY + gp.tileSize * 3/8;;
+        int slotX = slotXstart;
+        int slotY = slotYstart;
+
+        // CURSOR
+        int cursorX = slotXstart + (gp.tileSize * 9/8 * slotCol);
+        int cursorY = slotYstart + (gp.tileSize * 17/16 * slotRow);
+        int cursorWidth = gp.tileSize;
+        int cursorHeight = gp.tileSize;
+
+        // DRAW ITEMS
+        for (int i = 0; i < gp.player.inventory.size(); i++) {
+            g2.drawImage(gp.player.inventory.get(i).image1, slotX, slotY, null);
+            slotX += gp.tileSize * 9/8;
+
+            if (i == 2 || i == 5 || i == 8 || i == 11 || i == 14) {
+                slotY += gp.tileSize * 17/16;
+                slotX = slotXstart;
+            }
+
+        }
+
+        // DRAW CURSOR
+        g2.setColor(new Color(25, 54, 165, 190));
+        g2.setStroke(new BasicStroke(3));
+        g2.drawRoundRect(cursorX, cursorY, cursorWidth, cursorHeight, 10, 10);
     }
 
     public void drawSubWindow (int x, int y, int width, int height) {
