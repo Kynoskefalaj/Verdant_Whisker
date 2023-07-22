@@ -541,8 +541,6 @@ public class UI {
         int dFrameWidth = gp.tileSize * 5;
         int dFrameHeight = gp.tileSize * 4;
 
-        drawSubWindow(dFrameX, dFrameY, dFrameWidth, dFrameHeight);
-
         //DRAW DESCRIPTION TEXT
         int textX = dFrameX + 20;
         int textY = dFrameY + 40;
@@ -551,6 +549,7 @@ public class UI {
         int itemIndex = getItemIndexOnSlot();
 
         if (itemIndex < gp.player.inventory.size()) {
+            drawSubWindow(dFrameX, dFrameY, dFrameWidth, dFrameHeight);
             gp.uTool.drawEnterDelimitedString(gp.player.inventory.get(itemIndex).description, textX, textY,
                     32, g2);
         }

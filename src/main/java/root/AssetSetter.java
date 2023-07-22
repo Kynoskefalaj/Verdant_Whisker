@@ -2,7 +2,7 @@ package root;
 
 import entity.NPC_OldMan;
 import monster.MON_BlueSlime;
-import object.OBJ_Door;
+import object.*;
 
 public class AssetSetter {
     GamePanel gp;
@@ -12,6 +12,24 @@ public class AssetSetter {
     }
 
     public void setObject () {
+
+        int i = 0;
+        gp.objects[i] = new OBJ_Key(gp);
+        gp.objects[i].worldX = gp.tileSize * 25;
+        gp.objects[i].worldY = gp.tileSize * 23;
+        i++;
+        gp.objects[i] = new OBJ_Sacred_Necklace(gp);
+        gp.objects[i].worldX = gp.tileSize * 21;
+        gp.objects[i].worldY = gp.tileSize * 19;
+        i++;
+        gp.objects[i] = new OBJ_Pouch(gp);
+        gp.objects[i].worldX = gp.tileSize * 26;
+        gp.objects[i].worldY = gp.tileSize * 21;
+        i++;
+        gp.objects[i] = new OBJ_Rope(gp);
+        gp.objects[i].worldX = gp.tileSize * 32;
+        gp.objects[i].worldY = gp.tileSize * 21;
+        i++;
 
     }
     public void setNPC () {

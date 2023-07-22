@@ -9,5 +9,6 @@ public class OBJ_Leather_Backpack extends Entity {
         super(gp);
         name = "Leather Backpack";
         image1 = setUp("/objects/Leather_Backpack", gp.tileSize, gp.tileSize);
+        down1 = image1;
     }
 }

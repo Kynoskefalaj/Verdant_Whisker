@@ -287,6 +287,20 @@ public class Player extends Entity{
     public void pickUpObject (int i) {
 
         if (i != 999) {
+
+            String text;
+
+            if (inventory.size() != maxInventorySize) {
+
+                inventory.add(gp.objects[i]);
+                gp.playSE(gp.sound.coinSE);
+                text = "Got a " + gp.objects[i].name + "!";
+            }
+            else {
+                text = "You cannot carry anymore!";
+            }
+            gp.ui.addMessage(text);
+            gp.objects[i] = null;
         }
     }
 

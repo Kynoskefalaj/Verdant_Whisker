@@ -9,5 +9,6 @@ public class OBJ_Green_Tunic extends Entity {
         super(gp);
         name = "Green Tunic";
         image1 = setUp("/objects/Green_Tunic", gp.tileSize, gp.tileSize);
+        down1 = image1;
     }
 }

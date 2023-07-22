@@ -13,6 +13,7 @@ public class OBJ_Key extends Entity {
         super(gp);
         name = "Key";
         image1 = setUp("/objects/key01", gp.tileSize, gp.tileSize);
+        down1 = image1;
         description = "[" + name + "]" + "\nIt opens the door.";
     }
 }

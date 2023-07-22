@@ -9,5 +9,6 @@ public class OBJ_Sacred_Necklace extends Entity {
         super(gp);
         name = "Sacred Necklace";
         image1 = setUp("/objects/Sacred_Necklace", gp.tileSize, gp.tileSize);
+        down1 = image1;
     }
 }

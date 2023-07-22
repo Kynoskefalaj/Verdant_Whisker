@@ -9,5 +9,6 @@ public class OBJ_Rope extends Entity {
         super(gp);
         name = "Rope";
         image1 = setUp("/objects/Rope", gp.tileSize, gp.tileSize);
+        down1 = image1;
     }
 }
