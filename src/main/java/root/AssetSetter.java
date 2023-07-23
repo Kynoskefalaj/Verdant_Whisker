@@ -20,30 +20,30 @@ public class AssetSetter {
         gp.objects[i].worldY = gp.tileSize * 23;
         i++;
         gp.objects[i] = new OBJ_Sacred_Necklace(gp);
-        gp.objects[i].worldX = gp.tileSize * 21;
-        gp.objects[i].worldY = gp.tileSize * 19;
+        gp.objects[i].worldX = gp.tileSize * 9;
+        gp.objects[i].worldY = gp.tileSize * 7;
         i++;
         gp.objects[i] = new OBJ_Pouch(gp);
-        gp.objects[i].worldX = gp.tileSize * 26;
-        gp.objects[i].worldY = gp.tileSize * 21;
+        gp.objects[i].worldX = gp.tileSize * 8;
+        gp.objects[i].worldY = gp.tileSize * 32;
         i++;
         gp.objects[i] = new OBJ_Rope(gp);
         gp.objects[i].worldX = gp.tileSize * 32;
         gp.objects[i].worldY = gp.tileSize * 21;
         i++;
         gp.objects[i] = new OBJ_Emerald_Scimitar(gp);
-        gp.objects[i].worldX = gp.tileSize * 36;
-        gp.objects[i].worldY = gp.tileSize * 21;
+        gp.objects[i].worldX = gp.tileSize * 39;
+        gp.objects[i].worldY = gp.tileSize * 8;
         i++;
 
         gp.objects[i] = new OBJ_Paladin_Shield(gp);
         gp.objects[i].worldX = gp.tileSize * 36;
-        gp.objects[i].worldY = gp.tileSize * 19;
+        gp.objects[i].worldY = gp.tileSize * 8;
         i++;
 
         gp.objects[i] = new OBJ_Health_Potion(gp);
-        gp.objects[i].worldX = gp.tileSize * 22;
-        gp.objects[i].worldY = gp.tileSize * 21;
+        gp.objects[i].worldX = gp.tileSize * 23;
+        gp.objects[i].worldY = gp.tileSize * 7;
         i++;
 
     }

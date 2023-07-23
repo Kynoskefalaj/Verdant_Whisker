@@ -78,6 +78,9 @@ public class UI {
             drawPlayerLife();
             drawPlayerStamina();
             drawMessage();
+            if (gp.keyH.F12Pressed == true) {
+                drawCurrentCoordinates(g2);
+            }
         }
         // PAUSE STATE
         if (gp.gameState == gp.pauseState) {
@@ -614,5 +617,28 @@ public class UI {
         } else {
             currentUiSE++;
         }
+    }
+
+    public void drawCurrentCoordinates (Graphics2D g2) {
+
+        int fontSize = 38;
+        int startX = gp.tileSize / 2;
+        int startY = gp.screenHeight - (fontSize*4 + 6);
+
+
+        String strCoordinates = "X Col: " + gp.player.worldX / gp.tileSize + "\n" +
+                "Y Row: " + gp.player.worldY / gp.tileSize + "\n" +
+                "World X: " + gp.player.worldX + "\n" +
+                "World Y: " + gp.player.worldY;
+
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, fontSize));
+        g2.setColor(Color.BLACK);
+
+        gp.uTool.drawEnterDelimitedString(strCoordinates, startX, startY,
+                fontSize + 2, g2);
+
+        g2.setColor(Color.WHITE);
+        gp.uTool.drawEnterDelimitedString(strCoordinates, startX - 2, startY - 2,
+                fontSize + 2, g2);
     }
 }
