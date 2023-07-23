@@ -2,7 +2,6 @@ package root;
 
 import entity.Entity;
 import entity.Player;
-import entity.Projectile;
 import tile.TileManager;
 
 import javax.swing.*;
@@ -69,7 +68,7 @@ public class GamePanel extends JPanel implements Runnable{
 
     public void setupGame () {
 
-        asSetter.setObject();
+        asSetter.setObjects();
         asSetter.setNPC();
         asSetter.setMonster();
 

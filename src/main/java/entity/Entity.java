@@ -121,13 +121,7 @@ public EntityType type;
         boolean contactPlayer = gp.cChecker.checkPlayer(this);
 
         if (this.type == EntityType.MONSTER && contactPlayer == true) {
-            if(gp.player.invincible == false) {
-                int damage; //statements below are for case when armour is bigger than AP
-                if (gp.player.defense >= attack) {damage = 0;}
-                else {damage = attack - gp.player.defense;}
-                gp.player.life -= damage;
-                gp.player.invincible = true;
-            }
+            attackPlayer(attack);
         }
 
         // IF COLLISION IS FALSE, ENTITY CAN MOVE
@@ -161,6 +155,19 @@ public EntityType type;
                 invincible = false;
                 invincibleCounter = 0;
             }
+        }
+        if (shotAvailableCounter < 30) {
+            shotAvailableCounter++;
+        }
+    }
+
+    public void attackPlayer (int attack) {
+        if(gp.player.invincible == false) {
+            int damage; //statements below are for case when armour is bigger than AP
+            if (gp.player.defense >= attack) {damage = 0;}
+            else {damage = attack - gp.player.defense;}
+            gp.player.life -= damage;
+            gp.player.invincible = true;
         }
     }
 

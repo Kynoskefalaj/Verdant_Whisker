@@ -1,5 +1,6 @@
 package root;
 
+import entity.Entity;
 import entity.NPC_OldMan;
 import monster.MON_BlueSlime;
 import object.*;
@@ -9,56 +10,32 @@ import object.consumable.OBJ_Stamina_Potion;
 
 public class AssetSetter {
     GamePanel gp;
+    int i = 0;
 
     public AssetSetter(GamePanel gp) {
         this.gp = gp;
     }
 
-    public void setObject () {
+    public void setObjects() {
 
-        int i = 0;
-        gp.objects[i] = new OBJ_Key(gp);
-        gp.objects[i].worldX = gp.tileSize * 25;
-        gp.objects[i].worldY = gp.tileSize * 23;
-        i++;
-        gp.objects[i] = new OBJ_Sacred_Necklace(gp);
-        gp.objects[i].worldX = gp.tileSize * 9;
-        gp.objects[i].worldY = gp.tileSize * 7;
-        i++;
-        gp.objects[i] = new OBJ_Pouch(gp);
-        gp.objects[i].worldX = gp.tileSize * 8;
-        gp.objects[i].worldY = gp.tileSize * 32;
-        i++;
-        gp.objects[i] = new OBJ_Rope(gp);
-        gp.objects[i].worldX = gp.tileSize * 32;
-        gp.objects[i].worldY = gp.tileSize * 21;
-        i++;
-        gp.objects[i] = new OBJ_Emerald_Scimitar(gp);
-        gp.objects[i].worldX = gp.tileSize * 39;
-        gp.objects[i].worldY = gp.tileSize * 8;
-        i++;
-
-        gp.objects[i] = new OBJ_Paladin_Shield(gp);
-        gp.objects[i].worldX = gp.tileSize * 36;
-        gp.objects[i].worldY = gp.tileSize * 8;
-        i++;
-
-        gp.objects[i] = new OBJ_Health_Potion(gp);
-        gp.objects[i].worldX = gp.tileSize * 23;
-        gp.objects[i].worldY = gp.tileSize * 7;
-        i++;
-
-        gp.objects[i] = new OBJ_Stamina_Potion(gp);
-        gp.objects[i].worldX = gp.tileSize * 10;
-        gp.objects[i].worldY = gp.tileSize * 29;
-        i++;
-
-        gp.objects[i] = new OBJ_Mana_Potion(gp);
-        gp.objects[i].worldX = gp.tileSize * 11;
-        gp.objects[i].worldY = gp.tileSize * 34;
-        i++;
-
+        gp.objects[i] = putObject(new OBJ_Key(gp), 25, 23);
+        gp.objects[i] = putObject(new OBJ_Sacred_Necklace(gp), 9, 7);
+        gp.objects[i] = putObject(new OBJ_Pouch(gp), 8, 32);
+        gp.objects[i] = putObject(new OBJ_Rope(gp),32, 21);
+        gp.objects[i] = putObject(new OBJ_Emerald_Scimitar(gp), 39, 8);
+        gp.objects[i] = putObject(new OBJ_Paladin_Shield(gp), 36, 8);
+        gp.objects[i] = putObject(new OBJ_Health_Potion(gp), 23, 7);
+        gp.objects[i] = putObject(new OBJ_Stamina_Potion(gp), 10, 29);
+        gp.objects[i] = putObject(new OBJ_Mana_Potion(gp), 11, 34);
     }
+
+    public Entity putObject(Entity object, int colX, int rowY) {
+        object.worldX = gp.tileSize * colX;
+        object.worldY = gp.tileSize * rowY;
+        i++;
+        return object;
+    }
+
     public void setNPC () {
         gp.npcs[0] = new NPC_OldMan(gp);
         gp.npcs[0].worldX = gp.tileSize*21;

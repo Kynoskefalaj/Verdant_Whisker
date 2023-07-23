@@ -50,7 +50,11 @@ public abstract class Projectile extends Entity{
             }
         }
         else if (caster != gp.player) {
-            //later
+            boolean contactPlayer = gp.cChecker.checkPlayer(this);
+            if(gp.player.invincible == false && contactPlayer == true) {
+                attackPlayer(attack);
+                alive = false;
+            }
         }
 
         switch (direction) {
