@@ -1,6 +1,7 @@
 package object;
 
 import entity.Entity;
+import entity.EntityType;
 import root.GamePanel;
 
 public class OBJ_Heart extends Entity {
@@ -17,7 +18,6 @@ public class OBJ_Heart extends Entity {
         image2 = uTool.scaleImage(image2, scaledSize, scaledSize);
         image3 = uTool.scaleImage(image3, scaledSize, scaledSize);
 
-
-
+        type = EntityType.HUD;
     }
 }

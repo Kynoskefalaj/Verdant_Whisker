@@ -1,6 +1,7 @@
 package object;
 
 import entity.Entity;
+import entity.EntityType;
 import root.GamePanel;
 
 public class OBJ_Leather_Backpack extends Entity {
@@ -10,5 +11,7 @@ public class OBJ_Leather_Backpack extends Entity {
         name = "Leather Backpack";
         image1 = setUp("/objects/Leather_Backpack", gp.tileSize, gp.tileSize);
         down1 = image1;
+
+        type = EntityType.CONTAINER;
     }
 }

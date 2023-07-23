@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
 
-public class Entity {
+public abstract class Entity {
 
     GamePanel gp;
     public UtilityTool uTool = new UtilityTool();
@@ -50,7 +50,6 @@ public class Entity {
     public int hpBarCounter= 0;
 
     //CHARACTER ATTRIBUTES
-    public int type; // o = player 1 = npc, 2 = monster
     public String name;
     public int speed;
     public int maxLife;
@@ -74,6 +73,9 @@ public class Entity {
     public int attackValue;
     public int defenseValue;
     public String description = "";
+
+    // TYPE
+public EntityType type;
 
     public Entity (GamePanel gp) {
         this.gp = gp;
@@ -99,6 +101,8 @@ public class Entity {
         }
     }
 
+    public void use (Entity entity) {}
+
     public void update () {
 //        System.out.println("SpriteCounter: " + spriteCounter);
 
@@ -111,7 +115,7 @@ public class Entity {
         gp.cChecker.checkEntity(this, gp.monsters);
         boolean contactPlayer = gp.cChecker.checkPlayer(this);
 
-        if (this.type == 2 && contactPlayer == true) {
+        if (this.type == EntityType.MONSTER && contactPlayer == true) {
             if(gp.player.invincible == false) {
                 int damage; //statements below are for case when armour is bigger than AP
                 if (gp.player.defense >= attack) {damage = 0;}
@@ -193,7 +197,7 @@ public class Entity {
             }
 
             // Monster HP Bar
-            if (type == 2 && hpBarOn == true) {
+            if (type == EntityType.MONSTER && hpBarOn == true) {
 
                 double oneScale = (double)gp.tileSize / maxLife;
                 double hpBarValue = oneScale * life;

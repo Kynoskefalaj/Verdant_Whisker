@@ -1,6 +1,7 @@
 package object;
 
 import entity.Entity;
+import entity.EntityType;
 import root.GamePanel;
 
 public class OBJ_StaminaWheel extends Entity {
@@ -30,5 +31,6 @@ public class OBJ_StaminaWheel extends Entity {
         image8 = uTool.scaleImage(image8, scaledSize, scaledSize);
         image9 = uTool.scaleImage(image9, scaledSize, scaledSize);
 
+        type = EntityType.HUD;
     }
 }

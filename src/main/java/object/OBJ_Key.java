@@ -1,6 +1,7 @@
 package object;
 
 import entity.Entity;
+import entity.EntityType;
 import root.GamePanel;
 
 import javax.imageio.ImageIO;
@@ -15,5 +16,7 @@ public class OBJ_Key extends Entity {
         image1 = setUp("/objects/key01", gp.tileSize, gp.tileSize);
         down1 = image1;
         description = "[" + name + "]" + "\nIt opens the door.";
+
+        type = EntityType.KEY;
     }
 }

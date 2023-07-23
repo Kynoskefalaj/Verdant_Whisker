@@ -3,6 +3,7 @@ package root;
 import entity.NPC_OldMan;
 import monster.MON_BlueSlime;
 import object.*;
+import object.consumable.OBJ_Health_Potion;
 
 public class AssetSetter {
     GamePanel gp;
@@ -28,6 +29,20 @@ public class AssetSetter {
         i++;
         gp.objects[i] = new OBJ_Rope(gp);
         gp.objects[i].worldX = gp.tileSize * 32;
+        gp.objects[i].worldY = gp.tileSize * 21;
+        i++;
+        gp.objects[i] = new OBJ_Emerald_Scimitar(gp);
+        gp.objects[i].worldX = gp.tileSize * 36;
+        gp.objects[i].worldY = gp.tileSize * 21;
+        i++;
+
+        gp.objects[i] = new OBJ_Paladin_Shield(gp);
+        gp.objects[i].worldX = gp.tileSize * 36;
+        gp.objects[i].worldY = gp.tileSize * 19;
+        i++;
+
+        gp.objects[i] = new OBJ_Health_Potion(gp);
+        gp.objects[i].worldX = gp.tileSize * 22;
         gp.objects[i].worldY = gp.tileSize * 21;
         i++;
 

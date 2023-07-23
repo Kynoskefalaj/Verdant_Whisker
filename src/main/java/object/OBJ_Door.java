@@ -1,6 +1,7 @@
 package object;
 
 import entity.Entity;
+import entity.EntityType;
 import root.GamePanel;
 
 public class OBJ_Door extends Entity {
@@ -17,5 +18,7 @@ public class OBJ_Door extends Entity {
         solidArea.height = 32;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
+
+        type = EntityType.OBSTACLE;
     }
 }

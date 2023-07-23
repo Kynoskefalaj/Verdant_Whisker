@@ -33,6 +33,7 @@ public class Player extends Entity{
         screenX = gp.screenWidth/2 - gp.tileSize/2;
         screenY = gp.screenHeight/2 - gp.tileSize/2;
 
+        // SOLID AREA
         solidArea = new Rectangle();
         solidArea.x = (int)(10 * gp.scale);
         solidArea.y = (int)(16 * gp.scale);
@@ -41,8 +42,11 @@ public class Player extends Entity{
         solidArea.width = (int)(12 * gp.scale);
         solidArea.height = (int)(14 * gp.scale);
 
-        attackArea.width = (int)(22 * gp.scale);
-        attackArea.height = (int)(22 * gp.scale);
+        type = EntityType.PLAYER;
+
+        // ATTACK AREA
+//        attackArea.width = (int)(22 * gp.scale);
+//        attackArea.height = (int)(22 * gp.scale);
 
         setDefaultValues();
         getPlayerImage();
@@ -101,6 +105,7 @@ public class Player extends Entity{
     }
 
     public int getAttack() {
+        attackArea = currentWeapon.attackArea;
         return attack = strength * currentWeapon.attackValue;
     }
 
@@ -128,29 +133,57 @@ public class Player extends Entity{
     }
 
     public void getPlayerAttackImage () {
-        attackUp1 = setUp("/player/combat/Blink_up_smear_1", gp.tileSize, gp.tileSize * 2);
-        attackUp2 = setUp("/player/combat/Blink_up_smear_2", gp.tileSize, gp.tileSize * 2);
-        attackUp3 = setUp("/player/combat/Blink_up_smear_3", gp.tileSize, gp.tileSize * 2);
-        attackUp4 = setUp("/player/combat/Blink_up_smear_4", gp.tileSize, gp.tileSize * 2);
-        attackUp5 = setUp("/player/combat/Blink_up_smear_5", gp.tileSize, gp.tileSize * 2);
 
-        attackDown1 = setUp("/player/combat/Blink_down_smear_1", gp.tileSize, gp.tileSize * 2);
-        attackDown2 = setUp("/player/combat/Blink_down_smear_2", gp.tileSize, gp.tileSize * 2);
-        attackDown3 = setUp("/player/combat/Blink_down_smear_3", gp.tileSize, gp.tileSize * 2);
-        attackDown4 = setUp("/player/combat/Blink_down_smear_4", gp.tileSize, gp.tileSize * 2);
-        attackDown5 = setUp("/player/combat/Blink_down_smear_5", gp.tileSize, gp.tileSize * 2);
+        if (currentWeapon.type == EntityType.EMERALD_SWORD) {
+            attackUp1 = setUp("/player/combat/emerald/Blink_up_emerald_smear_1", gp.tileSize, gp.tileSize * 2);
+            attackUp2 = setUp("/player/combat/emerald/Blink_up_emerald_smear_2", gp.tileSize, gp.tileSize * 2);
+            attackUp3 = setUp("/player/combat/emerald/Blink_up_emerald_smear_3", gp.tileSize, gp.tileSize * 2);
+            attackUp4 = setUp("/player/combat/emerald/Blink_up_emerald_smear_4", gp.tileSize, gp.tileSize * 2);
+            attackUp5 = setUp("/player/combat/emerald/Blink_up_emerald_smear_5", gp.tileSize, gp.tileSize * 2);
 
-        attackLeft1 = setUp("/player/combat/Blink_left_smear_1", gp.tileSize * 2, gp.tileSize);
-        attackLeft2 = setUp("/player/combat/Blink_left_smear_2", gp.tileSize * 2, gp.tileSize);
-        attackLeft3 = setUp("/player/combat/Blink_left_smear_3", gp.tileSize * 2, gp.tileSize);
-        attackLeft4 = setUp("/player/combat/Blink_left_smear_4", gp.tileSize * 2, gp.tileSize);
-        attackLeft5 = setUp("/player/combat/Blink_left_smear_5", gp.tileSize * 2, gp.tileSize);
+            attackDown1 = setUp("/player/combat/emerald/Blink_down_emerald_smear_1", gp.tileSize, gp.tileSize * 2);
+            attackDown2 = setUp("/player/combat/emerald/Blink_down_emerald_smear_2", gp.tileSize, gp.tileSize * 2);
+            attackDown3 = setUp("/player/combat/emerald/Blink_down_emerald_smear_3", gp.tileSize, gp.tileSize * 2);
+            attackDown4 = setUp("/player/combat/emerald/Blink_down_emerald_smear_4", gp.tileSize, gp.tileSize * 2);
+            attackDown5 = setUp("/player/combat/emerald/Blink_down_emerald_smear_5", gp.tileSize, gp.tileSize * 2);
 
-        attackRight1 = setUp("/player/combat/Blink_right_smear_1", gp.tileSize * 2, gp.tileSize);
-        attackRight2 = setUp("/player/combat/Blink_right_smear_2", gp.tileSize * 2, gp.tileSize);
-        attackRight3 = setUp("/player/combat/Blink_right_smear_3", gp.tileSize * 2, gp.tileSize);
-        attackRight4 = setUp("/player/combat/Blink_right_smear_4", gp.tileSize * 2, gp.tileSize);
-        attackRight5 = setUp("/player/combat/Blink_right_smear_5", gp.tileSize * 2, gp.tileSize);
+            attackLeft1 = setUp("/player/combat/emerald/Blink_left_emerald_smear_1", gp.tileSize * 2, gp.tileSize);
+            attackLeft2 = setUp("/player/combat/emerald/Blink_left_emerald_smear_2", gp.tileSize * 2, gp.tileSize);
+            attackLeft3 = setUp("/player/combat/emerald/Blink_left_emerald_smear_3", gp.tileSize * 2, gp.tileSize);
+            attackLeft4 = setUp("/player/combat/emerald/Blink_left_emerald_smear_4", gp.tileSize * 2, gp.tileSize);
+            attackLeft5 = setUp("/player/combat/emerald/Blink_left_emerald_smear_5", gp.tileSize * 2, gp.tileSize);
+
+            attackRight1 = setUp("/player/combat/emerald/Blink_right_emerald_smear_1", gp.tileSize * 2, gp.tileSize);
+            attackRight2 = setUp("/player/combat/emerald/Blink_right_emerald_smear_2", gp.tileSize * 2, gp.tileSize);
+            attackRight3 = setUp("/player/combat/emerald/Blink_right_emerald_smear_3", gp.tileSize * 2, gp.tileSize);
+            attackRight4 = setUp("/player/combat/emerald/Blink_right_emerald_smear_4", gp.tileSize * 2, gp.tileSize);
+            attackRight5 = setUp("/player/combat/emerald/Blink_right_emerald_smear_5", gp.tileSize * 2, gp.tileSize);
+        }
+        if (currentWeapon.type == EntityType.SWORD) {
+            attackUp1 = setUp("/player/combat/Blink_up_smear_1", gp.tileSize, gp.tileSize * 2);
+            attackUp2 = setUp("/player/combat/Blink_up_smear_2", gp.tileSize, gp.tileSize * 2);
+            attackUp3 = setUp("/player/combat/Blink_up_smear_3", gp.tileSize, gp.tileSize * 2);
+            attackUp4 = setUp("/player/combat/Blink_up_smear_4", gp.tileSize, gp.tileSize * 2);
+            attackUp5 = setUp("/player/combat/Blink_up_smear_5", gp.tileSize, gp.tileSize * 2);
+
+            attackDown1 = setUp("/player/combat/Blink_down_smear_1", gp.tileSize, gp.tileSize * 2);
+            attackDown2 = setUp("/player/combat/Blink_down_smear_2", gp.tileSize, gp.tileSize * 2);
+            attackDown3 = setUp("/player/combat/Blink_down_smear_3", gp.tileSize, gp.tileSize * 2);
+            attackDown4 = setUp("/player/combat/Blink_down_smear_4", gp.tileSize, gp.tileSize * 2);
+            attackDown5 = setUp("/player/combat/Blink_down_smear_5", gp.tileSize, gp.tileSize * 2);
+
+            attackLeft1 = setUp("/player/combat/Blink_left_smear_1", gp.tileSize * 2, gp.tileSize);
+            attackLeft2 = setUp("/player/combat/Blink_left_smear_2", gp.tileSize * 2, gp.tileSize);
+            attackLeft3 = setUp("/player/combat/Blink_left_smear_3", gp.tileSize * 2, gp.tileSize);
+            attackLeft4 = setUp("/player/combat/Blink_left_smear_4", gp.tileSize * 2, gp.tileSize);
+            attackLeft5 = setUp("/player/combat/Blink_left_smear_5", gp.tileSize * 2, gp.tileSize);
+
+            attackRight1 = setUp("/player/combat/Blink_right_smear_1", gp.tileSize * 2, gp.tileSize);
+            attackRight2 = setUp("/player/combat/Blink_right_smear_2", gp.tileSize * 2, gp.tileSize);
+            attackRight3 = setUp("/player/combat/Blink_right_smear_3", gp.tileSize * 2, gp.tileSize);
+            attackRight4 = setUp("/player/combat/Blink_right_smear_4", gp.tileSize * 2, gp.tileSize);
+            attackRight5 = setUp("/player/combat/Blink_right_smear_5", gp.tileSize * 2, gp.tileSize);
+        }
     }
 
     @Override
@@ -387,7 +420,7 @@ public class Player extends Entity{
                 }
             }
         } else {
-            System.out.println("Miss!");
+//            System.out.println("Miss!");
         }
     }
 
@@ -410,6 +443,35 @@ public class Player extends Entity{
             gp.gameState = gp.dialogueState;
             gp.ui.currentDialogue = "You are level " + level + "now!\n"
                     + "You feel stronger!";
+        }
+    }
+
+    public void selectItem () {
+
+        int itemIndex = gp.ui.getItemIndexOnSlot();
+
+        if (itemIndex < inventory.size ()) {
+
+            Entity selectedItem = inventory.get(itemIndex);
+
+            if (selectedItem.type == EntityType.SWORD ||
+                    selectedItem.type == EntityType.AXE ||
+                    selectedItem.type == EntityType.CLUB ||
+                    selectedItem.type == EntityType.EMERALD_SWORD) {
+
+                currentWeapon = selectedItem;
+                attack = getAttack();
+                getPlayerAttackImage();
+            }
+            if (selectedItem.type == EntityType.SHIELD) {
+                currentShield = selectedItem;
+                defense = getDefense();
+            }
+            if (selectedItem.type == EntityType.CONSUMABLE) {
+
+                selectedItem.use(this);
+                inventory.remove(itemIndex);
+            }
         }
     }
 

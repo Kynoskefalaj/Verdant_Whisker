@@ -1,6 +1,7 @@
 package object;
 
 import entity.Entity;
+import entity.EntityType;
 import root.GamePanel;
 
 public class OBJ_Worn_Needle extends Entity {
@@ -12,7 +13,15 @@ public class OBJ_Worn_Needle extends Entity {
         image1 = setUp("/objects/Worn_Needle", gp.tileSize, gp.tileSize);
         down1 = image1;
         attackValue = 3;
-        description = "[" + name + "]" + "\n\nFirst lesson: \nStick them with the pointy \nend.";
+        description = "[" + name + "]\n" +
+                "Attack: " + attackValue + " \n\n" +
+                "First lesson: \n" +
+                "Stick them with the pointy \n" +
+                "end.";
 
+        attackArea.width = (int)(22 * gp.scale);
+        attackArea.height = (int)(22 * gp.scale);
+
+        type = EntityType.SWORD;
     }
 }

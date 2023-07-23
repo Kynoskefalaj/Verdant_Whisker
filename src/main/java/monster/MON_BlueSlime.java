@@ -2,6 +2,7 @@ package monster;
 
 import entity.Creature;
 import entity.Entity;
+import entity.EntityType;
 import root.GamePanel;
 
 import java.awt.*;
@@ -14,7 +15,7 @@ public class MON_BlueSlime extends Entity implements Creature {
 
     public MON_BlueSlime(GamePanel gp) {
         super(gp);
-        type = 2;
+        type = EntityType.MONSTER;
         this.gp = gp;
         name = "Blue Slime";
 
@@ -116,7 +117,7 @@ public class MON_BlueSlime extends Entity implements Creature {
                 }
 
         // Monster HP Bar
-        if (type == 2 && hpBarOn == true) {
+        if (type == EntityType.MONSTER && hpBarOn == true) {
 
             double oneScale = (double)gp.tileSize / maxLife;
             double hpBarValue = oneScale * life;

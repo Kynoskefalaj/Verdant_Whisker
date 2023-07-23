@@ -1,6 +1,7 @@
 package object;
 
 import entity.Entity;
+import entity.EntityType;
 import root.GamePanel;
 
 public class OBJ_Green_Tunic extends Entity {
@@ -10,5 +11,7 @@ public class OBJ_Green_Tunic extends Entity {
         name = "Green Tunic";
         image1 = setUp("/objects/Green_Tunic", gp.tileSize, gp.tileSize);
         down1 = image1;
+
+        type = EntityType.ARMOR;
     }
 }

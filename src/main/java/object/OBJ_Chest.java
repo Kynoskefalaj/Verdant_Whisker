@@ -1,6 +1,7 @@
 package object;
 
 import entity.Entity;
+import entity.EntityType;
 import root.GamePanel;
 
 public class OBJ_Chest extends Entity {
@@ -9,5 +10,6 @@ public class OBJ_Chest extends Entity {
         super(gp);
         name = "Chest";
         down1 = setUp("/objects/chest01", gp.tileSize, gp.tileSize);
+        type = EntityType.OBSTACLE;
     }
 }

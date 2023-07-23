@@ -4,19 +4,17 @@ import entity.Entity;
 import entity.EntityType;
 import root.GamePanel;
 
-public class OBJ_Wooden_Shield extends Entity {
+public class OBJ_Paladin_Shield extends Entity {
 
-
-    public OBJ_Wooden_Shield(GamePanel gp) {
+    public OBJ_Paladin_Shield(GamePanel gp) {
         super(gp);
-
-        name = "Wooden Shield";
-        image1 = setUp("/objects/Wooden_Shield", gp.tileSize, gp.tileSize);
+        image1 = setUp("/objects/Paladin_Shield", gp.tileSize, gp.tileSize);
         down1 = image1;
-        defenseValue = 4;
+        defenseValue = 11;
+        name = "Paladin Shield";
         description = "[" + name + "]\n" +
                 "Defence: " + defenseValue + " \n\n" +
-                "An old shield.";
+                "Holy Shield!";
 
         type = EntityType.SHIELD;
     }

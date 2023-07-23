@@ -520,12 +520,19 @@ public class UI {
 
         // DRAW ITEMS
         for (int i = 0; i < gp.player.inventory.size(); i++) {
+
+            // EQUIP CURSOR
+            if (gp.player.inventory.get(i) == gp.player.currentWeapon ||
+                gp.player.inventory.get(i) == gp.player.currentShield) {
+                    g2.setColor(new Color(240, 190, 90));
+                    g2.fillRoundRect(slotX, slotY, gp.tileSize, gp.tileSize, 10, 10);
+            }
             g2.drawImage(gp.player.inventory.get(i).image1, slotX, slotY, null);
             slotX += gp.tileSize * 9/8;
 
             if (i == 2 || i == 5 || i == 8 || i == 11 || i == 14) {
-                slotY += gp.tileSize * 17/16;
-                slotX = slotXstart;
+            slotY += gp.tileSize * 17/16;
+            slotX = slotXstart;
             }
 
         }
