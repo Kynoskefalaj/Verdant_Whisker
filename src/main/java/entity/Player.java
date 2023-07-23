@@ -383,7 +383,7 @@ public class Player extends Entity{
 
         if (i != 999){
 
-            if (invincible == false) {
+            if (invincible == false && gp.monsters[i].dying == false) {
                 int damage; //statements below are for case when armour is bigger than AP
                 if (defense >= gp.monsters[i].attack) {damage = 0;}
                 else {damage = gp.monsters[i].attack - defense;}
