@@ -4,13 +4,13 @@ import entity.Entity;
 import entity.EntityType;
 import root.GamePanel;
 
-public class OBJ_Health_Potion extends Entity {
+public class OBJ_Mana_Potion extends Entity {
 
     GamePanel gp;
     int recoveryValue = 5;
-    String recoveryType = "health";
+    String recoveryType = "mana";
 
-    public OBJ_Health_Potion(GamePanel gp) {
+    public OBJ_Mana_Potion(GamePanel gp) {
         super(gp);
         this.gp = gp;
 
@@ -18,7 +18,7 @@ public class OBJ_Health_Potion extends Entity {
         name = "Health Potion";
 
         description = String.format("[%s]\nRecovers %d %s.", name, recoveryValue, recoveryType);
-        image1 = setUp("/objects/consumables/Health_Potion", gp.tileSize, gp.tileSize);
+        image1 = setUp("/objects/consumables/Mana_Potion", gp.tileSize, gp.tileSize);
         down1 = image1;
 
     }

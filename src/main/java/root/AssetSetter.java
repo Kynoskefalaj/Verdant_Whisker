@@ -4,6 +4,8 @@ import entity.NPC_OldMan;
 import monster.MON_BlueSlime;
 import object.*;
 import object.consumable.OBJ_Health_Potion;
+import object.consumable.OBJ_Mana_Potion;
+import object.consumable.OBJ_Stamina_Potion;
 
 public class AssetSetter {
     GamePanel gp;
@@ -44,6 +46,16 @@ public class AssetSetter {
         gp.objects[i] = new OBJ_Health_Potion(gp);
         gp.objects[i].worldX = gp.tileSize * 23;
         gp.objects[i].worldY = gp.tileSize * 7;
+        i++;
+
+        gp.objects[i] = new OBJ_Stamina_Potion(gp);
+        gp.objects[i].worldX = gp.tileSize * 10;
+        gp.objects[i].worldY = gp.tileSize * 29;
+        i++;
+
+        gp.objects[i] = new OBJ_Mana_Potion(gp);
+        gp.objects[i].worldX = gp.tileSize * 11;
+        gp.objects[i].worldY = gp.tileSize * 34;
         i++;
 
     }
