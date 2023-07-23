@@ -45,6 +45,7 @@ public abstract class Entity {
     public int spriteCounter = 0;
     public int attackSpriteCounter = 0;
     public int actionLockCounter = 0;
+    public int shotAvailableCounter = 0;
     public int invincibleCounter;
     int dyingCounter = 0;
     public int hpBarCounter= 0;
@@ -54,6 +55,8 @@ public abstract class Entity {
     public int speed;
     public int maxLife;
     public int life;
+    public int maxMana;
+    public int mana;
     public int level;
     public int dexterity;
     public int exp;
@@ -68,11 +71,13 @@ public abstract class Entity {
     public int defense = 0;
     public Entity currentWeapon;
     public Entity currentShield;
+    public Projectile projectile;
 
 //    ITEM ATTRIBUTES
     public int attackValue;
     public int defenseValue;
     public String description = "";
+    public int useCost;
 
     // TYPE
 public EntityType type;

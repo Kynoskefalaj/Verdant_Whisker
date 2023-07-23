@@ -73,6 +73,7 @@ public class Player extends Entity{
         coin = 0;
         currentWeapon = new OBJ_Worn_Needle(gp);
         currentShield = new OBJ_Wooden_Shield(gp);
+        projectile = new OBJ_ArcaneMissile(gp);
         life = maxLife;
         stamina = maxStamina;
         attack = getAttack();
@@ -284,6 +285,19 @@ public class Player extends Entity{
                 spriteCounter = 0;
             }
         }
+
+        if (gp.keyH.controlPressed == true && projectile.alive == false && shotAvailableCounter == 30) {
+
+            // SET DEFAULT COORDINATES, DIRECTION AND CASTER
+            projectile.set(worldX, worldY, direction, true, this);
+
+            // ADD IT TO THE LIST
+            gp.projectilesList.add(projectile);
+
+            shotAvailableCounter = 0;
+
+            gp.playSE(gp.sound.projectileCastSE);
+        }
         // This needs to be outside of key if statement. Because it has to be updated even if player doesn't move.
         if (invincible == true) {
             invincibleCounter++;
@@ -291,6 +305,9 @@ public class Player extends Entity{
                 invincible = false;
                 invincibleCounter = 0;
             }
+        }
+        if (shotAvailableCounter < 30) {
+            shotAvailableCounter++;
         }
 
         if (gp.keyH.zeroPressed) {
@@ -305,7 +322,7 @@ public class Player extends Entity{
         if(attackSpriteCounter <= 18 / attackSpeed) {spriteNum = 1;}
         if (attackSpriteCounter > 18 / attackSpeed && attackSpriteCounter <= 54 / attackSpeed) {spriteNum = 2;}
         if (attackSpriteCounter > 54 / attackSpeed && attackSpriteCounter <= 108 / attackSpeed) {
-            damageMonster(checkWhatsHit());
+            damageMonster(checkWhatsHit(), attack);
             spriteNum = 3;
         }
         if (attackSpriteCounter > 108 / attackSpeed && attackSpriteCounter <= 144 / attackSpeed) {spriteNum = 4;}
@@ -394,7 +411,7 @@ public class Player extends Entity{
         }
     }
 
-    public void damageMonster (int i) {
+    public void damageMonster (int i, int attack) {
 
         if (i != 999) {
 

@@ -2,6 +2,7 @@ package root;
 
 import entity.Entity;
 import entity.Player;
+import entity.Projectile;
 import tile.TileManager;
 
 import javax.swing.*;
@@ -27,7 +28,7 @@ public class GamePanel extends JPanel implements Runnable{
     public final int maxWorldRow = 50;
 
 //    FPS
-    int FPS = 60;
+    int FPS = 80;
 
 //    SYSTEM
     TileManager tileM = new TileManager(this);
@@ -47,7 +48,8 @@ public class GamePanel extends JPanel implements Runnable{
     public Entity objects[] = new Entity[10];
     public Entity npcs[] = new Entity[10];
     public Entity monsters[] = new Entity[20];
-    ArrayList<Entity> entityList = new ArrayList<>();
+    public ArrayList<Entity> projectilesList = new ArrayList<>();
+    public ArrayList<Entity> entityList = new ArrayList<>();
 
     // GAME STATE
     public int gameState;
@@ -165,6 +167,16 @@ public class GamePanel extends JPanel implements Runnable{
                     }
                 }
             }
+            for (int i = 0; i < projectilesList.size(); i++) {
+                if (projectilesList.get(i) != null) {
+                    if (projectilesList.get(i).alive == true) {
+                        projectilesList.get(i).update();
+                    }
+                    if (projectilesList.get(i).alive == false) {
+                        projectilesList.remove(i);
+                    }
+                }
+            }
         } if(gameState == pauseState) {
             // NOTHING (for that moment)
         }
@@ -203,6 +215,12 @@ public class GamePanel extends JPanel implements Runnable{
             for (Entity monster : monsters) {
                 if (monster != null) {
                     entityList.add(monster);
+                }
+            }
+
+            for (Entity projectile : projectilesList) {
+                if (projectile != null) {
+                    entityList.add(projectile);
                 }
             }
 

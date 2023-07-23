@@ -8,7 +8,7 @@ public class KeyHandler implements KeyListener{
 
     GamePanel gp;
     public boolean upPressed, downPressed, leftPressed, rightPressed, spacePressed, enterPressed,
-            escapePressed, zeroPressed, F12Pressed;
+            escapePressed, zeroPressed, F12Pressed, controlPressed;
 
     // DEBUG
     boolean checkDrawTime = false;
@@ -163,6 +163,7 @@ public class KeyHandler implements KeyListener{
             case KeyEvent.VK_ESCAPE -> escapePressed = true;
             case KeyEvent.VK_0 -> zeroPressed = true;
             case KeyEvent.VK_F12 -> F12Pressed = true;
+            case KeyEvent.VK_CONTROL -> controlPressed = true;
             case KeyEvent.VK_T -> {
                 if (checkDrawTime == false) {
                     checkDrawTime = true;
@@ -245,6 +246,7 @@ public class KeyHandler implements KeyListener{
             case KeyEvent.VK_A : leftPressed = false; break;
             case KeyEvent.VK_D : rightPressed = false; break;
             case KeyEvent.VK_SPACE : spacePressed = false; break;
+            case KeyEvent.VK_CONTROL : controlPressed = false; break;
         }
     }
 }
