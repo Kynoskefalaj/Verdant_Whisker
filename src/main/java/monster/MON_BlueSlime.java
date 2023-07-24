@@ -37,7 +37,6 @@ public class MON_BlueSlime extends Entity implements Creature {
         deathSound = getClass().getResource("/sound/WaterSplash.wav");
     }
 
-
     @Override
     public void setDefaultValues() {
         speed = 1;

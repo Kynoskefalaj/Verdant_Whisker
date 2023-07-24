@@ -3,6 +3,7 @@ package root;
 import entity.Entity;
 import entity.NPC_OldMan;
 import monster.MON_BlueSlime;
+import monster.MON_SkeletonMage;
 import object.*;
 import object.consumable.OBJ_Health_Potion;
 import object.consumable.OBJ_Mana_Potion;
@@ -65,25 +66,10 @@ public class AssetSetter {
         gp.monsters[i].worldX = gp.tileSize * 38;
         gp.monsters[i].worldY = gp.tileSize * 42;
         i++;
-        gp.monsters[i] = new MON_BlueSlime(gp);
-        gp.monsters[i].worldX = gp.tileSize * 32;
-        gp.monsters[i].worldY = gp.tileSize * 42;
-        i++;
-        gp.monsters[i] = new MON_BlueSlime(gp);
-        gp.monsters[i].worldX = gp.tileSize * 33;
-        gp.monsters[i].worldY = gp.tileSize * 39;
-        i++;
-        gp.monsters[i] = new MON_BlueSlime(gp);
-        gp.monsters[i].worldX = gp.tileSize * 36;
+
+        gp.monsters[i] = new MON_SkeletonMage(gp);
+        gp.monsters[i].worldX = gp.tileSize * 37;
         gp.monsters[i].worldY = gp.tileSize * 40;
-        i++;
-        gp.monsters[i] = new MON_BlueSlime(gp);
-        gp.monsters[i].worldX = gp.tileSize * 37;
-        gp.monsters[i].worldY = gp.tileSize * 41;
-        i++;
-        gp.monsters[i] = new MON_BlueSlime(gp);
-        gp.monsters[i].worldX = gp.tileSize * 37;
-        gp.monsters[i].worldY = gp.tileSize * 42;
         i++;
     }
 }
