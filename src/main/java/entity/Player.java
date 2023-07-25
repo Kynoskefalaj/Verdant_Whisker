@@ -76,7 +76,7 @@ public class Player extends Entity{
         projectile = new OBJ_ArcaneMissile(gp);
         life = maxLife;
         stamina = maxStamina;
-        attack = getAttack();
+        attack = getAttack() + 100;
         defense = getDefense();
         attackSpeed = agility * 6;
     }

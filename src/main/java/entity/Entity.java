@@ -47,7 +47,7 @@ public abstract class Entity {
     public int actionLockCounter = 0;
     public int shotAvailableCounter = 0;
     public int invincibleCounter;
-    int dyingCounter = 0;
+    public int dyingCounter = 0;
     public int hpBarCounter= 0;
 
     //CHARACTER ATTRIBUTES

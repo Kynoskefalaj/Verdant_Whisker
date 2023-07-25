@@ -15,7 +15,7 @@ public class Sound {
     public URL mainTheme, coinSE, powerUpSE, unlockSE, successSE, bumpSE,
             talkSE, enterGameSE, swordSlashSE, monsterDeath, hurtSE, exhaustedSE,
             gui1SE, gui2SE, gui3SE, gui4SE,
-            mysterySE, cursorSE, explosionSE, projectileCastSE;
+            mysterySE, cursorSE, explosionSE, projectileCastSE, evilLaughSE;
     public URL[] uiSounds;
 
     public Sound() {
@@ -53,6 +53,8 @@ public class Sound {
         explosionSE = getClass().getResource("/sound/Explosion.wav");
 
         projectileCastSE = getClass().getResource("/sound/Gun.wav");
+
+        evilLaughSE = getClass().getResource("/sound/Evil_Laugh.wav");
 
 //        cursorSE = getClass().getResource("/sound/cursor.wav");
 

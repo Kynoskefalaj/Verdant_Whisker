@@ -7,6 +7,7 @@ import root.GamePanel;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Objects;
 import java.util.Random;
 
 public class MON_SkeletonMage extends Skeleton implements Creature {
@@ -20,6 +21,9 @@ public class MON_SkeletonMage extends Skeleton implements Creature {
         name = "Skeleton Mage";
 
         getImage();
+        getAttackImage();
+        getDyingImage();
+
         setSounds();
         setDefaultValues();
     }
@@ -69,7 +73,7 @@ public class MON_SkeletonMage extends Skeleton implements Creature {
     public void setSounds() {
         hitSound = getClass().getResource("/sound/Bump.wav");
         attackSound = getClass().getResource("/sound/Explosion.wav");
-        deathSound = getClass().getResource("/sound/WaterSplash.wav");
+        deathSound = gp.sound.evilLaughSE;
     }
     @Override
     public void getAttackImage() {
@@ -280,7 +284,7 @@ public class MON_SkeletonMage extends Skeleton implements Creature {
         }
 
         // IF COLLISION IS FALSE, ENTITY CAN MOVE
-        if(collisionOn == false) {
+        if(!collisionOn) {
 
             switch (direction) {
                 case "up" -> worldY -= speed;
@@ -293,20 +297,12 @@ public class MON_SkeletonMage extends Skeleton implements Creature {
 
         // SPRITE COUNTER + SPRITE NUMBERS
         spriteCounter++;
-        if (dying) {
+
+        if (attacking) {
             if (spriteCounter > 20) {
-                if (spriteNum <= 18) {
+                if (spriteNum < 21) {
                     spriteNum++;
-                } else {
-                    spriteNum = 1;
                     spriteCounter = 0;
-                }
-            }
-        }
-        else if (attacking) {
-            if (spriteCounter > 20) {
-                if (spriteNum <= 21) {
-                    spriteNum++;
                 } else {
                     spriteNum = 1;
                     spriteCounter = 0;
@@ -314,8 +310,9 @@ public class MON_SkeletonMage extends Skeleton implements Creature {
             }
         } else {
             if (spriteCounter > 20) {
-                if (spriteNum <= 6) {
+                if (spriteNum < 6) {
                     spriteNum++;
+                    spriteCounter = 0;
                 } else {
                     spriteNum = 1;
                     spriteCounter = 0;
@@ -336,7 +333,7 @@ public class MON_SkeletonMage extends Skeleton implements Creature {
     }
 
     public void attackPlayer (int attack) {
-        if(gp.player.invincible == false) {
+        if(!gp.player.invincible) {
             int damage; //statements below are for case when armour is bigger than AP
             if (gp.player.defense >= attack) {damage = 0;}
             else {damage = attack - gp.player.defense;}
@@ -356,7 +353,8 @@ public class MON_SkeletonMage extends Skeleton implements Creature {
                 worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
                 worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
                 worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
-            if (attacking == true) {
+
+            if (attacking) {
                 switch (direction) {
                     case "left", "up": // LATER HAVE TO DO SOMETHING WITH UP AND DOWN DIRECTION
                         image = attackLeft[spriteNum - 1];
@@ -365,6 +363,9 @@ public class MON_SkeletonMage extends Skeleton implements Creature {
                         image = attackRight[spriteNum - 1];
                         break;
                 }
+            }
+            if (dying) {
+                dyingAnimation(g2);
             }
             switch (direction) {
                 case "left", "up": // LATER HAVE TO DO SOMETHING WITH UP AND DOWN DIRECTION
@@ -395,40 +396,79 @@ public class MON_SkeletonMage extends Skeleton implements Creature {
         }
 
         // Suppress HP Bar after a while
-        if (invincible == true) {
+        if (invincible) {
             hpBarOn = true;
             hpBarCounter = 0;
             changeAlpha(g2,0.4f);
         }
 
-        if (dying == true) {
+        if (dying) {
+            if (dyingCounter == 1) {
+                gp.playSE(deathSound);
+            }
             dyingAnimation(g2);
         } else {
-            g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+            g2.drawImage(image, screenX, screenY, gp.tileSize * 2, gp.tileSize * 2, null);
+            changeAlpha(g2,1f);
         }
     }
 
     @Override
     public void dyingAnimation(Graphics2D g2) {
+        dyingCounter++;
+        int i = 15;
 
         BufferedImage image = null;
         int screenX = worldX - gp.player.worldX + gp.player.screenX;
         int screenY = worldY - gp.player.worldY + gp.player.screenY;
 
-        if (worldX + gp.tileSize > gp.player.worldX - gp.player.screenX &&
-                worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
-                worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
-                worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
-
-            switch (direction) {
-                case "left", "up": // LATER HAVE TO DO SOMETHING WITH UP AND DOWN DIRECTION
-                    image = dieLeft[spriteNum - 1];
-                    break;
-                case "right", "down": // LATER HAVE TO DO SOMETHING WITH UP AND DOWN DIRECTION
-                    image = dieRight[spriteNum - 1];
-                    break;
-            }
+        if (Objects.equals(direction, "left") || Objects.equals(direction, "up")) {
+            if (dyingCounter <= i) {image = dieLeft[0];}
+            if (dyingCounter > i && dyingCounter <= i * 2) {image = dieLeft[1];}
+            if (dyingCounter > i * 2 && dyingCounter <= i * 3) {image = dieLeft[2];}
+            if (dyingCounter > i * 3 && dyingCounter <= i * 4) {image = dieLeft[3];}
+            if (dyingCounter > i * 4 && dyingCounter <= i * 5) {image = dieLeft[4];}
+            if (dyingCounter > i * 5 && dyingCounter <= i * 6) {image = dieLeft[5];}
+            if (dyingCounter > i * 6 && dyingCounter <= i * 7) {image = dieLeft[6];}
+            if (dyingCounter > i * 7 && dyingCounter <= i * 8) {image = dieLeft[7];}
+            if (dyingCounter > i * 8 && dyingCounter <= i * 9) {image = dieLeft[8];}
+            if (dyingCounter > i * 9 && dyingCounter <= i * 10) {image = dieLeft[9];}
+            if (dyingCounter > i * 10 && dyingCounter <= i * 11) {image = dieLeft[10];}
+            if (dyingCounter > i * 11 && dyingCounter <= i * 12) {image = dieLeft[11];}
+            if (dyingCounter > i * 12 && dyingCounter <= i * 13) {image = dieLeft[12];}
+            if (dyingCounter > i * 13 && dyingCounter <= i * 14) {image = dieLeft[13];}
+            if (dyingCounter > i * 14 && dyingCounter <= i * 15) {image = dieLeft[14];}
+            if (dyingCounter > i * 15 && dyingCounter <= i * 16) {image = dieLeft[15];}
+            if (dyingCounter > i * 16 && dyingCounter <= i * 17) {image = dieLeft[16];}
+            if (dyingCounter > i * 17 && dyingCounter <= i * 18) {image = dieLeft[17];}
         }
-        g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+
+        if (Objects.equals(direction, "right") || Objects.equals(direction, "down")) {
+            if (dyingCounter <= i) {image = dieLeft[0];}
+            if (dyingCounter > i && dyingCounter <= i * 2) {image = dieRight[1];}
+            if (dyingCounter > i * 2 && dyingCounter <= i * 3) {image = dieRight[2];}
+            if (dyingCounter > i * 3 && dyingCounter <= i * 4) {image = dieRight[3];}
+            if (dyingCounter > i * 4 && dyingCounter <= i * 5) {image = dieRight[4];}
+            if (dyingCounter > i * 5 && dyingCounter <= i * 6) {image = dieRight[5];}
+            if (dyingCounter > i * 6 && dyingCounter <= i * 7) {image = dieRight[6];}
+            if (dyingCounter > i * 7 && dyingCounter <= i * 8) {image = dieRight[7];}
+            if (dyingCounter > i * 8 && dyingCounter <= i * 9) {image = dieRight[8];}
+            if (dyingCounter > i * 9 && dyingCounter <= i * 10) {image = dieRight[9];}
+            if (dyingCounter > i * 10 && dyingCounter <= i * 11) {image = dieRight[10];}
+            if (dyingCounter > i * 11 && dyingCounter <= i * 12) {image = dieRight[11];}
+            if (dyingCounter > i * 12 && dyingCounter <= i * 13) {image = dieRight[12];}
+            if (dyingCounter > i * 13 && dyingCounter <= i * 14) {image = dieRight[13];}
+            if (dyingCounter > i * 14 && dyingCounter <= i * 15) {image = dieRight[14];}
+            if (dyingCounter > i * 15 && dyingCounter <= i * 16) {image = dieRight[15];}
+            if (dyingCounter > i * 16 && dyingCounter <= i * 17) {image = dieRight[16];}
+            if (dyingCounter > i * 17 && dyingCounter <= i * 18) {image = dieRight[17];}
+        }
+
+        g2.drawImage(image, screenX, screenY, gp.tileSize * 2, gp.tileSize * 2, null);
+        changeAlpha(g2,1f);
+
+        if (dyingCounter > i * 19) {
+            alive = false;
+        }
     }
 }
