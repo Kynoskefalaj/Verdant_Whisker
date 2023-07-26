@@ -3,6 +3,8 @@ package monster;
 import entity.Creature;
 import entity.Entity;
 import entity.EntityType;
+import object.OBJ_ArcaneMissile;
+import object.OBJ_Rock;
 import root.GamePanel;
 
 import java.awt.*;
@@ -18,6 +20,8 @@ public class MON_BlueSlime extends Entity implements Creature {
         type = EntityType.MONSTER;
         this.gp = gp;
         name = "Blue Slime";
+
+        projectile = new OBJ_Rock(gp);
 
         solidArea.x = (int)(7 * gp.scale);
         solidArea.y = (int)(11 * gp.scale);
@@ -76,6 +80,12 @@ public class MON_BlueSlime extends Entity implements Creature {
             if (i > 50 && i <= 75) {direction = "left";}
             if (i > 75) {direction = "right";}
             actionLockCounter = 0;
+        }
+        int i = new Random().nextInt(100)+1;
+        if (i > 99 && projectile.alive == false && shotAvailableCounter == 30) {
+            projectile.set(worldX, worldY, direction, true, this);
+            gp.projectilesList.add(projectile);
+            shotAvailableCounter = 0;
         }
     }
 

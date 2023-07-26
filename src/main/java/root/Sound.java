@@ -9,7 +9,6 @@ import java.net.URL;
 public class Sound {
 
     Clip clip;
-    URL[] soundURL = new URL[30];
     FloatControl volumeControl;
 
     public URL mainTheme, coinSE, powerUpSE, unlockSE, successSE, bumpSE,
