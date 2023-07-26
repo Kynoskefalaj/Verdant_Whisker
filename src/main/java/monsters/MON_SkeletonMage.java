@@ -4,6 +4,7 @@ import entities.Creature;
 import entities.EntityType;
 import entities.Skeleton;
 import objects.projectiles.OBJ_ArcaneMissile;
+import objects.projectiles.OBJ_DarkEnergyBall;
 import root.GamePanel;
 
 import java.awt.*;
@@ -21,7 +22,7 @@ public class MON_SkeletonMage extends Skeleton implements Creature {
         type = EntityType.MONSTER;
         name = "Skeleton Mage";
 
-        projectile = new OBJ_ArcaneMissile(gp);
+        projectile = new OBJ_DarkEnergyBall(gp);
         projectile.life *= 3;
 
         getImage();

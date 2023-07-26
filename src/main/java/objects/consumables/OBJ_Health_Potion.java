@@ -1,4 +1,4 @@
-package objects.consumable;
+package objects.consumables;
 
 import entities.Entity;
 import entities.EntityType;
