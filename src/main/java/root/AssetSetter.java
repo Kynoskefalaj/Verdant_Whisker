@@ -1,13 +1,18 @@
 package root;
 
-import entity.Entity;
-import entity.NPC_OldMan;
-import monster.MON_BlueSlime;
-import monster.MON_SkeletonMage;
-import object.*;
-import object.consumable.OBJ_Health_Potion;
-import object.consumable.OBJ_Mana_Potion;
-import object.consumable.OBJ_Stamina_Potion;
+import entities.Entity;
+import entities.NPC_OldMan;
+import monsters.MON_BlueSlime;
+import monsters.MON_SkeletonMage;
+import objects.consumable.OBJ_Health_Potion;
+import objects.consumable.OBJ_Mana_Potion;
+import objects.consumable.OBJ_Stamina_Potion;
+import objects.jewellery.OBJ_Sacred_Necklace;
+import objects.shields.OBJ_Paladin_Shield;
+import objects.tools.OBJ_Key;
+import objects.tools.OBJ_Pouch;
+import objects.tools.OBJ_Rope;
+import objects.weapons.OBJ_Emerald_Scimitar;
 
 public class AssetSetter {
     GamePanel gp;

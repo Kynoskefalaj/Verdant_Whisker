@@ -1,6 +1,6 @@
 package root;
 
-import entity.Entity;
+import entities.Entity;
 
 public class CollisionChecker {
 

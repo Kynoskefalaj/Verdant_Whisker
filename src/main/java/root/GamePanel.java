@@ -1,7 +1,7 @@
 package root;
 
-import entity.Entity;
-import entity.Player;
+import entities.Entity;
+import entities.Player;
 import tile.TileManager;
 
 import javax.swing.*;

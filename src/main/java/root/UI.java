@@ -1,8 +1,8 @@
 package root;
 
-import entity.Entity;
-import object.OBJ_Heart;
-import object.OBJ_StaminaWheel;
+import entities.Entity;
+import objects.hud.OBJ_Heart;
+import objects.hud.OBJ_StaminaWheel;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
