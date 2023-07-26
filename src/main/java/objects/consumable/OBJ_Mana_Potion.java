@@ -20,7 +20,6 @@ public class OBJ_Mana_Potion extends Entity {
         description = String.format("[%s]\nRecovers %d %s.", name, recoveryValue, recoveryType);
         image1 = setUp("/objects/consumables/Mana_Potion", gp.tileSize, gp.tileSize);
         down1 = image1;
-
     }
 
     @Override
@@ -29,9 +28,9 @@ public class OBJ_Mana_Potion extends Entity {
         gp.gameState = gp.dialogueState;
         gp.ui.currentDialogue = "You drink the " + name + "!\n" +
                 "Your " + recoveryType + " has been recovered by " + recoveryValue + ".";
-        entity.life += recoveryValue;
-        if(entity.life > entity.maxLife) {
-            entity.life = entity.maxLife;
+        entity.mana += recoveryValue;
+        if(entity.mana > entity.maxMana) {
+            entity.mana = entity.maxMana;
         }
         gp.playSE(gp.sound.powerUpSE);
     }

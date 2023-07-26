@@ -3,6 +3,7 @@ package monsters;
 import entities.Creature;
 import entities.EntityType;
 import entities.Skeleton;
+import objects.projectiles.OBJ_ArcaneMissile;
 import root.GamePanel;
 
 import java.awt.*;
@@ -19,6 +20,9 @@ public class MON_SkeletonMage extends Skeleton implements Creature {
         this.gp = gp;
         type = EntityType.MONSTER;
         name = "Skeleton Mage";
+
+        projectile = new OBJ_ArcaneMissile(gp);
+        projectile.life *= 3;
 
         getImage();
         getAttackImage();
@@ -258,6 +262,13 @@ public class MON_SkeletonMage extends Skeleton implements Creature {
             if (i > 75) {direction = "right";}
             actionLockCounter = 0;
         }
+
+        int i = new Random().nextInt(100)+1;
+        if (i > 96 && projectile.alive == false && shotAvailableCounter == 30) {
+            projectile.set(worldX, worldY, direction, true, this);
+            gp.projectilesList.add(projectile);
+            shotAvailableCounter = 0;
+        }
     }
     @Override
     public void damageReaction () {
@@ -346,8 +357,8 @@ public class MON_SkeletonMage extends Skeleton implements Creature {
     public void draw (Graphics2D g2) {
 
         BufferedImage image = null;
-        int screenX = worldX - gp.player.worldX + gp.player.screenX;
-        int screenY = worldY - gp.player.worldY + gp.player.screenY;
+        int screenX = worldX - gp.player.worldX + gp.player.screenX - gp.tileSize/2;
+        int screenY = worldY - gp.player.worldY + gp.player.screenY - gp.tileSize/2;
 
         if (worldX + gp.tileSize > gp.player.worldX - gp.player.screenX &&
                 worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
@@ -383,9 +394,9 @@ public class MON_SkeletonMage extends Skeleton implements Creature {
             double oneScale = (double)gp.tileSize / maxLife;
             double hpBarValue = oneScale * life;
             g2.setColor(new Color(35,35,35));
-            g2.fillRect(screenX - 1, screenY - 16, gp.tileSize + 2, 12);
+            g2.fillRect(screenX - 1 + gp.tileSize/2, screenY, gp.tileSize + 2, 12);
             g2.setColor(new Color(223, 29, 53));
-            g2.fillRect(screenX, screenY - 15, (int)hpBarValue, 10);
+            g2.fillRect(screenX + gp.tileSize/2, screenY + 1, (int)hpBarValue, 10);
 
             hpBarCounter++;
 
@@ -419,8 +430,8 @@ public class MON_SkeletonMage extends Skeleton implements Creature {
         int i = 15;
 
         BufferedImage image = null;
-        int screenX = worldX - gp.player.worldX + gp.player.screenX;
-        int screenY = worldY - gp.player.worldY + gp.player.screenY;
+        int screenX = worldX - gp.player.worldX + gp.player.screenX - gp.tileSize/2;
+        int screenY = worldY - gp.player.worldY + gp.player.screenY - gp.tileSize/2;
 
         if (Objects.equals(direction, "left") || Objects.equals(direction, "up")) {
             if (dyingCounter <= i) {image = dieLeft[0];}

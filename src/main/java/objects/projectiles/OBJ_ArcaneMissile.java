@@ -1,5 +1,6 @@
 package objects.projectiles;
 
+import entities.Entity;
 import entities.Projectile;
 import root.GamePanel;
 
@@ -17,7 +18,7 @@ public class OBJ_ArcaneMissile extends Projectile {
         maxLife = 80;
         life = maxLife;
         attack = 7;
-        useCost = 2;
+        useCost = 1;
         alive = false;
         getImage();
 
@@ -148,5 +149,18 @@ public class OBJ_ArcaneMissile extends Projectile {
         right28 = setUp("/projectile/arcane_missile/right/am_right_28", gp.tileSize, gp.tileSize);
         right29 = setUp("/projectile/arcane_missile/right/am_right_29", gp.tileSize, gp.tileSize);
         right30 = setUp("/projectile/arcane_missile/right/am_right_30", gp.tileSize, gp.tileSize);
+    }
+
+    public boolean haveResource (Entity caster) {
+
+        boolean haveResource = false;
+        if (caster.mana >= useCost) {
+            haveResource = true;
+        }
+        return haveResource;
+    }
+
+    public void subtractResource (Entity caster) {
+        caster.mana -= useCost;
     }
 }

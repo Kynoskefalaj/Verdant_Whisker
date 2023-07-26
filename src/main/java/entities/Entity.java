@@ -57,6 +57,7 @@ public abstract class Entity {
     public int life;
     public int maxMana;
     public int mana;
+    public int ammo;
     public int level;
     public int dexterity;
     public int exp;

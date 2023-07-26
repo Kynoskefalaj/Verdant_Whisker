@@ -1,5 +1,6 @@
 package objects.projectiles;
 
+import entities.Entity;
 import entities.Projectile;
 import root.GamePanel;
 
@@ -23,7 +24,6 @@ public class OBJ_Rock extends Projectile {
         useCost = 2;
         alive = false;
         getImage();
-
     }
 
     public void getImage () {
@@ -34,8 +34,8 @@ public class OBJ_Rock extends Projectile {
     public void draw (Graphics2D g2) {
 
         BufferedImage image = null;
-        int screenX = worldX - gp.player.worldX + gp.player.screenX;
-        int screenY = worldY - gp.player.worldY + gp.player.screenY;
+        int screenX = worldX - gp.player.worldX + gp.player.screenX + gp.tileSize/4;
+        int screenY = worldY - gp.player.worldY + gp.player.screenY + gp.tileSize/4;
 
         if (worldX + gp.tileSize > gp.player.worldX - gp.player.screenX &&
                 worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
@@ -47,5 +47,18 @@ public class OBJ_Rock extends Projectile {
         g2.drawImage(image, screenX, screenY, gp.tileSize/2, gp.tileSize/2, null);
 
         changeAlpha(g2, 1f);
+    }
+
+    public boolean haveResource (Entity caster) {
+
+        boolean haveResource = false;
+        if (caster.ammo >= useCost) {
+            haveResource = true;
+        }
+        return haveResource;
+    }
+
+    public void subtractResource (Entity caster) {
+        caster.ammo -= useCost;
     }
 }

@@ -228,4 +228,12 @@ public abstract class Projectile extends Entity{
             changeAlpha(g2,1f);
         }
     }
+
+    public boolean haveResource (Entity caster) {
+
+        boolean haveResource = false;
+        return haveResource;
+    }
+
+    public abstract void subtractResource (Entity caster);
 }

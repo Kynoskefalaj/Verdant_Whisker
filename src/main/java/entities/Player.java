@@ -4,6 +4,7 @@ import objects.clothes.OBJ_Green_Hat;
 import objects.clothes.OBJ_Green_Tunic;
 import objects.jewellery.OBJ_Sacred_Necklace;
 import objects.projectiles.OBJ_ArcaneMissile;
+import objects.projectiles.OBJ_Rock;
 import objects.shields.OBJ_Wooden_Shield;
 import objects.tools.OBJ_Key;
 import objects.tools.OBJ_Leather_Backpack;
@@ -91,6 +92,8 @@ public class Player extends Entity{
         attack = getAttack() + 100;
         defense = getDefense();
         attackSpeed = agility * 6;
+
+        ammo = 10;
     }
 
     public void setItems () {
@@ -298,10 +301,14 @@ public class Player extends Entity{
             }
         }
 
-        if (gp.keyH.controlPressed == true && projectile.alive == false && shotAvailableCounter == 30) {
+        if (gp.keyH.controlPressed == true && projectile.alive == false &&
+                shotAvailableCounter == 30 && projectile.haveResource(this) == true) {
 
             // SET DEFAULT COORDINATES, DIRECTION AND CASTER
             projectile.set(worldX, worldY, direction, true, this);
+
+            // SUBTRACT THE COST (MANA, AMMO, etc.)
+            projectile.subtractResource(this);
 
             // ADD IT TO THE LIST
             gp.projectilesList.add(projectile);
@@ -460,8 +467,10 @@ public class Player extends Entity{
             level++;
             nextLevelExp = nextLevelExp * 2;
             maxLife += 1;
+            maxMana += 1;
             maxStamina += 2;
             life = maxLife;
+            mana = maxMana;
             stamina = maxStamina;
             strength++;
             agility++;
