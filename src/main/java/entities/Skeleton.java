@@ -16,6 +16,7 @@ public abstract class Skeleton extends Entity {
     protected BufferedImage[] dieLeft = new BufferedImage[18];
     protected BufferedImage[] dieRight = new BufferedImage[18];
 
+
     public Skeleton(GamePanel gp) {
         super(gp);
     }

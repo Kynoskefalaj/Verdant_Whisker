@@ -3,7 +3,6 @@ package monsters;
 import entities.Creature;
 import entities.EntityType;
 import entities.Skeleton;
-import objects.projectiles.OBJ_ArcaneMissile;
 import objects.projectiles.OBJ_DarkEnergyBall;
 import root.GamePanel;
 
@@ -41,6 +40,7 @@ public class MON_SkeletonMage extends Skeleton implements Creature {
         attack = 12;
         defense = 5;
         exp = 25;
+        attackSpeed = 1;
     }
 
     @Override
@@ -266,9 +266,50 @@ public class MON_SkeletonMage extends Skeleton implements Creature {
 
         int i = new Random().nextInt(100)+1;
         if (i > 96 && projectile.alive == false && shotAvailableCounter == 30) {
-            projectile.set(worldX, worldY, direction, true, this);
-            gp.projectilesList.add(projectile);
-            shotAvailableCounter = 0;
+            attack();
+        }
+    }
+
+    public void shoot() {
+        projectile.set(worldX, worldY, direction, true, this);
+        gp.projectilesList.add(projectile);
+        shotAvailableCounter = 0;
+    }
+
+    public void attack() {
+        attackSpriteCounter++;
+
+        attacking = true;
+        int v = 5;
+
+        if(attackSpriteCounter <= v / attackSpeed) {spriteNum = 1;}
+        if (attackSpriteCounter > v / attackSpeed && attackSpriteCounter <= v * 2 / attackSpeed) {spriteNum = 2;}
+        if (attackSpriteCounter > v * 2 / attackSpeed && attackSpriteCounter <= v * 3 / attackSpeed) {spriteNum = 3;}
+        if (attackSpriteCounter > v * 3 / attackSpeed && attackSpriteCounter <= v * 4 / attackSpeed) {spriteNum = 4;}
+        if (attackSpriteCounter > v * 4 / attackSpeed && attackSpriteCounter <= v * 5 / attackSpeed) {spriteNum = 5;}
+        if (attackSpriteCounter > v * 5 / attackSpeed && attackSpriteCounter <= v * 6 / attackSpeed) {spriteNum = 6;}
+        if (attackSpriteCounter > v * 6 / attackSpeed && attackSpriteCounter <= v * 7 / attackSpeed) {spriteNum = 7;}
+        if (attackSpriteCounter > v * 7 / attackSpeed && attackSpriteCounter <= v * 8 / attackSpeed) {spriteNum = 8;}
+        if (attackSpriteCounter > v * 8 / attackSpeed && attackSpriteCounter <= v * 9 / attackSpeed) {spriteNum = 9;}
+        if (attackSpriteCounter > v * 9 / attackSpeed && attackSpriteCounter <= v * 10 / attackSpeed) {spriteNum = 10;}
+        if (attackSpriteCounter > v * 10 / attackSpeed && attackSpriteCounter <= v * 11 / attackSpeed) {
+            spriteNum = 11;
+            shoot();
+        }
+        if (attackSpriteCounter > v * 11 / attackSpeed && attackSpriteCounter <= v * 12 / attackSpeed) {spriteNum = 12;}
+        if (attackSpriteCounter > v * 12 / attackSpeed && attackSpriteCounter <= v * 13 / attackSpeed) {spriteNum = 13;}
+        if (attackSpriteCounter > v * 13 / attackSpeed && attackSpriteCounter <= v * 14 / attackSpeed) {spriteNum = 14;}
+        if (attackSpriteCounter > v * 14 / attackSpeed && attackSpriteCounter <= v * 15 / attackSpeed) {spriteNum = 15;}
+        if (attackSpriteCounter > v * 15 / attackSpeed && attackSpriteCounter <= v * 16 / attackSpeed) {spriteNum = 16;}
+        if (attackSpriteCounter > v * 16 / attackSpeed && attackSpriteCounter <= v * 17 / attackSpeed) {spriteNum = 17;}
+        if (attackSpriteCounter > v * 17 / attackSpeed && attackSpriteCounter <= v * 18 / attackSpeed) {spriteNum = 18;}
+        if (attackSpriteCounter > v * 18 / attackSpeed && attackSpriteCounter <= v * 19 / attackSpeed) {spriteNum = 19;}
+        if (attackSpriteCounter > v * 19 / attackSpeed && attackSpriteCounter <= v * 20 / attackSpeed) {spriteNum = 20;}
+        if (attackSpriteCounter > v * 20 / attackSpeed && attackSpriteCounter <= v * 21 / attackSpeed) {spriteNum = 21;}
+        if (attackSpriteCounter > v * 21 / attackSpeed) {
+            spriteNum = 1;
+            attackSpriteCounter = 0;
+            attacking = false;
         }
     }
     @Override
@@ -310,18 +351,18 @@ public class MON_SkeletonMage extends Skeleton implements Creature {
         // SPRITE COUNTER + SPRITE NUMBERS
         spriteCounter++;
 
-        if (attacking) {
-            if (spriteCounter > 20) {
-                if (spriteNum < 21) {
-                    spriteNum++;
-                    spriteCounter = 0;
-                } else {
-                    spriteNum = 1;
-                    spriteCounter = 0;
-                }
-            }
-        } else {
-            if (spriteCounter > 20) {
+//        if (attacking) {
+//            if (spriteCounter > 15) {
+//                if (spriteNum < 21) {
+//                    spriteNum++;
+//                    spriteCounter = 0;
+//                } else {
+//                    spriteNum = 1;
+//                    spriteCounter = 0;
+//                }
+//            }
+//        } else {
+            if (spriteCounter > 15) {
                 if (spriteNum < 6) {
                     spriteNum++;
                     spriteCounter = 0;
@@ -330,7 +371,7 @@ public class MON_SkeletonMage extends Skeleton implements Creature {
                     spriteCounter = 0;
                 }
             }
-        }
+//        }
 
         if (invincible) {
             invincibleCounter++;
@@ -376,9 +417,9 @@ public class MON_SkeletonMage extends Skeleton implements Creature {
                         break;
                 }
             }
-            if (dying) {
+            else if (dying) {
                 dyingAnimation(g2);
-            }
+            } else {
             switch (direction) {
                 case "left", "up": // LATER HAVE TO DO SOMETHING WITH UP AND DOWN DIRECTION
                     image = walkLeft[spriteNum - 1];
@@ -386,6 +427,7 @@ public class MON_SkeletonMage extends Skeleton implements Creature {
                 case "right", "down": // LATER HAVE TO DO SOMETHING WITH UP AND DOWN DIRECTION
                     image = walkRight[spriteNum - 1];
                     break;
+                }
             }
         }
 

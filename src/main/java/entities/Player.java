@@ -4,7 +4,6 @@ import objects.clothes.OBJ_Green_Hat;
 import objects.clothes.OBJ_Green_Tunic;
 import objects.jewellery.OBJ_Sacred_Necklace;
 import objects.projectiles.OBJ_ArcaneMissile;
-import objects.projectiles.OBJ_Rock;
 import objects.shields.OBJ_Wooden_Shield;
 import objects.tools.OBJ_Key;
 import objects.tools.OBJ_Leather_Backpack;
@@ -18,7 +17,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-public class Player extends Entity{
+public class Player extends Entity implements Archery {
 
     KeyHandler keyH;
     UtilityTool uTool;
@@ -286,7 +285,7 @@ public class Player extends Entity{
             gp.keyH.enterPressed = false;
 
             spriteCounter++;
-//            System.out.println("Speed:" + speed + "speedBoost: " + speedBoost);
+
             if (spriteCounter > 9 - spriteSpeedModifier) {
                 if (spriteNum == 1) {
                     spriteNum = 2;
@@ -303,20 +302,9 @@ public class Player extends Entity{
 
         if (gp.keyH.controlPressed == true && projectile.alive == false &&
                 shotAvailableCounter == 30 && projectile.haveResource(this) == true) {
-
-            // SET DEFAULT COORDINATES, DIRECTION AND CASTER
-            projectile.set(worldX, worldY, direction, true, this);
-
-            // SUBTRACT THE COST (MANA, AMMO, etc.)
-            projectile.subtractResource(this);
-
-            // ADD IT TO THE LIST
-            gp.projectilesList.add(projectile);
-
-            shotAvailableCounter = 0;
-
-            gp.playSE(gp.sound.projectileCastSE);
+            shoot();
         }
+
         // This needs to be outside of key if statement. Because it has to be updated even if player doesn't move.
         if (invincible == true) {
             invincibleCounter++;
@@ -351,6 +339,21 @@ public class Player extends Entity{
             attackSpriteCounter = 0;
             attacking = false;
         }
+    }
+
+    public void shoot() {
+        // SET DEFAULT COORDINATES, DIRECTION AND CASTER
+        projectile.set(worldX, worldY, direction, true, this);
+
+        // SUBTRACT THE COST (MANA, AMMO, etc.)
+        projectile.subtractResource(this);
+
+        // ADD IT TO THE LIST
+        gp.projectilesList.add(projectile);
+
+        shotAvailableCounter = 0;
+
+        gp.playSE(gp.sound.projectileCastSE);
     }
 
     public void pickUpObject (int i) {
