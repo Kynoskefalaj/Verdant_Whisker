@@ -3,6 +3,7 @@ package monsters;
 import entities.Creature;
 import entities.Entity;
 import entities.EntityType;
+import objects.projectiles.OBJ_DarkEnergyBall;
 import objects.projectiles.OBJ_Rock;
 import root.GamePanel;
 

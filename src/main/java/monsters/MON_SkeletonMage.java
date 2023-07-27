@@ -4,6 +4,7 @@ import entities.Creature;
 import entities.EntityType;
 import entities.Skeleton;
 import objects.projectiles.OBJ_DarkEnergyBall;
+import objects.projectiles.OBJ_Rock;
 import root.GamePanel;
 
 import java.awt.*;
@@ -14,6 +15,7 @@ import java.util.Random;
 public class MON_SkeletonMage extends Skeleton implements Creature {
 
     GamePanel gp;
+    boolean shooting = false;
 
     public MON_SkeletonMage(GamePanel gp) {
         super(gp);
@@ -22,7 +24,6 @@ public class MON_SkeletonMage extends Skeleton implements Creature {
         name = "Skeleton Mage";
 
         projectile = new OBJ_DarkEnergyBall(gp);
-        projectile.life *= 3;
 
         getImage();
         getAttackImage();
@@ -253,7 +254,7 @@ public class MON_SkeletonMage extends Skeleton implements Creature {
     public void setAction() {
 
         actionLockCounter++;
-        if (actionLockCounter == 120) {
+        if (actionLockCounter > 90 && !attacking) {
             Random random = new Random();
             int i = random.nextInt(100) + 1; // pick up a number from 0 to 100
 
@@ -265,8 +266,8 @@ public class MON_SkeletonMage extends Skeleton implements Creature {
         }
 
         int i = new Random().nextInt(100)+1;
-        if (i > 96 && projectile.alive == false && shotAvailableCounter == 30) {
-            attack();
+        if (i > 99 && projectile.alive == false && shotAvailableCounter == 30 && shooting == false) {
+            shooting = true;
         }
     }
 
@@ -282,34 +283,36 @@ public class MON_SkeletonMage extends Skeleton implements Creature {
         attacking = true;
         int v = 5;
 
-        if(attackSpriteCounter <= v / attackSpeed) {spriteNum = 1;}
-        if (attackSpriteCounter > v / attackSpeed && attackSpriteCounter <= v * 2 / attackSpeed) {spriteNum = 2;}
-        if (attackSpriteCounter > v * 2 / attackSpeed && attackSpriteCounter <= v * 3 / attackSpeed) {spriteNum = 3;}
-        if (attackSpriteCounter > v * 3 / attackSpeed && attackSpriteCounter <= v * 4 / attackSpeed) {spriteNum = 4;}
-        if (attackSpriteCounter > v * 4 / attackSpeed && attackSpriteCounter <= v * 5 / attackSpeed) {spriteNum = 5;}
-        if (attackSpriteCounter > v * 5 / attackSpeed && attackSpriteCounter <= v * 6 / attackSpeed) {spriteNum = 6;}
-        if (attackSpriteCounter > v * 6 / attackSpeed && attackSpriteCounter <= v * 7 / attackSpeed) {spriteNum = 7;}
-        if (attackSpriteCounter > v * 7 / attackSpeed && attackSpriteCounter <= v * 8 / attackSpeed) {spriteNum = 8;}
-        if (attackSpriteCounter > v * 8 / attackSpeed && attackSpriteCounter <= v * 9 / attackSpeed) {spriteNum = 9;}
-        if (attackSpriteCounter > v * 9 / attackSpeed && attackSpriteCounter <= v * 10 / attackSpeed) {spriteNum = 10;}
-        if (attackSpriteCounter > v * 10 / attackSpeed && attackSpriteCounter <= v * 11 / attackSpeed) {
+        if(attackSpriteCounter <= v ) {spriteNum = 1;}
+        if (attackSpriteCounter > v  && attackSpriteCounter <= v * 2) {spriteNum = 2;}
+        if (attackSpriteCounter > v * 2 && attackSpriteCounter <= v * 3) {spriteNum = 3;}
+        if (attackSpriteCounter > v * 3 && attackSpriteCounter <= v * 4) {spriteNum = 4;}
+        if (attackSpriteCounter > v * 4 && attackSpriteCounter <= v * 5) {spriteNum = 5;}
+        if (attackSpriteCounter > v * 5 && attackSpriteCounter <= v * 6) {spriteNum = 6;}
+        if (attackSpriteCounter > v * 6 && attackSpriteCounter <= v * 7) {spriteNum = 7;}
+        if (attackSpriteCounter > v * 7 && attackSpriteCounter <= v * 8) {spriteNum = 8;}
+        if (attackSpriteCounter > v * 8 && attackSpriteCounter <= v * 9) {spriteNum = 9;}
+        if (attackSpriteCounter > v * 9 && attackSpriteCounter <= v * 10) {spriteNum = 10;}
+        if (attackSpriteCounter > v * 10 && attackSpriteCounter <= v * 11) {
             spriteNum = 11;
             shoot();
         }
-        if (attackSpriteCounter > v * 11 / attackSpeed && attackSpriteCounter <= v * 12 / attackSpeed) {spriteNum = 12;}
-        if (attackSpriteCounter > v * 12 / attackSpeed && attackSpriteCounter <= v * 13 / attackSpeed) {spriteNum = 13;}
-        if (attackSpriteCounter > v * 13 / attackSpeed && attackSpriteCounter <= v * 14 / attackSpeed) {spriteNum = 14;}
-        if (attackSpriteCounter > v * 14 / attackSpeed && attackSpriteCounter <= v * 15 / attackSpeed) {spriteNum = 15;}
-        if (attackSpriteCounter > v * 15 / attackSpeed && attackSpriteCounter <= v * 16 / attackSpeed) {spriteNum = 16;}
-        if (attackSpriteCounter > v * 16 / attackSpeed && attackSpriteCounter <= v * 17 / attackSpeed) {spriteNum = 17;}
-        if (attackSpriteCounter > v * 17 / attackSpeed && attackSpriteCounter <= v * 18 / attackSpeed) {spriteNum = 18;}
-        if (attackSpriteCounter > v * 18 / attackSpeed && attackSpriteCounter <= v * 19 / attackSpeed) {spriteNum = 19;}
-        if (attackSpriteCounter > v * 19 / attackSpeed && attackSpriteCounter <= v * 20 / attackSpeed) {spriteNum = 20;}
-        if (attackSpriteCounter > v * 20 / attackSpeed && attackSpriteCounter <= v * 21 / attackSpeed) {spriteNum = 21;}
-        if (attackSpriteCounter > v * 21 / attackSpeed) {
+        if (attackSpriteCounter > v * 11 && attackSpriteCounter <= v * 12) {spriteNum = 12;}
+        if (attackSpriteCounter > v * 12 && attackSpriteCounter <= v * 13) {spriteNum = 13;}
+        if (attackSpriteCounter > v * 13 && attackSpriteCounter <= v * 14) {spriteNum = 14;}
+        if (attackSpriteCounter > v * 14 && attackSpriteCounter <= v * 15) {spriteNum = 15;}
+        if (attackSpriteCounter > v * 15 && attackSpriteCounter <= v * 16) {spriteNum = 16;}
+        if (attackSpriteCounter > v * 16 && attackSpriteCounter <= v * 17) {spriteNum = 17;}
+        if (attackSpriteCounter > v * 17 && attackSpriteCounter <= v * 18) {spriteNum = 18;}
+        if (attackSpriteCounter > v * 18 && attackSpriteCounter <= v * 19) {spriteNum = 19;}
+        if (attackSpriteCounter > v * 19 && attackSpriteCounter <= v * 20) {spriteNum = 20;}
+        if (attackSpriteCounter > v * 20 && attackSpriteCounter <= v * 21) {spriteNum = 21;}
+        if (attackSpriteCounter > v * 21) {
             spriteNum = 1;
             attackSpriteCounter = 0;
+            shooting = false;
             attacking = false;
+
         }
     }
     @Override
@@ -322,7 +325,6 @@ public class MON_SkeletonMage extends Skeleton implements Creature {
 
     @Override
     public void update () {
-
         setAction();
 
         collisionOn = false;
@@ -337,7 +339,7 @@ public class MON_SkeletonMage extends Skeleton implements Creature {
         }
 
         // IF COLLISION IS FALSE, ENTITY CAN MOVE
-        if(!collisionOn) {
+        if(!collisionOn && !attacking) {
 
             switch (direction) {
                 case "up" -> worldY -= speed;
@@ -347,22 +349,9 @@ public class MON_SkeletonMage extends Skeleton implements Creature {
             }
         }
 
-
         // SPRITE COUNTER + SPRITE NUMBERS
         spriteCounter++;
-
-//        if (attacking) {
-//            if (spriteCounter > 15) {
-//                if (spriteNum < 21) {
-//                    spriteNum++;
-//                    spriteCounter = 0;
-//                } else {
-//                    spriteNum = 1;
-//                    spriteCounter = 0;
-//                }
-//            }
-//        } else {
-            if (spriteCounter > 15) {
+            if (!attacking && spriteCounter > 15) {
                 if (spriteNum < 6) {
                     spriteNum++;
                     spriteCounter = 0;
@@ -371,7 +360,6 @@ public class MON_SkeletonMage extends Skeleton implements Creature {
                     spriteCounter = 0;
                 }
             }
-//        }
 
         if (invincible) {
             invincibleCounter++;
@@ -382,6 +370,10 @@ public class MON_SkeletonMage extends Skeleton implements Creature {
         }
         if (shotAvailableCounter < 30) {
             shotAvailableCounter++;
+        }
+
+        if (shooting) {
+            attack();
         }
     }
 
@@ -461,7 +453,8 @@ public class MON_SkeletonMage extends Skeleton implements Creature {
                 gp.playSE(deathSound);
             }
             dyingAnimation(g2);
-        } else {
+        }
+        else {
             g2.drawImage(image, screenX, screenY, gp.tileSize * 2, gp.tileSize * 2, null);
             changeAlpha(g2,1f);
         }

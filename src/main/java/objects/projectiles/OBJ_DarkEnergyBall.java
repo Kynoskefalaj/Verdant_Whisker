@@ -14,8 +14,8 @@ public class OBJ_DarkEnergyBall extends Projectile {
         this.gp = gp;
 
         name = "Dark Energy Ball";
-        speed = 8;
-        maxLife = 120;
+        speed = 6;
+        maxLife = 80;
         life = maxLife;
         attack = 12;
         useCost = 2;
