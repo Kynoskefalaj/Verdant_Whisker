@@ -205,6 +205,9 @@ public class GamePanel extends JPanel implements Runnable{
                 }
             }
 
+            // USER INTERFACE
+            ui.draw(g2);
+
             for (Entity obj : objects) {
                 if (obj != null) {
                     entityList.add(obj);
@@ -240,9 +243,6 @@ public class GamePanel extends JPanel implements Runnable{
             }
             // EMPTY ENTITY LIST (otherwise it will grow on every loop)
             entityList.clear();
-
-            // USER INTERFACE
-            ui.draw(g2);
 
             if (keyH.checkDrawTime == true) {
                 long drawEnd = System.nanoTime();

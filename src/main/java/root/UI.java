@@ -95,9 +95,9 @@ public class UI {
         }
         // DIALOGUE STATE
         if (gp.gameState == gp.dialogueState) {
-            drawDialogueScreen();
             drawPlayerLife_Mana();
             drawPlayerStamina();
+            drawDialogueScreen();
         }
         // CHARACTER STATE
         if (gp.gameState == gp.characterState) {
