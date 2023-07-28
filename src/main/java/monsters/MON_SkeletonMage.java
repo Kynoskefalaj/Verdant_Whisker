@@ -16,12 +16,14 @@ public class MON_SkeletonMage extends Skeleton implements Creature {
 
     GamePanel gp;
     boolean shooting = false;
+    private int localScale;
 
     public MON_SkeletonMage(GamePanel gp) {
         super(gp);
         this.gp = gp;
         type = EntityType.MONSTER;
         name = "Skeleton Mage";
+        localScale = gp.tileSize * 2;
 
         projectile = new OBJ_DarkEnergyBall(gp);
 
@@ -48,30 +50,30 @@ public class MON_SkeletonMage extends Skeleton implements Creature {
     public void getImage() {
 
         walkRight[0] = setUp("/monsters/skeleton/mage/walking/" +
-                "right/skeleton_mage_walk_right_1", gp.tileSize*2, gp.tileSize*2);
+                "right/skeleton_mage_walk_right_1", localScale, localScale);
         walkRight[1] = setUp("/monsters/skeleton/mage/walking/" +
-                "right/skeleton_mage_walk_right_2", gp.tileSize*2, gp.tileSize*2);
+                "right/skeleton_mage_walk_right_2", localScale, localScale);
         walkRight[2] = setUp("/monsters/skeleton/mage/walking/" +
-                "right/skeleton_mage_walk_right_3", gp.tileSize*2, gp.tileSize*2);
+                "right/skeleton_mage_walk_right_3", localScale, localScale);
         walkRight[3] = setUp("/monsters/skeleton/mage/walking/" +
-                "right/skeleton_mage_walk_right_4", gp.tileSize*2, gp.tileSize*2);
+                "right/skeleton_mage_walk_right_4", localScale, localScale);
         walkRight[4] = setUp("/monsters/skeleton/mage/walking/" +
-                "right/skeleton_mage_walk_right_5", gp.tileSize*2, gp.tileSize*2);
+                "right/skeleton_mage_walk_right_5", localScale, localScale);
         walkRight[5] = setUp("/monsters/skeleton/mage/walking/" +
-                "right/skeleton_mage_walk_right_6", gp.tileSize*2, gp.tileSize*2);
+                "right/skeleton_mage_walk_right_6", localScale, localScale);
 
         walkLeft[0] = setUp("/monsters/skeleton/mage/walking/" +
-                "left/skeleton_mage_walk_left_1", gp.tileSize*2, gp.tileSize*2);
+                "left/skeleton_mage_walk_left_1", localScale, localScale);
         walkLeft[1] = setUp("/monsters/skeleton/mage/walking/" +
-                "left/skeleton_mage_walk_left_2", gp.tileSize*2, gp.tileSize*2);
+                "left/skeleton_mage_walk_left_2", localScale, localScale);
         walkLeft[2] = setUp("/monsters/skeleton/mage/walking/" +
-                "left/skeleton_mage_walk_left_3", gp.tileSize*2, gp.tileSize*2);
+                "left/skeleton_mage_walk_left_3", localScale, localScale);
         walkLeft[3] = setUp("/monsters/skeleton/mage/walking/" +
-                "left/skeleton_mage_walk_left_4", gp.tileSize*2, gp.tileSize*2);
+                "left/skeleton_mage_walk_left_4", localScale, localScale);
         walkLeft[4] = setUp("/monsters/skeleton/mage/walking/" +
-                "left/skeleton_mage_walk_left_5", gp.tileSize*2, gp.tileSize*2);
+                "left/skeleton_mage_walk_left_5", localScale, localScale);
         walkLeft[5] = setUp("/monsters/skeleton/mage/walking/" +
-                "left/skeleton_mage_walk_left_6", gp.tileSize*2, gp.tileSize*2);
+                "left/skeleton_mage_walk_left_6", localScale, localScale);
 
         down1 = walkRight[0]; // IN CASE OF SPAWN
     }
@@ -85,169 +87,169 @@ public class MON_SkeletonMage extends Skeleton implements Creature {
     public void getAttackImage() {
 
         attackRight[1-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "attack/right/skeleton_mage_right_attack_1", gp.tileSize, gp.tileSize);
+                "attack/right/skeleton_mage_right_attack_1", localScale, localScale);
         attackRight[2-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "attack/right/skeleton_mage_right_attack_2", gp.tileSize, gp.tileSize);
+                "attack/right/skeleton_mage_right_attack_2", localScale, localScale);
         attackRight[3-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "attack/right/skeleton_mage_right_attack_3", gp.tileSize, gp.tileSize);
+                "attack/right/skeleton_mage_right_attack_3", localScale, localScale);
         attackRight[4-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "attack/right/skeleton_mage_right_attack_4", gp.tileSize, gp.tileSize);
+                "attack/right/skeleton_mage_right_attack_4", localScale, localScale);
         attackRight[5-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "attack/right/skeleton_mage_right_attack_5", gp.tileSize, gp.tileSize);
+                "attack/right/skeleton_mage_right_attack_5", localScale, localScale);
         attackRight[6-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "attack/right/skeleton_mage_right_attack_6", gp.tileSize, gp.tileSize);
+                "attack/right/skeleton_mage_right_attack_6", localScale, localScale);
         attackRight[7-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "attack/right/skeleton_mage_right_attack_7", gp.tileSize, gp.tileSize);
+                "attack/right/skeleton_mage_right_attack_7", localScale, localScale);
         attackRight[8-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "attack/right/skeleton_mage_right_attack_8", gp.tileSize, gp.tileSize);
+                "attack/right/skeleton_mage_right_attack_8", localScale, localScale);
         attackRight[9-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "attack/right/skeleton_mage_right_attack_9", gp.tileSize, gp.tileSize);
+                "attack/right/skeleton_mage_right_attack_9", localScale, localScale);
         attackRight[10-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "attack/right/skeleton_mage_right_attack_10", gp.tileSize, gp.tileSize);
+                "attack/right/skeleton_mage_right_attack_10", localScale, localScale);
         attackRight[11-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "attack/right/skeleton_mage_right_attack_11", gp.tileSize, gp.tileSize);
+                "attack/right/skeleton_mage_right_attack_11", localScale, localScale);
         attackRight[12-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "attack/right/skeleton_mage_right_attack_12", gp.tileSize, gp.tileSize);
+                "attack/right/skeleton_mage_right_attack_12", localScale, localScale);
         attackRight[13-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "attack/right/skeleton_mage_right_attack_13", gp.tileSize, gp.tileSize);
+                "attack/right/skeleton_mage_right_attack_13", localScale, localScale);
         attackRight[14-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "attack/right/skeleton_mage_right_attack_14", gp.tileSize, gp.tileSize);
+                "attack/right/skeleton_mage_right_attack_14", localScale, localScale);
         attackRight[15-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "attack/right/skeleton_mage_right_attack_15", gp.tileSize, gp.tileSize);
+                "attack/right/skeleton_mage_right_attack_15", localScale, localScale);
         attackRight[16-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "attack/right/skeleton_mage_right_attack_16", gp.tileSize, gp.tileSize);
+                "attack/right/skeleton_mage_right_attack_16", localScale, localScale);
         attackRight[17-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "attack/right/skeleton_mage_right_attack_17", gp.tileSize, gp.tileSize);
+                "attack/right/skeleton_mage_right_attack_17", localScale, localScale);
         attackRight[18-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "attack/right/skeleton_mage_right_attack_18", gp.tileSize, gp.tileSize);
+                "attack/right/skeleton_mage_right_attack_18", localScale, localScale);
         attackRight[19-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "attack/right/skeleton_mage_right_attack_19", gp.tileSize, gp.tileSize);
+                "attack/right/skeleton_mage_right_attack_19", localScale, localScale);
         attackRight[20-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "attack/right/skeleton_mage_right_attack_20", gp.tileSize, gp.tileSize);
+                "attack/right/skeleton_mage_right_attack_20", localScale, localScale);
         attackRight[21-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "attack/right/skeleton_mage_right_attack_21", gp.tileSize, gp.tileSize);
+                "attack/right/skeleton_mage_right_attack_21", localScale, localScale);
 
 
         attackLeft[1-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "attack/left/skeleton_mage_left_attack_1", gp.tileSize, gp.tileSize);
+                "attack/left/skeleton_mage_left_attack_1", localScale, localScale);
         attackLeft[2-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "attack/left/skeleton_mage_left_attack_2", gp.tileSize, gp.tileSize);
+                "attack/left/skeleton_mage_left_attack_2", localScale, localScale);
         attackLeft[3-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "attack/left/skeleton_mage_left_attack_3", gp.tileSize, gp.tileSize);
+                "attack/left/skeleton_mage_left_attack_3", localScale, localScale);
         attackLeft[4-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "attack/left/skeleton_mage_left_attack_4", gp.tileSize, gp.tileSize);
+                "attack/left/skeleton_mage_left_attack_4", localScale, localScale);
         attackLeft[5-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "attack/left/skeleton_mage_left_attack_5", gp.tileSize, gp.tileSize);
+                "attack/left/skeleton_mage_left_attack_5", localScale, localScale);
         attackLeft[6-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "attack/left/skeleton_mage_left_attack_6", gp.tileSize, gp.tileSize);
+                "attack/left/skeleton_mage_left_attack_6", localScale, localScale);
         attackLeft[7-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "attack/left/skeleton_mage_left_attack_7", gp.tileSize, gp.tileSize);
+                "attack/left/skeleton_mage_left_attack_7", localScale, localScale);
         attackLeft[8-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "attack/left/skeleton_mage_left_attack_8", gp.tileSize, gp.tileSize);
+                "attack/left/skeleton_mage_left_attack_8", localScale, localScale);
         attackLeft[9-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "attack/left/skeleton_mage_left_attack_9", gp.tileSize, gp.tileSize);
+                "attack/left/skeleton_mage_left_attack_9", localScale, localScale);
         attackLeft[10-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "attack/left/skeleton_mage_left_attack_10", gp.tileSize, gp.tileSize);
+                "attack/left/skeleton_mage_left_attack_10", localScale, localScale);
         attackLeft[11-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "attack/left/skeleton_mage_left_attack_11", gp.tileSize, gp.tileSize);
+                "attack/left/skeleton_mage_left_attack_11", localScale, localScale);
         attackLeft[12-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "attack/left/skeleton_mage_left_attack_12", gp.tileSize, gp.tileSize);
+                "attack/left/skeleton_mage_left_attack_12", localScale, localScale);
         attackLeft[13-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "attack/left/skeleton_mage_left_attack_13", gp.tileSize, gp.tileSize);
+                "attack/left/skeleton_mage_left_attack_13", localScale, localScale);
         attackLeft[14-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "attack/left/skeleton_mage_left_attack_14", gp.tileSize, gp.tileSize);
+                "attack/left/skeleton_mage_left_attack_14", localScale, localScale);
         attackLeft[15-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "attack/left/skeleton_mage_left_attack_15", gp.tileSize, gp.tileSize);
+                "attack/left/skeleton_mage_left_attack_15", localScale, localScale);
         attackLeft[16-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "attack/left/skeleton_mage_left_attack_16", gp.tileSize, gp.tileSize);
+                "attack/left/skeleton_mage_left_attack_16", localScale, localScale);
         attackLeft[17-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "attack/left/skeleton_mage_left_attack_17", gp.tileSize, gp.tileSize);
+                "attack/left/skeleton_mage_left_attack_17", localScale, localScale);
         attackLeft[18-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "attack/left/skeleton_mage_left_attack_18", gp.tileSize, gp.tileSize);
+                "attack/left/skeleton_mage_left_attack_18", localScale, localScale);
         attackLeft[19-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "attack/left/skeleton_mage_left_attack_19", gp.tileSize, gp.tileSize);
+                "attack/left/skeleton_mage_left_attack_19", localScale, localScale);
         attackLeft[21-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "attack/left/skeleton_mage_left_attack_21", gp.tileSize, gp.tileSize);
+                "attack/left/skeleton_mage_left_attack_21", localScale, localScale);
         attackLeft[20-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "attack/left/skeleton_mage_left_attack_20", gp.tileSize, gp.tileSize);
+                "attack/left/skeleton_mage_left_attack_20", localScale, localScale);
     }
     @Override
     public void getDyingImage() {
 
         dieRight[1-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "dying/right/skeleton_mage_dying_right_1", gp.tileSize, gp.tileSize);
+                "dying/right/skeleton_mage_dying_right_1", localScale, localScale);
         dieRight[2-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "dying/right/skeleton_mage_dying_right_2", gp.tileSize, gp.tileSize);
+                "dying/right/skeleton_mage_dying_right_2", localScale, localScale);
         dieRight[3-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "dying/right/skeleton_mage_dying_right_3", gp.tileSize, gp.tileSize);
+                "dying/right/skeleton_mage_dying_right_3", localScale, localScale);
         dieRight[4-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "dying/right/skeleton_mage_dying_right_4", gp.tileSize, gp.tileSize);
+                "dying/right/skeleton_mage_dying_right_4", localScale, localScale);
         dieRight[5-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "dying/right/skeleton_mage_dying_right_5", gp.tileSize, gp.tileSize);
+                "dying/right/skeleton_mage_dying_right_5", localScale, localScale);
         dieRight[6-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "dying/right/skeleton_mage_dying_right_6", gp.tileSize, gp.tileSize);
+                "dying/right/skeleton_mage_dying_right_6", localScale, localScale);
         dieRight[7-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "dying/right/skeleton_mage_dying_right_7", gp.tileSize, gp.tileSize);
+                "dying/right/skeleton_mage_dying_right_7", localScale, localScale);
         dieRight[8-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "dying/right/skeleton_mage_dying_right_8", gp.tileSize, gp.tileSize);
+                "dying/right/skeleton_mage_dying_right_8", localScale, localScale);
         dieRight[9-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "dying/right/skeleton_mage_dying_right_9", gp.tileSize, gp.tileSize);
+                "dying/right/skeleton_mage_dying_right_9", localScale, localScale);
         dieRight[10-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "dying/right/skeleton_mage_dying_right_10", gp.tileSize, gp.tileSize);
+                "dying/right/skeleton_mage_dying_right_10", localScale, localScale);
         dieRight[11-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "dying/right/skeleton_mage_dying_right_11", gp.tileSize, gp.tileSize);
+                "dying/right/skeleton_mage_dying_right_11", localScale, localScale);
         dieRight[12-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "dying/right/skeleton_mage_dying_right_12", gp.tileSize, gp.tileSize);
+                "dying/right/skeleton_mage_dying_right_12", localScale, localScale);
         dieRight[13-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "dying/right/skeleton_mage_dying_right_13", gp.tileSize, gp.tileSize);
+                "dying/right/skeleton_mage_dying_right_13", localScale, localScale);
         dieRight[14-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "dying/right/skeleton_mage_dying_right_14", gp.tileSize, gp.tileSize);
+                "dying/right/skeleton_mage_dying_right_14", localScale, localScale);
         dieRight[15-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "dying/right/skeleton_mage_dying_right_15", gp.tileSize, gp.tileSize);
+                "dying/right/skeleton_mage_dying_right_15", localScale, localScale);
         dieRight[16-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "dying/right/skeleton_mage_dying_right_16", gp.tileSize, gp.tileSize);
+                "dying/right/skeleton_mage_dying_right_16", localScale, localScale);
         dieRight[17-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "dying/right/skeleton_mage_dying_right_17", gp.tileSize, gp.tileSize);
+                "dying/right/skeleton_mage_dying_right_17", localScale, localScale);
         dieRight[18-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "dying/right/skeleton_mage_dying_right_18", gp.tileSize, gp.tileSize);
+                "dying/right/skeleton_mage_dying_right_18", localScale, localScale);
 
 
         dieLeft[1-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "dying/left/skeleton_mage_dying_left_1", gp.tileSize, gp.tileSize);
+                "dying/left/skeleton_mage_dying_left_1", localScale, localScale);
         dieLeft[2-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "dying/left/skeleton_mage_dying_left_2", gp.tileSize, gp.tileSize);
+                "dying/left/skeleton_mage_dying_left_2", localScale, localScale);
         dieLeft[3-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "dying/left/skeleton_mage_dying_left_3", gp.tileSize, gp.tileSize);
+                "dying/left/skeleton_mage_dying_left_3", localScale, localScale);
         dieLeft[4-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "dying/left/skeleton_mage_dying_left_4", gp.tileSize, gp.tileSize);
+                "dying/left/skeleton_mage_dying_left_4", localScale, localScale);
         dieLeft[5-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "dying/left/skeleton_mage_dying_left_5", gp.tileSize, gp.tileSize);
+                "dying/left/skeleton_mage_dying_left_5", localScale, localScale);
         dieLeft[6-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "dying/left/skeleton_mage_dying_left_6", gp.tileSize, gp.tileSize);
+                "dying/left/skeleton_mage_dying_left_6", localScale, localScale);
         dieLeft[7-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "dying/left/skeleton_mage_dying_left_7", gp.tileSize, gp.tileSize);
+                "dying/left/skeleton_mage_dying_left_7", localScale, localScale);
         dieLeft[8-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "dying/left/skeleton_mage_dying_left_8", gp.tileSize, gp.tileSize);
+                "dying/left/skeleton_mage_dying_left_8", localScale, localScale);
         dieLeft[9-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "dying/left/skeleton_mage_dying_left_9", gp.tileSize, gp.tileSize);
+                "dying/left/skeleton_mage_dying_left_9", localScale, localScale);
         dieLeft[10-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "dying/left/skeleton_mage_dying_left_10", gp.tileSize, gp.tileSize);
+                "dying/left/skeleton_mage_dying_left_10", localScale, localScale);
         dieLeft[11-1]= setUp("/monsters/skeleton/mage/combat/" +
-                "dying/left/skeleton_mage_dying_left_11", gp.tileSize, gp.tileSize);
+                "dying/left/skeleton_mage_dying_left_11", localScale, localScale);
         dieLeft[12-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "dying/left/skeleton_mage_dying_left_12", gp.tileSize, gp.tileSize);
+                "dying/left/skeleton_mage_dying_left_12", localScale, localScale);
         dieLeft[13-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "dying/left/skeleton_mage_dying_left_13", gp.tileSize, gp.tileSize);
+                "dying/left/skeleton_mage_dying_left_13", localScale, localScale);
         dieLeft[14-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "dying/left/skeleton_mage_dying_left_14", gp.tileSize, gp.tileSize);
+                "dying/left/skeleton_mage_dying_left_14", localScale, localScale);
         dieLeft[15-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "dying/left/skeleton_mage_dying_left_15", gp.tileSize, gp.tileSize);
+                "dying/left/skeleton_mage_dying_left_15", localScale, localScale);
         dieLeft[16-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "dying/left/skeleton_mage_dying_left_16", gp.tileSize, gp.tileSize);
+                "dying/left/skeleton_mage_dying_left_16", localScale, localScale);
         dieLeft[17-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "dying/left/skeleton_mage_dying_left_17", gp.tileSize, gp.tileSize);
+                "dying/left/skeleton_mage_dying_left_17", localScale, localScale);
         dieLeft[18-1] = setUp("/monsters/skeleton/mage/combat/" +
-                "dying/left/skeleton_mage_dying_left_18", gp.tileSize, gp.tileSize);
+                "dying/left/skeleton_mage_dying_left_18", localScale, localScale);
 
     }
     @Override
@@ -463,7 +465,9 @@ public class MON_SkeletonMage extends Skeleton implements Creature {
     @Override
     public void dyingAnimation(Graphics2D g2) {
         dyingCounter++;
-        int i = 15;
+        int i = 8;
+
+        changeAlpha(g2,1f);
 
         BufferedImage image = null;
         int screenX = worldX - gp.player.worldX + gp.player.screenX - gp.tileSize/2;
@@ -511,7 +515,7 @@ public class MON_SkeletonMage extends Skeleton implements Creature {
             if (dyingCounter > i * 17 && dyingCounter <= i * 18) {image = dieRight[17];}
         }
 
-        g2.drawImage(image, screenX, screenY, gp.tileSize * 2, gp.tileSize * 2, null);
+        g2.drawImage(image, screenX, screenY,null);
         changeAlpha(g2,1f);
 
         if (dyingCounter > i * 19) {
