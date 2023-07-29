@@ -457,7 +457,7 @@ public class MON_SkeletonMage extends Skeleton implements Creature {
             dyingAnimation(g2);
         }
         else {
-            g2.drawImage(image, screenX, screenY, gp.tileSize * 2, gp.tileSize * 2, null);
+            g2.drawImage(image, screenX, screenY,null);
             changeAlpha(g2,1f);
         }
     }
@@ -465,7 +465,7 @@ public class MON_SkeletonMage extends Skeleton implements Creature {
     @Override
     public void dyingAnimation(Graphics2D g2) {
         dyingCounter++;
-        int i = 8;
+        int i = 10;
 
         changeAlpha(g2,1f);
 
