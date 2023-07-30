@@ -303,9 +303,6 @@ public class UI {
 
         else if (titleScreenState == 1) {
             // CLASS SELECTION SCREEN
-//            g2.setColor(Color.BLACK);
-//            g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
-
             g2.setColor(Color.white);
             g2.setFont(g2.getFont().deriveFont(42F));
 
@@ -345,9 +342,7 @@ public class UI {
             if (commandNum == 3) {
                 g2.drawString(">", x - 40, y);
             }
-
         }
-
     }
 
     public void drawPauseScreen() {
@@ -570,7 +565,6 @@ public class UI {
             slotY += gp.tileSize * 17/16;
             slotX = slotXstart;
             }
-
         }
 
         // DRAW CURSOR

@@ -17,6 +17,9 @@ import objects.weapons.OBJ_Emerald_Scimitar;
 public class AssetSetter {
     GamePanel gp;
     int i = 0;
+    int j = 0;
+
+    int k = 0;
 
     public AssetSetter(GamePanel gp) {
         this.gp = gp;
@@ -24,57 +27,48 @@ public class AssetSetter {
 
     public void setObjects() {
 
-        gp.objects[i] = putObject(new OBJ_Key(gp), 25, 23);
-        gp.objects[i] = putObject(new OBJ_Sacred_Necklace(gp), 9, 7);
-        gp.objects[i] = putObject(new OBJ_Pouch(gp), 8, 32);
-        gp.objects[i] = putObject(new OBJ_Rope(gp),32, 21);
-        gp.objects[i] = putObject(new OBJ_Emerald_Scimitar(gp), 39, 8);
-        gp.objects[i] = putObject(new OBJ_Paladin_Shield(gp), 36, 8);
-        gp.objects[i] = putObject(new OBJ_Health_Potion(gp), 23, 7);
-        gp.objects[i] = putObject(new OBJ_Stamina_Potion(gp), 10, 29);
-        gp.objects[i] = putObject(new OBJ_Mana_Potion(gp), 11, 34);
-    }
-
-    public Entity putObject(Entity object, int colX, int rowY) {
-        object.worldX = gp.tileSize * colX;
-        object.worldY = gp.tileSize * rowY;
-        i++;
-        return object;
-    }
-
-    public void setNPC () {
-        gp.npcs[0] = new NPC_OldMan(gp);
-        gp.npcs[0].worldX = gp.tileSize*21;
-        gp.npcs[0].worldY = gp.tileSize*21;
+        putObject(new OBJ_Key(gp), 25, 23);
+        putObject(new OBJ_Sacred_Necklace(gp), 9, 7);
+        putObject(new OBJ_Pouch(gp), 8, 32);
+        putObject(new OBJ_Rope(gp),32, 21);
+        putObject(new OBJ_Emerald_Scimitar(gp), 39, 8);
+        putObject(new OBJ_Paladin_Shield(gp), 36, 8);
+        putObject(new OBJ_Health_Potion(gp), 23, 7);
+        putObject(new OBJ_Stamina_Potion(gp), 10, 29);
+        putObject(new OBJ_Mana_Potion(gp), 11, 34);
     }
 
     public void setMonster () {
+        putMonster(new MON_BlueSlime(gp), 21, 38);
+        putMonster(new MON_BlueSlime(gp), 23, 42);
+        putMonster(new MON_BlueSlime(gp), 24, 37);
+        putMonster(new MON_BlueSlime(gp), 34, 42);
+        putMonster(new MON_BlueSlime(gp), 38, 42);
+        putMonster(new MON_SkeletonMage(gp), 37, 40);
+    }
 
-        int i = 0;
-        gp.monsters[i] = new MON_BlueSlime(gp);
-        gp.monsters[i].worldX = gp.tileSize * 21;
-        gp.monsters[i].worldY = gp.tileSize * 38;
-        i++;
-        gp.monsters[i] = new MON_BlueSlime(gp);
-        gp.monsters[i].worldX = gp.tileSize * 23;
-        gp.monsters[i].worldY = gp.tileSize * 42;
-        i++;
-        gp.monsters[i] = new MON_BlueSlime(gp);
-        gp.monsters[i].worldX = gp.tileSize * 24;
-        gp.monsters[i].worldY = gp.tileSize * 37;
-        i++;
-        gp.monsters[i] = new MON_BlueSlime(gp);
-        gp.monsters[i].worldX = gp.tileSize * 34;
-        gp.monsters[i].worldY = gp.tileSize * 42;
-        i++;
-        gp.monsters[i] = new MON_BlueSlime(gp);
-        gp.monsters[i].worldX = gp.tileSize * 38;
-        gp.monsters[i].worldY = gp.tileSize * 42;
-        i++;
+    public void setNPC () {
+        putNPC(new NPC_OldMan(gp), 21, 21);
+    }
 
-        gp.monsters[i] = new MON_SkeletonMage(gp);
-        gp.monsters[i].worldX = gp.tileSize * 37;
-        gp.monsters[i].worldY = gp.tileSize * 40;
+    public void putObject(Entity object, int colX, int rowY) {
+        object.worldX = gp.tileSize * colX;
+        object.worldY = gp.tileSize * rowY;
+        gp.objects[i] = object;
         i++;
+    }
+
+    public void putMonster(Entity monster, int colX, int rowY) {
+        monster.worldX = gp.tileSize * colX;
+        monster.worldY = gp.tileSize * rowY;
+        gp.monsters[j] = monster;
+        j++;
+    }
+
+    public void putNPC(Entity npc, int colX, int rowY) {
+        npc.worldX = gp.tileSize * colX;
+        npc.worldY = gp.tileSize * rowY;
+        gp.npcs[k] = npc;
+        k++;
     }
 }

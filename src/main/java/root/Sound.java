@@ -55,8 +55,6 @@ public class Sound {
 
         evilLaughSE = getClass().getResource("/sound/Evil_Laugh.wav");
 
-//        cursorSE = getClass().getResource("/sound/cursor.wav");
-
         cursorSE = gui1SE;
 
         uiSounds = new URL[]{gui1SE, gui2SE, gui3SE};
