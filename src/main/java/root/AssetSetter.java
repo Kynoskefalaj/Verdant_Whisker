@@ -19,7 +19,6 @@ import objects.weapons.OBJ_Emerald_Scimitar;
 
 public class AssetSetter {
     GamePanel gp;
-    int i = 0;
     int j = 0;
 
     int k = 0;
@@ -60,24 +59,42 @@ public class AssetSetter {
     }
 
     public void putObject(Entity object, int colX, int rowY) {
+        int index = 0;
+        for (int v = 0; v < gp.objects.length; v++) {
+            if (gp.objects[v] == null) {
+                index = v;
+                break;
+            }
+        }
         object.worldX = gp.tileSize * colX;
         object.worldY = gp.tileSize * rowY;
-        gp.objects[i] = object;
-        i++;
+        gp.objects[index] = object;
     }
 
     public void dropObject(Entity object, int worldX, int worldY) {
+        int index = 0;
+        for (int v = 0; v < gp.objects.length; v++) {
+            if (gp.objects[v] == null) {
+                index = v;
+                break;
+            }
+        }
         object.worldX = worldX;
         object.worldY = worldY;
-        gp.objects[i] = object;
-        i++;
+        gp.objects[index] = object;
     }
 
     public void putMonster(Entity monster, int colX, int rowY) {
+        int index = 0;
+        for (int v = 0; v < gp.monsters.length; v++) {
+            if (gp.monsters[v] == null) {
+                index = v;
+                break;
+            }
+        }
         monster.worldX = gp.tileSize * colX;
         monster.worldY = gp.tileSize * rowY;
-        gp.monsters[j] = monster;
-        j++;
+        gp.monsters[index] = monster;
     }
 
     public void putNPC(Entity npc, int colX, int rowY) {

@@ -388,12 +388,12 @@ public class Player extends Entity implements Archery {
                     inventory.add(gp.objects[i]);
                     gp.playSE(gp.sound.coinSE);
                     text = "Got a " + gp.objects[i].name + "!";
+                    gp.objects[i] = null;
                 }
                 else {
                     text = "You cannot carry anymore!";
                 }
                 gp.ui.addMessage(text);
-                gp.objects[i] = null;
             }
         }
     }
