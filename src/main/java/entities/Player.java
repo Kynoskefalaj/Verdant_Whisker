@@ -321,6 +321,18 @@ public class Player extends Entity implements Archery {
             gp.asSetter.setMonster();
             gp.keyH.zeroPressed = false;
         }
+
+        if (life > maxLife) {
+            life = maxLife;
+        }
+
+        if (mana > maxMana) {
+            mana = maxMana;
+        }
+
+        if (stamina > maxStamina) {
+            stamina = maxStamina;
+        }
     }
 
     public void attacking () {
@@ -360,19 +372,29 @@ public class Player extends Entity implements Archery {
 
         if (i != 999) {
 
-            String text;
+            // PICKUP ONLY ITEMS
+            if (gp.objects[i].type == EntityType.PICKUP_ONLY) {
 
-            if (inventory.size() != maxInventorySize) {
-
-                inventory.add(gp.objects[i]);
-                gp.playSE(gp.sound.coinSE);
-                text = "Got a " + gp.objects[i].name + "!";
+                gp.objects[i].use(this);
+                gp.objects[i] = null;
             }
             else {
-                text = "You cannot carry anymore!";
+                // INVENTORY ITEMS
+
+                String text;
+
+                if (inventory.size() != maxInventorySize) {
+
+                    inventory.add(gp.objects[i]);
+                    gp.playSE(gp.sound.coinSE);
+                    text = "Got a " + gp.objects[i].name + "!";
+                }
+                else {
+                    text = "You cannot carry anymore!";
+                }
+                gp.ui.addMessage(text);
+                gp.objects[i] = null;
             }
-            gp.ui.addMessage(text);
-            gp.objects[i] = null;
         }
     }
 

@@ -5,9 +5,11 @@ import entities.EntityType;
 import root.GamePanel;
 
 public class OBJ_StaminaWheel extends Entity {
+    GamePanel gp;
 
     public OBJ_StaminaWheel(GamePanel gp) {
         super(gp);
+        this.gp = gp;
         name = "StaminaWheel";
 
         image1 = setUp("/objects/hud/stamina_wheel_full", gp.tileSize, gp.tileSize);
@@ -31,6 +33,16 @@ public class OBJ_StaminaWheel extends Entity {
         image8 = uTool.scaleImage(image8, scaledSize, scaledSize);
         image9 = uTool.scaleImage(image9, scaledSize, scaledSize);
 
-        type = EntityType.HUD;
+        type = EntityType.PICKUP_ONLY;
+        value = 4;
+        down1 = image1;
+    }
+
+    @Override
+    public void use(Entity entity) {
+        gp.playSE(gp.sound.powerUpSE);
+        gp.ui.addMessage("Max stamina increased by: " + value);
+        entity.maxStamina += value;
+        entity.stamina += value;
     }
 }

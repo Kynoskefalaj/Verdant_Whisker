@@ -7,7 +7,6 @@ import root.GamePanel;
 public class OBJ_Health_Potion extends Entity {
 
     GamePanel gp;
-    int recoveryValue = 5;
     String recoveryType = "health";
 
     public OBJ_Health_Potion(GamePanel gp) {
@@ -16,8 +15,9 @@ public class OBJ_Health_Potion extends Entity {
 
         type = EntityType.CONSUMABLE;
         name = "Health Potion";
+        value = 5;
 
-        description = String.format("[%s]\nRecovers %d %s.", name, recoveryValue, recoveryType);
+        description = String.format("[%s]\nRecovers %d %s.", name, value, recoveryType);
         image1 = setUp("/objects/consumables/Health_Potion", gp.tileSize, gp.tileSize);
         down1 = image1;
 
@@ -28,8 +28,8 @@ public class OBJ_Health_Potion extends Entity {
 
         gp.gameState = gp.dialogueState;
         gp.ui.currentDialogue = "You drink the " + name + "!\n" +
-                "Your " + recoveryType + " has been recovered by " + recoveryValue + ".";
-        entity.life += recoveryValue;
+                "Your " + recoveryType + " has been recovered by " + value + ".";
+        entity.life += value;
         if(entity.life > entity.maxLife) {
             entity.life = entity.maxLife;
         }

@@ -44,7 +44,7 @@ public class GamePanel extends JPanel implements Runnable{
 //    ENTITY AND OBJECT
     public Player player = new Player(this, keyH);
 //    We can display 10 object on screen at the same time
-    public Entity objects[] = new Entity[10];
+    public Entity objects[] = new Entity[20];
     public Entity npcs[] = new Entity[10];
     public Entity monsters[] = new Entity[20];
     public ArrayList<Entity> projectilesList = new ArrayList<>();
@@ -75,13 +75,11 @@ public class GamePanel extends JPanel implements Runnable{
         playMusic(sound.mainTheme);
         gameState = titleState;
     }
-
     public void startGameThread() {
 
         gameThread = new Thread(this);
         gameThread.start();
     }
-
     @Override
     public void run() { //SLEEP game loop
 
@@ -143,7 +141,6 @@ public class GamePanel extends JPanel implements Runnable{
 //            }
 //        }
 //    }
-
     public void update() {
 //        don't have to write like "(keyH.upPressed == true)" in each statement because this field is boolean type,
 //        so statement is true if that field is true
@@ -156,16 +153,19 @@ public class GamePanel extends JPanel implements Runnable{
                     entity.update();
                 }
             }
+            // MONSTERS
             for (int i = 0; i < monsters.length; i++) {
                 if (monsters[i] != null) {
                     if (monsters[i].alive == true && monsters[i].dying == false) {
                         monsters[i].update();
                     }
                     if (monsters[i].alive == false) {
+                        monsters[i].checkDrop();
                         monsters[i] = null;
                     }
                 }
             }
+            // PROJECTILES
             for (int i = 0; i < projectilesList.size(); i++) {
                 if (projectilesList.get(i) != null) {
                     if (projectilesList.get(i).alive == true) {
@@ -180,7 +180,6 @@ public class GamePanel extends JPanel implements Runnable{
             // NOTHING (for that moment)
         }
     }
-
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
@@ -256,13 +255,11 @@ public class GamePanel extends JPanel implements Runnable{
         g2.dispose();
     }
     public void playMusic(URL url) {
-
         sound.setFile(url);
         sound.play();
         sound.loop();
     }
     public void stopMusic() {
-
         sound.stop();
     }
     public void playSE(URL url) {

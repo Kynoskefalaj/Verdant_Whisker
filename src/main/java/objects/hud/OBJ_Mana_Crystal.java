@@ -1,6 +1,7 @@
 package objects.hud;
 
 import entities.Entity;
+import entities.EntityType;
 import root.GamePanel;
 
 public class OBJ_Mana_Crystal extends Entity {
@@ -19,5 +20,16 @@ public class OBJ_Mana_Crystal extends Entity {
         image1 = uTool.scaleImage(image1, scaledSize, scaledSize);
         image2 = uTool.scaleImage(image2, scaledSize, scaledSize);
 
+        type = EntityType.PICKUP_ONLY;
+        value = 1;
+        down1 = image1;
+    }
+
+    @Override
+    public void use(Entity entity) {
+        gp.playSE(gp.sound.powerUpSE);
+        gp.ui.addMessage("Max mana increased by: " + value);
+        entity.maxMana += value;
+        entity.mana += value;
     }
 }

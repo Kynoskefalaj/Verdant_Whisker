@@ -21,7 +21,8 @@ public enum EntityType {
     HUD(17),
     KEY(18),
     TOOLS(19),
-    EMERALD_SWORD(20);
+    EMERALD_SWORD(20),
+    PICKUP_ONLY(21);
 
     private final int value;
 

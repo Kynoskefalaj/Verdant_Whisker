@@ -3,6 +3,9 @@ package monsters;
 import entities.Creature;
 import entities.Entity;
 import entities.EntityType;
+import objects.OBJ_Bronze_Coin;
+import objects.consumables.OBJ_Health_Potion;
+import objects.consumables.OBJ_Mana_Potion;
 import objects.projectiles.OBJ_DarkEnergyBall;
 import objects.projectiles.OBJ_Rock;
 import root.GamePanel;
@@ -40,7 +43,6 @@ public class MON_BlueSlime extends Entity implements Creature {
         attackSound = null;
         deathSound = getClass().getResource("/sound/WaterSplash.wav");
     }
-
     @Override
     public void setDefaultValues() {
         speed = 1;
@@ -50,7 +52,6 @@ public class MON_BlueSlime extends Entity implements Creature {
         defense = 0;
         exp = 2;
     }
-
     public void getImage () {
         image1 = setUp("/monsters/Slime1", gp.tileSize, gp.tileSize);
         image2 = setUp("/monsters/Slime2", gp.tileSize, gp.tileSize);
@@ -66,7 +67,6 @@ public class MON_BlueSlime extends Entity implements Creature {
         left2 = image3; left3 = image5; left4 = image7; right1 = image1;
         right2 = image3; right3 = image5; right4 = image7;
     }
-
     @Override
     public void setAction () {
 
@@ -88,13 +88,27 @@ public class MON_BlueSlime extends Entity implements Creature {
             shotAvailableCounter = 0;
         }
     }
-
     @Override
     public void damageReaction () {
 
         actionLockCounter = 0;
 
         direction = gp.player.direction;
+    }
+    public void checkDrop() {
+        // CAST A DIE
+        int i = new Random().nextInt(100) + 1;
+
+        // SET THE MONSTER DROP
+        if (i < 50) {
+            dropItem(new OBJ_Bronze_Coin(gp));
+        }
+        if (i >= 50 && i < 75) {
+//            dropItem(null);
+        }
+        if (i >=90 && i < 100) {
+            dropItem(new OBJ_Mana_Potion(gp));
+        }
     }
 
     @Override

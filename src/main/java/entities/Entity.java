@@ -75,6 +75,7 @@ public abstract class Entity {
     public Projectile projectile;
 
 //    ITEM ATTRIBUTES
+    public int value;
     public int attackValue;
     public int defenseValue;
     public String description = "";
@@ -89,9 +90,7 @@ public EntityType type;
     }
 
     public void setAction () { }
-
-    public void damageReaction () {};
-
+    public void damageReaction () {}
     public void speak () {
         if(dialogues[dialogueIndex] == null) {
             dialogueIndex -= 1;
@@ -106,9 +105,11 @@ public EntityType type;
             case "right" -> direction = "left";
         }
     }
-
     public void use (Entity entity) {}
-
+    public void checkDrop() {}
+    public void dropItem(Entity droppedItem) {
+        gp.asSetter.dropObject(droppedItem, worldX, worldY);
+    }
     public void update () {
 //        System.out.println("SpriteCounter: " + spriteCounter);
 
@@ -161,7 +162,6 @@ public EntityType type;
             shotAvailableCounter++;
         }
     }
-
     public void attackPlayer (int attack) {
         if(gp.player.invincible == false) {
             int damage; //statements below are for case when armour is bigger than AP
@@ -171,7 +171,6 @@ public EntityType type;
             gp.player.invincible = true;
         }
     }
-
     public void draw (Graphics2D g2) {
 
         BufferedImage image = null;
@@ -241,7 +240,6 @@ public EntityType type;
             changeAlpha(g2,1f);
         }
     }
-
     public void dyingAnimation(Graphics2D g2) {
 
      dyingCounter++;
@@ -261,11 +259,9 @@ public EntityType type;
     }
 
     }
-
     public void changeAlpha (Graphics2D g2, float alphaValue) {
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alphaValue));
     }
-
     public BufferedImage setUp (String imagePath, int width, int height) {
         BufferedImage image = null;
         try {

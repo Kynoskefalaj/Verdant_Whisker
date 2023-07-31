@@ -3,6 +3,10 @@ package monsters;
 import entities.Creature;
 import entities.EntityType;
 import entities.Skeleton;
+import objects.OBJ_Bronze_Coin;
+import objects.consumables.OBJ_Health_Potion;
+import objects.consumables.OBJ_Mana_Potion;
+import objects.consumables.OBJ_Stamina_Potion;
 import objects.projectiles.OBJ_DarkEnergyBall;
 import objects.projectiles.OBJ_Rock;
 import root.GamePanel;
@@ -386,6 +390,22 @@ public class MON_SkeletonMage extends Skeleton implements Creature {
             else {damage = attack - gp.player.defense;}
             gp.player.life -= damage;
             gp.player.invincible = true;
+        }
+    }
+
+    public void checkDrop() {
+        // CAST A DIE
+        int i = new Random().nextInt(100) + 1;
+
+        // SET THE MONSTER DROP
+        if (i < 25) {
+            dropItem(new OBJ_Bronze_Coin(gp));
+        }
+        if (i >= 25 && i < 75) {
+            dropItem(new OBJ_Stamina_Potion(gp));
+        }
+        if (i >=75 && i < 100) {
+            dropItem(new OBJ_Health_Potion(gp));
         }
     }
 
