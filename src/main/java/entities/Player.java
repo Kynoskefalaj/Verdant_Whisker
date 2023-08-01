@@ -259,6 +259,9 @@ public class Player extends Entity implements Archery {
             int monsterIndex = gp.cChecker.checkEntity(this, gp.monsters);
             contactMonster(monsterIndex);
 
+//            CHECK INTERACTIVE TILE COLLISION
+            int iTileIndex = gp.cChecker.checkEntity(this, gp.iTile);
+
 //            CHECK EVENT
             gp.eHandler.checkEvent();
 
@@ -343,6 +346,8 @@ public class Player extends Entity implements Archery {
         if (attackSpriteCounter > 54 / attackSpeed && attackSpriteCounter <= 108 / attackSpeed) {
             damageMonster(checkWhatsHit(), attack);
             spriteNum = 3;
+            int iTileIndex = gp.cChecker.checkEntity(this, gp.iTile);
+            damageInteractiveTile(iTileIndex);
         }
         if (attackSpriteCounter > 108 / attackSpeed && attackSpriteCounter <= 144 / attackSpeed) {spriteNum = 4;}
         if (attackSpriteCounter > 144 / attackSpeed && attackSpriteCounter <= 162 / attackSpeed) {spriteNum = 5;}
@@ -482,6 +487,14 @@ public class Player extends Entity implements Archery {
             }
         } else {
 //            System.out.println("Miss!");
+        }
+    }
+
+    public void damageInteractiveTile (int iTileIndex){
+
+        if (iTileIndex != 999 && gp.iTile[iTileIndex].destructible == true &&
+                gp.iTile[iTileIndex].isProperWeapon(this) == true) {
+            gp.iTile[iTileIndex] = null;
         }
     }
 

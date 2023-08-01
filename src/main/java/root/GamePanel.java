@@ -3,6 +3,7 @@ package root;
 import entities.Entity;
 import entities.Player;
 import tile.TileManager;
+import tile.interactive.InteractiveTile;
 
 import javax.swing.*;
 import java.awt.*;
@@ -47,6 +48,7 @@ public class GamePanel extends JPanel implements Runnable{
     public Entity objects[] = new Entity[50];
     public Entity npcs[] = new Entity[10];
     public Entity monsters[] = new Entity[20];
+    public InteractiveTile iTile[] = new InteractiveTile[50];
     public ArrayList<Entity> projectilesList = new ArrayList<>();
     public ArrayList<Entity> entityList = new ArrayList<>();
 
@@ -71,6 +73,7 @@ public class GamePanel extends JPanel implements Runnable{
         asSetter.setObjects();
         asSetter.setNPC();
         asSetter.setMonster();
+        asSetter.setInteractiveTile();
 
         playMusic(sound.mainTheme);
         gameState = titleState;
@@ -176,7 +179,13 @@ public class GamePanel extends JPanel implements Runnable{
                     }
                 }
             }
-        } if(gameState == pauseState) {
+            for (int i = 0; i < iTile.length; i++) {
+                if (iTile[i] != null) {
+                    iTile[i].update();
+                }
+            }
+        }
+        if(gameState == pauseState) {
             // NOTHING (for that moment)
         }
     }
@@ -195,6 +204,13 @@ public class GamePanel extends JPanel implements Runnable{
         } else {
             // TILE
             tileM.draw(g2); //tiles must be drawn before player, otherwise tiles would override player image
+
+            // INTERACTIVE TILE
+            for (int i = 0; i < iTile.length; i++) {
+                if (iTile[i] != null) {
+                    iTile[i].draw(g2);
+                }
+            }
 
             //ADD ENTITIES TOP THE LIST
             entityList.add(player);

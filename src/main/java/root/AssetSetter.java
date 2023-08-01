@@ -16,6 +16,9 @@ import objects.shields.OBJ_Paladin_Shield;
 import objects.tools.OBJ_Pouch;
 import objects.tools.OBJ_Rope;
 import objects.weapons.OBJ_Emerald_Scimitar;
+import objects.weapons.OBJ_WoodcuttersAxe;
+import tile.interactive.IT_DryBush;
+import tile.interactive.InteractiveTile;
 
 public class AssetSetter {
     GamePanel gp;
@@ -43,6 +46,7 @@ public class AssetSetter {
         putObject(new OBJ_Mana_Potion(gp), 11, 34);
         putObject(new OBJ_Heart(gp), 22, 27);
         putObject(new OBJ_Mana_Crystal(gp), 22, 31);
+        putObject(new OBJ_WoodcuttersAxe(gp), 22, 7);
     }
 
     public void setMonster () {
@@ -102,5 +106,28 @@ public class AssetSetter {
         npc.worldY = gp.tileSize * rowY;
         gp.npcs[k] = npc;
         k++;
+    }
+
+    public void setInteractiveTile () {
+        putInteractiveTile(new IT_DryBush(gp), 27, 7);
+        putInteractiveTile(new IT_DryBush(gp), 28, 7);
+        putInteractiveTile(new IT_DryBush(gp), 29, 7);
+        putInteractiveTile(new IT_DryBush(gp), 30, 7);
+        putInteractiveTile(new IT_DryBush(gp), 31, 7);
+        putInteractiveTile(new IT_DryBush(gp), 32, 7);
+        putInteractiveTile(new IT_DryBush(gp), 33, 7);
+    }
+
+    public void putInteractiveTile(InteractiveTile interactiveTile, int colX, int rowY) {
+        int index = 0;
+        for (int i = 0; i < gp.monsters.length; i++) {
+            if (gp.iTile[i] == null) {
+                index = i;
+                break;
+            }
+        }
+        interactiveTile.worldX = gp.tileSize * colX;
+        interactiveTile.worldY = gp.tileSize * rowY;
+        gp.iTile[index] = interactiveTile;
     }
 }
