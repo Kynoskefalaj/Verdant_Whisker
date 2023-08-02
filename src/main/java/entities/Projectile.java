@@ -37,9 +37,19 @@ public abstract class Projectile extends Entity{
         this.alive = alive;
         this.caster = caster;
         this.life = this.maxLife;
+
+        solidArea = new Rectangle();
+        solidArea.x = (int)(11 * gp.scale);
+        solidArea.y = (int)(11 * gp.scale);
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
+        solidArea.width = (int)(10 * gp.scale);
+        solidArea.height = (int)(10 * gp.scale);
     }
 
     public void update() {
+        collisionOn = false;
+        gp.cChecker.checkTile(this);
 
         if (caster == gp.player) {
             int monsterIndex = gp.cChecker.checkEntity(this, gp.monsters);
@@ -49,7 +59,7 @@ public abstract class Projectile extends Entity{
                 alive = false;
             }
         }
-        else if (caster != gp.player) {
+        if (caster != gp.player) {
             boolean contactPlayer = gp.cChecker.checkPlayer(this);
             if(gp.player.invincible == false && contactPlayer == true) {
                 attackPlayer(attack);
@@ -57,16 +67,18 @@ public abstract class Projectile extends Entity{
             }
         }
 
-        switch (direction) {
-            case "up" -> worldY -= speed;
-            case "down" -> worldY += speed;
-            case "left" -> worldX -= speed;
-            case "right" -> worldX += speed;
+        if (collisionOn == false) {
+            switch (direction) {
+                case "up" -> worldY -= speed;
+                case "down" -> worldY += speed;
+                case "left" -> worldX -= speed;
+                case "right" -> worldX += speed;
+            }
         }
 
         life--;
 
-        if (life <= 0) {
+        if (life <= 0 || collisionOn) {
             alive = false;
         }
 
