@@ -383,6 +383,9 @@ public class Player extends Entity implements Archery {
                 gp.objects[i].use(this);
                 gp.objects[i] = null;
             }
+            else if (gp.objects[i].type == EntityType.NOT_PICKABLE) {
+                // DO NOTHING
+            }
             else {
                 // INVENTORY ITEMS
 
@@ -490,11 +493,19 @@ public class Player extends Entity implements Archery {
         }
     }
 
-    public void damageInteractiveTile (int iTileIndex){
+    public void damageInteractiveTile (int i){
 
-        if (iTileIndex != 999 && gp.iTile[iTileIndex].destructible == true &&
-                gp.iTile[iTileIndex].isProperWeapon(this) == true) {
-            gp.iTile[iTileIndex] = null;
+        if (i != 999 && gp.iTile[i].destructible && gp.iTile[i].isProperWeapon(this)
+                && !gp.iTile[i].invincible) {
+
+            gp.playSE(gp.sound.hitBushSE);
+            gp.iTile[i].life--;
+            gp.iTile[i].invincible = true;
+
+            if (gp.iTile[i].life <= 0) {
+                gp.asSetter.dropObject(gp.iTile[i].getDestroyedForm(), gp.iTile[i].worldX, gp.iTile[i].worldY);
+                gp.iTile[i] = null;
+            }
         }
     }
 

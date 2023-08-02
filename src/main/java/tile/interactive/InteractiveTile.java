@@ -15,6 +15,18 @@ public class InteractiveTile extends Entity {
 
     public void update () {
 
+        if (invincible == true) {
+            invincibleCounter++;
+            if (invincibleCounter > 15) {
+                invincible = false;
+                invincibleCounter = 0;
+            }
+        }
+    }
+
+    public InteractiveTile getDestroyedForm () {
+        InteractiveTile tile = null;
+        return tile;
     }
 
     public boolean isProperWeapon(Entity entity) {
