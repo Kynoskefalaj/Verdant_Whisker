@@ -111,7 +111,6 @@ public EntityType type;
         gp.asSetter.dropObject(droppedItem, worldX, worldY);
     }
     public void update () {
-//        System.out.println("SpriteCounter: " + spriteCounter);
 
         setAction();
 

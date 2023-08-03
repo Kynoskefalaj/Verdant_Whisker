@@ -1,7 +1,5 @@
 package root;
 
-import java.awt.*;
-
 public class EventHandler {
 
     GamePanel gp;
