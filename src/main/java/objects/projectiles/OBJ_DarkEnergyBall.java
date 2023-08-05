@@ -4,6 +4,8 @@ import entities.Entity;
 import entities.Projectile;
 import root.GamePanel;
 
+import java.awt.*;
+
 public class OBJ_DarkEnergyBall extends Projectile {
 
     GamePanel gp;
@@ -161,5 +163,29 @@ public class OBJ_DarkEnergyBall extends Projectile {
 
     public void subtractResource (Entity caster) {
         caster.mana -= useCost;
+    }
+
+    @Override
+    public Color getParticleColor() {
+        Color color = new Color(97, 4, 4);
+        return color;
+    }
+
+    @Override
+    public int getParticleSize() {
+        int size = 6; // 6 pixels;
+        return size;
+    }
+
+    @Override
+    public int getParticleSpeed() {
+        int speed = 1;
+        return speed;
+    }
+
+    @Override
+    public int getParticleMaxLife() {
+        int maxLife = 20 ;
+        return maxLife;
     }
 }

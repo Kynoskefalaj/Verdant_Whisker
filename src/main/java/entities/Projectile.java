@@ -55,6 +55,7 @@ public abstract class Projectile extends Entity{
             int monsterIndex = gp.cChecker.checkEntity(this, gp.monsters);
             if (monsterIndex != 999) {
                 gp.player.damageMonster(monsterIndex, attack);
+                generateParticle(caster.projectile, gp.monsters[monsterIndex]);
                 gp.playSE(gp.sound.explosionSE);
                 alive = false;
             }
@@ -63,6 +64,7 @@ public abstract class Projectile extends Entity{
             boolean contactPlayer = gp.cChecker.checkPlayer(this);
             if(gp.player.invincible == false && contactPlayer == true) {
                 attackPlayer(attack);
+                generateParticle(caster.projectile, gp.player);
                 alive = false;
             }
         }
@@ -79,6 +81,7 @@ public abstract class Projectile extends Entity{
         life--;
 
         if (life <= 0 || collisionOn) {
+            generateParticle(caster.projectile, gp.player);
             alive = false;
         }
 

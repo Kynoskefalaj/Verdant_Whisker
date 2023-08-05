@@ -4,6 +4,8 @@ import entities.Entity;
 import entities.EntityType;
 import root.GamePanel;
 
+import java.awt.*;
+
 public class IT_DryBush extends InteractiveTile{
 
     GamePanel gp;
@@ -34,5 +36,29 @@ public class IT_DryBush extends InteractiveTile{
             isProperWeapon = true;
         }
         return isProperWeapon;
+    }
+
+    @Override
+    public Color getParticleColor() {
+        Color color = new Color(59, 84, 35);
+        return color;
+    }
+
+    @Override
+    public int getParticleSize() {
+        int size = 6; // 6 pixels;
+        return size;
+    }
+
+    @Override
+    public int getParticleSpeed() {
+        int speed = 1;
+        return speed;
+    }
+
+    @Override
+    public int getParticleMaxLife() {
+        int maxLife = 20 ;
+        return maxLife;
     }
 }

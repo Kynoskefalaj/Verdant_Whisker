@@ -502,6 +502,9 @@ public class Player extends Entity implements Archery {
             gp.iTile[i].life--;
             gp.iTile[i].invincible = true;
 
+            // GENERATE PARTICLE
+            generateParticle(gp.iTile[i], gp.iTile[i]);
+
             if (gp.iTile[i].life <= 0) {
                 gp.asSetter.dropObject(gp.iTile[i].getDestroyedForm(), gp.iTile[i].worldX, gp.iTile[i].worldY);
                 gp.iTile[i] = null;
