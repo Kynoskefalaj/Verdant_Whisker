@@ -476,6 +476,12 @@ public class Player extends Entity implements Archery {
                 gp.monsters[i].life -= damage;
                 gp.ui.addMessage(damage + " damage!");
 
+                try {
+                    generateParticle(gp.monsters[i], gp.monsters[i]);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
                 gp.monsters[i].invincible = true;
                 gp.monsters[i].damageReaction();
 

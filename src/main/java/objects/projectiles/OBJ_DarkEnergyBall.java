@@ -1,12 +1,13 @@
 package objects.projectiles;
 
 import entities.Entity;
+import entities.GeneratesParticles;
 import entities.Projectile;
 import root.GamePanel;
 
 import java.awt.*;
 
-public class OBJ_DarkEnergyBall extends Projectile {
+public class OBJ_DarkEnergyBall extends Projectile implements GeneratesParticles {
 
     GamePanel gp;
 

@@ -1,12 +1,14 @@
 package objects.projectiles;
 
 import entities.Entity;
+import entities.GeneratesParticles;
 import entities.Projectile;
 import root.GamePanel;
 
 import java.awt.*;
+import java.util.Random;
 
-public class OBJ_ArcaneMissile extends Projectile {
+public class OBJ_ArcaneMissile extends Projectile implements GeneratesParticles {
 
     GamePanel gp;
 
@@ -168,8 +170,19 @@ public class OBJ_ArcaneMissile extends Projectile {
 
     @Override
     public Color getParticleColor() {
-        Color color = new Color(110, 26, 220);
-        return color;
+        Color[] colors = new Color[10];
+        colors[0] = new Color(110, 26, 220);
+        colors[1] = new Color(123, 77, 185);
+        colors[2] = new Color(34, 197, 197);
+        colors[3] = new Color(32, 78, 185);
+        colors[4] = new Color(151, 94, 209);
+        colors[5] = new Color(59, 118, 234);
+        colors[6] = new Color(228, 28, 234);
+        colors[7] = new Color(203, 119, 223);
+        colors[8] = new Color(117, 56, 200);
+        colors[9] = new Color(11, 206, 196, 255);
+
+        return colors[new Random().nextInt(10)];
     }
 
     @Override

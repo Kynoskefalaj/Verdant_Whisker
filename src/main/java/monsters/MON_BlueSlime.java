@@ -3,6 +3,7 @@ package monsters;
 import entities.Creature;
 import entities.Entity;
 import entities.EntityType;
+import entities.GeneratesParticles;
 import objects.OBJ_Bronze_Coin;
 import objects.consumables.OBJ_Health_Potion;
 import objects.consumables.OBJ_Mana_Potion;
@@ -14,7 +15,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
-public class MON_BlueSlime extends Entity implements Creature {
+public class MON_BlueSlime extends Entity implements Creature, GeneratesParticles {
 
     GamePanel gp;
 
@@ -169,6 +170,29 @@ public class MON_BlueSlime extends Entity implements Creature {
         g2.drawImage(image, screenX, screenY,null);
 
         changeAlpha(g2,1f);
+    }
+    @Override
+    public Color getParticleColor() {
+        Color color = new Color(49, 97, 185);
+        return color;
+    }
+
+    @Override
+    public int getParticleSize() {
+        int size = 6; // 6 pixels;
+        return size;
+    }
+
+    @Override
+    public int getParticleSpeed() {
+        int speed = 1;
+        return speed;
+    }
+
+    @Override
+    public int getParticleMaxLife() {
+        int maxLife = 12 ;
+        return maxLife;
     }
 }
 

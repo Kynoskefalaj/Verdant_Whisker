@@ -2,11 +2,12 @@ package tile.interactive;
 
 import entities.Entity;
 import entities.EntityType;
+import entities.GeneratesParticles;
 import root.GamePanel;
 
 import java.awt.*;
 
-public class IT_DryBush extends InteractiveTile{
+public class IT_DryBush extends InteractiveTile implements GeneratesParticles {
 
     GamePanel gp;
 

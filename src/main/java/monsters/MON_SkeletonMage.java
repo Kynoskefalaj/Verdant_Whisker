@@ -2,6 +2,7 @@ package monsters;
 
 import entities.Creature;
 import entities.EntityType;
+import entities.GeneratesParticles;
 import entities.Skeleton;
 import objects.OBJ_Bronze_Coin;
 import objects.consumables.OBJ_Health_Potion;
@@ -16,7 +17,7 @@ import java.awt.image.BufferedImage;
 import java.util.Objects;
 import java.util.Random;
 
-public class MON_SkeletonMage extends Skeleton implements Creature {
+public class MON_SkeletonMage extends Skeleton implements Creature, GeneratesParticles {
 
     GamePanel gp;
     boolean shooting = false;
@@ -541,5 +542,29 @@ public class MON_SkeletonMage extends Skeleton implements Creature {
         if (dyingCounter > i * 19) {
             alive = false;
         }
+    }
+
+    @Override
+    public Color getParticleColor() {
+        Color color = new Color(164, 163, 167);
+        return color;
+    }
+
+    @Override
+    public int getParticleSize() {
+        int size = 8; // 6 pixels;
+        return size;
+    }
+
+    @Override
+    public int getParticleSpeed() {
+        int speed = 1;
+        return speed;
+    }
+
+    @Override
+    public int getParticleMaxLife() {
+        int maxLife = 25 ;
+        return maxLife;
     }
 }

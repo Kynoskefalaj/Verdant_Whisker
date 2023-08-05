@@ -1,13 +1,14 @@
 package objects.projectiles;
 
 import entities.Entity;
+import entities.GeneratesParticles;
 import entities.Projectile;
 import root.GamePanel;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class OBJ_Rock extends Projectile {
+public class OBJ_Rock extends Projectile implements GeneratesParticles {
 
     GamePanel gp;
 
@@ -82,7 +83,7 @@ public class OBJ_Rock extends Projectile {
 
     @Override
     public int getParticleMaxLife() {
-        int maxLife = 20 ;
+        int maxLife = 13 ;
         return maxLife;
     }
 }
