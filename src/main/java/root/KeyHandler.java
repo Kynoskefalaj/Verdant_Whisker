@@ -49,6 +49,11 @@ public class KeyHandler implements KeyListener{
         else if (gp.gameState == gp.characterState) {
             characterState(code);
         }
+
+        // OPTIONS STATE
+        else if (gp.gameState == gp.optionsState) {
+            optionsState(code);
+        }
     }
 
     public void titleState (int code) {
@@ -159,7 +164,6 @@ public class KeyHandler implements KeyListener{
             case KeyEvent.VK_C -> gp.gameState = gp.characterState;
             case KeyEvent.VK_SPACE -> spacePressed = true;
             case KeyEvent.VK_ENTER -> enterPressed = true;
-            case KeyEvent.VK_ESCAPE -> escapePressed = true;
             case KeyEvent.VK_0 -> zeroPressed = true;
             case KeyEvent.VK_F12 -> F12Pressed = true;
             case KeyEvent.VK_CONTROL -> controlPressed = true;
@@ -176,6 +180,40 @@ public class KeyHandler implements KeyListener{
                 } else if (gp.gameState == gp.pauseState) {
                     gp.gameState = gp.playState;
                 }
+            }
+            case KeyEvent.VK_ESCAPE -> {
+                escapePressed = true;
+                gp.gameState = gp.optionsState;
+            }
+        }
+    }
+
+    public void optionsState (int code) {
+        if (code == KeyEvent.VK_ESCAPE) {
+            gp.gameState = gp.playState;
+        }
+        if (code == KeyEvent.VK_ENTER) {
+            enterPressed = true;
+        }
+
+        int maxCommandNum = 0;
+        switch (gp.ui.subState) {
+            case 0:
+                maxCommandNum = 5;
+
+        }
+        if (code == KeyEvent.VK_W) {
+            gp.ui.commandNum--;
+            gp.playSE(gp.sound.gui1SE);
+            if (gp.ui.commandNum < 0) {
+                gp.ui.commandNum = maxCommandNum;
+            }
+        }
+        if (code == KeyEvent.VK_S) {
+            gp.ui.commandNum++;
+            gp.playSE(gp.sound.gui1SE);
+            if (gp.ui.commandNum > 5) {
+                gp.ui.commandNum = 0;
             }
         }
     }
