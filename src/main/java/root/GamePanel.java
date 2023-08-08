@@ -33,6 +33,7 @@ public class GamePanel extends JPanel implements Runnable{
     int screenHeight2 = screenHeight;
     BufferedImage tempScreen;
     Graphics2D g2;
+    public boolean fullScreenOn = false;
 
 //    FPS
     int FPS = 60;
@@ -40,7 +41,7 @@ public class GamePanel extends JPanel implements Runnable{
 //    SYSTEM
     TileManager tileM = new TileManager(this);
     public KeyHandler keyH = new KeyHandler(this);
-    public Sound sound = new Sound();
+    public Sound music = new Sound();
     public Sound se = new Sound(); //Sound Effect
     public CollisionChecker cChecker = new CollisionChecker(this);
     public AssetSetter asSetter = new AssetSetter(this);
@@ -84,7 +85,7 @@ public class GamePanel extends JPanel implements Runnable{
         asSetter.setMonster();
         asSetter.setInteractiveTile();
 
-        playMusic(sound.mainTheme);
+        playMusic(music.mainTheme);
         gameState = titleState;
 
         //Blank buffered image as large as the game screen
@@ -321,12 +322,12 @@ public class GamePanel extends JPanel implements Runnable{
     }
 
     public void playMusic(URL url) {
-        sound.setFile(url);
-        sound.play();
-        sound.loop();
+        music.setFile(url);
+        music.play();
+        music.loop();
     }
     public void stopMusic() {
-        sound.stop();
+        music.stop();
     }
     public void playSE(URL url) {
         //Sound Effect

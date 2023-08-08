@@ -6,10 +6,8 @@ import entities.GeneratesParticles;
 import entities.Skeleton;
 import objects.OBJ_Bronze_Coin;
 import objects.consumables.OBJ_Health_Potion;
-import objects.consumables.OBJ_Mana_Potion;
 import objects.consumables.OBJ_Stamina_Potion;
 import objects.projectiles.OBJ_DarkEnergyBall;
-import objects.projectiles.OBJ_Rock;
 import root.GamePanel;
 
 import java.awt.*;
@@ -86,7 +84,7 @@ public class MON_SkeletonMage extends Skeleton implements Creature, GeneratesPar
     public void setSounds() {
         hitSound = getClass().getResource("/sound/Bump.wav");
         attackSound = getClass().getResource("/sound/Explosion.wav");
-        deathSound = gp.sound.evilLaughSE;
+        deathSound = gp.music.evilLaughSE;
     }
     @Override
     public void getAttackImage() {

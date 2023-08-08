@@ -33,6 +33,6 @@ public class OBJ_Health_Potion extends Entity {
         if(entity.life > entity.maxLife) {
             entity.life = entity.maxLife;
         }
-        gp.playSE(gp.sound.powerUpSE);
+        gp.playSE(gp.music.powerUpSE);
     }
 }

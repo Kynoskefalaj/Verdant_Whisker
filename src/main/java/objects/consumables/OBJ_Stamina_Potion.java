@@ -33,6 +33,6 @@ public class OBJ_Stamina_Potion extends Entity {
         if(entity.stamina > entity.maxStamina) {
             entity.stamina = entity.maxStamina;
         }
-        gp.playSE(gp.sound.powerUpSE);
+        gp.playSE(gp.music.powerUpSE);
     }
 }

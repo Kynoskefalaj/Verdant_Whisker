@@ -65,7 +65,7 @@ public class KeyHandler implements KeyListener{
                     if (gp.ui.commandNum < 0) {
                         gp.ui.commandNum = 2;
                     }
-                    gp.playSE(gp.sound.uiSounds[gp.ui.currentUiSE - 1]);
+                    gp.playSE(gp.se.uiSounds[gp.ui.currentUiSE - 1]);
                     gp.ui.setCurrentSE();
                     break;
                 case KeyEvent.VK_S, KeyEvent.VK_DOWN:
@@ -73,7 +73,7 @@ public class KeyHandler implements KeyListener{
                     if (gp.ui.commandNum > 2) {
                         gp.ui.commandNum = 0;
                     }
-                    gp.playSE(gp.sound.uiSounds[gp.ui.currentUiSE - 1]);
+                    gp.playSE(gp.se.uiSounds[gp.ui.currentUiSE - 1]);
                     gp.ui.setCurrentSE();
                     break;
                 case KeyEvent.VK_ENTER :
@@ -81,13 +81,13 @@ public class KeyHandler implements KeyListener{
                         case 0 :
 //                            gp.gameState = gp.playState;
                             gp.ui.titleScreenState = 1;
-                            gp.playSE(gp.sound.gui4SE);
+                            gp.playSE(gp.se.gui4SE);
                             break;
                         case 1 :
-                            gp.playSE(gp.sound.gui4SE);
+                            gp.playSE(gp.se.gui4SE);
                             break;
                         case 2 :
-                            gp.playSE(gp.sound.gui4SE);
+                            gp.playSE(gp.se.gui4SE);
                             System.exit(0);
                             break;
                     }
@@ -100,7 +100,7 @@ public class KeyHandler implements KeyListener{
                     if (gp.ui.commandNum < 0) {
                         gp.ui.commandNum = 3;
                     }
-                    gp.playSE(gp.sound.uiSounds[gp.ui.currentUiSE - 1]);
+                    gp.playSE(gp.se.uiSounds[gp.ui.currentUiSE - 1]);
                     gp.ui.setCurrentSE();
                     break;
                 case KeyEvent.VK_S, KeyEvent.VK_DOWN:
@@ -108,7 +108,7 @@ public class KeyHandler implements KeyListener{
                     if (gp.ui.commandNum > 3) {
                         gp.ui.commandNum = 0;
                     }
-                    gp.playSE(gp.sound.uiSounds[gp.ui.currentUiSE - 1]);
+                    gp.playSE(gp.se.uiSounds[gp.ui.currentUiSE - 1]);
                     gp.ui.setCurrentSE();
                     break;
                 case KeyEvent.VK_ENTER :
@@ -116,18 +116,18 @@ public class KeyHandler implements KeyListener{
                         case 0 :
                             System.out.println("Do some fighter specific stuff!");
                             gp.gameState = gp.playState;
-                            gp.playSE(gp.sound.enterGameSE);
+                            gp.playSE(gp.se.enterGameSE);
                             try {
                                 Thread.sleep(1); //3100 is optimal
                             } catch (InterruptedException ex) {
                                 throw new RuntimeException(ex);
                             }
-                            gp.stopMusic();
+//                            gp.stopMusic();
                             break;
                         case 1 :
                             System.out.println("Do some thief specific stuff!");
                             gp.gameState = gp.playState;
-                            gp.playSE(gp.sound.enterGameSE);
+                            gp.playSE(gp.se.enterGameSE);
                             try {
                                 Thread.sleep(3100); //3100 is optimal
                             } catch (InterruptedException ex) {
@@ -138,7 +138,7 @@ public class KeyHandler implements KeyListener{
                         case 2 :
                             System.out.println("Do some sorcerer specific stuff!");
                             gp.gameState = gp.playState;
-                            gp.playSE(gp.sound.enterGameSE);
+                            gp.playSE(gp.se.enterGameSE);
                             try {
                                 Thread.sleep(3100); //3100 is optimal
                             } catch (InterruptedException ex) {
@@ -199,21 +199,48 @@ public class KeyHandler implements KeyListener{
         int maxCommandNum = 0;
         switch (gp.ui.subState) {
             case 0:
-                maxCommandNum = 5;
+                maxCommandNum = 5; break;
+            case 3: maxCommandNum = 1; break;
 
         }
         if (code == KeyEvent.VK_W) {
             gp.ui.commandNum--;
-            gp.playSE(gp.sound.gui1SE);
+            gp.playSE(gp.se.gui1SE);
             if (gp.ui.commandNum < 0) {
                 gp.ui.commandNum = maxCommandNum;
             }
         }
         if (code == KeyEvent.VK_S) {
             gp.ui.commandNum++;
-            gp.playSE(gp.sound.gui1SE);
+            gp.playSE(gp.se.gui1SE);
             if (gp.ui.commandNum > 5) {
                 gp.ui.commandNum = 0;
+            }
+        }
+        if (code == KeyEvent.VK_A) {
+            if (gp.ui.subState == 0) {
+                if (gp.ui.commandNum == 1 && gp.music.volumeScale > 0) {
+                    gp.music.volumeScale--;
+                    gp.music.checkVolume();
+                    gp.playSE(gp.se.gui2SE);
+                }
+                if (gp.ui.commandNum == 2 && gp.se.volumeScale > 0) {
+                    gp.se.volumeScale--;
+                    gp.playSE(gp.se.gui2SE);
+                }
+            }
+        }
+        if (code == KeyEvent.VK_D) {
+            if (gp.ui.subState == 0) {
+                if (gp.ui.commandNum == 1 && gp.music.volumeScale < 5) {
+                    gp.music.volumeScale++;
+                    gp.music.checkVolume();
+                    gp.playSE(gp.se.gui4SE);
+                }
+                if (gp.ui.commandNum == 2 && gp.se.volumeScale < 5) {
+                    gp.se.volumeScale++;
+                    gp.playSE(gp.se.gui4SE);
+                }
             }
         }
     }
@@ -236,35 +263,35 @@ public class KeyHandler implements KeyListener{
 
         if (code == KeyEvent.VK_C) {
             gp.gameState = gp.playState;
-            gp.playSE(gp.sound.cursorSE);
+            gp.playSE(gp.se.cursorSE);
         }
         if (code == KeyEvent.VK_ESCAPE) {
             gp.gameState = gp.playState;
-            gp.playSE(gp.sound.cursorSE);
+            gp.playSE(gp.se.cursorSE);
         }
 
         if (code == KeyEvent.VK_W) {
             if (gp.ui.slotRow != 0) {
                 gp.ui.slotRow--;
-                gp.playSE(gp.sound.cursorSE);
+                gp.playSE(gp.se.cursorSE);
             }
         }
         if (code == KeyEvent.VK_S) {
             if (gp.ui.slotRow != 4) {
                 gp.ui.slotRow++;
-                gp.playSE(gp.sound.cursorSE);
+                gp.playSE(gp.se.cursorSE);
             }
         }
         if (code == KeyEvent.VK_A) {
             if (gp.ui.slotCol != 0) {
                 gp.ui.slotCol--;
-                gp.playSE(gp.sound.cursorSE);
+                gp.playSE(gp.se.cursorSE);
             }
         }
         if (code == KeyEvent.VK_D) {
             if (gp.ui.slotCol != 2) {
                 gp.ui.slotCol++;
-                gp.playSE(gp.sound.cursorSE);
+                gp.playSE(gp.se.cursorSE);
             }
         }
         if (code == KeyEvent.VK_ENTER) {

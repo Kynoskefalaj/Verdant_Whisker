@@ -29,7 +29,7 @@ public class OBJ_Heart extends Entity {
 
     @Override
     public void use(Entity entity) {
-        gp.playSE(gp.sound.powerUpSE);
+        gp.playSE(gp.music.powerUpSE);
         gp.ui.addMessage("Max life increased by: " + value);
         entity.maxLife += value;
         entity.life += value;

@@ -82,7 +82,7 @@ public class EventHandler {
 
     public void damagePit (int col, int row, int gameState) {
         gp.gameState = gameState;
-        gp.playSE(gp.sound.exhaustedSE);
+        gp.playSE(gp.se.exhaustedSE);
         gp.ui.currentDialogue = "You fall into a pit!";
         gp.player.life--;
 //        eventRect[col][row].eventDone = true; //then this event will occur one time
@@ -94,7 +94,7 @@ public class EventHandler {
         if (gp.keyH.enterPressed == true) {
             gp.gameState = gameState;
             gp.player.attackCancelled = true;
-            gp.playSE(gp.sound.successSE);
+            gp.playSE(gp.se.successSE);
             gp.ui.currentDialogue = "You drink the water. \n Your health and mana have been recovered!";
             gp.player.life = gp.player.maxLife;
             gp.player.mana = gp.player.maxMana;

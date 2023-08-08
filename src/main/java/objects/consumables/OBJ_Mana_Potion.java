@@ -32,6 +32,6 @@ public class OBJ_Mana_Potion extends Entity {
         if(entity.mana > entity.maxMana) {
             entity.mana = entity.maxMana;
         }
-        gp.playSE(gp.sound.powerUpSE);
+        gp.playSE(gp.music.powerUpSE);
     }
 }

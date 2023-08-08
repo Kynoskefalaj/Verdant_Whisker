@@ -56,7 +56,7 @@ public abstract class Projectile extends Entity{
             if (monsterIndex != 999) {
                 gp.player.damageMonster(monsterIndex, attack);
                 generateParticle(caster.projectile, gp.monsters[monsterIndex]);
-                gp.playSE(gp.sound.explosionSE);
+                gp.playSE(gp.se.explosionSE);
                 alive = false;
             }
         }

@@ -9,7 +9,9 @@ import java.net.URL;
 public class Sound {
 
     Clip clip;
-    FloatControl volumeControl;
+    FloatControl fc;
+    int volumeScale = 3;
+    float volume;
 
     public URL mainTheme, coinSE, powerUpSE, unlockSE, successSE, bumpSE,
             talkSE, enterGameSE, swordSlashSE, monsterDeath, hurtSE, exhaustedSE,
@@ -70,14 +72,29 @@ public class Sound {
             clip.open(ais);
 
             //getting clip volume controller
-            volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-            setVolume(-10f);
+            fc = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            setVolume(-12f);
+            checkVolume();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
+
+    public void checkVolume() {
+
+        switch (volumeScale) {
+            case 0: volume = -80f; break;
+            case 1: volume = -40f; break;
+            case 2: volume = -22f; break;
+            case 3: volume = -8f; break;
+            case 4: volume = 1f; break;
+            case 5: volume = 6f; break;
+        }
+        fc.setValue(volume);
+    }
+
     public void play() {
 
         clip.start();
@@ -92,13 +109,13 @@ public class Sound {
     }
 
     public void setVolume(float volume) {
-        if (volume < volumeControl.getMinimum()) {
-            volume = volumeControl.getMinimum();
+        if (volume < fc.getMinimum()) {
+            volume = fc.getMinimum();
         }
-        if (volume > volumeControl.getMaximum()) {
-            volume = volumeControl.getMaximum();
+        if (volume > fc.getMaximum()) {
+            volume = fc.getMaximum();
         }
 
-        volumeControl.setValue(volume);
+        fc.setValue(volume);
     }
 }

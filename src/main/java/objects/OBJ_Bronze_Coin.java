@@ -22,7 +22,7 @@ public class OBJ_Bronze_Coin extends Entity {
     @Override
     public void use (Entity entity) {
 
-        gp.playSE(gp.sound.coinSE);
+        gp.playSE(gp.music.coinSE);
         gp.ui.addMessage("Coin +" + value);
         gp.player.coin += value;
     }

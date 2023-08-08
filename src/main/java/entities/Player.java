@@ -277,7 +277,7 @@ public class Player extends Entity implements Archery {
             }
 
             if (keyH.enterPressed == true && attackCancelled == false && stamina > 1.5) {
-                gp.playSE(gp.sound.swordSlashSE);
+                gp.playSE(gp.se.swordSlashSE);
                 attacking = true;
                 stamina -= 2;
                 spriteCounter = 0;
@@ -370,7 +370,7 @@ public class Player extends Entity implements Archery {
 
         shotAvailableCounter = 0;
 
-        gp.playSE(gp.sound.projectileCastSE);
+        gp.playSE(gp.se.projectileCastSE);
     }
 
     public void pickUpObject (int i) {
@@ -394,7 +394,7 @@ public class Player extends Entity implements Archery {
                 if (inventory.size() != maxInventorySize) {
 
                     inventory.add(gp.objects[i]);
-                    gp.playSE(gp.sound.coinSE);
+                    gp.playSE(gp.se.coinSE);
                     text = "Got a " + gp.objects[i].name + "!";
                     gp.objects[i] = null;
                 }
@@ -443,7 +443,7 @@ public class Player extends Entity implements Archery {
                 attackCancelled = true;
                 gp.gameState = gp.dialogueState;
                 gp.npcs[i].speak();
-                gp.playSE(gp.sound.talkSE);
+                gp.playSE(gp.se.talkSE);
             }
         }
     }
@@ -457,7 +457,7 @@ public class Player extends Entity implements Archery {
                 if (defense >= gp.monsters[i].attack) {damage = 0;}
                 else {damage = gp.monsters[i].attack - defense;}
                 life -= damage;
-                gp.playSE(gp.sound.hurtSE);
+                gp.playSE(gp.se.hurtSE);
                 invincible = true;
             }
         }
@@ -487,7 +487,7 @@ public class Player extends Entity implements Archery {
 
                 if (gp.monsters[i].life <= 0) {
                     gp.monsters[i].dying = true;
-                    gp.playSE(gp.sound.monsterDeath);
+                    gp.playSE(gp.se.monsterDeath);
                     exp += gp.monsters[i].exp;
                     gp.ui.addMessage("Blink killed the " + gp.monsters[i].name + "!");
                     gp.ui.addMessage("Exp " + gp.monsters[i].exp);
@@ -504,7 +504,7 @@ public class Player extends Entity implements Archery {
         if (i != 999 && gp.iTile[i].destructible && gp.iTile[i].isProperWeapon(this)
                 && !gp.iTile[i].invincible) {
 
-            gp.playSE(gp.sound.hitBushSE);
+            gp.playSE(gp.se.hitBushSE);
             gp.iTile[i].life--;
             gp.iTile[i].invincible = true;
 
@@ -535,7 +535,7 @@ public class Player extends Entity implements Archery {
             attack = getAttack();
             defense = getDefense();
 
-            gp.playSE(gp.sound.powerUpSE);
+            gp.playSE(gp.se.powerUpSE);
             gp.gameState = gp.dialogueState;
             gp.ui.currentDialogue = "You are level " + level + "now!\n"
                     + "You feel stronger!";
