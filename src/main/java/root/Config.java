@@ -46,23 +46,25 @@ public class Config {
             String s = br.readLine();
 
             // FULL SCREEN
-            if (s.equals("On")) {
-                gp.fullScreenOn = true;
+            if (s!= null) {
+                if (s.equals("On")) {
+                    gp.fullScreenOn = true;
+                }
+                if (s.equals("Off")) {
+                    gp.fullScreenOn = false;
+                }
+
+
+                // MUSIC VOLUME
+                s = br.readLine();
+                gp.music.volumeScale = Integer.parseInt(s);
+
+                // SE VOLUME
+                s = br.readLine();
+                gp.se.volumeScale = Integer.parseInt(s);
             }
-            if (s.equals("Off")) {
-                gp.fullScreenOn = false;
-            }
-
-            // MUSIC VOLUME
-            s = br.readLine();
-            gp.music.volumeScale = Integer.parseInt(s);
-
-            // SE VOLUME
-            s = br.readLine();
-            gp.se.volumeScale = Integer.parseInt(s);
-
             br.close();
-            
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

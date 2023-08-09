@@ -47,6 +47,7 @@ public class GamePanel extends JPanel implements Runnable{
     public AssetSetter asSetter = new AssetSetter(this);
     public UI ui = new UI(this);
     public EventHandler eHandler = new EventHandler(this);
+    public Config config = new Config(this);
     public UtilityTool uTool = new UtilityTool();
     Thread gameThread;
 
@@ -93,7 +94,9 @@ public class GamePanel extends JPanel implements Runnable{
         //Everything what that g2 draws will be recorded in this tempScreen BufferedImage
         g2 = (Graphics2D) tempScreen.getGraphics();
 
-        setFullScreen();
+        if(fullScreenOn == true) {
+            setFullScreen();
+        }
     }
 
     public void setFullScreen() {

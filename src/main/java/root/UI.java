@@ -718,6 +718,7 @@ public class UI {
         volumeUnitWidth = 24 * gp.se.volumeScale;
         g2.fillRect(textX, textY, volumeUnitWidth, 24);
 
+        gp.config.saveConfig();
     }
 
     public void options_fullScreenNotification(int frameX, int frameY) {
