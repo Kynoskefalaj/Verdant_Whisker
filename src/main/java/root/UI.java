@@ -30,7 +30,7 @@ public class UI {
     public int titleScreenState = 0;
     public int slotCol = 0;
     public int slotRow = 0;
-    public int subState = 0;
+    public Options_SubState subState = Options_SubState.TOP;
 
 
 
@@ -613,13 +613,132 @@ public class UI {
         drawSubWindow(frameX, frameY, frameWidth, frameHeight);
 
         switch(subState) {
-            case 0: options_top(frameX, frameY); break;
-            case 1: options_fullScreenNotification(frameX, frameY); break;
-            case 2: options_control(frameX, frameY); break;
-            case 3: options_endGameConfirmation(frameX, frameY); break;
+            case TOP: options_top(frameX, frameY); break;
+            case FULL_SCREEN: options_fullScreenNotification(frameX, frameY); break;
+            case CONTROLS: options_control(frameX, frameY); break;
+            case END_GAME: options_endGameConfirmation(frameX, frameY); break;
+            case GRAPHICS: options_graphics(frameX, frameY); break;
+            case PROPORTIONS: options_proportions(frameX, frameY); break;
         }
 
         gp.keyH.enterPressed = false;
+    }
+
+    public void options_proportions (int frameX, int frameY) {
+        int textX;
+        int textY;
+
+        // TITLE
+        String text = "Proportions";
+        textX = getXforCenteredText(text);
+        textY = frameY + gp.tileSize;
+        g2.drawString(text, textX, textY);
+
+        // 16 : 9
+        text = "16 : 9";
+        textX = getXforCenteredText(text);
+        textY += gp.tileSize * 2;
+        g2.drawString(text, textX, textY);
+        if(commandNum == 0) {
+            g2.drawString(">", textX - 25, textY);
+            if(gp.keyH.enterPressed) {
+                gp.screenProportions = ScreenProportions.res16_9;
+            }
+        }
+
+        // 21 : 9
+        text = "21 : 9";
+        textX = getXforCenteredText(text);
+        textY += gp.tileSize;
+        g2.drawString(text, textX, textY);
+        if(commandNum == 1) {
+            g2.drawString(">", textX - 25, textY);
+            if(gp.keyH.enterPressed) {
+                gp.screenProportions = ScreenProportions.res21_9;
+            }
+        }
+
+        // 3 : 2
+        text = "3 : 2";
+        textX = getXforCenteredText(text);
+        textY += gp.tileSize;
+        g2.drawString(text, textX, textY);
+        if(commandNum == 2) {
+            g2.drawString(">", textX - 25, textY);
+            if(gp.keyH.enterPressed) {
+                gp.screenProportions = ScreenProportions.res3_2;
+            }
+        }
+
+        //BACK
+        textY += gp.tileSize * 4;
+        g2.drawString("Back", textX, textY);
+        if(commandNum == 3) {
+            g2.drawString(">", textX - 25, textY);
+            if (gp.keyH.enterPressed) {
+                subState = Options_SubState.TOP;
+                commandNum = 0;
+            }
+        }
+    }
+
+    public void options_graphics (int frameX, int frameY) {
+        int textX;
+        int textY;
+
+        // TITLE
+        String text = "Graphics";
+        textX = getXforCenteredText(text);
+        textY = frameY + gp.tileSize;
+        g2.drawString(text, textX, textY);
+
+        // FULL SCREEN ON/OFF
+        textX = frameX + gp.tileSize;
+        textY += gp.tileSize * 2;
+        g2.drawString("Full Screen", textX, textY);
+        if(commandNum == 0) {
+            g2.drawString(">", textX - 25, textY);
+            if(gp.keyH.enterPressed) {
+                if(!gp.fullScreenOn) {
+                    gp.fullScreenOn = true;
+                }
+                else if (gp.fullScreenOn) {
+                    gp.fullScreenOn = false;
+                }
+                subState = Options_SubState.FULL_SCREEN;
+            }
+        }
+
+        textY += gp.tileSize;
+        g2.drawString("Proportions", textX, textY);
+        if(commandNum == 1) {
+            g2.drawString(">", textX - 25, textY);
+            if(gp.keyH.enterPressed) {
+                subState = Options_SubState.PROPORTIONS;
+            }
+        }
+
+        //BACK
+        textY += gp.tileSize * 5;
+        g2.drawString("Back", textX, textY);
+        if(commandNum == 2) {
+            g2.drawString(">", textX - 25, textY);
+            if (gp.keyH.enterPressed) {
+                subState = Options_SubState.TOP;
+                commandNum = 0;
+            }
+        }
+
+
+        //FULL SCREEN CHECK BOX
+        textX = frameX + (int)(gp.tileSize * 4.5);
+        textY = frameY + (int)(gp.tileSize * 2.5);
+        g2.setStroke(new BasicStroke(3));
+        g2.drawRect(textX, textY, gp.tileSize/2, gp.tileSize/2);
+        if(gp.fullScreenOn == true) {
+            g2.fillRect(textX, textY, gp.tileSize/2, gp.tileSize/2);
+        }
+
     }
 
     public void options_top(int frameX, int frameY) {
@@ -636,17 +755,11 @@ public class UI {
         // FULL SCREEN ON/OFF
         textX = frameX + gp.tileSize;
         textY += gp.tileSize * 2;
-        g2.drawString("Full Screen", textX, textY);
+        g2.drawString("Graphics", textX, textY);
         if(commandNum == 0) {
             g2.drawString(">", textX - 25, textY);
             if(gp.keyH.enterPressed == true) {
-                if(gp.fullScreenOn == false) {
-                    gp.fullScreenOn = true;
-                }
-                else if (gp.fullScreenOn == true) {
-                    gp.fullScreenOn = false;
-                }
-                subState = 1;
+                subState = Options_SubState.GRAPHICS;
             }
         }
 
@@ -670,7 +783,7 @@ public class UI {
         if(commandNum == 3) {
             g2.drawString(">", textX - 25, textY);
             if (gp.keyH.enterPressed) {
-                subState = 2;
+                subState = Options_SubState.CONTROLS;
                 commandNum = 0;
             }
         }
@@ -681,7 +794,7 @@ public class UI {
         if(commandNum == 4) {
             g2.drawString(">", textX - 25, textY);
             if (gp.keyH.enterPressed) {
-                subState = 3;
+                subState = Options_SubState.END_GAME;
                 commandNum = 0;
             }
         }
@@ -697,14 +810,8 @@ public class UI {
             }
         }
 
-        //FULL SCREEN CHECK BOX
         textX = frameX + (int)(gp.tileSize * 4.5);
         textY = frameY + (int)(gp.tileSize * 2.5);
-        g2.setStroke(new BasicStroke(3));
-        g2.drawRect(textX, textY, gp.tileSize/2, gp.tileSize/2);
-        if(gp.fullScreenOn == true) {
-            g2.fillRect(textX, textY, gp.tileSize/2, gp.tileSize/2);
-        }
 
         //MUSIC VOLUME
         textY += gp.tileSize;
@@ -740,7 +847,7 @@ public class UI {
         if (commandNum == 0) {
             g2.drawString(">", textX - 25, textY);
             if (gp.keyH.enterPressed == true) {
-                subState = 0;
+                subState = Options_SubState.TOP;
             }
         }
     }
@@ -781,7 +888,7 @@ public class UI {
         if (commandNum == 0) {
             g2.drawString(">", textX - 25, textY);
             if (gp.keyH.enterPressed) {
-                subState = 0;
+                subState = Options_SubState.TOP;
                 commandNum = 3;
             }
         }
@@ -809,7 +916,7 @@ public class UI {
         if (commandNum == 0) {
             g2.drawString(">", textX-25, textY);
             if (gp.keyH.enterPressed) {
-                subState = 0;
+                subState = Options_SubState.TOP;
                 titleScreenState = 0;
                 drawTitleScreen();
                 gp.gameState = gp.titleState;
@@ -824,7 +931,7 @@ public class UI {
         if (commandNum == 1) {
             g2.drawString(">", textX-25, textY);
             if (gp.keyH.enterPressed) {
-                subState = 0;
+                subState = Options_SubState.TOP;
                 commandNum = 4;
             }
         }

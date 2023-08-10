@@ -23,6 +23,10 @@ public class Config {
             }
             bw.newLine();
 
+            // PROPORTIONS
+            bw.write(String.valueOf(gp.screenProportions));
+            bw.newLine();
+
             // MUSIC VOLUME
             bw.write(String.valueOf(gp.music.volumeScale));
             bw.newLine();
@@ -54,6 +58,12 @@ public class Config {
                     gp.fullScreenOn = false;
                 }
 
+                s = br.readLine();
+                switch (s) {
+                    case "res16_9" -> gp.screenProportions = ScreenProportions.res16_9;
+                    case "res21_9" -> gp.screenProportions = ScreenProportions.res21_9;
+                    case "res3_2" -> gp.screenProportions = ScreenProportions.res3_2;
+                }
 
                 // MUSIC VOLUME
                 s = br.readLine();

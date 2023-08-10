@@ -19,40 +19,42 @@ public class GamePanel extends JPanel implements Runnable{
     public final double scale = 2;
 
     public final int tileSize = (int) (originalTileSize * scale);
-    public final int maxScreenCol = 28;
-    public final int maxScreenRow = 12;
-    public final int screenWidth = tileSize * maxScreenCol;
-    public final int screenHeight = tileSize * maxScreenRow;
+    public int maxScreenCol;
+    public int maxScreenRow;
+    public int screenWidth;
+    public int screenHeight;
 
 //    WORLD SETTINGS
     public final int maxWorldCol = 50;
     public final int maxWorldRow = 50;
 
 //    FOR FULL SCREEN
-    int screenWidth2 = screenWidth;
-    int screenHeight2 = screenHeight;
+    int screenWidth2;
+    int screenHeight2;
     BufferedImage tempScreen;
     Graphics2D g2;
     public boolean fullScreenOn = false;
+    public ScreenProportions screenProportions;
 
 //    FPS
     int FPS = 60;
 
 //    SYSTEM
-    TileManager tileM = new TileManager(this);
-    public KeyHandler keyH = new KeyHandler(this);
-    public Sound music = new Sound();
-    public Sound se = new Sound(); //Sound Effect
-    public CollisionChecker cChecker = new CollisionChecker(this);
-    public AssetSetter asSetter = new AssetSetter(this);
-    public UI ui = new UI(this);
-    public EventHandler eHandler = new EventHandler(this);
-    public Config config = new Config(this);
-    public UtilityTool uTool = new UtilityTool();
+    TileManager tileM;
+    public KeyHandler keyH;
+    public Sound music;
+    public Sound se; //Sound Effect
+    public CollisionChecker cChecker;
+    public AssetSetter asSetter;
+    public UI ui;
+    public EventHandler eHandler;
+    public Config config;
+    public UtilityTool uTool;
+    public ScreenConfig screenConfig;
     Thread gameThread;
 
 //    ENTITY AND OBJECT
-    public Player player = new Player(this, keyH);
+    public Player player;
 //    We can display 10 object on screen at the same time
     public Entity objects[] = new Entity[50];
     public Entity npcs[] = new Entity[10];
@@ -72,6 +74,24 @@ public class GamePanel extends JPanel implements Runnable{
     public final int optionsState = 5;
 
     public GamePanel () {
+
+        this.screenConfig = new ScreenConfig();
+        setScreenProportions();
+
+        //INSTANTIATE
+        this.tileM = new TileManager(this);
+        this.keyH = new KeyHandler(this);
+        this.music = new Sound();
+        this.se = new Sound(); //Sound Effect
+        this.cChecker = new CollisionChecker(this);
+        this.asSetter = new AssetSetter(this);
+        this.ui = new UI(this);
+        this.eHandler = new EventHandler(this);
+        this.config = new Config(this);
+        this.uTool = new UtilityTool();
+
+        this.player = new Player(this, keyH);
+
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true); //enabling this will improve performance
@@ -79,8 +99,29 @@ public class GamePanel extends JPanel implements Runnable{
         this.setFocusable(true);
     }
 
+    public void setScreenProportions() {
+
+        screenConfig.loadConfig();
+        screenProportions = screenConfig.sp;
+
+        switch (screenProportions) {
+            case res16_9 -> maxScreenCol = 21;
+            case res21_9 -> maxScreenCol = 28;
+            case res3_2 -> maxScreenCol = 18;
+        }
+
+        maxScreenRow = 12;
+
+        screenWidth = tileSize * maxScreenCol;
+        screenHeight = tileSize * maxScreenRow;
+
+        screenWidth2 = screenWidth;
+        screenHeight2 = screenHeight;
+    }
+
     public void setupGame () {
 
+//        setScreenProportions();
         asSetter.setObjects();
         asSetter.setNPC();
         asSetter.setMonster();
