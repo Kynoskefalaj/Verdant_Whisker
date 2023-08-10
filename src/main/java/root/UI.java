@@ -643,7 +643,16 @@ public class UI {
             g2.drawString(">", textX - 25, textY);
             if(gp.keyH.enterPressed) {
                 gp.screenProportions = ScreenProportions.res16_9;
+                subState = Options_SubState.FULL_SCREEN;
+                commandNum = 0;
             }
+        }
+
+        int selectX = textX - gp.tileSize/2;
+        if(gp.screenProportions == ScreenProportions.res16_9) {
+            int selectY = textY - gp.tileSize/2;
+            g2.setStroke(new BasicStroke(2));
+            g2.drawRect(selectX, selectY, gp.tileSize*2, 42);
         }
 
         // 21 : 9
@@ -655,7 +664,14 @@ public class UI {
             g2.drawString(">", textX - 25, textY);
             if(gp.keyH.enterPressed) {
                 gp.screenProportions = ScreenProportions.res21_9;
+                subState = Options_SubState.FULL_SCREEN;
+                commandNum = 0;
             }
+        }
+        if(gp.screenProportions == ScreenProportions.res21_9) {
+            int selectY = textY - gp.tileSize/2;
+            g2.setStroke(new BasicStroke(2));
+            g2.drawRect(selectX, selectY, gp.tileSize*2, 42);
         }
 
         // 3 : 2
@@ -667,7 +683,14 @@ public class UI {
             g2.drawString(">", textX - 25, textY);
             if(gp.keyH.enterPressed) {
                 gp.screenProportions = ScreenProportions.res3_2;
+                subState = Options_SubState.FULL_SCREEN;
+                commandNum = 0;
             }
+        }
+        if(gp.screenProportions == ScreenProportions.res3_2) {
+            int selectY = textY - gp.tileSize/2;
+            g2.setStroke(new BasicStroke(2));
+            g2.drawRect(selectX, selectY, gp.tileSize*2, 42);
         }
 
         //BACK
@@ -830,12 +853,13 @@ public class UI {
 
     public void options_fullScreenNotification(int frameX, int frameY) {
 
-        int textX = frameX + gp.tileSize;
+        int textX;
         int textY = frameY + gp.tileSize * 3;
 
         currentDialogue = "The change will take \neffect after restarting \nthe game";
 
         for(String line: currentDialogue.split("\n")) {
+            textX = getXforCenteredText(line);
             g2.drawString(line, textX, textY);
             textY += 40;
         }
@@ -843,7 +867,9 @@ public class UI {
         // BACK
         textY += frameY + gp.tileSize * 3;
 
-        g2.drawString("Back", textX, textY);
+        String text = "Back";
+        textX = getXforCenteredText(text);
+        g2.drawString(text, textX, textY);
         if (commandNum == 0) {
             g2.drawString(">", textX - 25, textY);
             if (gp.keyH.enterPressed == true) {
