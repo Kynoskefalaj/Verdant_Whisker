@@ -95,7 +95,24 @@ public class Player extends Entity implements Archery {
         ammo = 10;
     }
 
+    public void setDefaultPosition() {
+        worldX = gp.tileSize * 23;
+        worldY = gp.tileSize * 21;
+        direction = "down";
+    }
+
+    public void restoreLifeAndMana() {
+        life = maxLife;
+        mana = maxMana;
+        stamina = maxStamina;
+        invincible = false;
+    }
+
+
     public void setItems () {
+        // RESET
+        inventory.clear();
+
         // EQUIPMENT
         equipment[0] = new OBJ_Sacred_Necklace(gp);
         equipment[1] = new OBJ_Green_Hat(gp);
@@ -335,6 +352,11 @@ public class Player extends Entity implements Archery {
 
         if (stamina > maxStamina) {
             stamina = maxStamina;
+        }
+
+        if (life <= 0) {
+            gp.gameState = gp.gameOverState;
+            gp.playSE(gp.se.gameOverSE);
         }
     }
 
