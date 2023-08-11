@@ -31,7 +31,10 @@ public class AssetSetter {
     }
 
     public void setObjects() {
+        //Reset
+        gp.objects = new Entity[50];
 
+        //Put
         putObject(new OBJ_Bronze_Coin(gp), 25, 23);
         putObject(new OBJ_Bronze_Coin(gp), 21, 21);
         putObject(new OBJ_Bronze_Coin(gp), 22, 23);
@@ -50,6 +53,9 @@ public class AssetSetter {
     }
 
     public void setMonster () {
+        //Reset
+        gp.monsters = new Entity[20];
+        //Put
         putMonster(new MON_BlueSlime(gp), 21, 38);
         putMonster(new MON_BlueSlime(gp), 23, 42);
         putMonster(new MON_BlueSlime(gp), 24, 37);
@@ -59,6 +65,9 @@ public class AssetSetter {
     }
 
     public void setNPC () {
+        //Reset
+        gp.npcs = new Entity[10];
+        //Put
         putNPC(new NPC_OldMan(gp), 21, 21);
     }
 
