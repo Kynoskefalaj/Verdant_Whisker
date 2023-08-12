@@ -356,6 +356,9 @@ public class Player extends Entity implements Archery {
 
         if (life <= 0) {
             gp.gameState = gp.gameOverState;
+            //Bypass for bug related to hitting Enter while dying
+            gp.ui.commandNum = -1;
+            gp.stopMusic();
             gp.playSE(gp.se.gameOverSE);
         }
     }
