@@ -38,9 +38,9 @@ public class AssetSetter {
         putObject(new OBJ_Bronze_Coin(gp), 25, 23);
         putObject(new OBJ_Bronze_Coin(gp), 21, 21);
         putObject(new OBJ_Bronze_Coin(gp), 22, 23);
-        putObject(new OBJ_Sacred_Necklace(gp), 9, 7);
+        putObject(new OBJ_Sacred_Necklace(gp), 11, 8);
         putObject(new OBJ_Pouch(gp), 8, 32);
-        putObject(new OBJ_Rope(gp),32, 21);
+        putObject(new OBJ_Rope(gp),33, 20);
         putObject(new OBJ_Emerald_Scimitar(gp), 39, 8);
         putObject(new OBJ_Paladin_Shield(gp), 36, 8);
         putObject(new OBJ_Health_Potion(gp), 23, 7);
@@ -118,13 +118,17 @@ public class AssetSetter {
     }
 
     public void setInteractiveTile () {
-        putInteractiveTile(new IT_DryBush(gp), 27, 7);
-        putInteractiveTile(new IT_DryBush(gp), 28, 7);
-        putInteractiveTile(new IT_DryBush(gp), 29, 7);
-        putInteractiveTile(new IT_DryBush(gp), 30, 7);
-        putInteractiveTile(new IT_DryBush(gp), 31, 7);
-        putInteractiveTile(new IT_DryBush(gp), 32, 7);
-        putInteractiveTile(new IT_DryBush(gp), 33, 7);
+        putInteractiveTile(new IT_DryBush(gp), 27, 12);
+        putInteractiveTile(new IT_DryBush(gp), 28, 12);
+        putInteractiveTile(new IT_DryBush(gp), 29, 12);
+        putInteractiveTile(new IT_DryBush(gp), 30, 12);
+        putInteractiveTile(new IT_DryBush(gp), 31, 12);
+        putInteractiveTile(new IT_DryBush(gp), 32, 12);
+        putInteractiveTile(new IT_DryBush(gp), 33, 12);
+
+        putInteractiveTile(new IT_DryBush(gp), 30, 21);
+        putInteractiveTile(new IT_DryBush(gp), 31, 21);
+        putInteractiveTile(new IT_DryBush(gp), 32, 21);
     }
 
     public void putInteractiveTile(InteractiveTile interactiveTile, int colX, int rowY) {

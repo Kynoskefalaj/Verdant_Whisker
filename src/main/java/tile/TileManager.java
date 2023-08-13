@@ -21,20 +21,89 @@ public class TileManager {
     public TileManager (GamePanel gp) {
         this.gp = gp;
 
-        tiles = new Tile[10];
+        tiles = new Tile[59];
         mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
 
         getTileImage();
-        loadMap("/maps/world01.txt");
+        loadMap("/maps/worldV3.txt");
     }
 
     public void getTileImage() {
-            setUp(0, "grass1", false);
-            setUp(1, "BrickWall01", true);
-            setUp(2, "water1", true);
-            setUp(3, "dirt1", false);
-            setUp(4, "bush03", true);
-            setUp(5, "sand01", false);
+
+        // PLACEHOLDERS prevent from nullPointerException
+        setUp(0, "grass/Grass00", false);
+        setUp(1, "grass/Grass00", false);
+        setUp(2, "grass/Grass00", false);
+        setUp(3, "grass/Grass00", false);
+        setUp(4, "grass/Grass00", false);
+        setUp(5, "grass/Grass00", false);
+        setUp(6, "grass/Grass00", false);
+        setUp(7, "grass/Grass00", false);
+        setUp(8, "grass/Grass00", false);
+        setUp(9, "grass/Grass00", false);
+
+        //TILES SET HERE
+
+        // GRASS
+        setUp(10, "grass/Grass00", false);
+        setUp(11, "grass/Grass01", false);
+
+        // WATER
+        setUp(12, "water/Water00", true);
+        setUp(13, "water/Water01", true);
+        setUp(14, "water/Water02", true);
+        setUp(15, "water/Water03", true);
+        setUp(16, "water/Water04", true);
+        setUp(17, "water/Water05", true);
+        setUp(18, "water/Water06", true);
+        setUp(19, "water/Water07", true);
+        setUp(20, "water/Water08", true);
+        setUp(21, "water/Water09", true);
+        setUp(22, "water/Water10", true);
+        setUp(23, "water/Water11", true);
+        setUp(24, "water/Water12", true);
+        setUp(25, "water/Water13", true);
+
+        // PATH
+        setUp(26, "path/Path00", false);
+        setUp(27, "path/Path01", false);
+        setUp(28, "path/Path02", false);
+        setUp(29, "path/Path03", false);
+        setUp(30, "path/Path04", false);
+        setUp(31, "path/Path05", false);
+        setUp(32, "path/Path06", false);
+        setUp(33, "path/Path07", false);
+        setUp(34, "path/Path08", false);
+        setUp(35, "path/Path09", false);
+        setUp(36, "path/Path10", false);
+        setUp(37, "path/Path11", false);
+        setUp(38, "path/Path12", false);
+
+        setUp(39, "dirt1", false);
+        setUp(40, "BrickWall01", false);
+
+        // BUSHES
+        setUp(41, "grass/Bush01", true);
+        setUp(42, "grass/Bush02", true);
+        setUp(43, "grass/Bush03", true);
+
+        // INTERIOR
+        setUp(44, "interior/Floor00", false);
+        setUp(45, "interior/Interior01", false);
+        setUp(46, "interior/Interior02", false);
+        setUp(47, "interior/Interior03", false);
+        setUp(48, "interior/Interior04", false);
+        setUp(49, "interior/Interior05", false);
+        setUp(50, "interior/Interior06", false);
+        setUp(51, "interior/Interior07", false);
+        setUp(52, "interior/Interior08", false);
+        setUp(53, "interior/Interior09", false);
+        setUp(54, "interior/Interior10", false);
+        setUp(55, "interior/Interior11", false);
+        setUp(56, "interior/Interior12", false);
+        setUp(57, "interior/Interior13", false);
+
+        setUp(58, "interior/BlackBackground", false);
     }
 
     public void setUp(int index, String imageName, boolean collision) {
