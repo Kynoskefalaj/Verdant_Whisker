@@ -21,11 +21,12 @@ public class TileManager {
     public TileManager (GamePanel gp) {
         this.gp = gp;
 
-        tiles = new Tile[59];
+        tiles = new Tile[100];
         mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
 
         getTileImage();
         loadMap("/maps/worldV3.txt");
+//        loadMap("/maps/interior01.txt");
     }
 
     public void getTileImage() {
@@ -89,21 +90,24 @@ public class TileManager {
 
         // INTERIOR
         setUp(44, "interior/Floor00", false);
-        setUp(45, "interior/Interior01", false);
-        setUp(46, "interior/Interior02", false);
-        setUp(47, "interior/Interior03", false);
-        setUp(48, "interior/Interior04", false);
-        setUp(49, "interior/Interior05", false);
-        setUp(50, "interior/Interior06", false);
-        setUp(51, "interior/Interior07", false);
-        setUp(52, "interior/Interior08", false);
-        setUp(53, "interior/Interior09", false);
-        setUp(54, "interior/Interior10", false);
-        setUp(55, "interior/Interior11", false);
-        setUp(56, "interior/Interior12", false);
-        setUp(57, "interior/Interior13", false);
+        setUp(45, "interior/Interior01", true);
+        setUp(46, "interior/Interior02", true);
+        setUp(47, "interior/Interior03", true);
+        setUp(48, "interior/Interior04", true);
+        setUp(49, "interior/Interior05", true);
+        setUp(50, "interior/Interior06", true);
+        setUp(51, "interior/Interior07", true);
+        setUp(52, "interior/Interior08", true);
+        setUp(53, "interior/Interior09", true);
+        setUp(54, "interior/Interior10", true);
+        setUp(55, "interior/Interior11", true);
+        setUp(56, "interior/Interior12", true);
+        setUp(57, "interior/Interior13", true);
 
         setUp(58, "interior/BlackBackground", false);
+
+        setUp(59, "BigHouse00", true);
+
     }
 
     public void setUp(int index, String imageName, boolean collision) {

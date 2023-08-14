@@ -39,7 +39,7 @@ public class AssetSetter {
         putObject(new OBJ_Bronze_Coin(gp), 21, 21);
         putObject(new OBJ_Bronze_Coin(gp), 22, 23);
         putObject(new OBJ_Sacred_Necklace(gp), 11, 8);
-        putObject(new OBJ_Pouch(gp), 8, 32);
+        putObject(new OBJ_Pouch(gp), 10, 32);
         putObject(new OBJ_Rope(gp),33, 20);
         putObject(new OBJ_Emerald_Scimitar(gp), 39, 8);
         putObject(new OBJ_Paladin_Shield(gp), 36, 8);
