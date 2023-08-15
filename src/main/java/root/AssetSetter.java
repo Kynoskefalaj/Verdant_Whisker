@@ -32,115 +32,122 @@ public class AssetSetter {
 
     public void setObjects() {
         //Reset
-        gp.objects = new Entity[50];
+        gp.objects = new Entity[gp.maxMap][50];
 
         //Put
-        putObject(new OBJ_Bronze_Coin(gp), 25, 23);
-        putObject(new OBJ_Bronze_Coin(gp), 21, 21);
-        putObject(new OBJ_Bronze_Coin(gp), 22, 23);
-        putObject(new OBJ_Sacred_Necklace(gp), 11, 8);
-        putObject(new OBJ_Pouch(gp), 10, 32);
-        putObject(new OBJ_Rope(gp),33, 20);
-        putObject(new OBJ_Emerald_Scimitar(gp), 39, 8);
-        putObject(new OBJ_Paladin_Shield(gp), 36, 8);
-        putObject(new OBJ_Health_Potion(gp), 23, 7);
-        putObject(new OBJ_Stamina_Potion(gp), 10, 29);
-        putObject(new OBJ_StaminaWheel(gp), 10, 28);
-        putObject(new OBJ_Mana_Potion(gp), 11, 34);
-        putObject(new OBJ_Heart(gp), 22, 27);
-        putObject(new OBJ_Mana_Crystal(gp), 22, 31);
-        putObject(new OBJ_WoodcuttersAxe(gp), 22, 7);
+        putObject(new OBJ_Bronze_Coin(gp),0, 25, 23);
+        putObject(new OBJ_Bronze_Coin(gp),0, 21, 21);
+        putObject(new OBJ_Bronze_Coin(gp),0, 22, 23);
+        putObject(new OBJ_Sacred_Necklace(gp),0, 11, 8);
+        putObject(new OBJ_Pouch(gp),0, 10, 32);
+        putObject(new OBJ_Rope(gp),0,33, 20);
+        putObject(new OBJ_Emerald_Scimitar(gp),0, 39, 8);
+        putObject(new OBJ_Paladin_Shield(gp),0, 36, 8);
+        putObject(new OBJ_Health_Potion(gp),0, 23, 7);
+        putObject(new OBJ_Stamina_Potion(gp),0, 10, 29);
+        putObject(new OBJ_StaminaWheel(gp),0, 10, 28);
+        putObject(new OBJ_Mana_Potion(gp),0, 11, 34);
+        putObject(new OBJ_Heart(gp),0, 22, 27);
+        putObject(new OBJ_Mana_Crystal(gp),0, 22, 31);
+        putObject(new OBJ_WoodcuttersAxe(gp),0,22, 7);
     }
 
     public void setMonster () {
         //Reset
-        gp.monsters = new Entity[20];
+        gp.monsters = new Entity[gp.maxMap][20];
+
         //Put
-        putMonster(new MON_BlueSlime(gp), 21, 38);
-        putMonster(new MON_BlueSlime(gp), 23, 42);
-        putMonster(new MON_BlueSlime(gp), 24, 37);
-        putMonster(new MON_BlueSlime(gp), 34, 42);
-        putMonster(new MON_BlueSlime(gp), 38, 42);
-        putMonster(new MON_SkeletonMage(gp), 37, 40);
+        putMonster(new MON_BlueSlime(gp),0, 21, 38);
+        putMonster(new MON_BlueSlime(gp),0, 23, 42);
+        putMonster(new MON_BlueSlime(gp),0, 24, 37);
+        putMonster(new MON_BlueSlime(gp),0, 34, 42);
+        putMonster(new MON_BlueSlime(gp),0, 38, 42);
+        putMonster(new MON_SkeletonMage(gp),0, 37, 40);
     }
 
     public void setNPC () {
         //Reset
-        gp.npcs = new Entity[10];
+        gp.npcs = new Entity[gp.maxMap][10];
+
         //Put
-        putNPC(new NPC_OldMan(gp), 21, 21);
+        putNPC(new NPC_OldMan(gp),0,21,21);
     }
 
-    public void putObject(Entity object, int colX, int rowY) {
+    public void putObject(Entity object, int mapNum, int colX, int rowY) {
+
         int index = 0;
-        for (int v = 0; v < gp.objects.length; v++) {
-            if (gp.objects[v] == null) {
+        for (int v = 0; v < gp.objects[1].length; v++) {
+            if (gp.objects[mapNum][v] == null) {
                 index = v;
                 break;
             }
         }
         object.worldX = gp.tileSize * colX;
         object.worldY = gp.tileSize * rowY;
-        gp.objects[index] = object;
+        gp.objects[mapNum][index] = object;
     }
 
     public void dropObject(Entity object, int worldX, int worldY) {
+
         int index = 0;
-        for (int v = 0; v < gp.objects.length; v++) {
-            if (gp.objects[v] == null) {
+        for (int v = 0; v < gp.objects[1].length; v++) {
+            if (gp.objects[gp.currentMap][v] == null) {
                 index = v;
                 break;
             }
         }
         object.worldX = worldX;
         object.worldY = worldY;
-        gp.objects[index] = object;
+        gp.objects[gp.currentMap][index] = object;
     }
 
-    public void putMonster(Entity monster, int colX, int rowY) {
+    public void putMonster(Entity monster, int mapNum, int colX, int rowY) {
+
         int index = 0;
-        for (int v = 0; v < gp.monsters.length; v++) {
-            if (gp.monsters[v] == null) {
+        for (int v = 0; v < gp.monsters[1].length; v++) {
+            if (gp.monsters[mapNum][v] == null) {
                 index = v;
                 break;
             }
         }
         monster.worldX = gp.tileSize * colX;
         monster.worldY = gp.tileSize * rowY;
-        gp.monsters[index] = monster;
+        gp.monsters[mapNum][index] = monster;
     }
 
-    public void putNPC(Entity npc, int colX, int rowY) {
+    public void putNPC(Entity npc, int mapNum, int colX, int rowY) {
+
         npc.worldX = gp.tileSize * colX;
         npc.worldY = gp.tileSize * rowY;
-        gp.npcs[k] = npc;
+        gp.npcs[mapNum][k] = npc;
         k++;
     }
 
     public void setInteractiveTile () {
-        putInteractiveTile(new IT_DryBush(gp), 27, 12);
-        putInteractiveTile(new IT_DryBush(gp), 28, 12);
-        putInteractiveTile(new IT_DryBush(gp), 29, 12);
-        putInteractiveTile(new IT_DryBush(gp), 30, 12);
-        putInteractiveTile(new IT_DryBush(gp), 31, 12);
-        putInteractiveTile(new IT_DryBush(gp), 32, 12);
-        putInteractiveTile(new IT_DryBush(gp), 33, 12);
+        putInteractiveTile(new IT_DryBush(gp),0, 27, 12);
+        putInteractiveTile(new IT_DryBush(gp),0, 28, 12);
+        putInteractiveTile(new IT_DryBush(gp),0, 29, 12);
+        putInteractiveTile(new IT_DryBush(gp),0, 30, 12);
+        putInteractiveTile(new IT_DryBush(gp),0, 31, 12);
+        putInteractiveTile(new IT_DryBush(gp),0, 32, 12);
+        putInteractiveTile(new IT_DryBush(gp),0, 33, 12);
 
-        putInteractiveTile(new IT_DryBush(gp), 30, 21);
-        putInteractiveTile(new IT_DryBush(gp), 31, 21);
-        putInteractiveTile(new IT_DryBush(gp), 32, 21);
+        putInteractiveTile(new IT_DryBush(gp),0, 30, 21);
+        putInteractiveTile(new IT_DryBush(gp),0, 31, 21);
+        putInteractiveTile(new IT_DryBush(gp),0, 32, 21);
     }
 
-    public void putInteractiveTile(InteractiveTile interactiveTile, int colX, int rowY) {
+    public void putInteractiveTile(InteractiveTile interactiveTile, int mapNum, int colX, int rowY) {
+
         int index = 0;
         for (int i = 0; i < gp.monsters.length; i++) {
-            if (gp.iTile[i] == null) {
+            if (gp.iTile[mapNum][i] == null) {
                 index = i;
                 break;
             }
         }
         interactiveTile.worldX = gp.tileSize * colX;
         interactiveTile.worldY = gp.tileSize * rowY;
-        gp.iTile[index] = interactiveTile;
+        gp.iTile[mapNum][index] = interactiveTile;
     }
 }

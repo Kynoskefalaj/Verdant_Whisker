@@ -98,7 +98,7 @@ public class TileManager {
         setUp(50, "interior/Interior06", true);
         setUp(51, "interior/Interior07", true);
         setUp(52, "interior/Interior08", true);
-        setUp(53, "interior/Interior09", true);
+        setUp(53, "interior/Interior09", false);
         setUp(54, "interior/Interior10", true);
         setUp(55, "interior/Interior11", true);
         setUp(56, "interior/Interior12", true);
@@ -106,7 +106,7 @@ public class TileManager {
 
         setUp(58, "interior/BlackBackground", true);
 
-        setUp(59, "BigHouse00", true);
+        setUp(59, "BigHouse00", false);
 
     }
 

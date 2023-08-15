@@ -28,7 +28,7 @@ public class GamePanel extends JPanel implements Runnable{
     public final int maxWorldCol = 50;
     public final int maxWorldRow = 50;
     public final int maxMap = 10;
-    public int currentMap = 1;
+    public int currentMap = 0;
 
 //    FOR FULL SCREEN
     int screenWidth2;
@@ -58,10 +58,10 @@ public class GamePanel extends JPanel implements Runnable{
 //    ENTITY AND OBJECT
     public Player player;
 //    We can display 10 object on screen at the same time
-    public Entity[] objects;
-    public Entity[] npcs;
-    public Entity[] monsters;
-    public InteractiveTile[] iTile = new InteractiveTile[50];
+    public Entity[][] objects;
+    public Entity[][] npcs;
+    public Entity[][] monsters;
+    public InteractiveTile[][] iTile = new InteractiveTile[maxMap][50];
     public ArrayList<Entity> projectilesList = new ArrayList<>();
     public ArrayList<Entity> particlesList = new ArrayList<>();
     public ArrayList<Entity> entityList = new ArrayList<>();
@@ -243,30 +243,35 @@ public class GamePanel extends JPanel implements Runnable{
             // PLAYER
             player.update();
             // NPC
-            for (Entity entity : npcs) {
-                if (entity != null) {
-                    entity.update();
+//            for (Entity entity : npcs[1]) {
+//                if (entity != null) {
+//                    entity.update();
+//                }
+//            }
+            for (int i = 0; i < npcs[1].length; i++) {
+                if (npcs[currentMap][i] != null) {
+                    npcs[currentMap][i].update();
                 }
             }
             // MONSTERS
-            for (int i = 0; i < monsters.length; i++) {
-                if (monsters[i] != null) {
-                    if (monsters[i].alive == true && monsters[i].dying == false) {
-                        monsters[i].update();
+            for (int i = 0; i < monsters[1].length; i++) {
+                if (monsters[currentMap][i] != null) {
+                    if (monsters[currentMap][i].alive &&  ! monsters[currentMap][i].dying) {
+                        monsters[currentMap][i].update();
                     }
-                    if (monsters[i].alive == false) {
-                        monsters[i].checkDrop();
-                        monsters[i] = null;
+                    if (! monsters[currentMap][i].alive) {
+                        monsters[currentMap][i].checkDrop();
+                        monsters[currentMap][i] = null;
                     }
                 }
             }
             // PROJECTILES
             for (int i = 0; i < projectilesList.size(); i++) {
                 if (projectilesList.get(i) != null) {
-                    if (projectilesList.get(i).alive == true) {
+                    if (projectilesList.get(i).alive) {
                         projectilesList.get(i).update();
                     }
-                    if (projectilesList.get(i).alive == false) {
+                    if ( ! projectilesList.get(i).alive) {
                         projectilesList.remove(i);
                     }
                 }
@@ -275,17 +280,17 @@ public class GamePanel extends JPanel implements Runnable{
             // PARTICLES
             for (int i = 0; i < particlesList.size(); i++) {
                 if (particlesList.get(i) != null) {
-                    if (particlesList.get(i).alive == true) {
+                    if (particlesList.get(i).alive) {
                         particlesList.get(i).update();
                     }
-                    if (particlesList.get(i).alive == false) {
+                    if ( ! particlesList.get(i).alive) {
                         particlesList.remove(i);
                     }
                 }
             }
-            for (int i = 0; i < iTile.length; i++) {
-                if (iTile[i] != null) {
-                    iTile[i].update();
+            for (int i = 0; i < iTile[1].length; i++) {
+                if (iTile[currentMap][i] != null) {
+                    iTile[currentMap][i].update();
                 }
             }
         }
@@ -297,7 +302,7 @@ public class GamePanel extends JPanel implements Runnable{
     public void drawToTempScreen() {
         // DEBUG
         long drawStart = 0;
-        if (keyH.checkDrawTime == true) {
+        if (keyH.checkDrawTime) {
             drawStart = System.nanoTime();
         }
 
@@ -308,29 +313,44 @@ public class GamePanel extends JPanel implements Runnable{
             tileM.draw(g2); //tiles must be drawn before player, otherwise tiles would override player image
 
             // INTERACTIVE TILE
-            for (int i = 0; i < iTile.length; i++) {
-                if (iTile[i] != null) {
-                    iTile[i].draw(g2);
+            for (int i = 0; i < iTile[1].length; i++) {
+                if (iTile[currentMap][i] != null) {
+                    iTile[currentMap][i].draw(g2);
                 }
             }
 
-            //ADD ENTITIES TOP THE LIST
+            //ADD ENTITIES TO THE LIST
             entityList.add(player);
-            for (Entity npc : npcs) {
-                if (npc != null) {
-                    entityList.add(npc);
+//            for (Entity npc : npcs[1]) {
+//                if (npc != null) {
+//                    entityList.add(npc);
+//                }
+//            }
+            for (int i = 0; i < npcs[1].length; i++) {
+                if (npcs[currentMap][1] != null) {
+                    entityList.add(npcs[currentMap][1]);
                 }
             }
 
-            for (Entity obj : objects) {
-                if (obj != null) {
-                    entityList.add(obj);
+//            for (Entity obj : objects[1]) {
+//                if (obj != null) {
+//                    entityList.add(obj);
+//                }
+//            }
+            for (int i = 0; i < objects[1].length; i++) {
+                if (objects[currentMap][i] != null) {
+                    entityList.add(objects[currentMap][i]);
                 }
             }
 
-            for (Entity monster : monsters) {
-                if (monster != null) {
-                    entityList.add(monster);
+//            for (Entity monster : monsters[1]) {
+//                if (monster != null) {
+//                    entityList.add(monster);
+//                }
+//            }
+            for (int i = 0; i < monsters[1].length; i++) {
+                if (monsters[currentMap][i] != null) {
+                    entityList.add(monsters[currentMap][i]);
                 }
             }
 

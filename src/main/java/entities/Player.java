@@ -65,10 +65,10 @@ public class Player extends Entity implements Archery {
     }
 
     public void setDefaultValues() {
-        worldX = gp.tileSize * 11;
-        worldY = gp.tileSize * 12;
-//        worldX = gp.tileSize * 23;
-//        worldY = gp.tileSize * 21;
+//        worldX = gp.tileSize * 11;
+//        worldY = gp.tileSize * 12;
+        worldX = gp.tileSize * 23;
+        worldY = gp.tileSize * 21;
         speed = 3;
         direction = "down";
         spriteSpeedModifier = 0;
@@ -100,8 +100,6 @@ public class Player extends Entity implements Archery {
     public void setDefaultPosition() {
         worldX = gp.tileSize * 23;
         worldY = gp.tileSize * 21;
-//        worldX = gp.tileSize * 12;
-//        worldY = gp.tileSize * 13;
         direction = "down";
     }
 
@@ -407,12 +405,12 @@ public class Player extends Entity implements Archery {
         if (i != 999) {
 
             // PICKUP ONLY ITEMS
-            if (gp.objects[i].type == EntityType.PICKUP_ONLY) {
+            if (gp.objects[gp.currentMap][i].type == EntityType.PICKUP_ONLY) {
 
-                gp.objects[i].use(this);
-                gp.objects[i] = null;
+                gp.objects[gp.currentMap][i].use(this);
+                gp.objects[gp.currentMap][i] = null;
             }
-            else if (gp.objects[i].type == EntityType.NOT_PICKABLE) {
+            else if (gp.objects[gp.currentMap][i].type == EntityType.NOT_PICKABLE) {
                 // DO NOTHING
             }
             else {
@@ -422,15 +420,16 @@ public class Player extends Entity implements Archery {
 
                 if (inventory.size() != maxInventorySize) {
 
-                    inventory.add(gp.objects[i]);
+                    inventory.add(gp.objects[gp.currentMap][i]);
                     gp.playSE(gp.se.coinSE);
-                    text = "Got a " + gp.objects[i].name + "!";
-                    gp.objects[i] = null;
+                    text = "Got a " + gp.objects[gp.currentMap][i].name + "!";
+//                    gp.objects[gp.currentMap][i] = null;
                 }
                 else {
                     text = "You cannot carry anymore!";
                 }
                 gp.ui.addMessage(text);
+                gp.objects[gp.currentMap][i] = null; //LIKE RYI
             }
         }
     }
@@ -471,7 +470,7 @@ public class Player extends Entity implements Archery {
             if (i != 999) {
                 attackCancelled = true;
                 gp.gameState = gp.dialogueState;
-                gp.npcs[i].speak();
+                gp.npcs[gp.currentMap][i].speak();
                 gp.playSE(gp.se.talkSE);
             }
         }
@@ -481,10 +480,10 @@ public class Player extends Entity implements Archery {
 
         if (i != 999){
 
-            if (invincible == false && gp.monsters[i].dying == false) {
+            if (invincible &&  ! gp.monsters[gp.currentMap][i].dying) {
                 int damage; //statements below are for case when armour is bigger than AP
-                if (defense >= gp.monsters[i].attack) {damage = 0;}
-                else {damage = gp.monsters[i].attack - defense;}
+                if (defense >= gp.monsters[gp.currentMap][i].attack) {damage = 0;}
+                else {damage = gp.monsters[gp.currentMap][i].attack - defense;}
                 life -= damage;
                 gp.playSE(gp.se.hurtSE);
                 invincible = true;
@@ -496,30 +495,30 @@ public class Player extends Entity implements Archery {
 
         if (i != 999) {
 
-            if (gp.monsters[i].invincible == false) {
-                gp.playSE(gp.monsters[i].hitSound);
+            if (gp.monsters[gp.currentMap][i].invincible == false) {
+                gp.playSE(gp.monsters[gp.currentMap][i].hitSound);
                 int damage; //statements below are for case when armour is bigger than AP
-                if (gp.monsters[i].defense >= attack) {damage = 0;}
-                else {damage = attack - gp.monsters[i].defense;}
+                if (gp.monsters[gp.currentMap][i].defense >= attack) {damage = 0;}
+                else {damage = attack - gp.monsters[gp.currentMap][i].defense;}
 
-                gp.monsters[i].life -= damage;
+                gp.monsters[gp.currentMap][i].life -= damage;
                 gp.ui.addMessage(damage + " damage!");
 
                 try {
-                    generateParticle(gp.monsters[i], gp.monsters[i]);
+                    generateParticle(gp.monsters[gp.currentMap][i], gp.monsters[gp.currentMap][i]);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
 
-                gp.monsters[i].invincible = true;
-                gp.monsters[i].damageReaction();
+                gp.monsters[gp.currentMap][i].invincible = true;
+                gp.monsters[gp.currentMap][i].damageReaction();
 
-                if (gp.monsters[i].life <= 0) {
-                    gp.monsters[i].dying = true;
+                if (gp.monsters[gp.currentMap][i].life <= 0) {
+                    gp.monsters[gp.currentMap][i].dying = true;
                     gp.playSE(gp.se.monsterDeath);
-                    exp += gp.monsters[i].exp;
-                    gp.ui.addMessage("Blink killed the " + gp.monsters[i].name + "!");
-                    gp.ui.addMessage("Exp " + gp.monsters[i].exp);
+                    exp += gp.monsters[gp.currentMap][i].exp;
+                    gp.ui.addMessage("Blink killed the " + gp.monsters[gp.currentMap][i].name + "!");
+                    gp.ui.addMessage("Exp " + gp.monsters[gp.currentMap][i].exp);
                     checkLevelUp();
                 }
             }
@@ -530,19 +529,21 @@ public class Player extends Entity implements Archery {
 
     public void damageInteractiveTile (int i){
 
-        if (i != 999 && gp.iTile[i].destructible && gp.iTile[i].isProperWeapon(this)
-                && !gp.iTile[i].invincible) {
+        if (i != 999 && gp.iTile[gp.currentMap][i].destructible &&
+                gp.iTile[gp.currentMap][i].isProperWeapon(this)
+                && !gp.iTile[gp.currentMap][i].invincible) {
 
             gp.playSE(gp.se.hitBushSE);
-            gp.iTile[i].life--;
-            gp.iTile[i].invincible = true;
+            gp.iTile[gp.currentMap][i].life--;
+            gp.iTile[gp.currentMap][i].invincible = true;
 
             // GENERATE PARTICLE
-            generateParticle(gp.iTile[i], gp.iTile[i]);
+            generateParticle(gp.iTile[gp.currentMap][i], gp.iTile[gp.currentMap][i]);
 
-            if (gp.iTile[i].life <= 0) {
-                gp.asSetter.dropObject(gp.iTile[i].getDestroyedForm(), gp.iTile[i].worldX, gp.iTile[i].worldY);
-                gp.iTile[i] = null;
+            if (gp.iTile[gp.currentMap][i].life <= 0) {
+                gp.asSetter.dropObject(gp.iTile[gp.currentMap][i].getDestroyedForm(),
+                        gp.iTile[gp.currentMap][i].worldX, gp.iTile[gp.currentMap][i].worldY);
+                gp.iTile[gp.currentMap][i] = null;
             }
         }
     }
