@@ -2,6 +2,8 @@ package entities;
 
 import root.GamePanel;
 
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.Random;
 
 public class NPC_OldMan extends Entity{

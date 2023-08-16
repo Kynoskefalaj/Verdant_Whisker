@@ -126,9 +126,9 @@ public class GamePanel extends JPanel implements Runnable{
 
 //        setScreenProportions();
         asSetter.setObjects();
-        asSetter.setNPC();
         asSetter.setMonster();
         asSetter.setInteractiveTile();
+        asSetter.setNPC();
 
         playMusic(music.mainTheme);
         gameState = titleState;
@@ -327,8 +327,8 @@ public class GamePanel extends JPanel implements Runnable{
 //                }
 //            }
             for (int i = 0; i < npcs[1].length; i++) {
-                if (npcs[currentMap][1] != null) {
-                    entityList.add(npcs[currentMap][1]);
+                if (npcs[currentMap][i] != null) {
+                    entityList.add(npcs[currentMap][i]);
                 }
             }
 
