@@ -18,6 +18,7 @@ import objects.tools.OBJ_Rope;
 import objects.weapons.OBJ_Emerald_Scimitar;
 import objects.weapons.OBJ_WoodcuttersAxe;
 import tile.interactive.IT_DryBush;
+import tile.big_obstacles.BO_BigHouse;
 import tile.interactive.InteractiveTile;
 
 public class AssetSetter {
@@ -50,6 +51,9 @@ public class AssetSetter {
         putObject(new OBJ_Heart(gp),0, 22, 27);
         putObject(new OBJ_Mana_Crystal(gp),0, 22, 31);
         putObject(new OBJ_WoodcuttersAxe(gp),0,22, 7);
+
+        putObject(new BO_BigHouse(gp),0,9, 34);
+        gp.objects[0][15].worldY += 2;
     }
 
     public void setMonster () {
@@ -63,6 +67,28 @@ public class AssetSetter {
         putMonster(new MON_BlueSlime(gp),0, 34, 42);
         putMonster(new MON_BlueSlime(gp),0, 38, 42);
         putMonster(new MON_SkeletonMage(gp),0, 37, 40);
+    }
+
+    public void setInteractiveTile () {
+        putInteractiveTile(new IT_DryBush(gp),0, 27, 12);
+        putInteractiveTile(new IT_DryBush(gp),0, 28, 12);
+        putInteractiveTile(new IT_DryBush(gp),0, 29, 12);
+        putInteractiveTile(new IT_DryBush(gp),0, 30, 12);
+        putInteractiveTile(new IT_DryBush(gp),0, 31, 12);
+        putInteractiveTile(new IT_DryBush(gp),0, 32, 12);
+        putInteractiveTile(new IT_DryBush(gp),0, 33, 12);
+
+        putInteractiveTile(new IT_DryBush(gp),0, 30, 21);
+        putInteractiveTile(new IT_DryBush(gp),0, 31, 21);
+        putInteractiveTile(new IT_DryBush(gp),0, 32, 21);
+    }
+
+    public void setBigObstacles () {
+
+    }
+
+    public void putBigObstacles () {
+
     }
 
     public void setNPC () {
@@ -115,32 +141,10 @@ public class AssetSetter {
         gp.monsters[mapNum][index] = monster;
     }
 
-    public void putNPC(Entity npc, int mapNum, int colX, int rowY) {
-
-        npc.worldX = gp.tileSize * colX;
-        npc.worldY = gp.tileSize * rowY;
-        gp.npcs[mapNum][k] = npc;
-        k++;
-    }
-
-    public void setInteractiveTile () {
-        putInteractiveTile(new IT_DryBush(gp),0, 27, 12);
-        putInteractiveTile(new IT_DryBush(gp),0, 28, 12);
-        putInteractiveTile(new IT_DryBush(gp),0, 29, 12);
-        putInteractiveTile(new IT_DryBush(gp),0, 30, 12);
-        putInteractiveTile(new IT_DryBush(gp),0, 31, 12);
-        putInteractiveTile(new IT_DryBush(gp),0, 32, 12);
-        putInteractiveTile(new IT_DryBush(gp),0, 33, 12);
-
-        putInteractiveTile(new IT_DryBush(gp),0, 30, 21);
-        putInteractiveTile(new IT_DryBush(gp),0, 31, 21);
-        putInteractiveTile(new IT_DryBush(gp),0, 32, 21);
-    }
-
     public void putInteractiveTile(InteractiveTile interactiveTile, int mapNum, int colX, int rowY) {
 
         int index = 0;
-        for (int i = 0; i < gp.monsters.length; i++) {
+        for (int i = 0; i < gp.iTile[1].length; i++) {
             if (gp.iTile[mapNum][i] == null) {
                 index = i;
                 break;
@@ -149,5 +153,13 @@ public class AssetSetter {
         interactiveTile.worldX = gp.tileSize * colX;
         interactiveTile.worldY = gp.tileSize * rowY;
         gp.iTile[mapNum][index] = interactiveTile;
+    }
+
+    public void putNPC(Entity npc, int mapNum, int colX, int rowY) {
+
+        npc.worldX = gp.tileSize * colX;
+        npc.worldY = gp.tileSize * rowY;
+        gp.npcs[mapNum][k] = npc;
+        k++;
     }
 }

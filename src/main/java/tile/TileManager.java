@@ -108,6 +108,8 @@ public class TileManager {
 
         setUp(59, "BigHouse00", false);
 
+
+
     }
 
     public void setUp(int index, String imageName, boolean collision) {
