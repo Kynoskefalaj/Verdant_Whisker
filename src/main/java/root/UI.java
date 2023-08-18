@@ -30,6 +30,7 @@ public class UI {
     public int titleScreenState = 0;
     public int slotCol = 0;
     public int slotRow = 0;
+    int counter = 0;
     public Options_SubState subState = Options_SubState.TOP;
 
 
@@ -113,6 +114,10 @@ public class UI {
         // GAME OVER
         if (gp.gameState == gp.gameOverState) {
             drawGameOverScreen();
+        }
+        // TRANSITION STATE
+        if (gp.gameState == gp.transitionState) {
+            drawTransition();
         }
     }
 
@@ -1006,6 +1011,24 @@ public class UI {
                 commandNum = 4;
             }
         }
+    }
+
+    public void drawTransition() {
+        counter++;
+
+        g2.setColor(new Color(0,0,0,counter * 5));
+        g2.fillRect(0,0,gp.screenWidth, gp.screenHeight);
+
+        if(counter == 50) {
+            counter = 0;
+            gp.gameState = gp.playState;
+            gp.currentMap = gp.eHandler.tempMap;
+            gp.player.worldX = gp.tileSize * gp.eHandler.tempCol;
+            gp.player.worldY = gp.tileSize * gp.eHandler.tempRow;
+            gp.eHandler.prevEventX = gp.player.worldX;
+            gp.eHandler.prevEventY = gp.player.worldY;
+        }
+
     }
 
     public int getItemIndexOnSlot () {
