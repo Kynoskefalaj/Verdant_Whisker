@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public abstract class Entity {
@@ -75,6 +76,8 @@ public abstract class Entity {
     public Projectile projectile;
 
 //    ITEM ATTRIBUTES
+    public ArrayList<Entity> inventory = new ArrayList<>();
+    public final int maxInventorySize = 15;
     public int value;
     public int attackValue;
     public int defenseValue;

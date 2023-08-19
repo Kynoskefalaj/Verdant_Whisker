@@ -30,9 +30,6 @@ public class Player extends Entity implements Archery {
     int spriteSpeedModifier;
 
     public Entity[] equipment = new Entity[9];
-    public ArrayList<Entity> inventory = new ArrayList<>();
-    public final int maxInventorySize = 15;
-
 
     public Player(GamePanel gp, KeyHandler keyH){
         super(gp); // CALLING THE SUPER CLASS CONSTRUCTOR

@@ -1,6 +1,7 @@
 package root;
 
 import entities.Entity;
+import entities.NPC_Merchant;
 import entities.NPC_OldMan;
 import monsters.MON_BlueSlime;
 import monsters.MON_SkeletonMage;
@@ -97,6 +98,7 @@ public class AssetSetter {
 
         //Put
         putNPC(new NPC_OldMan(gp),0,21,21);
+        putNPC(new NPC_Merchant(gp),1,12,7);
     }
 
     public void putObject(Entity object, int mapNum, int colX, int rowY) {
