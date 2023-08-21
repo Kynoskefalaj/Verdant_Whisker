@@ -4,6 +4,7 @@ import objects.consumables.OBJ_Health_Potion;
 import objects.consumables.OBJ_Mana_Potion;
 import objects.consumables.OBJ_Stamina_Potion;
 import root.GamePanel;
+import root.Options_SubState;
 
 public class NPC_Merchant extends Entity{
 
@@ -88,7 +89,7 @@ public class NPC_Merchant extends Entity{
         }
 
         spriteCounter++;
-        if (spriteCounter > 12) {
+        if (spriteCounter > 24) {
             if (spriteNum == 1) {
                 spriteNum = 2;
             } else if (spriteNum == 2) {
@@ -100,17 +101,13 @@ public class NPC_Merchant extends Entity{
             }
             spriteCounter = 0;
         }
+    }
 
-        if (invincible == true) {
-            invincibleCounter++;
-            if (invincibleCounter > 40) {
-                invincible = false;
-                invincibleCounter = 0;
-            }
-        }
-        if (shotAvailableCounter < 30) {
-            shotAvailableCounter++;
-        }
+    public void speak() {
+        super.speak();
+        gp.gameState = gp.tradeState;
+        gp.ui.npc = this;
+        gp.ui.subState = Options_SubState.SELECT;
     }
 
 }

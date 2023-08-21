@@ -6,7 +6,10 @@ public enum Options_SubState {
     CONTROLS(2),
     END_GAME(3),
     GRAPHICS(4),
-    PROPORTIONS(5);
+    PROPORTIONS(5),
+    SELECT(6),
+    BUY(7),
+    SELL(8);
 
     private final int value;
 

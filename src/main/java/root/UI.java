@@ -31,6 +31,8 @@ public class UI {
     public int slotCol = 0;
     public int slotRow = 0;
     int counter = 0;
+    public Entity npc;
+
     public Options_SubState subState = Options_SubState.TOP;
 
 
@@ -118,6 +120,10 @@ public class UI {
         // TRANSITION STATE
         if (gp.gameState == gp.transitionState) {
             drawTransition();
+        }
+        // TRADE STATE
+        if (gp.gameState == gp.tradeState) {
+            drawTradeScreen();
         }
     }
 
@@ -418,9 +424,9 @@ public class UI {
     public void drawDialogueScreen () {
 
         //WINDOW
-        int x = gp.tileSize * 2;
+        int x = gp.tileSize * 3;
         int y = gp.tileSize / 2;
-        int width = gp.screenWidth - (gp.tileSize * 4);
+        int width = gp.screenWidth - (gp.tileSize * 6);
         int height = gp.tileSize * 4;
 
         drawSubWindow(x, y, width, height);
@@ -1106,5 +1112,36 @@ public class UI {
         g2.setColor(Color.WHITE);
         gp.uTool.drawEnterDelimitedString(strCoordinates, startX - 2, startY - 2,
                 fontSize + 2, g2);
+    }
+
+    public void drawTradeScreen() {
+
+        switch(subState) {
+            case SELECT: trade_select(); break;
+            case BUY: trade_buy(); break;
+            case SELL: trade_sell(); break;
+        }
+
+    }
+
+    public void trade_select() {
+
+        drawDialogueScreen();
+
+        // DRAW WINDOW
+        int width = gp.tileSize * 3;
+        int height = gp.tileSize * 7/2;
+        int x = gp.screenWidth - width - gp.tileSize * 3;
+        int y = gp.tileSize * 9/2;
+        drawSubWindow(x, y, width, height);
+
+    }
+
+    public void trade_buy() {
+
+    }
+
+    public void trade_sell() {
+
     }
 }

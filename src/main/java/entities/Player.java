@@ -62,10 +62,11 @@ public class Player extends Entity implements Archery {
     }
 
     public void setDefaultValues() {
-//        worldX = gp.tileSize * 11;
-//        worldY = gp.tileSize * 12;
-        worldX = gp.tileSize * 23;
-        worldY = gp.tileSize * 21;
+
+        worldX = gp.tileSize * 11;
+        worldY = gp.tileSize * 8;
+//        worldX = gp.tileSize * 23;
+//        worldY = gp.tileSize * 21;
         speed = 3;
         direction = "down";
         spriteSpeedModifier = 0;

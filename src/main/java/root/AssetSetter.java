@@ -161,7 +161,10 @@ public class AssetSetter {
 
         npc.worldX = gp.tileSize * colX;
         npc.worldY = gp.tileSize * rowY;
-        gp.npcs[mapNum][k] = npc;
-        k++;
+        for (int i = 0; i < gp.npcs[1].length; i++) {
+            if (gp.npcs[mapNum][i] == null) {
+                gp.npcs[mapNum][i] = npc;
+            }
+        }
     }
 }

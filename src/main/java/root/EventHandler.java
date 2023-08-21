@@ -1,5 +1,7 @@
 package root;
 
+import entities.Entity;
+
 public class EventHandler {
 
     GamePanel gp;
@@ -59,6 +61,7 @@ public class EventHandler {
             else if (hit(0,20, 12, "left")) {teleport(gp.dialogueState, 37, 10);}
             else if (hit(0,10,39,"any")) {transition(1, 11, 13);}
             else if (hit(1,11,13,"any")) {transition(0, 10, 39);}
+            else if (hit(1, 12, 9, "up")) {speak(gp.npcs[1][0]);}
         }
 
     }
@@ -132,5 +135,14 @@ public class EventHandler {
         canTouchEvent = false;
 
         gp.playSE(gp.se.stairsSE);
+    }
+
+    public void speak(Entity entity) {
+
+        if(gp.keyH.enterPressed) {
+            gp.gameState = gp.dialogueState;
+            gp.player.attackCancelled = true;
+            entity.speak();
+        }
     }
 }
