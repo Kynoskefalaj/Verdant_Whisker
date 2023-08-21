@@ -24,9 +24,6 @@ import tile.interactive.InteractiveTile;
 
 public class AssetSetter {
     GamePanel gp;
-    int j = 0;
-
-    int k = 0;
 
     public AssetSetter(GamePanel gp) {
         this.gp = gp;
@@ -159,11 +156,13 @@ public class AssetSetter {
 
     public void putNPC(Entity npc, int mapNum, int colX, int rowY) {
 
+        boolean firstlyAdded = true;
         npc.worldX = gp.tileSize * colX;
         npc.worldY = gp.tileSize * rowY;
         for (int i = 0; i < gp.npcs[1].length; i++) {
-            if (gp.npcs[mapNum][i] == null) {
+            if (gp.npcs[mapNum][i] == null && firstlyAdded) {
                 gp.npcs[mapNum][i] = npc;
+                firstlyAdded = false;
             }
         }
     }

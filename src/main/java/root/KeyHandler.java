@@ -59,6 +59,34 @@ public class KeyHandler implements KeyListener{
         else if (gp.gameState == gp.gameOverState) {
             gameOverState(code);
         }
+
+        // TRADE STATE
+        else if (gp.gameState == gp.tradeState) {
+            tradeState(code);
+        }
+    }
+
+    public void tradeState(int code) {
+        if (code == KeyEvent.VK_ENTER) {
+            enterPressed = true;
+        }
+        if (gp.ui.subState == Options_SubState.SELECT) {
+            if (code == KeyEvent.VK_W || code == KeyEvent.VK_UP) {
+                gp.ui.commandNum--;
+                if(gp.ui.commandNum < 0) {
+                    gp.ui.commandNum = 2;
+                }
+                gp.playSE(gp.se.gui4SE);
+            }
+            if (code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN) {
+                gp.ui.commandNum++;
+                if(gp.ui.commandNum > 2) {
+                    gp.ui.commandNum = 0;
+                }
+                gp.playSE(gp.se.gui4SE);
+            }
+        }
+
     }
 
     public void titleState (int code) {
@@ -209,14 +237,14 @@ public class KeyHandler implements KeyListener{
             case PROPORTIONS: maxCommandNum = 3; break;
         }
 
-        if (code == KeyEvent.VK_W) {
+        if (code == KeyEvent.VK_W || code == KeyEvent.VK_UP) {
             gp.ui.commandNum--;
             gp.playSE(gp.se.gui1SE);
             if (gp.ui.commandNum < 0) {
                 gp.ui.commandNum = maxCommandNum;
             }
         }
-        if (code == KeyEvent.VK_S) {
+        if (code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN) {
             gp.ui.commandNum++;
             gp.playSE(gp.se.gui1SE);
             if (gp.ui.commandNum > maxCommandNum) {
@@ -276,13 +304,13 @@ public class KeyHandler implements KeyListener{
             gp.playSE(gp.se.cursorSE);
         }
 
-        if (code == KeyEvent.VK_W) {
+        if (code == KeyEvent.VK_W || code == KeyEvent.VK_UP) {
             if (gp.ui.slotRow != 0) {
                 gp.ui.slotRow--;
                 gp.playSE(gp.se.cursorSE);
             }
         }
-        if (code == KeyEvent.VK_S) {
+        if (code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN) {
             if (gp.ui.slotRow != 4) {
                 gp.ui.slotRow++;
                 gp.playSE(gp.se.cursorSE);
@@ -306,7 +334,7 @@ public class KeyHandler implements KeyListener{
     }
 
     private void gameOverState(int code) {
-        if(code == KeyEvent.VK_W) {
+        if(code == KeyEvent.VK_W || code == KeyEvent.VK_UP) {
             gp.ui.commandNum--;
             if(gp.ui.commandNum < 0) {
                 gp.ui.commandNum = 1;
@@ -314,7 +342,7 @@ public class KeyHandler implements KeyListener{
             gp.playSE(gp.se.gui3SE);
         }
 
-        if(code == KeyEvent.VK_S) {
+        if(code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN) {
             gp.ui.commandNum++;
             if(gp.ui.commandNum > 1) {
                 gp.ui.commandNum = 0;

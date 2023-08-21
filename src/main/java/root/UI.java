@@ -140,7 +140,7 @@ public class UI {
         text = "Game Over";
         // Shadow
         g2.setColor(Color.black);
-        x = getXforCenteredText(text);
+        x = getXforScreenCenteredText(text);
         y = gp.tileSize * 5;
         g2.drawString(text, x, y);
         // Main
@@ -150,7 +150,7 @@ public class UI {
         //Retry
         g2.setFont(g2.getFont().deriveFont(50f));
         text = "Retry";
-        x = getXforCenteredText(text);
+        x = getXforScreenCenteredText(text);
         y += gp.tileSize * 3;
         g2.drawString(text, x, y);
         if(commandNum == 0) {
@@ -159,7 +159,7 @@ public class UI {
 
         //Back to the screen
         text = "Quit";
-        x = getXforCenteredText(text);
+        x = getXforScreenCenteredText(text);
         y += 55;
         g2.drawString(text, x, y);
         if(commandNum == 1  ) {
@@ -310,7 +310,7 @@ public class UI {
             // MAIN TITLE
             g2.setFont(g2.getFont().deriveFont(Font.BOLD, 96));
             String text = "VERDANT WHISKER";
-            int x = getXforCenteredText(text);
+            int x = getXforScreenCenteredText(text);
             int y = gp.tileSize * 3;
 
             // SHADOW
@@ -323,7 +323,7 @@ public class UI {
             // SUBTITLE
             text = "The tale of Emerald Tail";
             g2.setFont(g2.getFont().deriveFont(Font.PLAIN,62));
-            x = getXforCenteredText(text);
+            x = getXforScreenCenteredText(text);
             y += 76;
 
             g2.setColor(Color.white);
@@ -339,7 +339,7 @@ public class UI {
             g2.setFont(g2.getFont().deriveFont(Font.BOLD, 48));
 
             text = "NEW GAME";
-            x = getXforCenteredText(text);
+            x = getXforScreenCenteredText(text);
             y += gp.tileSize * 3;
             g2.drawString(text, x, y);
             if (commandNum == 0) {
@@ -347,7 +347,7 @@ public class UI {
             }
 
             text = "LOAD GAME";
-            x = getXforCenteredText(text);
+            x = getXforScreenCenteredText(text);
             y += gp.tileSize;
             g2.drawString(text, x, y);
             if (commandNum == 1) {
@@ -355,7 +355,7 @@ public class UI {
             }
 
             text = "EXIT";
-            x = getXforCenteredText(text);
+            x = getXforScreenCenteredText(text);
             y += gp.tileSize;
             g2.drawString(text, x, y);
             if (commandNum == 2) {
@@ -372,12 +372,12 @@ public class UI {
             g2.setFont(g2.getFont().deriveFont(42F));
 
             String text = "Select your class";
-            int x = getXforCenteredText(text);
+            int x = getXforScreenCenteredText(text);
             int y = gp.tileSize * 3;
             g2.drawString(text, x, y);
 
             text = "Fighter";
-            x = getXforCenteredText(text);
+            x = getXforScreenCenteredText(text);
             y += gp.tileSize * 2;
             g2.drawString(text, x, y);
             if (commandNum == 0) {
@@ -385,7 +385,7 @@ public class UI {
             }
 
             text = "Thief";
-            x = getXforCenteredText(text);
+            x = getXforScreenCenteredText(text);
             y += gp.tileSize;
             g2.drawString(text, x, y);
             if (commandNum == 1) {
@@ -393,7 +393,7 @@ public class UI {
             }
 
             text = "Sorcerer";
-            x = getXforCenteredText(text);
+            x = getXforScreenCenteredText(text);
             y += gp.tileSize;
             g2.drawString(text, x, y);
             if (commandNum == 2) {
@@ -401,7 +401,7 @@ public class UI {
             }
 
             text = "Back";
-            x = getXforCenteredText(text);
+            x = getXforScreenCenteredText(text);
             y += gp.tileSize * 2;
             g2.drawString(text, x, y);
             if (commandNum == 3) {
@@ -414,7 +414,7 @@ public class UI {
 
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 80F));
         String text = "PAUSED";
-        int x = getXforCenteredText(text);
+        int x = getXforScreenCenteredText(text);
         int y = gp.screenHeight/2;
 
         g2.drawString(text, x, y);
@@ -686,13 +686,13 @@ public class UI {
 
         // TITLE
         String text = "Proportions";
-        textX = getXforCenteredText(text);
+        textX = getXforScreenCenteredText(text);
         textY = frameY + gp.tileSize;
         g2.drawString(text, textX, textY);
 
         // 16 : 9
         text = "16 : 9";
-        textX = getXforCenteredText(text);
+        textX = getXforScreenCenteredText(text);
         textY += gp.tileSize * 2;
         g2.drawString(text, textX, textY);
         if(commandNum == 0) {
@@ -713,7 +713,7 @@ public class UI {
 
         // 21 : 9
         text = "21 : 9";
-        textX = getXforCenteredText(text);
+        textX = getXforScreenCenteredText(text);
         textY += gp.tileSize;
         g2.drawString(text, textX, textY);
         if(commandNum == 1) {
@@ -732,7 +732,7 @@ public class UI {
 
         // 3 : 2
         text = "3 : 2";
-        textX = getXforCenteredText(text);
+        textX = getXforScreenCenteredText(text);
         textY += gp.tileSize;
         g2.drawString(text, textX, textY);
         if(commandNum == 2) {
@@ -767,7 +767,7 @@ public class UI {
 
         // TITLE
         String text = "Graphics";
-        textX = getXforCenteredText(text);
+        textX = getXforScreenCenteredText(text);
         textY = frameY + gp.tileSize;
         g2.drawString(text, textX, textY);
 
@@ -827,7 +827,7 @@ public class UI {
 
         // TITLE
         String text = "Options";
-        textX = getXforCenteredText(text);
+        textX = getXforScreenCenteredText(text);
         textY = frameY + gp.tileSize;
         g2.drawString(text, textX, textY);
 
@@ -915,7 +915,7 @@ public class UI {
         currentDialogue = "The change will take \neffect after restarting \nthe game";
 
         for(String line: currentDialogue.split("\n")) {
-            textX = getXforCenteredText(line);
+            textX = getXforScreenCenteredText(line);
             g2.drawString(line, textX, textY);
             textY += 40;
         }
@@ -924,7 +924,7 @@ public class UI {
         textY += frameY + gp.tileSize * 3;
 
         String text = "Back";
-        textX = getXforCenteredText(text);
+        textX = getXforScreenCenteredText(text);
         g2.drawString(text, textX, textY);
         if (commandNum == 0) {
             g2.drawString(">", textX - 25, textY);
@@ -941,7 +941,7 @@ public class UI {
 
         // TITLE
         String text = "Control";
-        textX = getXforCenteredText(text);
+        textX = getXforScreenCenteredText(text);
         textY = frameY + gp.tileSize;
         g2.drawString(text, textX, textY);
 
@@ -985,14 +985,14 @@ public class UI {
         currentDialogue = "Quit the game and \nreturn to the title screen?";
 
         for (String line: currentDialogue.split("\n")) {
-            textX = getXforCenteredText(line);
+            textX = getXforScreenCenteredText(line);
             g2.drawString(line, textX, textY);
             textY += 40;
         }
 
         // YES
         String text = "Yes";
-        textX = getXforCenteredText(text);
+        textX = getXforScreenCenteredText(text);
         textY += gp.tileSize * 3;
         g2.drawString(text, textX, textY);
         if (commandNum == 0) {
@@ -1007,7 +1007,7 @@ public class UI {
 
         // NO
         text = "No";
-        textX = getXforCenteredText(text);
+        textX = getXforScreenCenteredText(text);
         textY += gp.tileSize;
         g2.drawString(text, textX, textY);
         if (commandNum == 1) {
@@ -1069,10 +1069,17 @@ public class UI {
         }
     }
 
-    public int getXforCenteredText (String text) {
+    public int getXforScreenCenteredText(String text) {
 
         int length = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
         int x = gp.screenWidth/2 - length/2;
+        return x;
+    }
+
+    public int getXforCenteredText (String text, int widthCenter) {
+
+        int length = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+        int x = widthCenter/2 - length/2;
         return x;
     }
 
@@ -1129,15 +1136,52 @@ public class UI {
         drawDialogueScreen();
 
         // DRAW WINDOW
-        int width = gp.tileSize * 3;
+        int width = gp.tileSize * 5/2;
         int height = gp.tileSize * 7/2;
         int x = gp.screenWidth - width - gp.tileSize * 3;
         int y = gp.tileSize * 9/2;
         drawSubWindow(x, y, width, height);
 
+        // DRAW TEXT
+        y += gp.tileSize * 7/8;
+        String text = "Buy";
+        int centeredX = x + getXforCenteredText(text, width);
+        if (commandNum == 0) {
+            g2.drawString(">", x + 24, y);
+            if(gp.keyH.enterPressed) {
+                subState = Options_SubState.BUY;
+            }
+        }
+
+        g2.drawString(text, centeredX, y);
+        y += gp.tileSize;
+        text = "Sell";
+        centeredX = x + getXforCenteredText(text, width);
+        if (commandNum == 1) {
+            g2.drawString(">", x + 24, y);
+            if(gp.keyH.enterPressed) {
+                subState = Options_SubState.SELL;
+            }
+        }
+        g2.drawString(text, centeredX, y);
+
+        y += gp.tileSize;
+        text = "Leave";
+        centeredX = x + getXforCenteredText(text, width);
+        if (commandNum == 2) {
+            g2.drawString(">", x + 24, y);
+            if(gp.keyH.enterPressed) {
+                subState = Options_SubState.TOP;
+                gp.gameState = gp.dialogueState;
+                currentDialogue = "Come again, hehehe...";
+            }
+        }
+        g2.drawString(text, centeredX, y);
     }
 
     public void trade_buy() {
+
+
 
     }
 
