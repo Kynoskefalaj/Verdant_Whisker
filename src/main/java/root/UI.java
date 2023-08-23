@@ -20,7 +20,6 @@ public class UI {
     BufferedImage stWheel8, stWheel7, stWheel6, stWheel5, stWheel4, stWheel3, stWheel2, stWheel1, stWheel0;
     BufferedImage crystal_full, crystal_blank;
     public boolean messageOn = false;
-    boolean test = false;
 
     ArrayList<String> message = new ArrayList<>();
     ArrayList<Integer> messageCounter = new ArrayList<>();
@@ -77,9 +76,6 @@ public class UI {
     public void draw (Graphics2D g2) {
         this.g2 = g2; // We do it to use g2 in other methods in this class
 
-        if (test) {
-            System.out.println("test");
-        }
         g2.setFont(maruMonica);
         g2.setColor(Color.white);
 
@@ -127,7 +123,7 @@ public class UI {
         }
 
         // TRADE STATE
-        if (gp.gameState == gp.tradeState) {
+        else if (gp.gameState == gp.tradeState) {
             drawTradeScreen();
         }
     }
@@ -1133,6 +1129,7 @@ public class UI {
             case BUY: trade_buy(); break;
             case SELL: trade_sell(); break;
         }
+        gp.keyH.enterPressed = false;
 
     }
 
@@ -1171,6 +1168,10 @@ public class UI {
             }
             g2.drawString(text, centeredX, y);
 
+            if (gp.keyH.escapePressed) {
+                gp.gameState = gp.playState;
+            }
+
             y += gp.tileSize;
             text = "Leave";
             centeredX = x + getXforCenteredText(text, width);
@@ -1178,10 +1179,8 @@ public class UI {
             if (commandNum == 2) {
                 g2.drawString(">", x + 24, y);
                 if(gp.keyH.enterPressed) {
-                    subState = Options_SubState.TOP;
                     commandNum = 0;
                     gp.gameState = gp.dialogueState;
-                    test = true;
 
                     currentDialogue = "Come again, hehehe...";
                 }
