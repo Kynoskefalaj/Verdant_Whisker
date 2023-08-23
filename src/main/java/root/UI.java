@@ -20,6 +20,7 @@ public class UI {
     BufferedImage stWheel8, stWheel7, stWheel6, stWheel5, stWheel4, stWheel3, stWheel2, stWheel1, stWheel0;
     BufferedImage crystal_full, crystal_blank;
     public boolean messageOn = false;
+    boolean test = false;
 
     ArrayList<String> message = new ArrayList<>();
     ArrayList<Integer> messageCounter = new ArrayList<>();
@@ -76,6 +77,9 @@ public class UI {
     public void draw (Graphics2D g2) {
         this.g2 = g2; // We do it to use g2 in other methods in this class
 
+        if (test) {
+            System.out.println("test");
+        }
         g2.setFont(maruMonica);
         g2.setColor(Color.white);
 
@@ -121,6 +125,7 @@ public class UI {
         if (gp.gameState == gp.transitionState) {
             drawTransition();
         }
+
         // TRADE STATE
         if (gp.gameState == gp.tradeState) {
             drawTradeScreen();
@@ -1133,50 +1138,55 @@ public class UI {
 
     public void trade_select() {
 
-        drawDialogueScreen();
+        if (gp.gameState == gp.tradeState) {
+            drawDialogueScreen();
 
-        // DRAW WINDOW
-        int width = gp.tileSize * 5/2;
-        int height = gp.tileSize * 7/2;
-        int x = gp.screenWidth - width - gp.tileSize * 3;
-        int y = gp.tileSize * 9/2;
-        drawSubWindow(x, y, width, height);
+            // DRAW WINDOW
+            int width = gp.tileSize * 5/2;
+            int height = gp.tileSize * 7/2;
+            int x = gp.screenWidth - width - gp.tileSize * 3;
+            int y = gp.tileSize * 9/2;
+            drawSubWindow(x, y, width, height);
 
-        // DRAW TEXT
-        y += gp.tileSize * 7/8;
-        String text = "Buy";
-        int centeredX = x + getXforCenteredText(text, width);
-        if (commandNum == 0) {
-            g2.drawString(">", x + 24, y);
-            if(gp.keyH.enterPressed) {
-                subState = Options_SubState.BUY;
+            // DRAW TEXT
+            y += gp.tileSize * 7/8;
+            String text = "Buy";
+            int centeredX = x + getXforCenteredText(text, width);
+            if (commandNum == 0) {
+                g2.drawString(">", x + 24, y);
+                if(gp.keyH.enterPressed) {
+                    subState = Options_SubState.BUY;
+                }
+            }
+
+            g2.drawString(text, centeredX, y);
+            y += gp.tileSize;
+            text = "Sell";
+            centeredX = x + getXforCenteredText(text, width);
+            if (commandNum == 1) {
+                g2.drawString(">", x + 24, y);
+                if(gp.keyH.enterPressed) {
+                    subState = Options_SubState.SELL;
+                }
+            }
+            g2.drawString(text, centeredX, y);
+
+            y += gp.tileSize;
+            text = "Leave";
+            centeredX = x + getXforCenteredText(text, width);
+            g2.drawString(text, centeredX, y);
+            if (commandNum == 2) {
+                g2.drawString(">", x + 24, y);
+                if(gp.keyH.enterPressed) {
+                    subState = Options_SubState.TOP;
+                    commandNum = 0;
+                    gp.gameState = gp.dialogueState;
+                    test = true;
+
+                    currentDialogue = "Come again, hehehe...";
+                }
             }
         }
-
-        g2.drawString(text, centeredX, y);
-        y += gp.tileSize;
-        text = "Sell";
-        centeredX = x + getXforCenteredText(text, width);
-        if (commandNum == 1) {
-            g2.drawString(">", x + 24, y);
-            if(gp.keyH.enterPressed) {
-                subState = Options_SubState.SELL;
-            }
-        }
-        g2.drawString(text, centeredX, y);
-
-        y += gp.tileSize;
-        text = "Leave";
-        centeredX = x + getXforCenteredText(text, width);
-        if (commandNum == 2) {
-            g2.drawString(">", x + 24, y);
-            if(gp.keyH.enterPressed) {
-                subState = Options_SubState.TOP;
-                gp.gameState = gp.dialogueState;
-                currentDialogue = "Come again, hehehe...";
-            }
-        }
-        g2.drawString(text, centeredX, y);
     }
 
     public void trade_buy() {
