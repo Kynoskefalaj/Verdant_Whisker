@@ -39,7 +39,7 @@ public class GamePanel extends JPanel implements Runnable{
     public ScreenProportions screenProportions;
 
 //    FPS
-    int FPS = 60;
+    public int FPS = 60;
 
 //    SYSTEM
     TileManager tileM;

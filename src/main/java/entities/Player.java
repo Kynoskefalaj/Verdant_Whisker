@@ -28,6 +28,7 @@ public class Player extends Entity implements Archery {
     public boolean attackCancelled = false;
 
     int spriteSpeedModifier;
+    int notificationCounter = 0;
 
     public Entity[] equipment = new Entity[9];
 
@@ -421,13 +422,18 @@ public class Player extends Entity implements Archery {
                     inventory.add(gp.objects[gp.currentMap][i]);
                     gp.playSE(gp.se.coinSE);
                     text = "Got a " + gp.objects[gp.currentMap][i].name + "!";
-//                    gp.objects[gp.currentMap][i] = null;
+                    gp.objects[gp.currentMap][i] = null;
+                    gp.ui.addMessage(text);
                 }
                 else {
-                    text = "You cannot carry anymore!";
+                    notificationCounter++;
+                    if (notificationCounter > gp.FPS/2) {
+                        notificationCounter = 0;
+                        text = "You cannot carry anymore!";
+                        gp.ui.addMessage(text);
+                    }
+
                 }
-                gp.ui.addMessage(text);
-                gp.objects[gp.currentMap][i] = null; //LIKE RYI
             }
         }
     }
