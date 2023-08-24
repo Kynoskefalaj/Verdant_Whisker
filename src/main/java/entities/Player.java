@@ -576,9 +576,9 @@ public class Player extends Entity implements Archery {
         }
     }
 
-    public void selectItem () {
+    public void selectItem (Entity entity) {
 
-        int itemIndex = gp.ui.getItemIndexOnSlot();
+        int itemIndex = gp.ui.getItemIndexOnSlot(gp.ui.playerSlotCol, gp.ui.playerSlotRow);
 
         if (itemIndex < inventory.size ()) {
 

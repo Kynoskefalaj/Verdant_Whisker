@@ -108,6 +108,8 @@ public class TileManager {
 
         setUp(59, "BigHouse00", false);
 
+        setUp(60, "path/Path_hole", false);
+
 
 
     }
