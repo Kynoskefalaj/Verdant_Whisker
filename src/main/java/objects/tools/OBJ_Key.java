@@ -12,6 +12,7 @@ public class OBJ_Key extends Entity {
         image1 = setUp("/objects/key01", gp.tileSize, gp.tileSize);
         down1 = image1;
         description = "[" + name + "]" + "\nIt opens the door.";
+        price = 50;
 
         type = EntityType.KEY;
     }

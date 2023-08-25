@@ -17,6 +17,7 @@ public class OBJ_Wooden_Shield extends Entity {
         description = "[" + name + "]\n" +
                 "Defence: " + defenseValue + " \n\n" +
                 "An old shield.";
+        price = 150;
 
         type = EntityType.SHIELD;
     }

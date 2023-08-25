@@ -15,6 +15,7 @@ public class OBJ_Paladin_Shield extends Entity {
         description = "[" + name + "]\n" +
                 "Defence: " + defenseValue + " \n\n" +
                 "Holy Shield!";
+        price = 900;
 
         type = EntityType.SHIELD;
     }

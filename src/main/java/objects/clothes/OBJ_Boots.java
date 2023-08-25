@@ -13,6 +13,7 @@ public class OBJ_Boots extends Entity {
         image1 = setUp("/objects/boots01", gp.tileSize, gp.tileSize);
         down1 = image1;
         description = "[" + name + "]" + "\nWhat a fancy colour.";
+        price = 75;
 
         type = EntityType.BOOTS;
     }

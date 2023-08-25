@@ -11,6 +11,7 @@ public class OBJ_Sacred_Necklace extends Entity {
         name = "Sacred Necklace";
         image1 = setUp("/objects/Sacred_Necklace", gp.tileSize, gp.tileSize);
         down1 = image1;
+        price = 80;
 
         type = EntityType.NECKLACE;
     }

@@ -11,6 +11,7 @@ public class OBJ_Rope extends Entity {
         name = "Rope";
         image1 = setUp("/objects/Rope", gp.tileSize, gp.tileSize);
         down1 = image1;
+        price = 18;
 
         type = EntityType.TOOLS;
     }

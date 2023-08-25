@@ -16,6 +16,7 @@ public class OBJ_Stamina_Potion extends Entity {
         type = EntityType.CONSUMABLE;
         name = "Stamina Potion";
         value = 16;
+        price = 4;
 
         description = String.format("[%s]\nRecovers %d %s.", name, value, recoveryType);
         image1 = setUp("/objects/consumables/Stamina_Potion", gp.tileSize, gp.tileSize);

@@ -12,6 +12,7 @@ public class OBJ_Pouch extends Entity {
         image1 = setUp("/objects/Pouch", gp.tileSize, gp.tileSize);
         down1 = image1;
         description = "[" + name + "]" + "\nSix additional slots.";
+        price = 15;
 
         type = EntityType.CONTAINER;
     }

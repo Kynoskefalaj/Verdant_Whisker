@@ -11,6 +11,7 @@ public class OBJ_Leather_Backpack extends Entity {
         name = "Leather Backpack";
         image1 = setUp("/objects/Leather_Backpack", gp.tileSize, gp.tileSize);
         down1 = image1;
+        price = 25;
 
         type = EntityType.CONTAINER;
     }

@@ -87,11 +87,16 @@ public class KeyHandler implements KeyListener{
             }
         }
         if (gp.ui.subState == Options_SubState.BUY) {
+            playerInventory(code);
+            if(code == KeyEvent.VK_ESCAPE) {
+                gp.ui.subState = Options_SubState.SELECT;
+            }
+        }
+        if (gp.ui.subState == Options_SubState.SELL) {
             npcInventory(code);
             if(code == KeyEvent.VK_ESCAPE) {
                 gp.ui.subState = Options_SubState.SELECT;
             }
-
         }
     }
 

@@ -82,7 +82,7 @@ public class Player extends Entity implements Archery {
         strength = 1;
         exp = 0;
         nextLevelExp = 5;
-        coin = 0;
+        coin = 40;
         currentWeapon = new OBJ_Worn_Needle(gp);
         currentShield = new OBJ_Wooden_Shield(gp);
         projectile = new OBJ_ArcaneMissile(gp);

@@ -83,6 +83,8 @@ public abstract class Entity {
     public int defenseValue;
     public String description = "";
     public int useCost;
+    public int price;
+    public double margin;
 
     // TYPE
 public EntityType type;

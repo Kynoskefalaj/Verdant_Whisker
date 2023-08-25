@@ -9,7 +9,8 @@ public enum Options_SubState {
     PROPORTIONS(5),
     SELECT(6),
     BUY(7),
-    SELL(8);
+    SELL(8),
+    INVENTORY(9);
 
     private final int value;
 

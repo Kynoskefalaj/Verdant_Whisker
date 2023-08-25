@@ -14,6 +14,7 @@ public class NPC_Merchant extends Entity{
         direction = "down";
         speed = 1;
         name = "Merchant";
+        margin = 1.2;
 
         getImage();
         setDialogue();
