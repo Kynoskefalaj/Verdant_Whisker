@@ -86,14 +86,14 @@ public class KeyHandler implements KeyListener{
                 gp.playSE(gp.se.gui4SE);
             }
         }
-        if (gp.ui.subState == Options_SubState.BUY) {
-            playerInventory(code);
+        else if (gp.ui.subState == Options_SubState.BUY) {
+            npcInventory(code);
             if(code == KeyEvent.VK_ESCAPE) {
                 gp.ui.subState = Options_SubState.SELECT;
             }
         }
-        if (gp.ui.subState == Options_SubState.SELL) {
-            npcInventory(code);
+        else if (gp.ui.subState == Options_SubState.SELL) {
+            playerInventory(code);
             if(code == KeyEvent.VK_ESCAPE) {
                 gp.ui.subState = Options_SubState.SELECT;
             }
@@ -108,19 +108,19 @@ public class KeyHandler implements KeyListener{
                 gp.playSE(gp.se.cursorSE);
             }
         }
-        if (code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN) {
+        else if (code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN) {
             if (gp.ui.playerSlotRow != 4) {
                 gp.ui.playerSlotRow++;
                 gp.playSE(gp.se.cursorSE);
             }
         }
-        if (code == KeyEvent.VK_A) {
+        else if (code == KeyEvent.VK_A || code == KeyEvent.VK_LEFT) {
             if (gp.ui.playerSlotCol != 0) {
                 gp.ui.playerSlotCol--;
                 gp.playSE(gp.se.cursorSE);
             }
         }
-        if (code == KeyEvent.VK_D) {
+        else if (code == KeyEvent.VK_D || code == KeyEvent.VK_RIGHT) {
             if (gp.ui.playerSlotCol != 2) {
                 gp.ui.playerSlotCol++;
                 gp.playSE(gp.se.cursorSE);
@@ -136,19 +136,19 @@ public class KeyHandler implements KeyListener{
                 gp.playSE(gp.se.cursorSE);
             }
         }
-        if (code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN) {
+        else if (code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN) {
             if (gp.ui.npcSlotRow != 4) {
                 gp.ui.npcSlotRow++;
                 gp.playSE(gp.se.cursorSE);
             }
         }
-        if (code == KeyEvent.VK_A) {
+        else if (code == KeyEvent.VK_A || code == KeyEvent.VK_LEFT) {
             if (gp.ui.npcSlotCol != 0) {
                 gp.ui.npcSlotCol--;
                 gp.playSE(gp.se.cursorSE);
             }
         }
-        if (code == KeyEvent.VK_D) {
+        else if (code == KeyEvent.VK_D || code == KeyEvent.VK_RIGHT) {
             if (gp.ui.npcSlotCol != 2) {
                 gp.ui.npcSlotCol++;
                 gp.playSE(gp.se.cursorSE);

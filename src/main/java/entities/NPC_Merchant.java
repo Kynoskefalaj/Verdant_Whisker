@@ -15,6 +15,7 @@ public class NPC_Merchant extends Entity{
         speed = 1;
         name = "Merchant";
         margin = 1.2;
+        coin = 1000;
 
         getImage();
         setDialogue();

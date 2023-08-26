@@ -22,8 +22,6 @@ public class UI {
     BufferedImage crystal_full, crystal_blank;
     public boolean messageOn = false;
 
-    boolean test = false;
-
     ArrayList<String> message = new ArrayList<>();
     ArrayList<Integer> messageCounter = new ArrayList<>();
     public boolean gameFinished = false;
@@ -618,9 +616,6 @@ public class UI {
         int dFrameWidth = 0;
         int dFrameHeight = 0;
 
-        if (subState == Options_SubState.BUY || subState == Options_SubState.SELL) {
-
-        }
         switch (subState) {
             case INVENTORY:
                 frameWidth = gp.tileSize * 4;
@@ -672,12 +667,6 @@ public class UI {
         int slotX = slotXstart;
         int slotY = slotYstart;
 
-
-        int cursorX = slotXstart + (gp.tileSize * 9/8 * slotCol);
-        int cursorY = slotYstart + (gp.tileSize * 17/16 * slotRow);
-        int cursorWidth = gp.tileSize;
-        int cursorHeight = gp.tileSize;
-
         // DRAW ITEMS
         for (int i = 0; i < entity.inventory.size(); i++) {
 
@@ -694,28 +683,31 @@ public class UI {
                 slotY += gp.tileSize * 17/16;
                 slotX = slotXstart;
             }
-
+        }
         // CURSOR
         if (cursor == true) {
 
+            int cursorX = slotXstart + (gp.tileSize * 9/8 * slotCol);
+            int cursorY = slotYstart + (gp.tileSize * 17/16 * slotRow);
+            int cursorWidth = gp.tileSize;
+            int cursorHeight = gp.tileSize;
 
-                // DRAW CURSOR
-                g2.setColor(new Color(25, 128, 165, 190));
-                g2.setStroke(new BasicStroke(3));
-                g2.drawRoundRect(cursorX, cursorY, cursorWidth, cursorHeight, 10, 10);
+            // DRAW CURSOR
+            g2.setColor(new Color(25, 128, 165, 190));
+            g2.setStroke(new BasicStroke(3));
+            g2.drawRoundRect(cursorX, cursorY, cursorWidth, cursorHeight, 10, 10);
 
-                //DRAW DESCRIPTION TEXT
-                int textX = dFrameX + 20;
-                int textY = dFrameY + 40;
-                g2.setFont(g2.getFont().deriveFont(28F));
+            //DRAW DESCRIPTION TEXT
+            int textX = dFrameX + 20;
+            int textY = dFrameY + 40;
+            g2.setFont(g2.getFont().deriveFont(28F));
 
-                int itemIndex = getItemIndexOnSlot(slotCol, slotRow);
+            int itemIndex = getItemIndexOnSlot(slotCol, slotRow);
 
-                if (itemIndex < entity.inventory.size()) {
-                    drawSubWindow(dFrameX, dFrameY, dFrameWidth, dFrameHeight);
-                    gp.uTool.drawEnterDelimitedString(entity.inventory.get(itemIndex).description, textX, textY,
-                            32, g2);
-                }
+            if (itemIndex < entity.inventory.size()) {
+                drawSubWindow(dFrameX, dFrameY, dFrameWidth, dFrameHeight);
+                gp.uTool.drawEnterDelimitedString(entity.inventory.get(itemIndex).description, textX, textY,
+                        32, g2);
             }
         }
     }
@@ -1192,17 +1184,12 @@ public class UI {
 
     public void drawTradeScreen() {
 
-        if (test) {
-            System.out.println("test");
-        }
-
         switch(subState) {
             case SELECT: trade_select(); break;
             case BUY: trade_buy(); break;
             case SELL: trade_sell(); break;
         }
         gp.keyH.enterPressed = false;
-
     }
 
     public void trade_select() {
@@ -1256,8 +1243,6 @@ public class UI {
                     subState = Options_SubState.TOP;
 
                     currentDialogue = "Come again, hehehe...";
-
-                    test = true;
                 }
             }
         }
@@ -1319,6 +1304,7 @@ public class UI {
                     currentDialogue = "You cannot carry any more!";
                 } else {
                     gp.player.coin -= price;
+                    npc.coin += price;
                     gp.player.inventory.add(npc.inventory.get(itemIndex));
                     npc.inventory.remove(npc.inventory.get(itemIndex));
                 }
@@ -1330,6 +1316,9 @@ public class UI {
 
         // DRAW PLAYER INVENTORY
         drawInventory(gp.player, Options_SubState.SELL, true);
+
+        // DRAW MERCHANT INVENTORY
+        drawInventory(npc, Options_SubState.SELL, false);
 
         int x = 0;
         int y = 0;
@@ -1365,7 +1354,7 @@ public class UI {
             drawSubWindow(x, y, width, height);
             g2.drawImage(coin, x + 15, y + 15, 32, 32, null);
 
-            int price = (int)(gp.player.inventory.get(itemIndex).price * gp.ui.npc.margin);
+            int price = (int)(gp.player.inventory.get(itemIndex).price * (1 - (gp.ui.npc.margin - 1)));
             text = "" + price;
             x = getXforAlignToRightText(text, (int)(gp.tileSize * 9));
             g2.drawString(text, x, y + 40);
@@ -1384,13 +1373,11 @@ public class UI {
                     currentDialogue = "Merchant cannot carry any more!";
                 } else {
                     npc.coin -= price;
-                    npc.inventory.add(npc.inventory.get(itemIndex));
-                    gp.player.inventory.remove(npc.inventory.get(itemIndex));
+                    gp.player.coin += price;
+                    npc.inventory.add(gp.player.inventory.get(itemIndex));
+                    gp.player.inventory.remove(gp.player.inventory.get(itemIndex));
                 }
             }
         }
-
-        drawInventory(npc, Options_SubState.SELL, false);
-
     }
 }
