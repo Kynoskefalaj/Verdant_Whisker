@@ -70,7 +70,7 @@ public class KeyHandler implements KeyListener{
         if (code == KeyEvent.VK_ENTER) {
             enterPressed = true;
         }
-        if (gp.ui.subState == Options_SubState.SELECT) {
+        if (gp.ui.subState == Options_SubState.MERCH_SELECT) {
             if (code == KeyEvent.VK_W || code == KeyEvent.VK_UP) {
                 gp.ui.commandNum--;
                 if(gp.ui.commandNum < 0) {
@@ -89,13 +89,13 @@ public class KeyHandler implements KeyListener{
         else if (gp.ui.subState == Options_SubState.BUY) {
             npcInventory(code);
             if(code == KeyEvent.VK_ESCAPE) {
-                gp.ui.subState = Options_SubState.SELECT;
+                gp.ui.subState = Options_SubState.MERCH_SELECT;
             }
         }
         else if (gp.ui.subState == Options_SubState.SELL) {
             playerInventory(code);
             if(code == KeyEvent.VK_ESCAPE) {
-                gp.ui.subState = Options_SubState.SELECT;
+                gp.ui.subState = Options_SubState.MERCH_SELECT;
             }
         }
     }

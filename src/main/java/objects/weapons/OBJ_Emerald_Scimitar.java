@@ -13,6 +13,7 @@ public class OBJ_Emerald_Scimitar extends Entity {
         image1 = setUp("/objects/Emerald_Scimitar", gp.tileSize, gp.tileSize);
         down1 = image1;
         attackValue = 11;
+        price = 1500;
 
         attackArea.width = (int)(28 * gp.scale);
         attackArea.height = (int)(28 * gp.scale);

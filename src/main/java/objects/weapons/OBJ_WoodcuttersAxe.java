@@ -16,6 +16,7 @@ public class OBJ_WoodcuttersAxe extends Entity {
         image1 = setUp("/objects/Woodcutters_Axe", gp.tileSize, gp.tileSize);
         down1 = image1;
         attackValue = 5;
+        price = 370;
 
         attackArea.width = (int)(18 * gp.scale);
         attackArea.height = (int)(18 * gp.scale);

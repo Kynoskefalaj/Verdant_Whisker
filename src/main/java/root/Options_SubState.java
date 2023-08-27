@@ -7,7 +7,7 @@ public enum Options_SubState {
     END_GAME(3),
     GRAPHICS(4),
     PROPORTIONS(5),
-    SELECT(6),
+    MERCH_SELECT(6),
     BUY(7),
     SELL(8),
     INVENTORY(9);

@@ -1185,7 +1185,7 @@ public class UI {
     public void drawTradeScreen() {
 
         switch(subState) {
-            case SELECT: trade_select(); break;
+            case MERCH_SELECT: trade_select(); break;
             case BUY: trade_buy(); break;
             case SELL: trade_sell(); break;
         }
@@ -1361,7 +1361,15 @@ public class UI {
 
             //SELL AN ITEM
             if (gp.keyH.enterPressed == true) {
-                if (gp.player.inventory.get(itemIndex).price > npc.coin) {
+
+                if (gp.player.inventory.get(itemIndex) == gp.player.currentWeapon ||
+                    gp.player.inventory.get(itemIndex) == gp.player.currentShield) {
+                    commandNum = 0;
+                    subState = Options_SubState.MERCH_SELECT;
+                    gp.gameState = gp.dialogueState;
+                    currentDialogue = "You cannot sell an equipped item.";
+                }
+                else if (gp.player.inventory.get(itemIndex).price > npc.coin) {
                     subState = Options_SubState.TOP;
                     gp.gameState = gp.dialogueState;
                     currentDialogue = "Merchant doesn't have that much money!";
