@@ -20,11 +20,9 @@ public class UI {
     BufferedImage heart_full, heart_half, heart_blank, coin;
     BufferedImage stWheel8, stWheel7, stWheel6, stWheel5, stWheel4, stWheel3, stWheel2, stWheel1, stWheel0;
     BufferedImage crystal_full, crystal_blank;
-    public boolean messageOn = false;
 
     ArrayList<String> message = new ArrayList<>();
     ArrayList<Integer> messageCounter = new ArrayList<>();
-    public boolean gameFinished = false;
     public String currentDialogue = "";
     public int commandNum = 0;
     public int currentUiSE = 1;
@@ -94,7 +92,7 @@ public class UI {
             drawPlayerLife_Mana();
             drawPlayerStamina();
             drawMessage();
-            if (gp.keyH.F12Pressed == true) {
+            if (gp.keyH.F12Pressed) {
                 drawCurrentCoordinates(g2);
             }
         }
@@ -177,8 +175,6 @@ public class UI {
 
     private void drawPlayerLife_Mana() {
 
-//        gp.player.life = 3;
-
         int x = gp.tileSize / 2;
         int y = gp.tileSize / 2;
         int i = 0;
@@ -229,7 +225,6 @@ public class UI {
     }
 
     public void drawPlayerStamina() {
-//        gp.player.stamina = 0;
 
         int x = gp.screenWidth - gp.tileSize - 10;
         int y = gp.tileSize / 2;
@@ -727,7 +722,7 @@ public class UI {
             case TOP: options_top(frameX, frameY); break;
             case FULL_SCREEN: options_fullScreenNotification(frameX, frameY); break;
             case CONTROLS: options_control(frameX, frameY); break;
-            case END_GAME: options_endGameConfirmation(frameX, frameY); break;
+            case END_GAME: options_endGameConfirmation(frameY); break;
             case GRAPHICS: options_graphics(frameX, frameY); break;
             case PROPORTIONS: options_proportions(frameX, frameY); break;
         }
@@ -1035,9 +1030,9 @@ public class UI {
 
     }
 
-    public void options_endGameConfirmation(int frameX, int  frameY) {
+    public void options_endGameConfirmation(int  frameY) {
 
-        int textX = frameX + gp.tileSize;
+        int textX;
         int textY = frameY + gp.tileSize * 3;
 
         currentDialogue = "Quit the game and \nreturn to the title screen?";

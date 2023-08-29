@@ -245,11 +245,7 @@ public class GamePanel extends JPanel implements Runnable{
             // PLAYER
             player.update();
             // NPC
-//            for (Entity entity : npcs[1]) {
-//                if (entity != null) {
-//                    entity.update();
-//                }
-//            }
+
             for (int i = 0; i < npcs[1].length; i++) {
                 if (npcs[currentMap][i] != null) {
                     npcs[currentMap][i].update();
@@ -323,33 +319,19 @@ public class GamePanel extends JPanel implements Runnable{
 
             //ADD ENTITIES TO THE LIST
             entityList.add(player);
-//            for (Entity npc : npcs[1]) {
-//                if (npc != null) {
-//                    entityList.add(npc);
-//                }
-//            }
+
             for (int i = 0; i < npcs[1].length; i++) {
                 if (npcs[currentMap][i] != null) {
                     entityList.add(npcs[currentMap][i]);
                 }
             }
 
-//            for (Entity obj : objects[1]) {
-//                if (obj != null) {
-//                    entityList.add(obj);
-//                }
-//            }
             for (int i = 0; i < objects[1].length; i++) {
                 if (objects[currentMap][i] != null) {
                     entityList.add(objects[currentMap][i]);
                 }
             }
 
-//            for (Entity monster : monsters[1]) {
-//                if (monster != null) {
-//                    entityList.add(monster);
-//                }
-//            }
             for (int i = 0; i < monsters[1].length; i++) {
                 if (monsters[currentMap][i] != null) {
                     entityList.add(monsters[currentMap][i]);
