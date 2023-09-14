@@ -1,6 +1,5 @@
 package ai;
 
-import entities.Entity;
 import root.GamePanel;
 
 import java.util.ArrayList;
@@ -113,6 +112,83 @@ public class PathFinder {
         node.hCost = xDistance + yDistance;
         // F cost
         node.fCost = node.gCost + node.hCost;
+    }
 
+    public boolean search() {
+
+        while (goalReached == false && step < 500) {
+            int col = currentNode.col;
+            int row = currentNode.row;
+
+            // CheckNode the current node
+            currentNode.checked = true;
+            openList.remove(currentNode);
+
+            //Open the Up node
+            if (row - 1 >= 0) {
+                openNode(node[col][row-1]);
+            }
+            //Open the left node
+            if (col - 1 >= 0) {
+                openNode(node[col-1][row]);
+            }
+            //Open the down node
+            if (row + 1 < gp.maxWorldRow) {
+                openNode(node[col][row+1]);
+            }
+            //Open the right node
+            if(col + 1 < gp.maxWorldCol) {
+                openNode(node[col+1][row]);
+            }
+
+            //Find the best node
+            int bestNodeIndex = 0;
+            int bestNodefCost = 999;
+
+            for (int i  = 0; i < openList.size(); i++) {
+                //Check if this node's F cost is better
+                if (openList.get(i).fCost == bestNodefCost) {
+                    if(openList.get(i).gCost < openList.get(bestNodeIndex).gCost) {
+                        bestNodeIndex = i;
+                    }
+                }
+            }
+
+            //If there is no node in the openList, end the loop
+            if (openList.size() == 0) {
+                break;
+            }
+
+            //After the loop, openList[bestNodeIndex] is the next step (= currentNode)
+            currentNode = openList.get(bestNodeIndex);
+
+            if(currentNode == goalNode) {
+                goalReached = true;
+                trackThePath();
+            }
+            step++;
+        }
+
+        return goalReached;
+    }
+
+    public void openNode (Node node) {
+
+        if (node.open == false && node.checked == false && node.solid == false) {
+
+            node.open = true;
+            node.parent = currentNode;
+            openList.add(node);
+        }
+    }
+
+    public void trackThePath() {
+        Node current = goalNode;
+
+        while (current != startNode) {
+
+            pathList.add(0, current);
+            current = current.parent;
+        }
     }
 }
