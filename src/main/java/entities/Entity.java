@@ -41,6 +41,7 @@ public abstract class Entity {
     public boolean alive = true;
     public boolean dying = false;
     public boolean hpBarOn = false;
+    public boolean onPath = false;
 
     // COUNTER
     public int spriteCounter = 0;
@@ -151,10 +152,8 @@ public EntityType type;
         gp.particlesList.add(pl3);
         gp.particlesList.add(pl4);
     }
-    public void update () {
 
-        setAction();
-
+    public void checkCollision() {
         collisionOn = false;
         gp.cChecker.checkTile(this);
         gp.cChecker.checkObject(this, false);
@@ -165,6 +164,11 @@ public EntityType type;
         if (this.type == EntityType.MONSTER && contactPlayer == true) {
             attackPlayer(attack);
         }
+    }
+    public void update () {
+
+        setAction();
+        checkCollision();
 
         // IF COLLISION IS FALSE, ENTITY CAN MOVE
         if(collisionOn == false) {
@@ -312,5 +316,25 @@ public EntityType type;
             e.printStackTrace();
         }
         return image;
+    }
+
+    public void searchPath (int goalCol, int goalRow) {
+
+        int startCol = (worldX + solidArea.x)/gp.tileSize;
+        int startRow = (worldY + solidArea.y)/gp.tileSize;
+
+        gp.pFinder.setNodes(startCol, startRow, goalCol, goalRow);
+
+        if (gp.pFinder.search() == true) {
+            // Next worldX & worldY
+            int nextX = gp.pFinder.pathList.get(0).col * gp.tileSize;
+            int nextY = gp.pFinder.pathList.get(0).row * gp.tileSize;
+
+            //Entity's solidArea position
+            int enLeftX = worldX + solidArea.x;
+            int enRightX = worldX + solidArea.x + solidArea.width;
+            int enTopY = worldY + solidArea.y;
+            int enBottomY = worldY + solidArea.y + solidArea.height;
+        }
     }
 }
