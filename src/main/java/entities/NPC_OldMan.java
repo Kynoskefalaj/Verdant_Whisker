@@ -77,7 +77,7 @@ public class NPC_OldMan extends Entity{
 
     @Override
     public void setAction () {
-        if (onPath = true) {
+        if (onPath == true && dialogueIndex == 6) {
             int goalCol = 12;
             int goalRow = 9;
 
