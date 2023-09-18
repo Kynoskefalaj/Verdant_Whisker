@@ -385,11 +385,11 @@ public EntityType type;
             }
 
             // If reaches the goal, stop the search
-            int nextCol = gp.pFinder.pathList.get(0).col;
-            int nextRow = gp.pFinder.pathList.get(0).row;
-            if(nextCol == goalCol && nextRow == goalRow) {
-                onPath = false;
-            }
+//            int nextCol = gp.pFinder.pathList.get(0).col;
+//            int nextRow = gp.pFinder.pathList.get(0).row;
+//            if(nextCol == goalCol && nextRow == goalRow) {
+//                onPath = false;
+//            }
         }
     }
 }
