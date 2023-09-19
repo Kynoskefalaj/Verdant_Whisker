@@ -77,7 +77,7 @@ public class NPC_OldMan extends Entity{
 
     @Override
     public void setAction () {
-        if (onPath == true && dialogueIndex == 6) {
+        if (onPath == true) {
 //            int goalCol = 12;
 //            int goalRow = 9;
             int goalCol = (gp.player.worldX + gp.player.solidArea.x) / gp.tileSize;
