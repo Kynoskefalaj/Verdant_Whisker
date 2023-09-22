@@ -287,7 +287,13 @@ public class MON_SkeletonMage extends Skeleton implements Creature, GeneratesPar
 
     public void shoot() {
         projectile.set(worldX, worldY, direction, true, this);
-        gp.projectilesList.add(projectile);
+//        gp.projectilesList.add(projectile);
+        for (int i = 0; i < gp.projectile[1].length; i++){
+            if(gp.projectile[gp.currentMap][i] == null) {
+                gp.projectile[gp.currentMap][i] = projectile;
+                break;
+            }
+        }
         shotAvailableCounter = 0;
     }
 

@@ -64,7 +64,8 @@ public TileManager tileM;
     public Entity[][] npcs;
     public Entity[][] monsters;
     public InteractiveTile[][] iTile = new InteractiveTile[maxMap][50];
-    public ArrayList<Entity> projectilesList = new ArrayList<>();
+    public Entity[][] projectile = new Entity[maxMap][20];
+//    public ArrayList<Entity> projectilesList = new ArrayList<>();
     public ArrayList<Entity> particlesList = new ArrayList<>();
     public ArrayList<Entity> entityList = new ArrayList<>();
 
@@ -266,13 +267,13 @@ public TileManager tileM;
                 }
             }
             // PROJECTILES
-            for (int i = 0; i < projectilesList.size(); i++) {
-                if (projectilesList.get(i) != null) {
-                    if (projectilesList.get(i).alive) {
-                        projectilesList.get(i).update();
+            for (int i = 0; i < projectile[1].length; i++) {
+                if (projectile[currentMap][i] != null) {
+                    if (projectile[currentMap][i].alive == true) {
+                        projectile[currentMap][i].update();
                     }
-                    if ( ! projectilesList.get(i).alive) {
-                        projectilesList.remove(i);
+                    if ( ! projectile[currentMap][i].alive) {
+                        projectile[currentMap][i] = null;
                     }
                 }
             }
@@ -340,7 +341,7 @@ public TileManager tileM;
                 }
             }
 
-            for (Entity projectile : projectilesList) {
+            for (Entity projectile : projectile[currentMap]) {
                 if (projectile != null) {
                     entityList.add(projectile);
                 }

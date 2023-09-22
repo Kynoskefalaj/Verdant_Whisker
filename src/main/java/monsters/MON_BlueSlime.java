@@ -85,7 +85,16 @@ public class MON_BlueSlime extends Entity implements Creature, GeneratesParticle
             int i = new Random().nextInt(100)+1;
             if (i > 99 && projectile.alive == false && shotAvailableCounter == 30) {
                 projectile.set(worldX, worldY, direction, true, this);
-                gp.projectilesList.add(projectile);
+//                gp.projectilesList.add(projectile);
+
+                //CHECK VACANCY
+                for (int ii = 0; ii < gp.projectile[1].length; ii++){
+                    if(gp.projectile[gp.currentMap][ii] == null) {
+                        gp.projectile[gp.currentMap][ii] = projectile;
+                        break;
+                    }
+                }
+
                 shotAvailableCounter = 0;
             }
         } else {

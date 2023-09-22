@@ -391,8 +391,13 @@ public class Player extends Entity implements Archery {
         // SUBTRACT THE COST (MANA, AMMO, etc.)
         projectile.subtractResource(this);
 
-        // ADD IT TO THE LIST
-        gp.projectilesList.add(projectile);
+        // CHECK VACANCY
+        for(int i = 0; i < gp.projectile[i].length; i++) {
+            if (gp.projectile[gp.currentMap][i] == null) {
+                gp.projectile[gp.currentMap][i] = projectile;
+                break;
+            }
+        }
 
         shotAvailableCounter = 0;
 
@@ -459,7 +464,10 @@ public class Player extends Entity implements Archery {
         // Check monster collision with weaponArea
         int monsterIndex = gp.cChecker.checkEntity(this, gp.monsters);
 
-        //Restore original area
+        int projectileIndex = gp.cChecker.checkEntity(this, gp.projectile);
+        damageProjectile(projectileIndex);
+
+        //Restore original data
         worldX = currentWorldX;
         worldY = currentWorldY;
         solidArea.width = solidAreaWidth;
@@ -549,6 +557,15 @@ public class Player extends Entity implements Archery {
                         gp.iTile[gp.currentMap][i].worldX, gp.iTile[gp.currentMap][i].worldY);
                 gp.iTile[gp.currentMap][i] = null;
             }
+        }
+    }
+
+    public void damageProjectile (int i) {
+
+        if (i != 999) {
+            Entity projectile = gp.projectile[gp.currentMap][i];
+            projectile.alive = false;
+            generateParticle(projectile, projectile);
         }
     }
 
