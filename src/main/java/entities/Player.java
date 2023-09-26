@@ -68,7 +68,8 @@ public class Player extends Entity implements Archery {
 //        worldY = gp.tileSize * 8;
         worldX = gp.tileSize * 23;
         worldY = gp.tileSize * 21;
-        speed = 3;
+        defaultSpeed = 3;
+        speed = defaultSpeed;
         direction = "down";
         spriteSpeedModifier = 0;
 
@@ -89,7 +90,7 @@ public class Player extends Entity implements Archery {
         life = maxLife;
         stamina = maxStamina;
         mana = maxMana;
-        attack = getAttack() + 100;
+        attack = getAttack();
         defense = getDefense();
         attackSpeed = agility * 6;
 
@@ -297,7 +298,7 @@ public class Player extends Entity implements Archery {
             if (keyH.enterPressed == true && attackCancelled == false && stamina > 1.5) {
                 gp.playSE(gp.se.swordSlashSE);
                 attacking = true;
-                stamina -= 2;
+                stamina -= 1;
                 spriteCounter = 0;
             }
             attackCancelled = false;
@@ -508,7 +509,11 @@ public class Player extends Entity implements Archery {
         if (i != 999) {
 
             if (gp.monsters[gp.currentMap][i].invincible == false) {
+
                 gp.playSE(gp.monsters[gp.currentMap][i].hitSound);
+
+                knockBack(gp.monsters[gp.currentMap][i]);
+
                 int damage; //statements below are for case when armour is bigger than AP
                 if (gp.monsters[gp.currentMap][i].defense >= attack) {damage = 0;}
                 else {damage = attack - gp.monsters[gp.currentMap][i].defense;}
@@ -537,6 +542,14 @@ public class Player extends Entity implements Archery {
         } else {
 //            System.out.println("Miss!");
         }
+    }
+
+    public void knockBack(Entity entity){
+
+        entity.direction = direction;
+        entity.speed += 10;
+        entity.knockBack = true;
+
     }
 
     public void damageInteractiveTile (int i){

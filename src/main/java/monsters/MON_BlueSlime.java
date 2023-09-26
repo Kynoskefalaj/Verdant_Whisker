@@ -46,7 +46,8 @@ public class MON_BlueSlime extends Entity implements Creature, GeneratesParticle
     }
     @Override
     public void setDefaultValues() {
-        speed = 1;
+        defaultSpeed = 1;
+        speed = defaultSpeed;
         maxLife = 14;
         life = maxLife;
         attack = 5;
