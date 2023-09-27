@@ -22,6 +22,7 @@ public class OBJ_Worn_Needle extends Entity {
         attackArea.width = (int)(22 * gp.scale);
         attackArea.height = (int)(22 * gp.scale);
         price = 90;
+        knockBackPower = 3;
 
         type = EntityType.SWORD;
     }

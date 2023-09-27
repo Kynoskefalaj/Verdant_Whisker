@@ -14,6 +14,7 @@ public class OBJ_Emerald_Scimitar extends Entity {
         down1 = image1;
         attackValue = 11;
         price = 1500;
+        knockBackPower = 6;
 
         attackArea.width = (int)(28 * gp.scale);
         attackArea.height = (int)(28 * gp.scale);

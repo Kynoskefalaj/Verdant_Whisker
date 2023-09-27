@@ -22,6 +22,7 @@ public class OBJ_ArcaneMissile extends Projectile implements GeneratesParticles 
         maxLife = 80;
         life = maxLife;
         attack = 7;
+        knockBackPower = 1;
         useCost = 1;
         alive = false;
         getImage();

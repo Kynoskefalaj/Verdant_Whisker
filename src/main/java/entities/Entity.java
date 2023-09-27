@@ -89,6 +89,7 @@ public abstract class Entity {
     public int useCost;
     public int price;
     public double margin;
+    public int knockBackPower = 0;
 
     // TYPE
 public EntityType type;

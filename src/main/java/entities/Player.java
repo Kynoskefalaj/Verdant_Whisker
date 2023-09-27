@@ -371,7 +371,7 @@ public class Player extends Entity implements Archery {
         if(attackSpriteCounter <= 18 / attackSpeed) {spriteNum = 1;}
         if (attackSpriteCounter > 18 / attackSpeed && attackSpriteCounter <= 54 / attackSpeed) {spriteNum = 2;}
         if (attackSpriteCounter > 54 / attackSpeed && attackSpriteCounter <= 108 / attackSpeed) {
-            damageMonster(checkWhatsHit(), attack);
+            damageMonster(checkWhatsHit(), attack, currentWeapon.knockBackPower);
             spriteNum = 3;
             int iTileIndex = gp.cChecker.checkEntity(this, gp.iTile);
             damageInteractiveTile(iTileIndex);
@@ -504,7 +504,7 @@ public class Player extends Entity implements Archery {
         }
     }
 
-    public void damageMonster (int i, int attack) {
+    public void damageMonster (int i, int attack, int knockBackPower) {
 
         if (i != 999) {
 
@@ -512,7 +512,9 @@ public class Player extends Entity implements Archery {
 
                 gp.playSE(gp.monsters[gp.currentMap][i].hitSound);
 
-                knockBack(gp.monsters[gp.currentMap][i]);
+                if(knockBackPower > 0) {
+                    knockBack(gp.monsters[gp.currentMap][i], knockBackPower);
+                }
 
                 int damage; //statements below are for case when armour is bigger than AP
                 if (gp.monsters[gp.currentMap][i].defense >= attack) {damage = 0;}
@@ -544,10 +546,10 @@ public class Player extends Entity implements Archery {
         }
     }
 
-    public void knockBack(Entity entity){
+    public void knockBack(Entity entity, int knockBackPower){
 
         entity.direction = direction;
-        entity.speed += 10;
+        entity.speed += knockBackPower;
         entity.knockBack = true;
 
     }
