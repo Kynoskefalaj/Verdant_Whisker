@@ -418,8 +418,10 @@ public class Player extends Entity implements Archery {
             else if (gp.objects[gp.currentMap][i].type == EntityType.NOT_PICKABLE) {
                 // DO NOTHING
             }
+            // OBSTACLE
             else if(gp.objects[gp.currentMap][i].type == EntityType.OBSTACLE) {
                 if(keyH.enterPressed == true) {
+                    attackCancelled = true;
                     gp.objects[gp.currentMap][i].interact();
                 }
             }

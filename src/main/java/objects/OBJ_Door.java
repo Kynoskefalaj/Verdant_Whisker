@@ -10,6 +10,7 @@ public class OBJ_Door extends Entity {
 
     public OBJ_Door (GamePanel gp) {
         super(gp);
+        this.gp = gp;
         name = "Door";
         down1 = setUp("/objects/door01", gp.tileSize, gp.tileSize);
         collision = true;
