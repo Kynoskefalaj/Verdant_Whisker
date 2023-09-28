@@ -6,6 +6,8 @@ import root.GamePanel;
 
 public class OBJ_Door extends Entity {
 
+    GamePanel gp;
+
     public OBJ_Door (GamePanel gp) {
         super(gp);
         name = "Door";
@@ -20,5 +22,10 @@ public class OBJ_Door extends Entity {
         solidAreaDefaultY = solidArea.y;
 
         type = EntityType.OBSTACLE;
+    }
+
+    public void interact() {
+        gp.gameState = gp.dialogueState;
+        gp.ui.currentDialogue = "You need a key to open this.";
     }
 }

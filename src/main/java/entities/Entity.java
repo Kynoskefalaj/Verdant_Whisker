@@ -115,6 +115,9 @@ public EntityType type;
             case "right" -> direction = "left";
         }
     }
+
+    public void interact() {}
+
     public void use (Entity entity) {}
     public void checkDrop() {}
     public void dropItem(Entity droppedItem) {
