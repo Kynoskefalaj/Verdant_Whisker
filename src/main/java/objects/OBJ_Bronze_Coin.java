@@ -20,10 +20,11 @@ public class OBJ_Bronze_Coin extends Entity {
     }
 
     @Override
-    public void use (Entity entity) {
+    public boolean use (Entity entity) {
 
         gp.playSE(gp.music.coinSE);
         gp.ui.addMessage("Coin +" + value);
         gp.player.coin += value;
+        return true;
     }
 }

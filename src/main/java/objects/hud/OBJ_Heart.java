@@ -28,10 +28,11 @@ public class OBJ_Heart extends Entity {
     }
 
     @Override
-    public void use(Entity entity) {
+    public boolean use(Entity entity) {
         gp.playSE(gp.music.powerUpSE);
         gp.ui.addMessage("Max life increased by: " + value);
         entity.maxLife += value;
         entity.life += value;
+        return true;
     }
 }

@@ -25,7 +25,7 @@ public class OBJ_Health_Potion extends Entity {
     }
 
     @Override
-    public void use (Entity entity) {
+    public boolean use (Entity entity) {
 
         gp.gameState = gp.dialogueState;
         gp.ui.currentDialogue = "You drink the " + name + "!\n" +
@@ -35,5 +35,6 @@ public class OBJ_Health_Potion extends Entity {
             entity.life = entity.maxLife;
         }
         gp.playSE(gp.music.powerUpSE);
+        return true;
     }
 }

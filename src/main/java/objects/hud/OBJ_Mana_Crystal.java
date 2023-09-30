@@ -26,10 +26,11 @@ public class OBJ_Mana_Crystal extends Entity {
     }
 
     @Override
-    public void use(Entity entity) {
+    public boolean use(Entity entity) {
         gp.playSE(gp.music.powerUpSE);
         gp.ui.addMessage("Max mana increased by: " + value);
         entity.maxMana += value;
         entity.mana += value;
+        return true;
     }
 }

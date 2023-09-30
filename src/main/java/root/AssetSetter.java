@@ -7,6 +7,7 @@ import monsters.MON_BlueSlime;
 import monsters.MON_SkeletonMage;
 import objects.OBJ_Bronze_Coin;
 import objects.OBJ_Door;
+import objects.OBJ_Key;
 import objects.consumables.OBJ_Health_Potion;
 import objects.consumables.OBJ_Mana_Potion;
 import objects.consumables.OBJ_Stamina_Potion;
@@ -57,6 +58,8 @@ public class AssetSetter {
         putObject(new OBJ_Door(gp),0,33, 7);
         putObject(new OBJ_Door(gp),0,14, 28);
         putObject(new OBJ_Door(gp),0,12, 12);
+
+        putObject(new OBJ_Key(gp),0, 21, 22);
     }
 
     public void setMonster () {

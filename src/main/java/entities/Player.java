@@ -5,7 +5,7 @@ import objects.clothes.OBJ_Green_Tunic;
 import objects.jewellery.OBJ_Sacred_Necklace;
 import objects.projectiles.OBJ_ArcaneMissile;
 import objects.shields.OBJ_Wooden_Shield;
-import objects.tools.OBJ_Key;
+import objects.OBJ_Key;
 import objects.tools.OBJ_Leather_Backpack;
 import objects.tools.OBJ_Pouch;
 import objects.tools.OBJ_Rope;
@@ -15,7 +15,6 @@ import root.KeyHandler;
 import root.UtilityTool;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
 public class Player extends Entity implements Archery {
 
@@ -638,8 +637,9 @@ public class Player extends Entity implements Archery {
             }
             if (selectedItem.type == EntityType.CONSUMABLE) {
 
-                selectedItem.use(this);
-                inventory.remove(itemIndex);
+                if (selectedItem.use(this) == true) {
+                    inventory.remove(itemIndex);
+                }
             }
         }
     }

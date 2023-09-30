@@ -39,10 +39,11 @@ public class OBJ_StaminaWheel extends Entity {
     }
 
     @Override
-    public void use(Entity entity) {
+    public boolean use(Entity entity) {
         gp.playSE(gp.music.powerUpSE);
         gp.ui.addMessage("Max stamina increased by: " + value);
         entity.maxStamina += value;
         entity.stamina += value;
+        return true;
     }
 }
