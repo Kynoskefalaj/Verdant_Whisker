@@ -63,7 +63,7 @@ public class AssetSetter {
 
         putObject(new OBJ_Key(gp),0, 21, 22);
 
-        putObject(new OBJ_Chest(gp, new OBJ_Green_Hat(gp)),0, 13, 31);
+        putObject(new OBJ_Chest(gp, new OBJ_Green_Hat(gp)),0, 15, 34);
     }
 
     public void setMonster () {
