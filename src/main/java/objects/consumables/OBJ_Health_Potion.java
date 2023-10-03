@@ -17,6 +17,7 @@ public class OBJ_Health_Potion extends Entity {
         name = "Health Potion";
         value = 5;
         price = 5;
+        stackable = true;
 
         description = String.format("[%s]\nRecovers %d %s.", name, value, recoveryType);
         image1 = setUp("/objects/consumables/Health_Potion", gp.tileSize, gp.tileSize);

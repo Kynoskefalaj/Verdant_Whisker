@@ -99,6 +99,8 @@ public class Player extends Entity implements Archery {
     public void setDefaultPosition() {
         worldX = gp.tileSize * 23;
         worldY = gp.tileSize * 21;
+//        worldX = gp.tileSize * 13;
+//        worldY = gp.tileSize * 32;
         direction = "down";
     }
 
@@ -136,16 +138,13 @@ public class Player extends Entity implements Archery {
         inventory.add(new OBJ_Pouch(gp));
         inventory.add(new OBJ_Pouch(gp));
     }
-
     public int getAttack() {
         attackArea = currentWeapon.attackArea;
         return attack = strength * currentWeapon.attackValue;
     }
-
     public int getDefense() {
         return defense = agility * currentShield.defenseValue;
     }
-
     public void getPlayerImage() {
             up1 = setUp("/player/walk/VW_up", gp.tileSize, gp.tileSize);
             up2 = setUp("/player/walk/VW_up2", gp.tileSize, gp.tileSize);
@@ -164,7 +163,6 @@ public class Player extends Entity implements Archery {
             right3 = setUp("/player/walk/VW_right3", gp.tileSize, gp.tileSize);
             right4 = setUp("/player/walk/VW_right4", gp.tileSize, gp.tileSize);
     }
-
     public void getPlayerAttackImage () {
 
         if (currentWeapon.type == EntityType.EMERALD_SWORD) {
@@ -218,7 +216,6 @@ public class Player extends Entity implements Archery {
             attackRight5 = setUp("/player/combat/Blink_right_smear_5", gp.tileSize * 2, gp.tileSize);
         }
     }
-
     @Override
     public void update() {
         resetSpeed();
@@ -363,7 +360,6 @@ public class Player extends Entity implements Archery {
             gp.playSE(gp.se.gameOverSE);
         }
     }
-
     public void attacking () {
         attackSpriteCounter++;
 
@@ -383,7 +379,6 @@ public class Player extends Entity implements Archery {
             attacking = false;
         }
     }
-
     public void shoot() {
         // SET DEFAULT COORDINATES, DIRECTION AND CASTER
         projectile.set(worldX, worldY, direction, true, this);
@@ -403,7 +398,6 @@ public class Player extends Entity implements Archery {
 
         gp.playSE(gp.se.projectileCastSE);
     }
-
     public void pickUpObject (int i) {
 
         if (i != 999) {
@@ -429,9 +423,7 @@ public class Player extends Entity implements Archery {
 
                 String text;
 
-                if (inventory.size() != maxInventorySize) {
-
-                    inventory.add(gp.objects[gp.currentMap][i]);
+                if (canObtainItem(gp.objects[gp.currentMap][i]) == true) {
                     gp.playSE(gp.se.coinSE);
                     text = "Got a " + gp.objects[gp.currentMap][i].name + "!";
                     gp.objects[gp.currentMap][i] = null;
@@ -449,7 +441,6 @@ public class Player extends Entity implements Archery {
             }
         }
     }
-
     public int checkWhatsHit () {
         // Save current worldX,worldY and solidArea
         int currentWorldX = worldX;
@@ -482,7 +473,6 @@ public class Player extends Entity implements Archery {
 
         return monsterIndex;
     }
-
     public void interactNPC (int i) {
 
         if(gp.gameState == gp.playState && gp.keyH.enterPressed == true) {
@@ -494,7 +484,6 @@ public class Player extends Entity implements Archery {
             }
         }
     }
-
     public void contactMonster(int i) {
 
         if (i != 999){
@@ -509,7 +498,6 @@ public class Player extends Entity implements Archery {
             }
         }
     }
-
     public void damageMonster (int i, int attack, int knockBackPower) {
 
         if (i != 999) {
@@ -551,15 +539,12 @@ public class Player extends Entity implements Archery {
 //            System.out.println("Miss!");
         }
     }
-
     public void knockBack(Entity entity, int knockBackPower){
 
         entity.direction = direction;
         entity.speed += knockBackPower;
         entity.knockBack = true;
-
     }
-
     public void damageInteractiveTile (int i){
 
         if (i != 999 && gp.iTile[gp.currentMap][i].destructible &&
@@ -580,16 +565,13 @@ public class Player extends Entity implements Archery {
             }
         }
     }
-
     public void damageProjectile (int i) {
-
         if (i != 999) {
             Entity projectile = gp.projectile[gp.currentMap][i];
             projectile.alive = false;
             generateParticle(projectile, projectile);
         }
     }
-
     public void checkLevelUp () {
 
         if (exp >= nextLevelExp) {
@@ -613,7 +595,6 @@ public class Player extends Entity implements Archery {
                     + "You feel stronger!";
         }
     }
-
     public void selectItem (Entity entity) {
 
         int itemIndex = gp.ui.getItemIndexOnSlot(gp.ui.playerSlotCol, gp.ui.playerSlotRow);
@@ -638,12 +619,53 @@ public class Player extends Entity implements Archery {
             if (selectedItem.type == EntityType.CONSUMABLE) {
 
                 if (selectedItem.use(this) == true) {
-                    inventory.remove(itemIndex);
+                    if(selectedItem.amount > 1) {
+                        selectedItem.amount--;
+                    }
+                    else {
+                        inventory.remove(itemIndex);
+                    }
                 }
             }
         }
     }
+    public int searchItemInventory(String itemName) {
+        int itemIndex = 999;
 
+        for(int i = 0; i < inventory.size(); i++) {
+            if(inventory.get(i).name.equals(itemName)) {
+                itemIndex = i;
+                break;
+            }
+        }
+        return itemIndex;
+    }
+    public boolean canObtainItem(Entity item) {
+        boolean canObtain = false;
+
+        // Check if item is stackable
+        if(item.stackable == true) {
+            int index = searchItemInventory(item.name);
+
+            if(index != 999) {
+                inventory.get (index).amount++;
+                canObtain = true;
+            }
+            else { // New item, so need to check vacancy
+                if(inventory.size() != maxInventorySize) {
+                    inventory.add(item);
+                    canObtain = true;
+                }
+            }
+        }
+        else { // Not stackable
+            if(inventory.size() != maxInventorySize) {
+                inventory.add(item);
+                canObtain = true;
+            }
+        }
+        return canObtain;
+    }
     public void resetSpeed () {
         speed = 3 + speedBoost;
         spriteSpeedModifier = 0;

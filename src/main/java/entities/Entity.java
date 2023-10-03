@@ -90,6 +90,8 @@ public abstract class Entity {
     public int price;
     public double margin;
     public int knockBackPower = 0;
+    public boolean stackable = false;
+    public int amount = 1;
 
     // TYPE
 public EntityType type;

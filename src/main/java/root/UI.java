@@ -672,6 +672,25 @@ public class UI {
                 g2.fillRoundRect(slotX, slotY, gp.tileSize, gp.tileSize, 10, 10);
             }
             g2.drawImage(entity.inventory.get(i).image1, slotX, slotY, null);
+
+            // DISPLAY THE AMOUNT
+            if (entity == gp.player && entity.inventory.get(i).amount > 1) {
+                g2.setFont(g2.getFont().deriveFont(32f));
+                int amountX;
+                int amountY;
+
+                String s = "" + entity.inventory.get(i).amount;
+                amountX = getXforAlignToRightText(s, slotX + 44);
+                amountY = slotY + gp.tileSize;
+
+                //SHADOW
+                g2.setColor(new Color(60, 60, 60));
+                g2.drawString(s, amountX, amountY);
+
+                //NUMBER
+                g2.setColor(Color.white);
+                g2.drawString(s, amountX - 3, amountY - 3);
+            }
             slotX += gp.tileSize * 9/8;
 
             if (i == 2 || i == 5 || i == 8 || i == 11 || i == 14) {
@@ -1293,14 +1312,14 @@ public class UI {
                     currentDialogue = "You need more coins to buy that!";
                     drawDialogueScreen();
                 }
-                else if (gp.player.inventory.size() == gp.player.maxInventorySize) {
+                else if (gp.player.canObtainItem(npc.inventory.get(itemIndex)) == false) {
                     subState = Options_SubState.TOP;
                     gp.gameState = gp.dialogueState;
                     currentDialogue = "You cannot carry any more!";
                 } else {
                     gp.player.coin -= price;
                     npc.coin += price;
-                    gp.player.inventory.add(npc.inventory.get(itemIndex));
+//                    gp.player.inventory.add(npc.inventory.get(itemIndex));
                     npc.inventory.remove(npc.inventory.get(itemIndex));
                 }
             }
@@ -1375,10 +1394,17 @@ public class UI {
                     gp.gameState = gp.dialogueState;
                     currentDialogue = "Merchant cannot carry any more!";
                 } else {
+                    if (gp.player.inventory.get(itemIndex).amount > 1) {
+                        gp.player.inventory.get(itemIndex).amount--;
+                        npc.inventory.add(gp.player.inventory.get(itemIndex));
+                    }
+                    else {
+                        npc.inventory.add(gp.player.inventory.get(itemIndex));
+                        gp.player.inventory.remove(gp.player.inventory.get(itemIndex));
+                    }
                     npc.coin -= price;
                     gp.player.coin += price;
-                    npc.inventory.add(gp.player.inventory.get(itemIndex));
-                    gp.player.inventory.remove(gp.player.inventory.get(itemIndex));
+
                 }
             }
         }

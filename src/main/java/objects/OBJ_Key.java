@@ -16,6 +16,7 @@ public class OBJ_Key extends Entity {
         down1 = image1;
         description = "[" + name + "]" + "\nIt opens the door.";
         price = 50;
+        stackable = true;
 
         type = EntityType.CONSUMABLE;
     }

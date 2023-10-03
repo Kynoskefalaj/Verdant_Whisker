@@ -14,9 +14,10 @@ public class OBJ_Mana_Potion extends Entity {
         this.gp = gp;
 
         type = EntityType.CONSUMABLE;
-        name = "Health Potion";
+        name = "Mana Potion";
         value = 5;
         price = 6;
+        stackable = true;
 
         description = String.format("[%s]\nRecovers %d %s.", name, value, recoveryType);
         image1 = setUp("/objects/consumables/Mana_Potion", gp.tileSize, gp.tileSize);
