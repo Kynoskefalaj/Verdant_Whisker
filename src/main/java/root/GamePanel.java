@@ -3,6 +3,7 @@ package root;
 import ai.PathFinder;
 import entities.Entity;
 import entities.Player;
+import environment.EnvironmentManager;
 import tile.TileManager;
 import tile.interactive.InteractiveTile;
 
@@ -55,6 +56,7 @@ public TileManager tileM;
     public UtilityTool uTool;
     public ScreenConfig screenConfig;
     public PathFinder pFinder = new PathFinder(this);
+    public EnvironmentManager eManager = new EnvironmentManager(this);
     Thread gameThread;
 
 //    ENTITY AND OBJECT
@@ -134,6 +136,7 @@ public TileManager tileM;
         asSetter.setMonster();
         asSetter.setInteractiveTile();
         asSetter.setNPC();
+        eManager.setup();
 
         playMusic(music.mainTheme);
         gameState = titleState;
@@ -370,6 +373,9 @@ public TileManager tileM;
             }
             // EMPTY ENTITY LIST (otherwise it will grow on every loop)
             entityList.clear();
+
+            // ENVIRONMENT
+            eManager.draw(g2);
 
             // USER INTERFACE
             ui.draw(g2);
