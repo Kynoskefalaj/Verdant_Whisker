@@ -5,10 +5,7 @@ import entities.NPC_Merchant;
 import entities.NPC_OldMan;
 import monsters.MON_BlueSlime;
 import monsters.MON_SkeletonMage;
-import objects.OBJ_Bronze_Coin;
-import objects.OBJ_Chest;
-import objects.OBJ_Door;
-import objects.OBJ_Key;
+import objects.*;
 import objects.clothes.OBJ_Green_Hat;
 import objects.consumables.OBJ_Health_Potion;
 import objects.consumables.OBJ_Mana_Potion;
@@ -64,6 +61,8 @@ public class AssetSetter {
         putObject(new OBJ_Key(gp),0, 21, 22);
 
         putObject(new OBJ_Chest(gp, new OBJ_Green_Hat(gp)),0, 15, 34);
+
+        putObject(new OBJ_Lantern(gp), 0, 18, 20);
     }
 
     public void setMonster () {

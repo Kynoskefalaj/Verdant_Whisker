@@ -77,6 +77,7 @@ public abstract class Entity {
     public int defense = 0;
     public Entity currentWeapon;
     public Entity currentShield;
+    public Entity currentLight;
     public Projectile projectile;
 
 //    ITEM ATTRIBUTES
@@ -92,6 +93,7 @@ public abstract class Entity {
     public int knockBackPower = 0;
     public boolean stackable = false;
     public int amount = 1;
+    public int lightRadius;
 
     // TYPE
 public EntityType type;

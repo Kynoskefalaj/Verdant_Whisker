@@ -23,7 +23,8 @@ public enum EntityType {
     TOOLS(19),
     EMERALD_SWORD(20),
     PICKUP_ONLY(21),
-    NOT_PICKABLE(22);
+    NOT_PICKABLE(22),
+    LIGHT(23);
 
 
     private final int value;
