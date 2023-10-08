@@ -25,6 +25,7 @@ public class Player extends Entity implements Archery {
     public final int screenY;
     int speedBoost = 0;
     public boolean attackCancelled = false;
+    public boolean lightUpdated = false;
 
     int spriteSpeedModifier;
     int notificationCounter = 0;
@@ -615,6 +616,15 @@ public class Player extends Entity implements Archery {
             if (selectedItem.type == EntityType.SHIELD) {
                 currentShield = selectedItem;
                 defense = getDefense();
+            }
+            if(selectedItem.type == EntityType.LIGHT) {
+                if(currentLight == selectedItem) {
+                    currentLight = null;
+                }
+                else {
+                    currentLight = selectedItem;
+                }
+                lightUpdated = true;
             }
             if (selectedItem.type == EntityType.CONSUMABLE) {
 
