@@ -237,11 +237,11 @@ public TileManager tileM;
                 delta--;
                 drawCount++;
             }
-            if (timer >= 1000000000) {
-                System.out.println("FPS: " + drawCount);
-                drawCount = 0;
-                timer = 0;
-            }
+//            if (timer >= 1000000000) {
+//                System.out.println("FPS: " + drawCount);
+//                drawCount = 0;
+//                timer = 0;
+//            }
         }
     }
     public void update() {
@@ -297,6 +297,7 @@ public TileManager tileM;
                     iTile[currentMap][i].update();
                 }
             }
+            eManager.update();
         }
         if(gameState == pauseState) {
             // NOTHING (for that moment)
