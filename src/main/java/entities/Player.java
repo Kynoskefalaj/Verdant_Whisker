@@ -32,6 +32,7 @@ public class Player extends Entity implements Archery {
 
     public Entity[] equipment = new Entity[9];
 
+
     public Player(GamePanel gp, KeyHandler keyH){
         super(gp); // CALLING THE SUPER CLASS CONSTRUCTOR
 
@@ -52,10 +53,6 @@ public class Player extends Entity implements Archery {
 
         type = EntityType.PLAYER;
 
-        // ATTACK AREA
-//        attackArea.width = (int)(22 * gp.scale);
-//        attackArea.height = (int)(22 * gp.scale);
-
         setDefaultValues();
         getPlayerImage();
         getPlayerAttackImage();
@@ -64,8 +61,6 @@ public class Player extends Entity implements Archery {
 
     public void setDefaultValues() {
 
-//        worldX = gp.tileSize * 11;
-//        worldY = gp.tileSize * 8;
         worldX = gp.tileSize * 23;
         worldY = gp.tileSize * 21;
         defaultSpeed = 3;
@@ -100,8 +95,6 @@ public class Player extends Entity implements Archery {
     public void setDefaultPosition() {
         worldX = gp.tileSize * 23;
         worldY = gp.tileSize * 21;
-//        worldX = gp.tileSize * 13;
-//        worldY = gp.tileSize * 32;
         direction = "down";
     }
 
@@ -219,6 +212,7 @@ public class Player extends Entity implements Archery {
     }
     @Override
     public void update() {
+
         resetSpeed();
 
         if (keyH.spacePressed == false) {
@@ -232,7 +226,6 @@ public class Player extends Entity implements Archery {
         if (attacking == true) {
             attacking();
         }
-
         else if(keyH.upPressed == true || keyH.downPressed == true
                 || keyH.leftPressed == true || keyH.rightPressed == true || keyH.enterPressed == true) {
 
@@ -332,6 +325,7 @@ public class Player extends Entity implements Archery {
                 invincibleCounter = 0;
             }
         }
+
         if (shotAvailableCounter < 30) {
             shotAvailableCounter++;
         }
@@ -362,6 +356,7 @@ public class Player extends Entity implements Archery {
         }
     }
     public void attacking () {
+
         attackSpriteCounter++;
 
         if(attackSpriteCounter <= 18 / attackSpeed) {spriteNum = 1;}
@@ -421,7 +416,6 @@ public class Player extends Entity implements Archery {
             }
             else {
                 // INVENTORY ITEMS
-
                 String text;
 
                 if (canObtainItem(gp.objects[gp.currentMap][i]) == true) {
@@ -536,8 +530,6 @@ public class Player extends Entity implements Archery {
                     checkLevelUp();
                 }
             }
-        } else {
-//            System.out.println("Miss!");
         }
     }
     public void knockBack(Entity entity, int knockBackPower){
@@ -613,10 +605,12 @@ public class Player extends Entity implements Archery {
                 attack = getAttack();
                 getPlayerAttackImage();
             }
+
             if (selectedItem.type == EntityType.SHIELD) {
                 currentShield = selectedItem;
                 defense = getDefense();
             }
+
             if(selectedItem.type == EntityType.LIGHT) {
                 if(currentLight == selectedItem) {
                     currentLight = null;
@@ -626,6 +620,7 @@ public class Player extends Entity implements Archery {
                 }
                 lightUpdated = true;
             }
+
             if (selectedItem.type == EntityType.CONSUMABLE) {
 
                 if (selectedItem.use(this) == true) {
@@ -640,6 +635,7 @@ public class Player extends Entity implements Archery {
         }
     }
     public int searchItemInventory(String itemName) {
+
         int itemIndex = 999;
 
         for(int i = 0; i < inventory.size(); i++) {
@@ -677,10 +673,10 @@ public class Player extends Entity implements Archery {
         return canObtain;
     }
     public void resetSpeed () {
+
         speed = 3 + speedBoost;
         spriteSpeedModifier = 0;
     }
-
     public void draw (Graphics2D g2) {
 
         BufferedImage image = null;
@@ -707,7 +703,6 @@ public class Player extends Entity implements Archery {
                         case 5 -> image = attackUp5;
                     }
                 } break;
-
             case "down" :
                 if (attacking == false) {
                     switch (spriteNum) {
@@ -726,7 +721,6 @@ public class Player extends Entity implements Archery {
                         case 5 -> image = attackDown5;
                     }
                 } break;
-
             case "left" :
                 if (attacking == false) {
                     switch (spriteNum) {
@@ -746,7 +740,6 @@ public class Player extends Entity implements Archery {
                         case 5 -> image = attackLeft5;
                     }
                 } break;
-
             case "right" :
                 if (attacking == false) {
                     switch (spriteNum) {
@@ -776,11 +769,6 @@ public class Player extends Entity implements Archery {
         // Reset alpha
 
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
-
-        // DEBUG
-//        g2.setFont(new Font("Arial", Font.PLAIN, 26));
-//        g2.setColor(Color.white);
-//        g2.drawString("Invincible: " + invincibleCounter, 100, 100);
     }
 
     public int checkObject(Entity entity, boolean player) {
