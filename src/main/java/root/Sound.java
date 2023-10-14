@@ -17,7 +17,7 @@ public class Sound {
             talkSE, enterGameSE, swordSlashSE, monsterDeath, hurtSE, exhaustedSE,
             gui1SE, gui2SE, gui3SE, gui4SE,
             mysterySE, cursorSE, explosionSE, projectileCastSE, evilLaughSE, hitBushSE,
-            gameOverSE, stairsSE;
+            gameOverSE, stairsSE, sleepSE;
     public URL[] uiSounds;
 
     public Sound() {
@@ -63,6 +63,8 @@ public class Sound {
         gameOverSE = getClass().getResource("/sound/Game Over.wav");
 
         stairsSE = getClass().getResource("/sound/stairs.wav");
+
+        sleepSE = getClass().getResource("/sound/sleep.wav");
 
         cursorSE = gui1SE;
 

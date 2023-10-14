@@ -157,6 +157,25 @@ public class Player extends Entity implements Archery {
             right3 = setUp("/player/walk/VW_right3", gp.tileSize, gp.tileSize);
             right4 = setUp("/player/walk/VW_right4", gp.tileSize, gp.tileSize);
     }
+
+    public void getSleepingImage(BufferedImage image) {
+        up1 = image;
+        up2 = image;
+        up3 = image;
+        up4 = image;
+        down1 = image;
+        down2 = image;
+        down3 = image;
+        down4 = image;
+        left1 = image;
+        left2 = image;
+        left3 = image;
+        left4 = image;
+        right1 = image;
+        right2 = image;
+        right3 = image;
+        right4 = image;
+    }
     public void getPlayerAttackImage () {
 
         if (currentWeapon.type == EntityType.EMERALD_SWORD) {
