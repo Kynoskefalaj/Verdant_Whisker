@@ -120,6 +120,26 @@ public EntityType type;
     public int getRow() {
         return (worldY + solidArea.y)/gp.tileSize;
     }
+    public int getXdistance (Entity target) {
+        int xDistance = Math.abs(worldX - target.worldX);
+        return xDistance;
+    }
+    public int getYdistance (Entity target) {
+        int yDistance = Math.abs(worldY - target.worldY);
+        return yDistance;
+    }
+    public int getTileDistance (Entity target) {
+        int tileDistance = (getXdistance(target) + getYdistance(target));
+        return tileDistance;
+    }
+    public int getGoalCol (Entity target) {
+        int goalCol = (target.worldX + target.solidArea.x) / gp.tileSize;
+        return goalCol;
+    }
+    public int getGoalRow (Entity target) {
+        int goalRow = (target.worldY + target.solidArea.y) / gp.tileSize;
+        return goalRow;
+    }
     public void setAction () { }
     public void damageReaction () {}
     public void speak () {
@@ -262,6 +282,7 @@ public EntityType type;
             shotAvailableCounter++;
         }
     }
+
     public void attackPlayer (int attack) {
         if(gp.player.invincible == false) {
             int damage; //statements below are for case when armour is bigger than AP

@@ -69,20 +69,24 @@ public class MON_BlueSlime extends Entity implements Creature, GeneratesParticle
         left2 = image3; left3 = image5; left4 = image7; right1 = image1;
         right2 = image3; right3 = image5; right4 = image7;
     }
-
-
-
     @Override
     public void setAction () {
 
+        int xDistance = Math.abs(worldX - gp.player.worldX);
+        int yDistance = Math.abs(worldY - gp.player.worldY);
+        int tileDistance = (xDistance + yDistance)/gp.tileSize;
+
         if (onPath == true) {
-//            int goalCol = 12;
-//            int goalRow = 9;
-            int goalCol = (gp.player.worldX + gp.player.solidArea.x) / gp.tileSize;
-            int goalRow = (gp.player.worldY + gp.player.solidArea.y) / gp.tileSize;
 
-            searchPath(goalCol, goalRow);
+            // Check if it stops chasing
+            if (tileDistance > 20) {
+                onPath = false;
+            }
 
+            // Search the direction to go
+            searchPath(getGoalCol(gp.player), getGoalRow(gp.player));
+
+            // Check if it shoots a projectile
             int i = new Random().nextInt(100)+1;
             if (i > 99 && projectile.alive == false && shotAvailableCounter == 30) {
                 projectile.set(worldX, worldY, direction, true, this);
@@ -95,10 +99,19 @@ public class MON_BlueSlime extends Entity implements Creature, GeneratesParticle
                         break;
                     }
                 }
-
                 shotAvailableCounter = 0;
             }
         } else {
+            // Check if it starts chasing
+            if (tileDistance < 5) {
+
+                int i = new Random().nextInt(100) + 1;
+                if (i > 50) {
+                    onPath = true;
+                }
+            }
+
+            // Get a random direction
             actionLockCounter++;
             if (actionLockCounter == 120) {
                 Random random = new Random();
