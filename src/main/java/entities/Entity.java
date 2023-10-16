@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Random;
 
 public abstract class Entity {
 
@@ -280,6 +281,32 @@ public EntityType type;
         }
         if (shotAvailableCounter < 30) {
             shotAvailableCounter++;
+        }
+    }
+
+    public void checkShootOrNot (int rate, int shotInterval) {
+        int i = new Random().nextInt(rate);
+        if (i == 0 && projectile.alive == false && shotAvailableCounter == shotInterval) {
+            projectile.set(worldX, worldY, direction, true, this);
+
+            //CHECK VACANCY
+            for (int ii = 0; ii < gp.projectile[1].length; ii++){
+                if(gp.projectile[gp.currentMap][ii] == null) {
+                    gp.projectile[gp.currentMap][ii] = projectile;
+                    break;
+                }
+            }
+            shotAvailableCounter = 0;
+        }
+    }
+
+    public void checkStopChasingOrNot (Entity target, int distance, int rate) {
+
+        if (getTileDistance(target) > distance) {
+            int i = new Random().nextInt(rate);
+            if (i == 0) {
+                onPath = false;
+            }
         }
     }
 

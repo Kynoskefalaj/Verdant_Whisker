@@ -79,28 +79,13 @@ public class MON_BlueSlime extends Entity implements Creature, GeneratesParticle
         if (onPath == true) {
 
             // Check if it stops chasing
-            if (tileDistance > 20) {
-                onPath = false;
-            }
+            checkStopChasingOrNot(gp.player, 15, 100);
 
             // Search the direction to go
             searchPath(getGoalCol(gp.player), getGoalRow(gp.player));
 
             // Check if it shoots a projectile
-            int i = new Random().nextInt(100)+1;
-            if (i > 99 && projectile.alive == false && shotAvailableCounter == 30) {
-                projectile.set(worldX, worldY, direction, true, this);
-//                gp.projectilesList.add(projectile);
-
-                //CHECK VACANCY
-                for (int ii = 0; ii < gp.projectile[1].length; ii++){
-                    if(gp.projectile[gp.currentMap][ii] == null) {
-                        gp.projectile[gp.currentMap][ii] = projectile;
-                        break;
-                    }
-                }
-                shotAvailableCounter = 0;
-            }
+            checkShootOrNot(200, 30);
         } else {
             // Check if it starts chasing
             if (tileDistance < 5) {
