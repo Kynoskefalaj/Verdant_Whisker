@@ -72,10 +72,6 @@ public class MON_BlueSlime extends Entity implements Creature, GeneratesParticle
     @Override
     public void setAction () {
 
-        int xDistance = Math.abs(worldX - gp.player.worldX);
-        int yDistance = Math.abs(worldY - gp.player.worldY);
-        int tileDistance = (xDistance + yDistance)/gp.tileSize;
-
         if (onPath == true) {
 
             // Check if it stops chasing
@@ -88,34 +84,10 @@ public class MON_BlueSlime extends Entity implements Creature, GeneratesParticle
             checkShootOrNot(200, 30);
         } else {
             // Check if it starts chasing
-            if (tileDistance < 5) {
-
-                int i = new Random().nextInt(100) + 1;
-                if (i > 50) {
-                    onPath = true;
-                }
-            }
+            checkStartChasingOrNot(gp.player, 5,100);
 
             // Get a random direction
-            actionLockCounter++;
-            if (actionLockCounter == 120) {
-                Random random = new Random();
-                int i = random.nextInt(100) + 1; // pick up a number from 0 to 100
-
-                if (i <= 25) {
-                    direction = "up";
-                }
-                if (i > 25 && i <= 50) {
-                    direction = "down";
-                }
-                if (i > 50 && i <= 75) {
-                    direction = "left";
-                }
-                if (i > 75) {
-                    direction = "right";
-                }
-                actionLockCounter = 0;
-            }
+            getRandomDirection();
         }
 
     }

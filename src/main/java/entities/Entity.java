@@ -300,6 +300,16 @@ public EntityType type;
         }
     }
 
+    public void checkStartChasingOrNot (Entity target, int distance, int rate) {
+
+        if (getTileDistance(target) < distance) {
+            int i = new Random().nextInt(rate);
+            if (i == 0) {
+                onPath = true;
+            }
+        }
+    }
+
     public void checkStopChasingOrNot (Entity target, int distance, int rate) {
 
         if (getTileDistance(target) > distance) {
@@ -307,6 +317,21 @@ public EntityType type;
             if (i == 0) {
                 onPath = false;
             }
+        }
+    }
+
+    public void getRandomDirection() {
+        actionLockCounter++;
+        if (actionLockCounter == 120) {
+            Random random = new Random();
+            int i = random.nextInt(100) + 1; // pick up a number from 0 to 100
+
+            if (i <= 25) {direction = "up";}
+            if (i > 25 && i <= 50) {direction = "down";}
+            if (i > 50 && i <= 75) {direction = "left";}
+            if (i > 75) {direction = "right";}
+
+            actionLockCounter = 0;
         }
     }
 
