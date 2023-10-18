@@ -157,35 +157,28 @@ public EntityType type;
             case "right" -> direction = "left";
         }
     }
-
     public void interact() {}
-
     public boolean use (Entity entity) { return false;}
     public void checkDrop() {}
     public void dropItem(Entity droppedItem) {
         gp.asSetter.dropObject(droppedItem, worldX, worldY);
     }
-
     public Color getParticleColor() {
         Color color = null;
         return color;
     }
-
     public int getParticleSize() {
         int size = 0;
         return size;
     }
-
     public int getParticleSpeed() {
         int speed = 0;
         return speed;
     }
-
     public int getParticleMaxLife() {
         int maxLife = 0 ;
         return maxLife;
     }
-
     public void generateParticle(Entity generator, Entity target) {
         Color color = generator.getParticleColor();
         int size = generator.getParticleSize();
@@ -201,7 +194,6 @@ public EntityType type;
         gp.particlesList.add(pl3);
         gp.particlesList.add(pl4);
     }
-
     public void checkCollision() {
         collisionOn = false;
         gp.cChecker.checkTile(this);
@@ -233,7 +225,6 @@ public EntityType type;
                     case "right" -> worldX += speed;
                 }
             }
-
             knockBackCounter++;
 
             if (knockBackCounter == 10) {
@@ -241,7 +232,6 @@ public EntityType type;
                 knockBack = false;
                 speed = defaultSpeed;
             }
-
         } else {
             setAction();
             checkCollision();
@@ -257,7 +247,6 @@ public EntityType type;
                 }
             }
         }
-
         spriteCounter++;
         if (spriteCounter > 12) {
             if (spriteNum == 1) {
@@ -283,7 +272,6 @@ public EntityType type;
             shotAvailableCounter++;
         }
     }
-
     public void checkShootOrNot (int rate, int shotInterval) {
         int i = new Random().nextInt(rate);
         if (i == 0 && projectile.alive == false && shotAvailableCounter == shotInterval) {
@@ -299,7 +287,6 @@ public EntityType type;
             shotAvailableCounter = 0;
         }
     }
-
     public void checkStartChasingOrNot (Entity target, int distance, int rate) {
 
         if (getTileDistance(target) < distance) {
@@ -309,7 +296,6 @@ public EntityType type;
             }
         }
     }
-
     public void checkStopChasingOrNot (Entity target, int distance, int rate) {
 
         if (getTileDistance(target) > distance) {
@@ -319,7 +305,6 @@ public EntityType type;
             }
         }
     }
-
     public void getRandomDirection() {
         actionLockCounter++;
         if (actionLockCounter == 120) {

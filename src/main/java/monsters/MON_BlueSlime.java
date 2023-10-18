@@ -115,7 +115,6 @@ public class MON_BlueSlime extends Entity implements Creature, GeneratesParticle
             dropItem(new OBJ_Mana_Potion(gp));
         }
     }
-
     @Override
     public void draw (Graphics2D g2) {
 
@@ -180,19 +179,16 @@ public class MON_BlueSlime extends Entity implements Creature, GeneratesParticle
         Color color = new Color(49, 97, 185);
         return color;
     }
-
     @Override
     public int getParticleSize() {
         int size = 6; // 6 pixels;
         return size;
     }
-
     @Override
     public int getParticleSpeed() {
         int speed = 1;
         return speed;
     }
-
     @Override
     public int getParticleMaxLife() {
         int maxLife = 12 ;
