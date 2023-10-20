@@ -4,6 +4,7 @@ import entities.Entity;
 import entities.NPC_Merchant;
 import entities.NPC_OldMan;
 import monsters.MON_BlueSlime;
+import monsters.MON_Orc;
 import monsters.MON_SkeletonMage;
 import objects.*;
 import objects.clothes.OBJ_Green_Hat;
@@ -77,6 +78,8 @@ public class AssetSetter {
         putMonster(new MON_BlueSlime(gp),0, 34, 42);
         putMonster(new MON_BlueSlime(gp),0, 38, 42);
         putMonster(new MON_SkeletonMage(gp),0, 37, 40);
+
+        putMonster(new MON_Orc(gp), 0, 12, 33);
     }
 
     public void setInteractiveTile () {
