@@ -516,10 +516,10 @@ public EntityType type;
         int nextWorldY = user.getTopY();
 
         switch(user.direction) {
-            case "up": nextWorldY = user.getTopY() - 1; break;
-            case "down": nextWorldY = user.getBottomY() + 1; break;
-            case "left": nextWorldX = user.getLeftX() - 1; break;
-            case "right": nextWorldY = user.getRightX() + 1; break;
+            case "up": nextWorldY = user.getTopY() - 10; break;
+            case "down": nextWorldY = user.getBottomY() + 10; break;
+            case "left": nextWorldX = user.getLeftX() - 10; break;
+            case "right": nextWorldY = user.getRightX() + 10; break;
         }
         int col = nextWorldX/gp.tileSize;
         int row = nextWorldY/gp.tileSize;
