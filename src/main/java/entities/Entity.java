@@ -28,6 +28,7 @@ public abstract class Entity {
     public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean collision = false;
     String[] dialogues = new String[20];
+    public Entity attacker;
 
     public URL hitSound, attackSound, deathSound, healSound;
 
@@ -44,6 +45,7 @@ public abstract class Entity {
     public boolean hpBarOn = false;
     public boolean onPath = false;
     public boolean knockBack = false;
+    public String knockBackDirection;
 
     // COUNTER
     public int spriteCounter = 0;
@@ -130,7 +132,7 @@ public EntityType type;
         return yDistance;
     }
     public int getTileDistance (Entity target) {
-        int tileDistance = (getXdistance(target) + getYdistance(target));
+        int tileDistance = (getXdistance(target) + getYdistance(target)) / gp.tileSize;
         return tileDistance;
     }
     public int getGoalCol (Entity target) {
@@ -218,7 +220,7 @@ public EntityType type;
                 speed = defaultSpeed;
             }
             else if (collisionOn == false) {
-                switch (gp.player.direction) {
+                switch (knockBackDirection) {
                     case "up" -> worldY -= speed;
                     case "down" -> worldY += speed;
                     case "left" -> worldX -= speed;
@@ -328,6 +330,13 @@ public EntityType type;
             gp.player.life -= damage;
             gp.player.invincible = true;
         }
+    }
+    public void setKnockBack(Entity target, Entity attacker, int knockBackPower){
+
+        this.attacker = attacker;
+        target.knockBackDirection = attacker.direction;
+        target.speed += knockBackPower;
+        target.knockBack = true;
     }
     public void draw (Graphics2D g2) {
 
