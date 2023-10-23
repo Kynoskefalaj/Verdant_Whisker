@@ -378,7 +378,7 @@ public class Player extends Entity implements Archery {
 
         attackSpriteCounter++;
 
-        if(attackSpriteCounter <= 18 / attackSpeed) {spriteNum = 1;}
+        if (attackSpriteCounter <= 18 / attackSpeed) {spriteNum = 1;}
         if (attackSpriteCounter > 18 / attackSpeed && attackSpriteCounter <= 54 / attackSpeed) {spriteNum = 2;}
         if (attackSpriteCounter > 54 / attackSpeed && attackSpriteCounter <= 108 / attackSpeed) {
             damageMonster(checkWhatsHit(), this, attack, currentWeapon.knockBackPower);

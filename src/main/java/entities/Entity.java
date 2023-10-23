@@ -274,6 +274,44 @@ public EntityType type;
             shotAvailableCounter++;
         }
     }
+    public void checkAttackOrNot(int rate, int straight, int horizontal) {
+        boolean targetInRange = false;
+        int xDis = getXdistance(gp.player);
+        int yDis = getYdistance(gp.player);
+
+        switch (direction) {
+            case "up":
+                if (gp.player.worldY < worldY && yDis < straight && xDis < horizontal) {
+                    targetInRange = true;
+                }
+                break;
+            case "down":
+                if (gp.player.worldY > worldY && yDis < straight && xDis < horizontal) {
+                    targetInRange = true;
+                }
+                break;
+            case "left":
+                if (gp.player.worldY < worldY && xDis < straight && yDis < horizontal) {
+                    targetInRange = true;
+                }
+                break;
+            case "right":
+                if (gp.player.worldY > worldY && xDis < straight && yDis < horizontal) {
+                    targetInRange = true;
+                }
+                break;
+        }
+        if (targetInRange == true) {
+            // Check if it initiates an attack
+            int i = new Random().nextInt(rate);
+            if(i == 0) {
+                attacking = true;
+                spriteNum = 1;
+                attackSpriteCounter = 0;
+                shotAvailableCounter = 0;
+            }
+        }
+    }
     public void checkShootOrNot (int rate, int shotInterval) {
         int i = new Random().nextInt(rate);
         if (i == 0 && projectile.alive == false && shotAvailableCounter == shotInterval) {
@@ -321,7 +359,80 @@ public EntityType type;
             actionLockCounter = 0;
         }
     }
+    public void attacking () {
 
+        attackSpriteCounter++;
+
+        if (attackSpriteCounter <= 5) {
+            spriteNum = 1;
+        }
+        if (attackSpriteCounter > 5 && attackSpriteCounter <= 25) {
+            spriteNum = 2;
+
+            // Save the current worldX, worldY, solidArea
+            int currentWorldX = worldX;
+            int currentWorldY = worldY;
+            int solidAreaWidth = solidArea.width;
+            int solidAreaHeight = solidArea.height;
+
+            // Adjust player's worldX/Y for the attackArea
+            switch (direction) {
+                case "up": worldY -= attackArea.height; break;
+                case "down": worldY += attackArea.height; break;
+                case "left": worldX -= attackArea.width; break;
+                case "right": worldX += attackArea.width; break;
+            }
+            // attackArea becomes solidArea
+            solidArea.width = attackArea.width;
+            solidArea.height = attackArea.height;
+
+            if (type == EntityType.MONSTER) {
+                if (gp.cChecker.checkPlayer(this) == true) {
+                    attackPlayer(attack);
+                }
+            } else { // Player
+                // Check monster collision with the updated worldX, worldY and solidArea
+                int monsterIndex = gp.cChecker.checkEntity(this, gp.monsters);
+                gp.player.damageMonster(monsterIndex, this, attack, currentWeapon.knockBackPower);
+
+                int iTileIndex = gp.cChecker.checkEntity(this, gp.iTile);
+                gp.player.damageInteractiveTile(iTileIndex);
+
+                int projectileIndex = gp.cChecker.checkEntity(this, gp.projectile);
+                gp.player.damageProjectile(projectileIndex);
+            }
+
+
+            // After checking collision, restore the original data
+            worldX = currentWorldX;
+            worldY = currentWorldY;
+            solidArea.width = solidAreaWidth;
+            solidArea.height = solidAreaHeight;
+        }
+        if (attackSpriteCounter > 25) {
+            spriteNum = 1;
+            spriteCounter = 0;
+            attacking = false;
+        }
+    }
+
+
+//        if (attackSpriteCounter <= 5 / attackSpeed) {spriteNum = 1;}
+//        if (attackSpriteCounter > 18 / attackSpeed && attackSpriteCounter <= 54 / attackSpeed) {spriteNum = 2;}
+//        if (attackSpriteCounter > 54 / attackSpeed && attackSpriteCounter <= 108 / attackSpeed) {
+//            damageMonster(checkWhatsHit(), this, attack, currentWeapon.knockBackPower);
+//            spriteNum = 3;
+//            int iTileIndex = gp.cChecker.checkEntity(this, gp.iTile);
+//            damageInteractiveTile(iTileIndex);
+//        }
+//        if (attackSpriteCounter > 108 / attackSpeed && attackSpriteCounter <= 144 / attackSpeed) {spriteNum = 4;}
+//        if (attackSpriteCounter > 144 / attackSpeed && attackSpriteCounter <= 162 / attackSpeed) {spriteNum = 5;}
+//        if (attackSpriteCounter > 162 / attackSpeed) { //default 162 / 6 = 27 (~0.5s)
+//            spriteNum = 1;
+//            attackSpriteCounter = 0;
+//            attacking = false;
+//        }
+//    }
     public void attackPlayer (int attack) {
         if(gp.player.invincible == false) {
             int damage; //statements below are for case when armour is bigger than AP
