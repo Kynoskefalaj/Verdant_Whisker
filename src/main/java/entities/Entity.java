@@ -234,7 +234,11 @@ public EntityType type;
                 knockBack = false;
                 speed = defaultSpeed;
             }
-        } else {
+        }
+        else if (attacking == true) {
+            attacking();
+        }
+        else {
             setAction();
             checkCollision();
 
@@ -248,19 +252,20 @@ public EntityType type;
                     case "right" -> worldX += speed;
                 }
             }
-        }
-        spriteCounter++;
-        if (spriteCounter > 12) {
-            if (spriteNum == 1) {
-                spriteNum = 2;
-            } else if (spriteNum == 2) {
-                spriteNum = 3;
-            } else if (spriteNum == 3) {
-                spriteNum = 4;
-            } else if (spriteNum == 4) {
-                spriteNum = 1;
+
+            spriteCounter++;
+            if (spriteCounter > 12) {
+                if (spriteNum == 1) {
+                    spriteNum = 2;
+                } else if (spriteNum == 2) {
+                    spriteNum = 3;
+                } else if (spriteNum == 3) {
+                    spriteNum = 4;
+                } else if (spriteNum == 4) {
+                    spriteNum = 1;
+                }
+                spriteCounter = 0;
             }
-            spriteCounter = 0;
         }
 
         if (invincible == true) {
@@ -363,10 +368,10 @@ public EntityType type;
 
         attackSpriteCounter++;
 
-        if (attackSpriteCounter <= 5) {
+        if (attackSpriteCounter <= 40) {
             spriteNum = 1;
         }
-        if (attackSpriteCounter > 5 && attackSpriteCounter <= 25) {
+        if (attackSpriteCounter > 5 && attackSpriteCounter <= 85) {
             spriteNum = 2;
 
             // Save the current worldX, worldY, solidArea
@@ -409,7 +414,7 @@ public EntityType type;
             solidArea.width = solidAreaWidth;
             solidArea.height = solidAreaHeight;
         }
-        if (attackSpriteCounter > 25) {
+        if (attackSpriteCounter > 85) {
             spriteNum = 1;
             spriteCounter = 0;
             attacking = false;
@@ -459,31 +464,84 @@ public EntityType type;
                 worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
                 worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
                 worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
+            int tempScreenX = screenX;
+            int tempScreenY = screenY;
+
             switch (direction) {
-                case "up":
-                    if (spriteNum == 1) {image = up1;}
-                    else if (spriteNum == 2) {image = up2;}
-                    else if (spriteNum == 3) {image = up3;}
-                    else if (spriteNum == 4) {image = up4;}
-                    break;
-                case "down":
-                    if (spriteNum == 1) {image = down1;}
-                    else if (spriteNum == 2) {image = down2;}
-                    else if (spriteNum == 3) {image = down3;}
-                    else if (spriteNum == 4) {image = down4;}
-                    break;
-                case "left":
-                    if (spriteNum == 1) {image = left1;}
-                    else if (spriteNum == 2) {image = left2;}
-                    else if (spriteNum == 3) {image = left3;}
-                    else if (spriteNum == 4) {image = left4;}
-                    break;
-                case "right":
-                    if (spriteNum == 1) {image = right1;}
-                    else if (spriteNum == 2) {image = right2;}
-                    else if (spriteNum == 3) {image = right3;}
-                    else if (spriteNum == 4) {image = right4;}
-                    break;
+                case "up" :
+                    if (attacking == false) {
+                        switch (spriteNum) {
+                            case 1 -> image = up1;
+                            case 2 -> image = up2;
+                            case 3 -> image = up3;
+                            case 4 -> image = up4;
+                        }
+                    }
+                    if (attacking == true) {
+                        tempScreenY -= gp.tileSize;
+                        switch (spriteNum) {
+                            case 1 -> image = attackUp1;
+                            case 2 -> image = attackUp2;
+                            case 3 -> image = attackUp3;
+                            case 4 -> image = attackUp4;
+                            case 5 -> image = attackUp5;
+                        }
+                    } break;
+                case "down" :
+                    if (attacking == false) {
+                        switch (spriteNum) {
+                            case 1 -> image = down1;
+                            case 2 -> image = down2;
+                            case 3 -> image = down3;
+                            case 4 -> image = down4;
+                        }
+                    }
+                    if (attacking == true) {
+                        switch (spriteNum) {
+                            case 1 -> image = attackDown1;
+                            case 2 -> image = attackDown2;
+                            case 3 -> image = attackDown3;
+                            case 4 -> image = attackDown4;
+                            case 5 -> image = attackDown5;
+                        }
+                    } break;
+                case "left" :
+                    if (attacking == false) {
+                        switch (spriteNum) {
+                            case 1 -> image = left1;
+                            case 2 -> image = left2;
+                            case 3 -> image = left3;
+                            case 4 -> image = left4;
+                        }
+                    }
+                    if (attacking == true) {
+                        tempScreenX -= gp.tileSize;
+                        switch (spriteNum) {
+                            case 1 -> image = attackLeft1;
+                            case 2 -> image = attackLeft2;
+                            case 3 -> image = attackLeft3;
+                            case 4 -> image = attackLeft4;
+                            case 5 -> image = attackLeft5;
+                        }
+                    } break;
+                case "right" :
+                    if (attacking == false) {
+                        switch (spriteNum) {
+                            case 1 -> image = right1;
+                            case 2 -> image = right2;
+                            case 3 -> image = right3;
+                            case 4 -> image = right4;
+                        }
+                    }
+                    if (attacking == true) {
+                        switch (spriteNum) {
+                            case 1 -> image = attackRight1;
+                            case 2 -> image = attackRight2;
+                            case 3 -> image = attackRight3;
+                            case 4 -> image = attackRight4;
+                            case 5 -> image = attackRight5;
+                        }
+                    } break;
             }
 
             // Monster HP Bar
@@ -513,7 +571,7 @@ public EntityType type;
                 dyingAnimation(g2);
             }
 
-            g2.drawImage(image, screenX, screenY,null);
+            g2.drawImage(image, tempScreenX, tempScreenY,null);
 
             changeAlpha(g2,1f);
         }

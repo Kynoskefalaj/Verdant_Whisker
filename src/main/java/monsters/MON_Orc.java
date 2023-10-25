@@ -64,14 +64,14 @@ public class MON_Orc extends Entity {
         right2 = setUp("/monsters/orc/orc_right_2", gp.tileSize, gp.tileSize);
     }
     public void getAttackImage() {
-        attackUp1 = setUp("/monsters/orc/orc_attack_up_1", gp.tileSize, gp.tileSize);
-        attackUp2 = setUp("/monsters/orc/orc_attack_up_2", gp.tileSize, gp.tileSize);
-        attackDown1 = setUp("/monsters/orc/orc_attack_down_1", gp.tileSize, gp.tileSize);
-        attackDown2 = setUp("/monsters/orc/orc_attack_down_2", gp.tileSize, gp.tileSize);
-        attackLeft1 = setUp("/monsters/orc/orc_attack_left_1", gp.tileSize, gp.tileSize);
-        attackLeft2 = setUp("/monsters/orc/orc_attack_left_2", gp.tileSize, gp.tileSize);
-        attackRight1 = setUp("/monsters/orc/orc_attack_right_1", gp.tileSize, gp.tileSize);
-        attackRight2 = setUp("/monsters/orc/orc_attack_right_2", gp.tileSize, gp.tileSize);
+        attackUp1 = setUp("/monsters/orc/orc_attack_up_1", gp.tileSize, gp.tileSize*2);
+        attackUp2 = setUp("/monsters/orc/orc_attack_up_2", gp.tileSize, gp.tileSize*2);
+        attackDown1 = setUp("/monsters/orc/orc_attack_down_1", gp.tileSize, gp.tileSize*2);
+        attackDown2 = setUp("/monsters/orc/orc_attack_down_2", gp.tileSize, gp.tileSize*2);
+        attackLeft1 = setUp("/monsters/orc/orc_attack_left_1", gp.tileSize*2, gp.tileSize);
+        attackLeft2 = setUp("/monsters/orc/orc_attack_left_2", gp.tileSize*2, gp.tileSize);
+        attackRight1 = setUp("/monsters/orc/orc_attack_right_1", gp.tileSize*2, gp.tileSize);
+        attackRight2 = setUp("/monsters/orc/orc_attack_right_2", gp.tileSize*2, gp.tileSize);
     }
     @Override
     public void setAction () {
@@ -90,6 +90,11 @@ public class MON_Orc extends Entity {
 
             // Get a random direction
             getRandomDirection();
+        }
+
+        // Check if it attacks
+        if (attacking == false) {
+            checkAttackOrNot(30, gp.tileSize * 4, gp.tileSize);
         }
 
     }
