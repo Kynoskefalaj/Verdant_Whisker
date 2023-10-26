@@ -158,7 +158,6 @@ public class MON_Orc extends Entity {
                     }
                 }
                 if (attacking == true) {
-                    screenY -= gp.tileSize;
                     switch (spriteNum) {
                         case 1 -> image = attackDown1;
                         case 2 -> image = attackDown2;
@@ -176,7 +175,7 @@ public class MON_Orc extends Entity {
                     }
                 }
                 if (attacking == true) {
-                    screenY -= gp.tileSize;
+                    screenX -= gp.tileSize;
                     switch (spriteNum) {
                         case 1 -> image = attackLeft1;
                         case 2 -> image = attackLeft2;
@@ -194,7 +193,6 @@ public class MON_Orc extends Entity {
                     }
                 }
                 if (attacking == true) {
-                    screenY -= gp.tileSize;
                     switch (spriteNum) {
                         case 1 -> image = attackRight1;
                         case 2 -> image = attackRight2;
