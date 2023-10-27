@@ -147,7 +147,7 @@ public class MON_Orc extends Entity {
             }
         }
         else if (attacking == true) {
-            attacking(200);
+            attacking(10);
         }
         else {
             setAction();

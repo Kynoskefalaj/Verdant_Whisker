@@ -420,14 +420,14 @@ public EntityType type;
             attacking = false;
         }
     }
-    public void attacking (int speed) {
+    public void attacking (int delay) {
 
         attackSpriteCounter++;
 
-        if (attackSpriteCounter <= 4 * speed) {
+        if (attackSpriteCounter <= 4 * delay) {
             spriteNum = 1;
         }
-        if (attackSpriteCounter > 5 && attackSpriteCounter <= 8 * speed) {
+        if (attackSpriteCounter > 4 * delay && attackSpriteCounter <= 7 * delay) {
             spriteNum = 2;
 
             // Save the current worldX, worldY, solidArea
@@ -463,37 +463,18 @@ public EntityType type;
                 gp.player.damageProjectile(projectileIndex);
             }
 
-
             // After checking collision, restore the original data
             worldX = currentWorldX;
             worldY = currentWorldY;
             solidArea.width = solidAreaWidth;
             solidArea.height = solidAreaHeight;
         }
-        if (attackSpriteCounter > 85) {
+        if (attackSpriteCounter > 7 * delay) {
             spriteNum = 1;
             spriteCounter = 0;
             attacking = false;
         }
     }
-
-
-//        if (attackSpriteCounter <= 5 / attackSpeed) {spriteNum = 1;}
-//        if (attackSpriteCounter > 18 / attackSpeed && attackSpriteCounter <= 54 / attackSpeed) {spriteNum = 2;}
-//        if (attackSpriteCounter > 54 / attackSpeed && attackSpriteCounter <= 108 / attackSpeed) {
-//            damageMonster(checkWhatsHit(), this, attack, currentWeapon.knockBackPower);
-//            spriteNum = 3;
-//            int iTileIndex = gp.cChecker.checkEntity(this, gp.iTile);
-//            damageInteractiveTile(iTileIndex);
-//        }
-//        if (attackSpriteCounter > 108 / attackSpeed && attackSpriteCounter <= 144 / attackSpeed) {spriteNum = 4;}
-//        if (attackSpriteCounter > 144 / attackSpeed && attackSpriteCounter <= 162 / attackSpeed) {spriteNum = 5;}
-//        if (attackSpriteCounter > 162 / attackSpeed) { //default 162 / 6 = 27 (~0.5s)
-//            spriteNum = 1;
-//            attackSpriteCounter = 0;
-//            attacking = false;
-//        }
-//    }
     public void attackPlayer (int attack) {
         if(gp.player.invincible == false) {
             int damage; //statements below are for case when armour is bigger than AP
