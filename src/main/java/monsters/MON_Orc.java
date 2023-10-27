@@ -4,7 +4,6 @@ import entities.Entity;
 import entities.EntityType;
 import objects.OBJ_Bronze_Coin;
 import objects.consumables.OBJ_Mana_Potion;
-import objects.projectiles.OBJ_Rock;
 import root.GamePanel;
 
 import java.awt.*;
@@ -20,8 +19,6 @@ public class MON_Orc extends Entity {
         type = EntityType.MONSTER;
         this.gp = gp;
         name = "Orc";
-
-//        projectile = new OBJ_Rock(gp);
 
         solidArea.x = (int)(4 * gp.scale);
         solidArea.y = (int)(4 * gp.scale);
@@ -94,7 +91,7 @@ public class MON_Orc extends Entity {
 
         // Check if it attacks
         if (attacking == false) {
-            checkAttackOrNot(30, gp.tileSize * 4, gp.tileSize);
+            checkAttackOrNot(20, gp.tileSize * 3, gp.tileSize);
         }
 
     }
@@ -120,6 +117,77 @@ public class MON_Orc extends Entity {
         }
         if (i >=90 && i < 100) {
             dropItem(new OBJ_Mana_Potion(gp));
+        }
+    }
+    public void update () {
+
+        if (knockBack == true) {
+            checkCollision();
+
+            if(collisionOn == true) {
+                // We need to cancel knockBack effect if it hits object
+                knockBackCounter = 0;
+                knockBack = false;
+                speed = defaultSpeed;
+            }
+            else if (collisionOn == false) {
+                switch (knockBackDirection) {
+                    case "up" -> worldY -= speed;
+                    case "down" -> worldY += speed;
+                    case "left" -> worldX -= speed;
+                    case "right" -> worldX += speed;
+                }
+            }
+            knockBackCounter++;
+
+            if (knockBackCounter == 10) {
+                knockBackCounter = 0;
+                knockBack = false;
+                speed = defaultSpeed;
+            }
+        }
+        else if (attacking == true) {
+            attacking(200);
+        }
+        else {
+            setAction();
+            checkCollision();
+
+            // IF COLLISION IS FALSE, ENTITY CAN MOVE
+            if(collisionOn == false) {
+
+                switch (direction) {
+                    case "up" -> worldY -= speed;
+                    case "down" -> worldY += speed;
+                    case "left" -> worldX -= speed;
+                    case "right" -> worldX += speed;
+                }
+            }
+
+            spriteCounter++;
+            if (spriteCounter > 12) {
+                if (spriteNum == 1) {
+                    spriteNum = 2;
+                } else if (spriteNum == 2) {
+                    spriteNum = 3;
+                } else if (spriteNum == 3) {
+                    spriteNum = 4;
+                } else if (spriteNum == 4) {
+                    spriteNum = 1;
+                }
+                spriteCounter = 0;
+            }
+        }
+
+        if (invincible == true) {
+            invincibleCounter++;
+            if (invincibleCounter > 40) {
+                invincible = false;
+                invincibleCounter = 0;
+            }
+        }
+        if (shotAvailableCounter < 30) {
+            shotAvailableCounter++;
         }
     }
     @Override
