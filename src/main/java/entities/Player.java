@@ -229,6 +229,27 @@ public class Player extends Entity implements Archery {
             attackRight5 = setUp("/player/combat/Blink_right_smear_5", gp.tileSize * 2, gp.tileSize);
         }
     }
+    public void getPlayerGuardImage () {
+        guardDown1 = setUp("/player/combat/Blink_down_block_1", gp.tileSize, gp.tileSize);
+        guardDown2 = setUp("/player/combat/Blink_down_block_2", gp.tileSize, gp.tileSize);
+        guardDown3 = setUp("/player/combat/Blink_down_block_3", gp.tileSize, gp.tileSize);
+        guardDown4 = setUp("/player/combat/Blink_down_block_4", gp.tileSize, gp.tileSize);
+
+        guardUp1 = setUp("/player/combat/Blink_up_block_1", gp.tileSize, gp.tileSize);
+        guardUp2 = setUp("/player/combat/Blink_up_block_2", gp.tileSize, gp.tileSize);
+        guardUp3 = setUp("/player/combat/Blink_up_block_3", gp.tileSize, gp.tileSize);
+        guardUp4 = setUp("/player/combat/Blink_up_block_4", gp.tileSize, gp.tileSize);
+
+        guardLeft1 = setUp("/player/combat/Blink_left_block_1", gp.tileSize, gp.tileSize);
+        guardLeft2 = setUp("/player/combat/Blink_left_block_3", gp.tileSize, gp.tileSize);
+        guardLeft3 = setUp("/player/combat/Blink_left_block_3", gp.tileSize, gp.tileSize);
+        guardLeft4 = setUp("/player/combat/Blink_left_block_4", gp.tileSize, gp.tileSize);
+
+        guardRight1 = setUp("/player/combat/Blink_right_block_1", gp.tileSize, gp.tileSize);
+        guardRight2 = setUp("/player/combat/Blink_right_block_2", gp.tileSize, gp.tileSize);
+        guardRight3 = setUp("/player/combat/Blink_right_block_3", gp.tileSize, gp.tileSize);
+        guardRight4 = setUp("/player/combat/Blink_right_block_4", gp.tileSize, gp.tileSize);
+    }
     @Override
     public void update() {
 

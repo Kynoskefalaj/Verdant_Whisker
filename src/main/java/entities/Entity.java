@@ -23,6 +23,10 @@ public abstract class Entity {
             attackDown1, attackDown2, attackDown3, attackDown4, attackDown5,
             attackLeft1, attackLeft2, attackLeft3, attackLeft4, attackLeft5,
             attackRight1, attackRight2, attackRight3, attackRight4, attackRight5;
+    public BufferedImage guardUp1, guardUp2, guardUp3, guardUp4,
+            guardDown1, guardDown2, guardDown3, guardDown4,
+            guardLeft1, guardLeft2, guardLeft3, guardLeft4,
+            guardRight1, guardRight2, guardRight3, guardRight4;
     public Rectangle solidArea;
     public Rectangle attackArea = new Rectangle(0, 0, 0, 0);
     public int solidAreaDefaultX, solidAreaDefaultY;
@@ -46,6 +50,7 @@ public abstract class Entity {
     public boolean onPath = false;
     public boolean knockBack = false;
     public String knockBackDirection;
+    public boolean guarding = false;
 
     // COUNTER
     public int spriteCounter = 0;
