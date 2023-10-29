@@ -25,7 +25,7 @@ public class MON_Orc extends Entity {
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
         solidArea.width = (int)(20 * gp.scale);
-        solidArea.height = (int)(22 * gp.scale);
+        solidArea.height = (int)(22 * gp.scale) + 9;
         attackArea.width = 48;
         attackArea.height = 48;
 
@@ -120,6 +120,8 @@ public class MON_Orc extends Entity {
         }
     }
     public void update () {
+
+        System.out.println(worldY);
 
         if (knockBack == true) {
             checkCollision();

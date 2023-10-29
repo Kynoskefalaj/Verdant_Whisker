@@ -80,6 +80,7 @@ public class AssetSetter {
         putMonster(new MON_SkeletonMage(gp),0, 37, 40);
 
         putMonster(new MON_Orc(gp), 0, 12, 33);
+        putMonster(new MON_BlueSlime(gp),0, 12, 32);
     }
 
     public void setInteractiveTile () {

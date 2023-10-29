@@ -89,11 +89,13 @@ public class Lighting {
         }
 
         // Check the state of the day
+        int daytimeDuration = 100 * 20;
+
         if(dayState == day) {
 
             dayCounter++;
 
-            if(dayCounter > 600) {
+            if(dayCounter > daytimeDuration) {
                 dayState = dusk;
                 dayCounter = 0;
             }
@@ -111,7 +113,7 @@ public class Lighting {
 
             dayCounter++;
 
-            if (dayCounter > 600) {
+            if (dayCounter > daytimeDuration) {
                 dayState = dawn;
                 dayCounter = 0;
             }
