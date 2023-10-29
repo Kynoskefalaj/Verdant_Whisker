@@ -54,8 +54,9 @@ public class Player extends Entity implements Archery {
         type = EntityType.PLAYER;
 
         setDefaultValues();
-        getPlayerImage();
-        getPlayerAttackImage();
+        getImage();
+        getAttackImage();
+        getGuardImage();
         setItems();
     }
 
@@ -139,7 +140,7 @@ public class Player extends Entity implements Archery {
     public int getDefense() {
         return defense = agility * currentShield.defenseValue;
     }
-    public void getPlayerImage() {
+    public void getImage() {
             up1 = setUp("/player/walk/VW_up", gp.tileSize, gp.tileSize);
             up2 = setUp("/player/walk/VW_up2", gp.tileSize, gp.tileSize);
             up3 = setUp("/player/walk/VW_up3", gp.tileSize, gp.tileSize);
@@ -176,7 +177,7 @@ public class Player extends Entity implements Archery {
         right3 = image;
         right4 = image;
     }
-    public void getPlayerAttackImage () {
+    public void getAttackImage() {
 
         if (currentWeapon.type == EntityType.EMERALD_SWORD) {
             attackUp1 = setUp("/player/combat/emerald/Blink_up_emerald_smear_1", gp.tileSize, gp.tileSize * 2);
@@ -229,26 +230,26 @@ public class Player extends Entity implements Archery {
             attackRight5 = setUp("/player/combat/Blink_right_smear_5", gp.tileSize * 2, gp.tileSize);
         }
     }
-    public void getPlayerGuardImage () {
-        guardDown1 = setUp("/player/combat/Blink_down_block_1", gp.tileSize, gp.tileSize);
-        guardDown2 = setUp("/player/combat/Blink_down_block_2", gp.tileSize, gp.tileSize);
-        guardDown3 = setUp("/player/combat/Blink_down_block_3", gp.tileSize, gp.tileSize);
-        guardDown4 = setUp("/player/combat/Blink_down_block_4", gp.tileSize, gp.tileSize);
+    public void getGuardImage() {
+        guardDown1 = setUp("/player/combat/block/Blink_down_block_1", gp.tileSize, gp.tileSize);
+        guardDown2 = setUp("/player/combat/block/Blink_down_block_2", gp.tileSize, gp.tileSize);
+        guardDown3 = setUp("/player/combat/block/Blink_down_block_3", gp.tileSize, gp.tileSize);
+        guardDown4 = setUp("/player/combat/block/Blink_down_block_4", gp.tileSize, gp.tileSize);
 
-        guardUp1 = setUp("/player/combat/Blink_up_block_1", gp.tileSize, gp.tileSize);
-        guardUp2 = setUp("/player/combat/Blink_up_block_2", gp.tileSize, gp.tileSize);
-        guardUp3 = setUp("/player/combat/Blink_up_block_3", gp.tileSize, gp.tileSize);
-        guardUp4 = setUp("/player/combat/Blink_up_block_4", gp.tileSize, gp.tileSize);
+        guardUp1 = setUp("/player/combat/block/Blink_up_block_1", gp.tileSize, gp.tileSize);
+        guardUp2 = setUp("/player/combat/block/Blink_up_block_2", gp.tileSize, gp.tileSize);
+        guardUp3 = setUp("/player/combat/block/Blink_up_block_3", gp.tileSize, gp.tileSize);
+        guardUp4 = setUp("/player/combat/block/Blink_up_block_4", gp.tileSize, gp.tileSize);
 
-        guardLeft1 = setUp("/player/combat/Blink_left_block_1", gp.tileSize, gp.tileSize);
-        guardLeft2 = setUp("/player/combat/Blink_left_block_3", gp.tileSize, gp.tileSize);
-        guardLeft3 = setUp("/player/combat/Blink_left_block_3", gp.tileSize, gp.tileSize);
-        guardLeft4 = setUp("/player/combat/Blink_left_block_4", gp.tileSize, gp.tileSize);
+        guardLeft1 = setUp("/player/combat/block/Blink_left_block_1", gp.tileSize, gp.tileSize);
+        guardLeft2 = setUp("/player/combat/block/Blink_left_block_3", gp.tileSize, gp.tileSize);
+        guardLeft3 = setUp("/player/combat/block/Blink_left_block_3", gp.tileSize, gp.tileSize);
+        guardLeft4 = setUp("/player/combat/block/Blink_left_block_4", gp.tileSize, gp.tileSize);
 
-        guardRight1 = setUp("/player/combat/Blink_right_block_1", gp.tileSize, gp.tileSize);
-        guardRight2 = setUp("/player/combat/Blink_right_block_2", gp.tileSize, gp.tileSize);
-        guardRight3 = setUp("/player/combat/Blink_right_block_3", gp.tileSize, gp.tileSize);
-        guardRight4 = setUp("/player/combat/Blink_right_block_4", gp.tileSize, gp.tileSize);
+        guardRight1 = setUp("/player/combat/block/Blink_right_block_1", gp.tileSize, gp.tileSize);
+        guardRight2 = setUp("/player/combat/block/Blink_right_block_2", gp.tileSize, gp.tileSize);
+        guardRight3 = setUp("/player/combat/block/Blink_right_block_3", gp.tileSize, gp.tileSize);
+        guardRight4 = setUp("/player/combat/block/Blink_right_block_4", gp.tileSize, gp.tileSize);
     }
     @Override
     public void update() {
@@ -266,6 +267,10 @@ public class Player extends Entity implements Archery {
         if (attacking == true) {
             attacking();
         }
+        else if (keyH.qPressed == true) {
+            guarding = true;
+        }
+
         else if(keyH.upPressed == true || keyH.downPressed == true
                 || keyH.leftPressed == true || keyH.rightPressed == true || keyH.enterPressed == true) {
 
@@ -335,6 +340,7 @@ public class Player extends Entity implements Archery {
             keyH.enterPressed = false;
 
             gp.keyH.enterPressed = false;
+            guarding = false;
 
             spriteCounter++;
 
@@ -351,6 +357,9 @@ public class Player extends Entity implements Archery {
                 spriteCounter = 0;
             }
         }
+
+        // Guarding becomes false if you are not pressing any key
+//        guarding = false;
 
         if (gp.keyH.controlPressed == true && projectile.alive == false &&
                 shotAvailableCounter == 30 && projectile.haveResource(this) == true) {
@@ -637,7 +646,7 @@ public class Player extends Entity implements Archery {
 
                 currentWeapon = selectedItem;
                 attack = getAttack();
-                getPlayerAttackImage();
+                getAttackImage();
             }
 
             if (selectedItem.type == EntityType.SHIELD) {
@@ -736,7 +745,16 @@ public class Player extends Entity implements Archery {
                         case 4 -> image = attackUp4;
                         case 5 -> image = attackUp5;
                     }
-                } break;
+                }
+                if (guarding == true) {
+                    switch (spriteNum) {
+                        case 1 -> image = guardUp1;
+                        case 2 -> image = guardUp2;
+                        case 3 -> image = guardUp3;
+                        case 4 -> image = guardUp4;
+                    }
+                }
+                break;
             case "down" :
                 if (attacking == false) {
                     switch (spriteNum) {
@@ -754,7 +772,16 @@ public class Player extends Entity implements Archery {
                         case 4 -> image = attackDown4;
                         case 5 -> image = attackDown5;
                     }
-                } break;
+                }
+                if (guarding == true) {
+                    switch (spriteNum) {
+                        case 1 -> image = guardDown1;
+                        case 2 -> image = guardDown2;
+                        case 3 -> image = guardDown3;
+                        case 4 -> image = guardDown4;
+                    }
+                }
+                break;
             case "left" :
                 if (attacking == false) {
                     switch (spriteNum) {
@@ -773,7 +800,16 @@ public class Player extends Entity implements Archery {
                         case 4 -> image = attackLeft4;
                         case 5 -> image = attackLeft5;
                     }
-                } break;
+                }
+                if (guarding == true) {
+                    switch (spriteNum) {
+                        case 1 -> image = guardLeft1;
+                        case 2 -> image = guardLeft2;
+                        case 3 -> image = guardLeft3;
+                        case 4 -> image = guardLeft4;
+                    }
+                }
+                break;
             case "right" :
                 if (attacking == false) {
                     switch (spriteNum) {
@@ -791,7 +827,16 @@ public class Player extends Entity implements Archery {
                         case 4 -> image = attackRight4;
                         case 5 -> image = attackRight5;
                     }
-                } break;
+                }
+                if (guarding == true) {
+                    switch (spriteNum) {
+                        case 1 -> image = guardRight1;
+                        case 2 -> image = guardRight2;
+                        case 3 -> image = guardRight3;
+                        case 4 -> image = guardRight4;
+                    }
+                }
+                break;
         }
 
         if (invincible == true) {

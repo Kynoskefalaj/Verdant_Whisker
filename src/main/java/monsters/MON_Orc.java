@@ -121,8 +121,6 @@ public class MON_Orc extends Entity {
     }
     public void update () {
 
-        System.out.println(worldY);
-
         if (knockBack == true) {
             checkCollision();
 
