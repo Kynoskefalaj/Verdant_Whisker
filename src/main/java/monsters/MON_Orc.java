@@ -26,8 +26,8 @@ public class MON_Orc extends Entity {
         solidAreaDefaultY = solidArea.y;
         solidArea.width = (int)(20 * gp.scale);
         solidArea.height = (int)(22 * gp.scale) + 9;
-        attackArea.width = 48;
-        attackArea.height = 48;
+        attackArea.width = gp.tileSize - 10;
+        attackArea.height = gp.tileSize - 10;
 
         getImage();
         getAttackImage();

@@ -369,6 +369,18 @@ public EntityType type;
             actionLockCounter = 0;
         }
     }
+    public String getOppositeDirection(String direction) {
+
+        String oppositeDirection = "";
+
+        switch (direction) {
+            case "up": oppositeDirection = "down"; break;
+            case "down": oppositeDirection = "up"; break;
+            case "left": oppositeDirection = "right"; break;
+            case "right": oppositeDirection = "left"; break;
+        }
+        return oppositeDirection;
+    }
     public void attacking () {
 
         attackSpriteCounter++;
@@ -483,10 +495,25 @@ public EntityType type;
     public void attackPlayer (int attack) {
         if(gp.player.invincible == false) {
             int damage; //statements below are for case when armour is bigger than AP
-            if (gp.player.defense >= attack) {damage = 0;}
+
+            // Get an opposite direction of this attacker
+            String canGuardDirection = getOppositeDirection(direction);
+
+            if (gp.player.defense >= attack) {damage = 1;}
             else {damage = attack - gp.player.defense;}
-            gp.player.life -= damage;
-            gp.player.invincible = true;
+
+            if (gp.player.guarding == true && gp.player.direction.equals(canGuardDirection)) {
+                damage /= 3;
+                gp.playSE(gp.se.parrySE);
+
+                gp.player.life -= damage;
+                gp.player.invincible = true;
+            }
+            else {
+                gp.playSE(gp.se.hurtSE);
+                gp.player.life -= damage;
+                gp.player.invincible = true;
+            }
         }
     }
     public void setKnockBack(Entity target, Entity attacker, int knockBackPower){
