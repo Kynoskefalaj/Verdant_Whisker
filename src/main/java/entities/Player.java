@@ -371,6 +371,7 @@ public class Player extends Entity implements Archery {
             invincibleCounter++;
             if (invincibleCounter > 60) {
                 invincible = false;
+                transparent = false;
                 invincibleCounter = 0;
             }
         }
@@ -534,11 +535,12 @@ public class Player extends Entity implements Archery {
 
             if (! invincible &&  ! gp.monsters[gp.currentMap][i].dying) {
                 int damage; //statements below are for case when armour is bigger than AP
-                if (defense >= gp.monsters[gp.currentMap][i].attack) {damage = 0;}
+                if (defense >= gp.monsters[gp.currentMap][i].attack) {damage = 1;}
                 else {damage = gp.monsters[gp.currentMap][i].attack - defense;}
                 life -= damage;
                 gp.playSE(gp.se.hurtSE);
                 invincible = true;
+                transparent = true;
             }
         }
     }
@@ -839,7 +841,7 @@ public class Player extends Entity implements Archery {
                 break;
         }
 
-        if (invincible == true) {
+        if (transparent == true) {
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
         }
 

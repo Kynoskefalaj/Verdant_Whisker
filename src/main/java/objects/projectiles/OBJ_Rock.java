@@ -21,7 +21,7 @@ public class OBJ_Rock extends Projectile implements GeneratesParticles {
         speed = 4;
         maxLife = 160;
         life = maxLife;
-        attack = 7;
+        attack = 4;
         useCost = 2;
         alive = false;
         getImage();

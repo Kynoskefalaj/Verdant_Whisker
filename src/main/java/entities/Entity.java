@@ -51,6 +51,7 @@ public abstract class Entity {
     public boolean knockBack = false;
     public String knockBackDirection;
     public boolean guarding = false;
+    public boolean transparent = false;
 
     // COUNTER
     public int spriteCounter = 0;
@@ -505,15 +506,18 @@ public EntityType type;
             if (gp.player.guarding == true && gp.player.direction.equals(canGuardDirection)) {
                 damage /= 3;
                 gp.playSE(gp.se.parrySE);
-
-                gp.player.life -= damage;
-                gp.player.invincible = true;
             }
-            else {
+            else { // Not guarding
                 gp.playSE(gp.se.hurtSE);
-                gp.player.life -= damage;
-                gp.player.invincible = true;
+                if(damage < 1) {
+                    damage = 1;
+                }
             }
+            if(damage != 0) {
+                gp.player.transparent = true;
+            }
+            gp.player.life -= damage;
+            gp.player.invincible = true;
         }
     }
     public void setKnockBack(Entity target, Entity attacker, int knockBackPower){
