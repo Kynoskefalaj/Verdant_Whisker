@@ -49,6 +49,7 @@ public class MON_Orc extends Entity {
         attack = 9;
         defense = 2;
         exp = 16;
+        knockBackPower = 5;
     }
     public void getImage () {
         up1 = setUp("/monsters/orc/orc_up_1", gp.tileSize, gp.tileSize);

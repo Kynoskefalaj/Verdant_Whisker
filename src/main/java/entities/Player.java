@@ -264,7 +264,41 @@ public class Player extends Entity implements Archery {
             }
         }
 
-        if (attacking == true) {
+        if (knockBack == true) {
+
+            collisionOn = false;
+            gp.cChecker.checkTile(this);
+            gp.cChecker.checkObject(this, true);
+            gp.cChecker.checkEntity(this, gp.npcs);
+            int monsterIndex = gp.cChecker.checkEntity(this, gp.monsters);
+            contactMonster(monsterIndex);
+
+//            CHECK INTERACTIVE TILE COLLISION
+            int iTileIndex = gp.cChecker.checkEntity(this, gp.iTile);
+
+            if(collisionOn == true) {
+                // We need to cancel knockBack effect if it hits object
+                knockBackCounter = 0;
+                knockBack = false;
+                speed = defaultSpeed;
+            }
+            else if (collisionOn == false) {
+                switch (knockBackDirection) {
+                    case "up" -> worldY -= speed;
+                    case "down" -> worldY += speed;
+                    case "left" -> worldX -= speed;
+                    case "right" -> worldX += speed;
+                }
+            }
+            knockBackCounter++;
+
+            if (knockBackCounter == 10) {
+                knockBackCounter = 0;
+                knockBack = false;
+                speed = defaultSpeed;
+            }
+        }
+        else if (attacking == true) {
             attacking();
         }
         else if (keyH.qPressed == true) {

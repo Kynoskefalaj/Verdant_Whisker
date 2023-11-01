@@ -515,6 +515,7 @@ public EntityType type;
             }
             if(damage != 0) {
                 gp.player.transparent = true;
+                setKnockBack(gp.player, this, knockBackPower);
             }
             gp.player.life -= damage;
             gp.player.invincible = true;
