@@ -104,6 +104,7 @@ public class Player extends Entity implements Archery {
         mana = maxMana;
         stamina = maxStamina;
         invincible = false;
+        transparent = false;
     }
 
 
@@ -303,6 +304,8 @@ public class Player extends Entity implements Archery {
         }
         else if (keyH.qPressed == true) {
             guarding = true;
+
+            guardCounter++;
         }
 
         else if(keyH.upPressed == true || keyH.downPressed == true
@@ -374,9 +377,9 @@ public class Player extends Entity implements Archery {
             keyH.enterPressed = false;
 
             gp.keyH.enterPressed = false;
-            guarding = false;
 
-            spriteCounter++;
+            guarding = false;
+            guardCounter = 0;
 
             if (spriteCounter > 9 - spriteSpeedModifier) {
                 if (spriteNum == 1) {
@@ -390,6 +393,8 @@ public class Player extends Entity implements Archery {
                 }
                 spriteCounter = 0;
             }
+
+            spriteCounter++;
         }
 
         // Guarding becomes false if you are not pressing any key
@@ -588,6 +593,10 @@ public class Player extends Entity implements Archery {
 
                 if(knockBackPower > 0) {
                     setKnockBack(gp.monsters[gp.currentMap][i], attacker, knockBackPower);
+                }
+
+                if(gp.monsters[gp.currentMap][i].offBalance == true) {
+                    attack *= 4;
                 }
 
                 int damage; //statements below are for case when armour is bigger than AP

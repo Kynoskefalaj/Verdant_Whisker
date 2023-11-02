@@ -52,6 +52,7 @@ public abstract class Entity {
     public String knockBackDirection;
     public boolean guarding = false;
     public boolean transparent = false;
+    public boolean offBalance = false;
 
     // COUNTER
     public int spriteCounter = 0;
@@ -62,6 +63,8 @@ public abstract class Entity {
     public int dyingCounter = 0;
     public int hpBarCounter= 0;
     public int knockBackCounter = 0;
+    public int guardCounter = 0;
+    int offBalanceCounter = 0;
 
     //CHARACTER ATTRIBUTES
     public String name;
@@ -284,6 +287,13 @@ public EntityType type;
         if (shotAvailableCounter < 30) {
             shotAvailableCounter++;
         }
+        if (offBalance == true) {
+            offBalanceCounter++;
+            if(offBalanceCounter > 60) {
+                offBalance = false;
+                offBalanceCounter = 0;
+            }
+        }
     }
     public void checkAttackOrNot(int rate, int straight, int horizontal) {
         boolean targetInRange = false;
@@ -504,8 +514,19 @@ public EntityType type;
             else {damage = attack - gp.player.defense;}
 
             if (gp.player.guarding == true && gp.player.direction.equals(canGuardDirection)) {
+
+                // Parry
+                if (gp.player.guardCounter < 10) {
+                    damage = 0;
+                    gp.playSE(gp.se.parrySE);
+                    setKnockBack(this, gp.player, knockBackPower);
+                    offBalance = true;
+                    // Returning monster sprite to previous state (to be looking off balance)
+                    attackSpriteCounter -= 40;
+                }
+                // Normal guard
                 damage /= 3;
-                gp.playSE(gp.se.parrySE);
+                gp.playSE(gp.se.blockedSE);
             }
             else { // Not guarding
                 gp.playSE(gp.se.hurtSE);
