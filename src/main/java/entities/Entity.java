@@ -524,9 +524,11 @@ public EntityType type;
                     // Returning monster sprite to previous state (to be looking off balance)
                     attackSpriteCounter -= 40;
                 }
-                // Normal guard
-                damage /= 3;
-                gp.playSE(gp.se.blockedSE);
+                else {
+                    // Normal guard
+                    damage /= 3;
+                    gp.playSE(gp.se.blockedSE);
+                }
             }
             else { // Not guarding
                 gp.playSE(gp.se.hurtSE);

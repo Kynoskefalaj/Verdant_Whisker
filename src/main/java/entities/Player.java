@@ -54,10 +54,6 @@ public class Player extends Entity implements Archery {
         type = EntityType.PLAYER;
 
         setDefaultValues();
-        getImage();
-        getAttackImage();
-        getGuardImage();
-        setItems();
     }
 
     public void setDefaultValues() {
@@ -83,6 +79,7 @@ public class Player extends Entity implements Archery {
         currentWeapon = new OBJ_Worn_Needle(gp);
         currentShield = new OBJ_Wooden_Shield(gp);
         projectile = new OBJ_ArcaneMissile(gp);
+        currentLight = null;
         life = maxLife;
         stamina = maxStamina;
         mana = maxMana;
@@ -91,6 +88,11 @@ public class Player extends Entity implements Archery {
         attackSpeed = agility * 6;
 
         ammo = 10;
+
+        getImage();
+        getAttackImage();
+        getGuardImage();
+        setItems();
     }
 
     public void setDefaultPosition() {
@@ -99,12 +101,16 @@ public class Player extends Entity implements Archery {
         direction = "down";
     }
 
-    public void restoreLifeAndMana() {
+    public void restoreStatus() {
         life = maxLife;
         mana = maxMana;
         stamina = maxStamina;
         invincible = false;
         transparent = false;
+        attacking = false;
+        guarding = false;
+        knockBack = false;
+        lightUpdated = true;
     }
 
 

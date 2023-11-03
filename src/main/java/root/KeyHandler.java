@@ -394,13 +394,13 @@ public class KeyHandler implements KeyListener{
         if(code == KeyEvent.VK_ENTER) {
             if (gp.ui.commandNum == 0) {
                 gp.gameState = gp.playState;
-                gp.retry();
+                gp.resetGame(false);
                 gp.playMusic(gp.music.mainTheme);
             }
             if (gp.ui.commandNum == 1) {
                 gp.gameState = gp.titleState;
                 gp.ui.titleScreenState = 0;
-                gp.restore();
+                gp.resetGame(true);
                 gp.playMusic(gp.music.mainTheme);
             }
         }

@@ -80,7 +80,10 @@ public class Lighting {
         g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
         g2.dispose();
     }
-
+public void resetDay () {
+    dayState = day;
+    filterAlpha = 0f;
+}
     public void update() {
 
         if(gp.player.lightUpdated == true) {

@@ -1080,6 +1080,7 @@ public class UI {
                 titleScreenState = 0;
                 drawTitleScreen();
                 gp.gameState = gp.titleState;
+                gp.resetGame(true);
             }
         }
 

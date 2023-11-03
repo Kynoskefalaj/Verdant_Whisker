@@ -151,23 +151,19 @@ public TileManager tileM;
             setFullScreen();
         }
     }
-
-    public void retry() {
+    public void resetGame(boolean restart) {
         player.setDefaultPosition();
-        player.restoreLifeAndMana();
+        player.restoreStatus();
         asSetter.setNPC();
         asSetter.setMonster();
-    }
 
-    public void restore() {
-        player.setDefaultValues();
-        player.setItems();
-        asSetter.setNPC();
-        asSetter.setMonster();
-        asSetter.setObjects();
-        asSetter.setInteractiveTile();
+        if(restart == true) {
+            player.setDefaultValues();
+            asSetter.setObjects();
+            asSetter.setInteractiveTile();
+            eManager.lighting.resetDay();
+        }
     }
-
     public void setFullScreen() {
         // GET LOCAL SCREEN DEVICE
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
