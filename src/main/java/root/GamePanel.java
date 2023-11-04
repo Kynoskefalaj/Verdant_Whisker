@@ -1,6 +1,7 @@
 package root;
 
 import ai.PathFinder;
+import data.SaveLoad;
 import entities.Entity;
 import entities.Player;
 import environment.EnvironmentManager;
@@ -57,6 +58,7 @@ public TileManager tileM;
     public ScreenConfig screenConfig;
     public PathFinder pFinder = new PathFinder(this);
     public EnvironmentManager eManager = new EnvironmentManager(this);
+    SaveLoad saveLoad = new SaveLoad(this);
     Thread gameThread;
 
 //    ENTITY AND OBJECT
