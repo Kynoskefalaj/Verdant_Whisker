@@ -185,6 +185,8 @@ public class KeyHandler implements KeyListener{
                             break;
                         case 1 :
                             gp.playSE(gp.se.gui4SE);
+                            gp.saveLoad.load();
+                            gp.gameState = gp.playState;
                             break;
                         case 2 :
                             gp.playSE(gp.se.gui4SE);
