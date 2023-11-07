@@ -61,7 +61,8 @@ public class AssetSetter {
 
         putObject(new OBJ_Key(gp),0, 21, 22);
 
-        putObject(new OBJ_Chest(gp, new OBJ_Green_Hat(gp)),0, 15, 34);
+        putObject(new OBJ_Chest(gp),0, 15, 34);
+        gp.objects[0][20].setLoot(new OBJ_Green_Hat(gp));
 
         putObject(new OBJ_Lantern(gp), 0, 18, 20);
         putObject(new OBJ_Tent(gp), 0, 19, 20);

@@ -53,6 +53,8 @@ public abstract class Entity {
     public boolean guarding = false;
     public boolean transparent = false;
     public boolean offBalance = false;
+    public Entity loot;
+    public boolean opened = false;
 
     // COUNTER
     public int spriteCounter = 0;
@@ -152,7 +154,8 @@ public EntityType type;
         int goalRow = (target.worldY + target.solidArea.y) / gp.tileSize;
         return goalRow;
     }
-    public void setAction () { }
+    public void setAction () {}
+    public void setLoot (Entity loot) {}
     public void damageReaction () {}
     public void speak () {
         if(dialogues[dialogueIndex] == null) {
