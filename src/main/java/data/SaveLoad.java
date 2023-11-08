@@ -70,6 +70,35 @@ public class SaveLoad {
                 ds.itemNames.add(gp.player.inventory.get(i).name);
                 ds.itemAmounts.add(gp.player.inventory.get(i).amount);
             }
+            // Player equipment
+            ds.currentWeaponSlot = gp.player.getCurrentWeaponSlot();
+            ds.currentShieldSlot = gp.player.getCurrentShieldSlot();
+
+            // Objects on map
+            ds.mapObjectsNames = new String[gp.maxMap][gp.objects[1].length];
+            ds.mapObjectWorldX = new int [gp.maxMap][gp.objects[1].length];
+            ds.mapObjectWorldY = new int [gp.maxMap][gp.objects[1].length];
+            ds.mapObjectLootNames = new String[gp.maxMap][gp.objects[1].length];
+            ds.mapObjectOpened = new boolean[gp.maxMap][gp.objects[1].length];
+
+            for(int mapNum = 0; mapNum < gp.maxMap; mapNum++) {
+
+                for (int i = 0; i < gp.objects[1].length; i++) {
+                    if (gp.objects[mapNum][i] == null) {
+                        ds.mapObjectsNames[mapNum][i] = "NA";
+                    }
+                    else {
+                        ds.mapObjectsNames[mapNum][i] = gp.objects[mapNum][i].name;
+                        ds.mapObjectWorldX[mapNum][i] = gp.objects[mapNum][i].worldX;
+                        ds.mapObjectWorldY[mapNum][i] = gp.objects[mapNum][i].worldY;
+
+                        if(gp.objects[mapNum][i].loot != null) {
+                            ds.mapObjectLootNames[mapNum][i] = gp.objects[mapNum][i].loot.name;
+                        }
+                        ds.mapObjectOpened[mapNum][i] = gp.objects[mapNum][i].opened;
+                    }
+                }
+            }
 
             //Write the DataStorage object
             oos.writeObject(ds);
@@ -101,6 +130,35 @@ public class SaveLoad {
             for(int i = 0; i < ds.itemNames.size(); i++) {
                 gp.player.inventory. add(getObject(ds.itemNames.get(i)));
                 gp.player.inventory.get(i).amount = ds.itemAmounts.get(i);
+            }
+            // Player equipment
+            gp.player.currentWeapon = gp.player.inventory.get(ds.currentWeaponSlot);
+            gp.player.currentShield = gp.player.inventory.get(ds.currentShieldSlot);
+            gp.player.getAttack();
+            gp.player.getDefense();
+            gp.player.getAttackImage();
+
+            // Objects on map
+            for(int mapNum = 0; mapNum < gp.objects[1].length; mapNum++) {
+
+                for(int i = 0; i < gp.objects[1].length; i++) {
+
+                    if (ds.mapObjectsNames[mapNum][i].equals("NA")) {
+                        gp.objects[mapNum][i] = null;
+                    }
+                    else {
+                        gp.objects[mapNum][i] = getObject(ds.mapObjectsNames[mapNum][i]);
+                        gp.objects[mapNum][i].worldX = ds.mapObjectWorldX[mapNum][i];
+                        gp.objects[mapNum][i].worldY = ds.mapObjectWorldY[mapNum][i];
+                        if (ds.mapObjectLootNames[mapNum][i] != null) {
+                            gp.objects[mapNum][i].loot = getObject(ds.mapObjectLootNames[mapNum][i]);
+                        }
+                        gp.objects[mapNum][i].opened = ds.mapObjectOpened[mapNum][i];
+                        if (gp.objects[mapNum][i].opened == true) {
+                            gp.objects[mapNum][i].down1 = gp.objects[mapNum][i].image2;
+                        }
+                    }
+                }
             }
         }
         catch(Exception e) {

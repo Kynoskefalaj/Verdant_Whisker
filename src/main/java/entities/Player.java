@@ -147,6 +147,24 @@ public class Player extends Entity implements Archery {
     public int getDefense() {
         return defense = agility * currentShield.defenseValue;
     }
+    public int getCurrentWeaponSlot() {
+        int currentWeaponSlot = 0;
+        for(int i = 0; i < inventory.size(); i++) {
+            if(inventory.get(i) == currentWeapon) {
+                currentWeaponSlot = i;
+            }
+        }
+        return currentWeaponSlot;
+    }
+    public int getCurrentShieldSlot () {
+        int currentShieldSlot = 0;
+        for(int i = 0; i < inventory.size(); i++) {
+            if(inventory.get(i) == currentWeapon) {
+                currentShieldSlot = i;
+            }
+        }
+        return currentShieldSlot;
+    }
     public void getImage() {
             up1 = setUp("/player/walk/VW_up", gp.tileSize, gp.tileSize);
             up2 = setUp("/player/walk/VW_up2", gp.tileSize, gp.tileSize);
