@@ -3,16 +3,25 @@ package data;
 import entities.Entity;
 import objects.*;
 import objects.clothes.OBJ_Boots;
+import objects.clothes.OBJ_Green_Hat;
+import objects.clothes.OBJ_Green_Tunic;
 import objects.consumables.OBJ_Health_Potion;
 import objects.consumables.OBJ_Mana_Potion;
 import objects.consumables.OBJ_Stamina_Potion;
+import objects.hud.OBJ_Heart;
+import objects.hud.OBJ_Mana_Crystal;
+import objects.hud.OBJ_StaminaWheel;
+import objects.jewellery.OBJ_Sacred_Necklace;
 import objects.shields.OBJ_Paladin_Shield;
 import objects.shields.OBJ_Wooden_Shield;
+import objects.tools.OBJ_Leather_Backpack;
 import objects.tools.OBJ_Pouch;
+import objects.tools.OBJ_Rope;
 import objects.weapons.OBJ_Emerald_Scimitar;
 import objects.weapons.OBJ_WoodcuttersAxe;
 import objects.weapons.OBJ_Worn_Needle;
 import root.GamePanel;
+import tile.big_obstacles.BO_BigHouse;
 
 import java.io.*;
 
@@ -44,6 +53,17 @@ public class SaveLoad {
             case "Tent": obj = new OBJ_Tent(gp); break;
             case "Door": obj = new OBJ_Door(gp); break;
             case "Chest": obj = new OBJ_Chest(gp); break;
+            case "Green Tunic": obj = new OBJ_Green_Tunic(gp); break;
+            case "Sacred Necklace": obj = new OBJ_Sacred_Necklace(gp); break;
+            case "Leather Backpack": obj = new OBJ_Leather_Backpack(gp); break;
+            case "Rope": obj = new OBJ_Rope(gp); break;
+            case "Green Hat": obj = new OBJ_Green_Hat(gp); break;
+            case "Bronze Coin": obj = new OBJ_Bronze_Coin(gp); break;
+            case "Heart": obj = new OBJ_Heart(gp); break;
+            case "Mana Crystal": obj = new OBJ_Mana_Crystal(gp); break;
+            case "StaminaWheel": obj = new OBJ_StaminaWheel(gp); break;
+            case "Big House": obj = new BO_BigHouse(gp); break;
+
         }
         return obj;
     }
@@ -139,7 +159,7 @@ public class SaveLoad {
             gp.player.getAttackImage();
 
             // Objects on map
-            for(int mapNum = 0; mapNum < gp.objects[1].length; mapNum++) {
+            for(int mapNum = 0; mapNum < gp.maxMap; mapNum++) {
 
                 for(int i = 0; i < gp.objects[1].length; i++) {
 
