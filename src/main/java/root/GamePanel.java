@@ -156,6 +156,7 @@ public TileManager tileM;
     public void resetGame(boolean restart) {
         player.setDefaultPosition();
         player.restoreStatus();
+        player.resetCounter();
         asSetter.setNPC();
         asSetter.setMonster();
 

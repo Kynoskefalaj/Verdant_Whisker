@@ -105,6 +105,7 @@ public class Player extends Entity implements Archery {
         life = maxLife;
         mana = maxMana;
         stamina = maxStamina;
+        speed = defaultSpeed;
         invincible = false;
         transparent = false;
         attacking = false;

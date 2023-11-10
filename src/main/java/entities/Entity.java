@@ -155,6 +155,18 @@ public EntityType type;
         return goalRow;
     }
     public void setAction () {}
+    public void resetCounter () {
+        spriteCounter = 0;
+        attackSpriteCounter = 0;
+        actionLockCounter = 0;
+        shotAvailableCounter = 0;
+        invincibleCounter = 0;
+        dyingCounter = 0;
+        hpBarCounter= 0;
+        knockBackCounter = 0;
+        guardCounter = 0;
+        offBalanceCounter = 0;
+    }
     public void setLoot (Entity loot) {}
     public void damageReaction () {}
     public void speak () {
