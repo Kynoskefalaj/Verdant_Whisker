@@ -49,30 +49,38 @@ public class NPC_OldMan extends Entity{
 
     public void setDialogue () {
 
-        dialogues[0] =
+        dialogues[0][0] =
                 "Hello, lad.";
-        dialogues[1] =
+        dialogues[0][1] =
                 "Oww... \n" +
                 "I feel that...\n" +
                 "You must be The One...";
-        dialogues[2] =
+        dialogues[0][2] =
                 "Verdant Whisker!\n" +
                 "Of course! That makes sense!\n" +
                 "Finally! \n" +
                 "I've been waiting for centuries!";
-        dialogues[3] =
+        dialogues[0][3] =
                 "You are Blink!";
-        dialogues[4] =
+        dialogues[0][4] =
                 "Great darkness is coming for us,\n" +
                 "you have to stop it!";
-        dialogues[5] =
+        dialogues[0][5] =
                 "\"Only the One with a pure heart, verdant whisker\n" +
                 "and an emerald tail can find the sword of destiny...\n" +
                 "Holding back The Calamity...\n" +
                 "And bringing the light once again!\"";
-        dialogues[6] =
+        dialogues[0][6] =
                 "You have to find The Sword...\n" +
                 "Otherwise everything is lost!";
+
+        dialogues[1][0] = "If you become tired, rest at the water.";
+        dialogues[1][1] = "However, the monsters reappear if you rest.\n" +
+                "I don't know why but that's how it works.";
+        dialogues[1][2] = "In any case, don't push yourself too hard.";
+
+        dialogues[2][0] = "I wonder how to open that door...";
+
     }
 
     @Override
@@ -111,8 +119,9 @@ public class NPC_OldMan extends Entity{
 
         // Do this character specific stuff in future
 
-        super.speak();
+        facePlayer();
+        startDialogue(this, dialogueSet);
 
-        onPath = true;
+//        onPath = true;
     }
 }

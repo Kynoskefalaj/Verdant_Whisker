@@ -55,7 +55,7 @@ public class NPC_Merchant extends Entity{
 
     public void setDialogue() {
 
-        dialogues[0] =
+        dialogues[0][0] =
                 "Greetings fella!\n" +
                         "I have some valuable items.\n" +
                         "Wanna trade?";

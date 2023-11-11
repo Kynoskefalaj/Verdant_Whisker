@@ -584,10 +584,9 @@ public class Player extends Entity implements Archery {
     }
     public void interactNPC (int i) {
 
-        if(gp.gameState == gp.playState && gp.keyH.enterPressed == true) {
+        if(gp.keyH.enterPressed == true) {
             if (i != 999) {
                 attackCancelled = true;
-                gp.gameState = gp.dialogueState;
                 gp.npcs[gp.currentMap][i].speak();
                 gp.playSE(gp.se.talkSE);
             }
