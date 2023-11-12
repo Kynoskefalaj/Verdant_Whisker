@@ -2,10 +2,11 @@ package root;
 
 import entities.Entity;
 
-public class EventHandler {
+public class EventHandler{
 
     GamePanel gp;
     EventRect eventRect[][][];
+    Entity eventMaster;
 
     int prevEventX, prevEventY;
     boolean canTouchEvent = true;
@@ -14,6 +15,8 @@ public class EventHandler {
 
     public EventHandler (GamePanel gp) {
         this.gp = gp;
+
+        eventMaster = new Entity(gp);
 
         eventRect = new EventRect[gp.maxMap][gp.maxWorldCol][gp.maxWorldRow];
 
@@ -42,6 +45,16 @@ public class EventHandler {
                 }
             }
         }
+
+        setDialogue();
+    }
+
+    public void setDialogue() {
+
+        eventMaster.dialogues[0][0] = "You fall into a pit!";
+        eventMaster.dialogues[1][0] = "You drink the water. \n Your health and mana have been recovered.\n" +
+                "The progress has been saved.";
+        eventMaster.dialogues[2][0] = "Teleport!";
     }
 
     public void checkEvent () {
@@ -99,7 +112,7 @@ public class EventHandler {
     public void damagePit (int gameState) {
         gp.gameState = gameState;
         gp.playSE(gp.se.exhaustedSE);
-        gp.ui.currentDialogue = "You fall into a pit!";
+        eventMaster.startDialogue(eventMaster, 0);
         gp.player.life--;
 //        eventRect[col][row].eventDone = true; //then this event will occur one time
         canTouchEvent = false;
@@ -111,8 +124,7 @@ public class EventHandler {
             gp.gameState = gameState;
             gp.player.attackCancelled = true;
             gp.playSE(gp.se.successSE);
-            gp.ui.currentDialogue = "You drink the water. \n Your health and mana have been recovered.\n" +
-                    "The progress has been saved.";
+            eventMaster.startDialogue(eventMaster, 1);
             gp.player.life = gp.player.maxLife;
             gp.player.mana = gp.player.maxMana;
             gp.asSetter.setMonster();
@@ -122,7 +134,7 @@ public class EventHandler {
 
     public void teleport (int gameState, int destCol, int destRow) {
         gp.gameState = gameState;
-        gp.ui.currentDialogue = "Teleport!";
+        eventMaster.startDialogue(eventMaster, 2);
         gp.player.worldX = gp.tileSize * destCol;
         gp.player.worldY = gp.tileSize * destRow;
     }

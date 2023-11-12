@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Random;
 
-public abstract class Entity {
+public class Entity {
 
     GamePanel gp;
     public UtilityTool uTool = new UtilityTool();

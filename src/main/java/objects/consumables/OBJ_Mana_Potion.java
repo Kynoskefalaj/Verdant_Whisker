@@ -22,14 +22,20 @@ public class OBJ_Mana_Potion extends Entity {
         description = String.format("[%s]\nRecovers %d %s.", name, value, recoveryType);
         image1 = setUp("/objects/consumables/Mana_Potion", gp.tileSize, gp.tileSize);
         down1 = image1;
+
+        setDialogue();
+    }
+
+    public void setDialogue() {
+
+        dialogues[0][0] = "You drink the " + name + "!\n" +
+                "Your " + recoveryType + " has been recovered by " + value + ".";
     }
 
     @Override
     public boolean use (Entity entity) {
 
-        gp.gameState = gp.dialogueState;
-        gp.ui.currentDialogue = "You drink the " + name + "!\n" +
-                "Your " + recoveryType + " has been recovered by " + value + ".";
+        startDialogue(this, 0);
         entity.mana += value;
         if(entity.mana > entity.maxMana) {
             entity.mana = entity.maxMana;

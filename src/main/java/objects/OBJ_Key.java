@@ -19,22 +19,29 @@ public class OBJ_Key extends Entity {
         stackable = true;
 
         type = EntityType.CONSUMABLE;
+
+        setDialogue();
+    }
+
+    public void setDialogue() {
+
+        dialogues[0][0] = "You use the " + name + " and open the door";
+
+        dialogues[1][0] = "What are you doing?";
     }
 
     public boolean use (Entity entity) {
 
-        gp.gameState = gp.dialogueState;
-
         int objIndex = getDetected(entity, gp.objects, "Door");
 
         if (objIndex != 999) {
-            gp.ui.currentDialogue = "You use the " + name + " and open the door";
+            startDialogue(this, 0);
             gp.playSE(gp.se.unlockSE);
             gp.objects[gp.currentMap][objIndex] = null;
             return true;
         }
         else {
-            gp.ui.currentDialogue = "What are you doing?";
+            startDialogue(this, 1);
             return false;
         }
     }

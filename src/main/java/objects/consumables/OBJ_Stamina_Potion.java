@@ -23,14 +23,19 @@ public class OBJ_Stamina_Potion extends Entity {
         image1 = setUp("/objects/consumables/Stamina_Potion", gp.tileSize, gp.tileSize);
         down1 = image1;
 
+        setDialogue();
+    }
+
+    public void setDialogue() {
+
+        dialogues[0][0] = "You drink the " + name + "!\n" +
+                "Your " + recoveryType + " has been recovered by " + value + ".";
     }
 
     @Override
     public boolean use (Entity entity) {
 
-        gp.gameState = gp.dialogueState;
-        gp.ui.currentDialogue = "You drink the " + name + "!\n" +
-                "Your " + recoveryType + " has been recovered by " + value + ".";
+        startDialogue(this, 0);
         entity.stamina += value;
         if(entity.stamina > entity.maxStamina) {
             entity.stamina = entity.maxStamina;
