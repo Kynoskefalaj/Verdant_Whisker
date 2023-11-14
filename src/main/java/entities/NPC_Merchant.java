@@ -59,6 +59,12 @@ public class NPC_Merchant extends Entity{
                 "Greetings fella!\n" +
                         "I have some valuable items.\n" +
                         "Wanna trade?";
+        dialogues[1][0] = "Come again, hehehe...";
+        dialogues[2][0] = "You need more coins to buy that!";
+        dialogues[3][0] = "You cannot carry any more!";
+        dialogues[4][0] = "You cannot sell an equipped item.";
+        dialogues[5][0] = "Merchant doesn't have that much money!";
+        dialogues[6][0] = "Merchant cannot carry any more!";
     }
 
     public void setItems() {
@@ -108,6 +114,7 @@ public class NPC_Merchant extends Entity{
     public void speak() {
         super.speak();
 
+        facePlayer();
         gp.gameState = gp.tradeState;
         gp.ui.npc = this;
         gp.ui.subState = Options_SubState.MERCH_SELECT;
