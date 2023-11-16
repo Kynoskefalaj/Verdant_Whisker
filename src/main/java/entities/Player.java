@@ -430,7 +430,9 @@ public class Player extends Entity implements Archery {
         }
 
         // Guarding becomes false if you are not pressing any key
-//        guarding = false;
+        if (keyH.qPressed == false) {
+            guarding = false;
+        }
 
         if (gp.keyH.controlPressed == true && projectile.alive == false &&
                 shotAvailableCounter == 30 && projectile.haveResource(this) == true) {
