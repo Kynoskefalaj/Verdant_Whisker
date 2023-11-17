@@ -1432,7 +1432,6 @@ public class UI {
                 else if (gp.player.inventory.get(itemIndex).price > npc.coin) {
                     subState = Options_SubState.TOP;
                     npc.startDialogue(npc, 5);
-                    drawDialogueScreen();
                 }
                 else if (npc.inventory.size() == npc.maxInventorySize) {
                     subState = Options_SubState.TOP;
